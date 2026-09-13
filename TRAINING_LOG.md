@@ -244,3 +244,35 @@ c1M 1.26@32M —— 全部低于随机基线，学习正常。
 - 10M val 轨迹：0.9350@900M → 0.9253@1B —— 持续下降；
 - 30M-c1M 训练 loss 0.82@477M（vs 30M-full 0.90@199M：语料轴分化开始显现，
   全语料 loss 更低但 nt 不对齐，暂不下结论）。
+
+## 2026-09-14（Day 2 深夜事故：ledger 写竞态导致 100M 重复启动 — 已根治）
+
+### 事故时间线
+- 22:39/22:55 supervisor 启动 100M s17(GPU4)/s29(GPU5)，ledger 有 running 行；
+- 03:54/04:06/04:40 supervisor 又启动了 s17/s29/s43 的**重复进程**（s17 重复进程
+  与原进程同卡 GPU4；s29 重复在 GPU0；s43 是首次启动）；
+- **根因**：ledger.jsonl 是读-改-写文件（_load→修改→_write 整文件重写），
+  monitoring cron 的 `ledger sync`（每 2h）与 supervisor 的 `update` 并发时
+  交错执行（读 A / 读 A / 写 B / 写 A′）→ 100M 两行被静默丢弃 →
+  supervisor 认为它们未在运行 → 重复启动；
+- **影响评估**：s17/s29 的重复进程与原进程写同一 out-dir 约 40/35 分钟。
+  由于批流确定性（同 seed 同流同初始化+断点续训轨迹一致），两进程产生的
+  checkpoint 在科学上等价；manifest 的 validations 单调一致（s17:
+  1.073→0.972→0.926→0.902）。重复进程已 kill，原进程保留继续跑；
+  s43 首启无冲突（其重复进程其实是首次启动，被我误杀后现已由修复版
+  supervisor 重新启动）。
+
+### 根治措施（87751c1）
+1. ledger 所有读-改-写循环加 **fcntl flock 排他锁**（ledger.lock）；
+2. 新增 `upsert()` 恢复工具，重建了丢失的 100M 行；
+3. supervisor 重启后正确 adopt 全部 6 个存活进程（无重复）。
+
+### 当前并行（8 训练）
+1M(GPU7) / 10M(GPU1) / 30M-full(GPU5) / 30M-c1M(GPU2) / 30M-c10M(GPU3, 新)
+/ 100M-s17(GPU4) / 100M-s29(GPU5) / 100M-s43(GPU0, 新)
+
+### 教训（写入实验纪律）
+- 多写入者的状态文件必须加锁（TokBench closure ledger 单写入者设计的前提
+  被我的监控 cron 打破了）；
+- 数据完整性检查升级：ckpt 文件冲突时以 manifest validations 的单调性为
+  判据（本次用于确认无科学损害）。
