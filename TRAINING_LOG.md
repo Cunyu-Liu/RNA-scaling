@@ -98,3 +98,13 @@ c1M 1.26@32M —— 全部低于随机基线，学习正常。
 2. 监控/记录/推送闭环运转正常；
 3. 下一步：等 10M 完整 2B nt 后重跑 probe（同协议），观察曲线变化；30M/1M 到 100M nt
    后各跑一次；100M 三种子入队自动接力。
+
+### 20:35 巡检简报（2026-09-13 20:30 定时巡检）
+
+- 简报：4 run 全部正常训练；cpu_fallback_count 全 0（逐一核验各 run manifest.json 的 validations；status.json 汇总层该字段为 null 未填充，"no alerts" 无法区分 null/0，故以 manifest 为准）；supervisor 无崩溃（无 relaunch/Traceback 记录，ledger attempts=1）；无 run DONE → wave.json 无需追加（8 任务已全在队列，含 100M s17/s29/s43 与 30M-c10M）；100M_s17 正在等待 ≥8GB+1.5GB margin 的空闲 GPU（supervisor 正常排队行为）。
+- 各 run 进度（nt / % / best_val_loss / cpu_fallback）：10M_s17 319M/2.0B / 16.0% / 1.0338@300M / 0；1M_s17 129M/2.0B / 6.5% / 1.2851@100M / 0；30M_s17_c1M 141M/2.0B / 7.0% / 1.1190@100M / 0；30M_s17 60M/2.0B / 3.0% / 首个 ckpt（100M nt）未落盘 / 0。吞吐按日志时间戳估算：10M ~40k、c1M ~16k、1M ~13k、30M ~5.8k nt/s（30M 仍受 GPU1 外部进程挤占；24h 吞吐评估点为 09-14 傍晚，届时决定是否迁移）。
+- 新落盘首个 100M-nt ckpt 记录（日期/run_id/nt/val_loss）：
+  - 2026-09-13 / rnasc_1M_s17 / nt=100007541 / val_loss=1.2851
+  - 2026-09-13 / rnasc_30M_s17c1M / nt=100007541 / val_loss=1.1190
+- 10M_s17 后续 ckpt：200M val=1.0966、300M val=1.0338（训练 val 持续下降；以上为运行数据记录，非科学结论）。
+- 注：上一小节标题日期"2026-09-14"与服务器时钟（Sun Sep 13 20:35 CST 2026）不一致，本节按服务器时钟如实记录；未改动历史小节。
