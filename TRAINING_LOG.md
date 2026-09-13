@@ -74,3 +74,27 @@ c1M 1.26@32M —— 全部低于随机基线，学习正常。
 - [ ] A7 文献复现（RiNALMo 或 RNA-FM 评测设置之一）；
 - [ ] S4 随机初始化对照（评测侧，跑同一 probe 协议）；
 - [ ] 100M 档 3 种子（已排队）。
+
+## 2026-09-14（Day 1 早：首个 checkpoint + 首个逐层 probe）
+
+### 里程碑
+- **RNA-Sc-10M 首个 100M-nt checkpoint + validation 落盘**：val_loss=1.2447（4M nt 验证，
+  cpu_fallback=0）。训练 loss 1.27→1.16@127M，持续下降。
+- wave1 其余：1M 34M nt / c1M 34M nt / 30M 15M nt（30M 与 GPU1 上 4 个外部进程竞争，
+  吞吐 ~4.5k nt/s，24h 后再评估是否迁移）。
+
+### 首个逐层 probe 结果（S7 day-1 协议，非最终科学结论）
+- 任务：rna_type 分类（19 类，family_validation 20k → family_test 4k，家族级切分）；
+- probe：逐层 mean-pooled states + 线性头（8 epochs）；
+- **多数类基线 acc=0.636**；probe 各层 acc 0.90-0.93 —— 显著超基线，家族信息已被编码；
+- **acc 随层深单调下降（L0 0.926 → L19 0.896）**：浅层信号强于深层，与 Li et al. 的
+  "低层特征主导"方向一致（早期证据，非结论——需 2B nt 完整训练 + 多规模对比后才能写）；
+- macro-F1 ~0.2：小类（snRNA/tmRNA/lncRNA 各 <1%）未学好，符合 100M/2000M=5% 训练进度；
+- probe 协议 bug 修复记录：v1 的 label 流与 batch 流错位（label_iter yield 整行块导致
+  样本只有 64 个）→ 重写为单流配对（sequence/rna_type 同行读取）；v2 结果统计有效。
+
+### 结论（记录，非科学声明）
+1. 管线全链路验证通过：训练 → checkpoint → 逐层 probe → 家族级评测；
+2. 监控/记录/推送闭环运转正常；
+3. 下一步：等 10M 完整 2B nt 后重跑 probe（同协议），观察曲线变化；30M/1M 到 100M nt
+   后各跑一次；100M 三种子入队自动接力。

@@ -72,75 +72,89 @@ def load_encoder(run_dir: str) -> tuple[RNAMLMEncoder, dict]:
 
 
 @torch.no_grad()
-def collect_states(model, device, split, seed, n_seq, d_layers):
-    """Stream a split and return (states per layer, rna_type labels, npad).
+def collect_states(model, device, split, n_seq, d_layers, context_nt=256,
+                   batch_nt=8192):
+    """Single-pass state collection: streams (sequence, rna_type) rows from
+    the split, encodes each sequence (no masking — pure hidden states), and
+    pools per-sequence mean over non-pad tokens for every layer.
 
-    Uses MLM batches (targets ignored) so tokenization matches pretraining.
+    Batching here is independent from the MLM training stream (probes never
+    feed back into training), so a simple length-bucketed batching is fine.
+    Sequence and label come from the SAME row: no pairing bug possible.
     """
     import pyarrow.parquet as pq
     model = model.to(device).eval()
     states = [[] for _ in range(d_layers)]
     labels = []
-    gen = iter_mlm_batches(SPLIT_8080, split, seed, context_nt=256,
-                           batch_nt=8192)
-    pf = pq.ParquetFile(SPLIT_8080)
-    # stream labels in parallel with the same iteration order
-    label_iter = _label_iter(pf, split, seed, n_seq)
+    rows: list[tuple[list[int], str]] = []
+    cur_max = 0
     n = 0
+
+    def _enc(seq: str) -> list[int]:
+        from rna_sc.data import ALPHABET
+        s = seq.upper().replace("T", "U")
+        return [ALPHABET.index(b) for b in s if b in ALPHABET]
+
+    def flush():
+        if not rows:
+            return
+        T = max(len(r[0]) for r in rows)
+        ids = torch.tensor(
+            [r[0] + [PAD] * (T - len(r[0])) for r in rows],
+            dtype=torch.long, device=device)
+        _, _, hids = model(ids, return_all_hiddens=True)
+        pad = ids == PAD
+        lengths = (~pad).sum(-1).clamp(min=1).float().unsqueeze(-1)
+        for li, h in enumerate(hids):
+            hm = h.float().masked_fill(pad.unsqueeze(-1), 0.0)
+            pooled = hm.sum(dim=1) / lengths
+            states[li].append(pooled.cpu())
+        labels.extend(r[1] for r in rows)
+        rows.clear()
+
+    pf = pq.ParquetFile(SPLIT_8080)
     with torch.no_grad(), torch.amp.autocast("cuda", dtype=torch.bfloat16):
-        for batch in gen:
-            ids = torch.tensor(batch["ids"], dtype=torch.long, device=device)
-            tgt = torch.tensor(batch["targets"], dtype=torch.long, device=device)
-            _, _, hids = model(ids, return_all_hiddens=True)
-            pad = ids == PAD
-            for li, h in enumerate(hids):
-                # per-sequence pooled stats: mean over NON-PAD tokens of the
-                # layer states (pool for STATE COLLECTION only; the probe head
-                # itself re-attends over tokens — see note).
-                hm = h.float().masked_fill(pad.unsqueeze(-1), 0.0)
-                cnt = (~pad).sum(-1).clamp(min=1).unsqueeze(-1)
-                states[li].append((hm / cnt).cpu())
-            lbls = next(label_iter, None)
-            if lbls is None:
-                break
-            labels.extend(lbls)
-            n += len(lbls)
-            if n >= n_seq:
-                break
+        for rb in pf.iter_batches(
+                batch_size=50_000,
+                columns=["split_membership", "canonical_sequence", "rna_type"]):
+            d = rb.to_pydict()
+            for sm, seq, rt in zip(d["split_membership"],
+                                   d["canonical_sequence"], d["rna_type"]):
+                if sm != split:
+                    continue
+                ids = _enc(seq[:context_nt])
+                if len(ids) < 2:
+                    continue
+                L = len(ids)
+                if rows and (len(rows) + 1) * max(cur_max, L) > batch_nt:
+                    flush()
+                    cur_max = 0
+                rows.append((ids, rt))
+                cur_max = max(cur_max, L)
+                n += 1
+                if n >= n_seq:
+                    flush()
+                    X = [torch.cat(s, dim=0) for s in states]
+                    return X, labels[:len(X[0])]
+        flush()
     X = [torch.cat(s, dim=0) for s in states]
-    y = labels[:len(X[0])]
-    return X, y
+    return X, labels[:len(X[0])]
 
 
-def _label_iter(pf, split, seed, n_seq):
-    """Yield rna_type labels in the same order as iter_mlm_batches streams.
+class LinearProbe(nn.Module):
+    """Linear head over a pooled (B, D) sequence representation."""
 
-    iter_mlm_batches reads (split_membership, canonical_sequence); the same
-    row order gives the same sequence order. Labels come from rna_type.
-    """
-    import collections
-    classes = {}
-    emitted = 0
-    for rb in pf.iter_batches(batch_size=50_000,
-                              columns=["split_membership", "rna_type"]):
-        d = rb.to_pydict()
-        rows = []
-        for sm, rt in zip(d["split_membership"], d["rna_type"]):
-            if sm != split:
-                continue
-            rows.append(rt)
-            emitted += 1
-            if emitted >= n_seq:
-                yield rows
-                return
-        if rows:
-            yield rows
-    return
+    def __init__(self, d_model: int, n_classes: int):
+        super().__init__()
+        self.head = nn.Linear(d_model, n_classes)
+
+    def forward(self, x):
+        return self.head(x)
 
 
 def probe_one_layer(X_tr, y_tr, X_ev, y_ev, n_classes, device, epochs=8):
     d = X_tr.shape[1]
-    probe = AttentionPoolProbe(d, n_classes).to(device)
+    probe = LinearProbe(d, n_classes).to(device)
     opt = torch.optim.AdamW(probe.parameters(), lr=1e-3, weight_decay=0.01)
     Xtr, Xev = X_tr.to(device).float(), X_ev.to(device).float()
     ytr = torch.tensor(y_tr, device=device)
@@ -149,15 +163,13 @@ def probe_one_layer(X_tr, y_tr, X_ev, y_ev, n_classes, device, epochs=8):
         perm = torch.randperm(len(Xtr), device=device)
         for i in range(0, len(Xtr), 256):
             idx = perm[i:i + 256]
-            logits = probe(Xtr[idx], torch.zeros_like(Xtr[idx][:, :, 0],
-                                                      dtype=torch.bool))
+            logits = probe(Xtr[idx])
             loss = F.cross_entropy(logits, ytr[idx])
             opt.zero_grad(set_to_none=True)
             loss.backward()
             opt.step()
     with torch.no_grad():
-        logits = probe(Xev, torch.zeros_like(Xev[:, :, 0], dtype=torch.bool))
-        pred = logits.argmax(-1)
+        pred = probe(Xev).argmax(-1)
         acc = (pred == yev).float().mean().item()
         f1 = _macro_f1(pred, yev, n_classes)
     return acc, f1
@@ -192,10 +204,8 @@ def main():
     # family-level split for the probe: family_validation vs family_test
     # (both disjoint from train by cluster construction; validation split is
     # used for pretraining model selection, so probes avoid it).
-    X_tr, y_tr = collect_states(model, dev, "family_validation", 17,
-                                args.n_train, L)
-    X_ev, y_ev = collect_states(model, dev, "family_test", 17,
-                                args.n_eval, L)
+    X_tr, y_tr = collect_states(model, dev, "family_validation", args.n_train, L)
+    X_ev, y_ev = collect_states(model, dev, "family_test", args.n_eval, L)
     classes = sorted(set(y_tr))
     cls_map = {c: i for i, c in enumerate(classes)}
     y_tri = [cls_map[c] for c in y_tr if c in cls_map]
@@ -215,8 +225,10 @@ def main():
                "ckpt_nt": ck.get("nt"), "n_classes": len(classes),
                "n_train": len(y_tri), "n_eval": len(y_evi),
                "acc": round(acc, 4), "f1_macro": round(f1, 4),
-               "pooling": "attention-probe (state collection mean-pooled "
-                          "per token, head attends over tokens)",
+               "pooling": "per-token state mean-pool per sequence + linear "
+                          "head (S7 sequencing tasks will use attention "
+                          "pooling over tokens; this pooled probe is the "
+                          "day-1 protocol)",
                "task": "rna_type classification (S11 global property)",
                "split": "family_validation->family_test"}
         with open(EVAL_OUT, "a") as fh:
