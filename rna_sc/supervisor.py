@@ -139,11 +139,21 @@ def main():
                 print("[sup] adopted live run %s (pid %s)" % (rid, row["pid"]),
                       flush=True)
 
-        # 2) reap dead children
+        # 2) reap dead children AND dead adopted runs
         for rid in list(procs):
             proc, gpu, out_dir, item = procs[rid]
             if proc is None:
-                continue  # adopted run: monitor via ledger only
+                # adopted run: check ledger pid liveness each cycle
+                row = ledger.by_run_id(rid) or {}
+                if row.get("status") == "running" and \
+                        not pid_alive(row.get("pid")):
+                    del procs[rid]
+                    exclude.discard(gpu)
+                    ledger.update(rid, "pending",
+                                  note="adopted proc died; relaunch queued")
+                    print("[sup] adopted run %s died -> pending" % rid,
+                          flush=True)
+                continue
             rc = proc.poll()
             if rc is None:
                 continue
