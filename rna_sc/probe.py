@@ -195,11 +195,24 @@ def main():
     ap.add_argument("--device", type=int, default=1)
     ap.add_argument("--n-train", type=int, default=20000)
     ap.add_argument("--n-eval", type=int, default=4000)
+    ap.add_argument("--random-init", type=int, default=None,
+                    help="S4 control: probe a RANDOM-INIT model with this "
+                         "seed using the architecture from --run-dir; "
+                         "excludes the inductive-bias/overparam explanation")
     args = ap.parse_args()
     dev = "cuda:%d" % args.device
     guard = GPUGuard(dev)
     guard.check()
     model, ck = load_encoder(args.run_dir)
+    if args.random_init is not None:
+        import torch as _t
+        _t.manual_seed(args.random_init)
+        mcfg = ck["cfg"]["arch"]
+        model = RNAMLMEncoder(d_model=mcfg["d_model"],
+                              n_layers=mcfg["n_layers"],
+                              n_heads=mcfg["n_heads"], d_ff=mcfg["d_ff"])
+        ck = dict(ck)
+        ck["nt"] = 0
     L = ck["cfg"]["arch"]["n_layers"]
     # family-level split for the probe: family_validation vs family_test
     # (both disjoint from train by cluster construction; validation split is
@@ -221,7 +234,9 @@ def main():
         Xtr = X_tr[li][keep_tr]
         Xev = X_ev[li][keep_ev]
         acc, f1 = probe_one_layer(Xtr, y_tri, Xev, y_evi, len(classes), dev)
-        rec = {"run": os.path.basename(args.run_dir), "layer": li,
+        rec = {"run": os.path.basename(args.run_dir) +
+               ("_randinit%s" % args.random_init if args.random_init
+                else ""), "layer": li,
                "ckpt_nt": ck.get("nt"), "n_classes": len(classes),
                "n_train": len(y_tri), "n_eval": len(y_evi),
                "acc": round(acc, 4), "f1_macro": round(f1, 4),
