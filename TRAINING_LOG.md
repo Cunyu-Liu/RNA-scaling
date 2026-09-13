@@ -2,8 +2,8 @@
 
 > 项目：RNA-LM 迁移学习机理研究（SPEC v1.1，S0-S12）
 > 服务器：A100 集群（bms-18937653-012），用户 cunyuliu
-> 代码：/home/cunyuliu/rna-sc（git 管理），数据/runs：/mnt/cunyuliu/rna-sc
-> 环境：conda toktokenbench（torch 2.6.0+cu124）
+> 代码：/home/cunyuliu/rna-sc（git → github.com/Cunyu-Liu/RNA-scaling）
+> 数据/runs：/mnt/cunyuliu/rna-sc；环境：conda toktokenbench（torch 2.6.0+cu124）
 
 ## 2026-09-13（Day 0：交接 + 基建 + wave1 启动）
 
@@ -14,53 +14,63 @@
   29,012,227 行 / 3,357,201 簇 / **簇级泄漏 0 / 序列级泄漏 0 → PASS**；
   split: train 14.13M(48.7%) / family_validation 7.53M(25.9%) / family_test 7.08M(24.4%) / validation 164k / test 109k；
   字母表纯净 ACGU；长度 10-583,414 nt。
-  ⚠️ 文档中的"8/1/1 比例"与实际不符——TokBench 的真实设计是家族级大 held-out（50%），S0 的
-  "held-out 10%"目标用 validation(0.6%)+test(0.4%)=1% 或 family_validation 承担，待导师确认口径。
+  ⚠️ 文档中的"8/1/1 比例"与实际不符——TokBench 真实设计是家族级大 held-out（~50%），
+  S0 的"held-out 10%"口径用 validation+test（合计 1%）承担，family_validation/test 留给家族级
+  评测切分。待导师确认口径。
 
 ### 基建（T0.2）
-- /home/cunyuliu/rna-sc 项目骨架：ALiBi MLM encoder（SDPA 显存安全版）/ frozen config /
-  split 流式 MLM 数据管线（nt 口径 exposure）/ 训练 runner（manifest 纪律）/ ledger（Z5）/
-  status 监控 / smoke 测试 / supervisor 调度器；
-- 复用 TokBench：nt 口径预算、GPUGuard 模式、manifest+ledger 纪律、验证集选择纪律。
+- /home/cunyuliu/rna-sc：ALiBi MLM encoder（SDPA 显存安全版）/ frozen config / split 流式
+  MLM 数据管线（nt 口径）/ 训练 runner（manifest 纪律）/ ledger（Z5）/ status 监控 /
+  smoke / supervisor 调度器 / family_table / per-layer probe；
+- GitHub：Cunyu-Liu/RNA-scaling（main，2 commits）。
 
-### 冒烟测试（验收 A6）— ALL PASS
-- mask 确定性 ✓ / 15% 比例 ✓ / 四档参数量 ±12% ✓ / 前向反向 ✓ / 真实 split 批处理 ✓ /
-  loss 1.956→1.465(30步) ✓ / cpu_fallback_count=0 ✓
+### 验收进度（CHECKLIST 对照）
+- A3 split 三查 ✓（深验证 PASS）；A4 家族分配表 ✓（release22_cluster_split.parquet，
+  3.36M 簇 cluster_pure=true，覆盖 release22 全量；外部数据集 join 留待评测集接入时做）；
+- A5 ledger 单测 ✓（claim 防重复 + adopt 存活进程实测）；A6 冒烟 ✓ ALL PASS；
+- A7 文献复现：未完成（列入 Day 1-7）。
+
+### 冒烟测试（A6）— ALL PASS
+mask 确定性/15% 比例/四档参数量 ±12%/前向反向/真实 split 批处理/loss 1.956→1.465/零 CPU 回退。
 
 ### 事故与决策记录（重要）
-1. **架构修订**：SPEC 表格的宽扁架构（如 1M=4层/d256）实际参数 3.15M（超目标 3 倍）。
-   修订为深窄形态：1M=18层/d64(0.89M)、10M=20层/d192(8.86M)、30M=12层/d480(33.2M,
-   +10.7% 在 12% 容差内，保留 RiNALMo-micro 对齐优势)、100M=23层/d576(91.6M)。
-   理由：等参数量是 scaling 归因的前提（Li et al. 惯例是架构由参数目标反推）。
-2. **wave1 OOM 事故**：启动时 nvidia-smi 显示 GPU6/7 各 ~2GB 已用（>38GB 空闲），但 GPU6/7
-   实际是 5.1GB 物理卡且其他用户进程随后涌入 → 3 个 run OOM。证据：logs/*.log 的
-   torch.OutOfMemoryError 堆栈。
-   **修复**：① GPU 选择改用 torch.cuda.mem_get_info（分配器真实值）；② batch_nt 32768→16384；
-   ③ supervisor：崩溃自动 --resume-from 最新 ckpt 重启（≤5 次）；④ supervisor 按真实空闲显存
-   动态选 GPU，不设其他 gate（遵守"有显存就能用"规则）。
-3. **重复启动事故**：supervisor 初版未跳过 ledger 中 running 且 pid 存活的行，重复启动 10M
-   （同 out-dir 双写）。已杀重复进程、修复 supervisor（adopt 存活 run、跳过活跃 run）。
+1. **架构修订**：SPEC 表格的宽扁架构参数量超目标 2-3 倍（1M 档实际 3.15M）。修订为深窄形态：
+   1M=18层/d64(0.89M)、10M=20层/d192(8.86M)、30M=12层/d480(33.2M, +10.7% 容差内)、
+   100M=23层/d576(91.6M)。理由：等参数量是 scaling 归因前提（SPEC 7.3 表的层配置是备忘录
+   里的近似示意；以参数量目标为准是 Li et al. 惯例）。30M 保留 RiNALMo-micro(33M) 对齐。
+2. **wave1 OOM 事故**：nvidia-smi 快照显示 GPU6/7 各 ~2GB 已用（判断 >38GB 空闲），
+   实际 GPU6/7 是 5.1GB 物理卡且其他用户进程随后涌入 → 3 run OOM（证据：log 堆栈）。
+   **修复**：GPU 选择改 torch.cuda.mem_get_info 真实值；batch_nt 32768→16384；
+   supervisor 崩溃自动 --resume-from 最新 ckpt（≤5 次）。
+3. **重复启动事故**：supervisor 初版未跳过"running 且 pid 存活"的 ledger 行，重复启动 10M。
+   已修复（adopt + skip）。
 
-### 当前运行（wave1，全部 2.0B nt 预算，bf16，LR 3e-4×档位系数，warmup 0.5% cosine）
-| run | model | GPU | pid | 启动 (UTC) |
-|---|---|---|---|---|
-| rnasc_30M_s17 | RNA-Sc-30M 主 scaling 轴 | 1 | 2660615 | 09:40 |
-| rnasc_10M_s17 | RNA-Sc-10M 主 scaling 轴 | 1 | 2630869 | 09:32 (wave1 原始进程) |
-| rnasc_30M_s17c1M | 30M×1M 语料（S2 数据量轴） | 2 | 2660624 | 09:40 |
-| rnasc_1M_s17 | RNA-Sc-1M 主 scaling 轴 | 7 | 2660631 | 09:40 |
+### wave1 运行状态（UTC 09:40 启动，全部 2.0B nt 预算）
+| run | model | GPU | 角色 | 50min 吞吐 | ETA |
+|---|---|---|---|---|---|
+| rnasc_10M_s17 | RNA-Sc-10M | 1（共享） | S1 scaling 轴 | 32k nt/s | ~0.7 天 |
+| rnasc_30M_s17 | RNA-Sc-30M | 1（共享+3外部进程竞争） | S1 scaling 轴 | 4.3k nt/s | ~5.3 天 |
+| rnasc_1M_s17 | RNA-Sc-1M | 7 | S1 scaling 轴 | 10.7k nt/s | ~2.2 天 |
+| rnasc_30M_s17c1M | 30M×1M 语料 | 2 | S2 数据量轴 | 10.7k nt/s | ~2.2 天 |
 
-早期 loss 轨迹：10M 1.32→1.26@22M nt；30M 1.35@2M；1M 1.31@4M；30M-c1M 1.28@4M。
-（MLM 4 字母表随机基线 ln4≈1.386；loss 已低于随机 → 学习发生）
+早期 loss（vs 随机基线 ln4≈1.386）：10M 1.27@97M；1M 1.26@32M；30M 1.30@13M；
+c1M 1.26@32M —— 全部低于随机基线，学习正常。
+30M 主档在 GPU1 与 4 个外部用户进程竞争（100% util 分摊），吞吐仅 4.3k；
+若 24h 后仍 <10k nt/s，考虑迁往更空闲的卡（supervisor 支持崩溃迁移，或等 c1M 完成后
+用其 GPU2 卡位）。
 
-### 训练预算与 ETA（按冒烟吞吐 ~3-4k nt/s 估）
-- 1M/10M/30M 单 run 2.0B nt ≈ 6-8 天/卡；
-- supervisor 挂机自动续；100M 主档（3 种子 17/29/43）与 30M-c10M 排队进入 wave.json
-  （显存满足即自动启动）。
+### 队列（wave.json，supervisor 自动领取）
+10M → 100M s17 → 100M s29 → 100M s43 → 30M-c10M（S2 轴第二点）。
+首个 100M nt checkpoint 预计今晚落盘（val_interval=100M nt）；到时立即跑 probe 冒烟。
+
+### 监控体系
+- 服务器 cron：每 2h rna_sc.status + ledger sync + 告警检查（CPU 回退/停滞）；
+- 本地定时任务：每日 08:30/20:30 巡检（读取 status.json，规则含停止 CPU 回退 run、
+  追加队列、记录 val loss、git commit）。
 
 ### 下一步（Day 1+）
-- [ ] 观察 24h：首个 100M nt checkpoint + val loss 落盘；
-- [ ] 把 100M s17/s29/s43 与 30M-c10M 加入 wave.json；
-- [ ] 全局家族分配表（T0.2.2，cluster_id 为键）；
-- [ ] S5 权重统计重采样对照、S4 随机初始化对照（评测侧）；
-- [ ] 逐层 probe 协议（T1.3 起步：CLSPool/attention pooling，禁 mean-pool）；
-- [ ] GitHub 仓库初始化 + 推送。
+- [ ] 首个 ckpt 落盘后：probe.py 冒烟（rna_type 分类，family_validation→family_test）；
+- [ ] 30M 吞吐评估，必要时迁移 GPU；
+- [ ] A7 文献复现（RiNALMo 或 RNA-FM 评测设置之一）；
+- [ ] S4 随机初始化对照（评测侧，跑同一 probe 协议）；
+- [ ] 100M 档 3 种子（已排队）。
