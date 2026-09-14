@@ -314,3 +314,29 @@ c1M 1.26@32M —— 全部低于随机基线，学习正常。
 
 ⚠️ 纪律检查：以上是中间观察。10M 单模型结论不得写入论文正文；等
 30M/100M/c1M/c10M 完成后做规模×训练量的二维对比再定结论。
+
+## 2026-09-14（Day 3 晚：supervisor DONE 检测 bug + 孤儿进程收编）
+
+### 事故与修复（连续第 3 个调度 bug，全部根治）
+1. **DONE 误判为死亡**：adopted-run 的 pid 消失后直接置 pending 重启——
+   但 10M 是正常 DONE 退出（manifest status=DONE）。被重启了一次
+   （重复进程 1936M nt 处被杀，无数据损害：确定性轨迹 + 只 append log）。
+   修复：reap 前先查 manifest DONE；ledger status=done 的直接出队；
+2. **孤儿进程收编**：supervisor 升级期间被 orphan 化的 s43（1398834，
+   293M nt）和 c10M（1398839）没有 ledger 行（行在竞态中丢失/未写过），
+   导致新 supervisor 重复启动 c10M。已杀 orphan 重复进程、upsert 登记
+   正确 pid。当前 7 训练进程与 ledger 完全一致（30M-full/c1M/c10M、
+   1M、100M×3 种子）。
+
+### 修正后的阵列状态（全部 healthy，fallback=0）
+| run | GPU | 备注 |
+|---|---|---|
+| 30M-full | 5 | 与 100M-s29 共卡 |
+| 30M-c1M | 2 | 640M nt |
+| 30M-c10M | 1 | 101M nt（supervisor 重启后） |
+| 1M | 7 | 700M nt（35%） |
+| 100M-s17/s29/s43 | 4/5/0 | 700M/500M/295M |
+
+调度器经历 4 轮实战修复（GPU 快照失真→OOM；adopt 死亡 reap；ledger
+竞态→重复启动；DONE 误判重启），现在同时满足：真实显存选择、断点续训、
+进程死亡检测（含正常完成）、ledger 锁安全。实战检验完成。
