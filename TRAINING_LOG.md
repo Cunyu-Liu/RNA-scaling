@@ -406,3 +406,38 @@ c1M 1.26@32M —— 全部低于随机基线，学习正常。
   S3 量化口径；其"多样性提升不改善性能"是 H5 的反向先验；
 - Schmirler 微调文：其"微调几乎总是赢"结论成为我们三协议矩阵的待检验
   对象（Claim 2 组成部分）；删除 LoRA 的决策由其"LoRA≈全参微调"结论背书。
+
+## 2026-09-15（Day 4 夜：例行巡检——全队列健康，无硬规则触发）
+
+### 巡检快照（status 生成 2026-09-14 20:34 服务器本地）
+| run | 状态/GPU | nt 进度 | best/last val | fallback |
+|---|---|---|---|---|
+| 30M-full | RUNNING GPU5 | 500M/2000M（25%） | last 0.937 | — |
+| 10M-full | **DONE** | 2000M/2000M（100%） | best 0.8716 | 0 |
+| 30M-c1M | **DONE**（1M 语料自然耗尽） | 850M | best 0.8960 | 0 |
+| 1M-full | RUNNING GPU7 | 1100M/2000M（55%） | last 1.137 | — |
+| 100M-s17 | RUNNING GPU4 | 1400M/2000M（70%） | last 0.818 | — |
+| 100M-s29 | RUNNING GPU5 | 900M/2000M（45%） | last 0.851 | — |
+| 100M-s43 | RUNNING GPU0 | 700M/2000M（35%） | last 0.863 | — |
+| 30M-c10M | RUNNING GPU1 | 300M/2000M（15%） | last 0.978 | — |
+| 30M-c1Mcs | RUNNING GPU3（wave 第 9 项，19:53 起） | 31M+ | loss 1.16 | — |
+
+### 规则执行结果
+1. **CPU fallback：零事件**（硬规则未触发）。两个 DONE run 的 manifest 全程
+   fallback=0（10M 19 次验证 / c1M 8 次）；全部训练日志无非零 fallback 行；
+2. **崩溃/重启：零**。supervisor 收编 6 个存活 run 并新启 c1Mcs（共 7 个训练
+   进程，CPU 99%+），supervisor.log 无 attempt/relaunch 循环，无需日志诊断；
+3. **最终 probe 覆盖：已满足，无需补跑**：
+   - 10M-full：probe_results.jsonl 已含 ckpt_nt=2000M（200008867）全量协议
+     记录（n_train=20000/n_eval=4000，20 层），best F1=0.2347@L19；
+     1900M best_val ckpt 的 probe best F1=0.174@L1（Day 4 已记）；
+   - 30M-c1M：最终 ckpt（800M，best_val ckpt）probe 已有，best F1=0.315@L7；
+   - ⚠ probe_results.jsonl 中 10M@2000M 混有一组 n_train=64/n_eval=31 的
+     smoke 记录（含 F1=1.0 小样本假象），汇总分析必须按 n_train/n_eval
+     过滤排除，不得作为科学结论；
+4. **wave.json**：8 基础 run + c1Mcs 均在队；c1Mcs 已启动（簇级分层 1M 语料：
+   1,000,011 序列 / 190,917 完整簇 / seed=17）。6/8 未 DONE，本轮不追加；
+5. 预计完成顺序：100M-s17（剩 600M，约 9h）→ 1M（约 22h）→ 100M-s29 /
+   30M-full → 100M-s43 / 30M-c10M。
+
+（规则 6 未触发：尚有 6/8 未 DONE，S1 scaling 对比表待全量完成后定稿。）
