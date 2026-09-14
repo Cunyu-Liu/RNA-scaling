@@ -276,3 +276,15 @@ c1M 1.26@32M —— 全部低于随机基线，学习正常。
   被我的监控 cron 打破了）；
 - 数据完整性检查升级：ckpt 文件冲突时以 manifest validations 的单调性为
   判据（本次用于确认无科学损害）。
+
+## 2026-09-14（巡检简报：100M s29/s43 首个对齐点记录）
+
+### 巡检简报（09:51 CST，规则逐项执行）
+- 8 run 全部 RUNNING，无 DONE → wave.json 无需追加（优先级任务 100M s17/s29/s43、30M-c10M 均已入队）；
+- cpu_fallback_count 全 0（以各 run manifest.json validations 字段逐一核验，status.json 汇总层该字段为 null 未填充）；
+- supervisor 无崩溃（日志无 relaunch / rc!=0 / Traceback）；
+- 进度（nt / % / last_val / fallback）：100M-s17 700M/35%/0.8634/0；100M-s29 500M/25%/0.8860/0；100M-s43 200M/10%/0.9687/0；10M-s17 1900M/95%/0.8716/0（接近完成）；1M-s17 700M/35%/1.1748/0；30M-s17 200M/10%/1.0183/0；30M-s17_c10M 100M/5%/1.1198/0；30M-s17_c1M 600M/30%/0.9215/0。
+- 首个 100M-nt checkpoint val loss 记录（日期/run_id/nt/val_loss）：
+  - 2026-09-14 / RNA-Sc-100M_s29 / nt=100007541 / val_loss=1.0770
+  - 2026-09-14 / RNA-Sc-100M_s43 / nt=100007541 / val_loss=1.0699
+- 注：s17 的 100M val（1.0734）已见于前节；100M 三种子首个对齐点 val 1.0734/1.0770/1.0699 相近（运行记录，非科学结论）。
