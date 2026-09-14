@@ -80,6 +80,14 @@ def latest_ckpt(out_dir: str) -> str | None:
     return os.path.join(out_dir, cks[-1])
 
 
+def _manifest_done(out_dir: str) -> bool:
+    try:
+        with open(os.path.join(out_dir, "manifest.json")) as fh:
+            return json.load(fh).get("status") == "DONE"
+    except (OSError, json.JSONDecodeError):
+        return False
+
+
 def launch_one(item, exclude) -> tuple:
     model_id, seed = item["model_id"], item["seed"]
     tag = item.get("corpus_tag", "full")
@@ -143,10 +151,23 @@ def main():
         for rid in list(procs):
             proc, gpu, out_dir, item = procs[rid]
             if proc is None:
-                # adopted run: check ledger pid liveness each cycle
+                # adopted run: check ledger pid liveness each cycle.
+                # IMPORTANT: a run whose manifest says DONE has finished
+                # normally — do NOT relaunch it (early bug: treated as dead).
                 row = ledger.by_run_id(rid) or {}
+                if row.get("status") == "done":
+                    del procs[rid]
+                    exclude.discard(gpu)
+                    continue
                 if row.get("status") == "running" and \
                         not pid_alive(row.get("pid")):
+                    if _manifest_done(out_dir):
+                        ledger.update(rid, "done")
+                        print("[sup] adopted run %s manifest DONE" % rid,
+                              flush=True)
+                        del procs[rid]
+                        exclude.discard(gpu)
+                        continue
                     del procs[rid]
                     exclude.discard(gpu)
                     ledger.update(rid, "pending",
