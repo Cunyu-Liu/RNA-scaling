@@ -230,6 +230,15 @@ def main():
             keep_ev.append(i)
     print("classes=%d train=%d eval=%d" % (len(classes), len(y_tri), len(y_evi)))
     os.makedirs(os.path.dirname(EVAL_OUT), exist_ok=True)
+
+    def rel_depth(li: int) -> float:
+        return round(li / max(1, L - 1), 3)
+
+    def depth_band(li: int) -> str:
+        r = li / max(1, L - 1)
+        return "early" if r <= 0.33 else ("middle" if r <= 0.66 else "late")
+
+    band_scores = {"early": [], "middle": [], "late": []}
     for li in range(L):
         Xtr = X_tr[li][keep_tr]
         Xev = X_ev[li][keep_ev]
@@ -237,6 +246,8 @@ def main():
         rec = {"run": os.path.basename(args.run_dir) +
                ("_randinit%s" % args.random_init if args.random_init
                 else ""), "layer": li,
+               "rel_depth": rel_depth(li), "depth_band": depth_band(li),
+               "n_layers": L,
                "ckpt_nt": ck.get("nt"), "n_classes": len(classes),
                "n_train": len(y_tri), "n_eval": len(y_evi),
                "acc": round(acc, 4), "f1_macro": round(f1, 4),
@@ -248,7 +259,14 @@ def main():
                "split": "family_validation->family_test"}
         with open(EVAL_OUT, "a") as fh:
             fh.write(json.dumps(rec) + "\n")
-        print("layer %d acc=%.4f f1=%.4f" % (li, acc, f1))
+        band_scores[depth_band(li)].append((acc, f1))
+        print("layer %d (%s, rel=%.2f) acc=%.4f f1=%.4f" % (
+            li, depth_band(li), rel_depth(li), acc, f1))
+    for band, scores in band_scores.items():
+        if scores:
+            print("BAND %s: mean acc=%.4f mean f1=%.4f (n=%d)" % (
+                band, sum(s[0] for s in scores) / len(scores),
+                sum(s[1] for s in scores) / len(scores), len(scores)))
     assert guard.cpu_fallback_count == 0
 
 

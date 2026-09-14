@@ -89,13 +89,22 @@ def validate(cfg, model, device) -> dict:
 
 def run(model_id: str, seed: int, device: int, out_dir: str,
         corpus_nseq: int | None = None, corpus_tag: str = "full",
-        smoke_nt: int | None = None, resume_from: str | None = None) -> dict:
+        smoke_nt: int | None = None, resume_from: str | None = None,
+        cluster_allowlist: str | None = None) -> dict:
     dev = "cuda:%d" % device
     assert torch.cuda.is_available(), "CUDA required (no silent CPU fallback)"
     guard = GPUGuard(dev)
     guard.check()
+    allowlist = None
+    if cluster_allowlist:
+        import pyarrow.parquet as pq
+        allowlist = set(pq.read_table(cluster_allowlist)
+                        .column("cluster_id").to_pylist())
+        print("[allowlist] %s: %d clusters" % (cluster_allowlist,
+                                               len(allowlist)), flush=True)
     cfg = resolve_config(model_id, seed, dev, corpus_nseq=corpus_nseq,
-                         corpus_tag=corpus_tag, smoke_nt=smoke_nt)
+                         corpus_tag=corpus_tag, smoke_nt=smoke_nt,
+                         cluster_allowlist=cluster_allowlist)
     if smoke_nt is not None:
         cfg = cfg.__class__(
             run_id=cfg.run_id, spec=cfg.spec, seed=cfg.seed, device=cfg.device,
@@ -105,6 +114,7 @@ def run(model_id: str, seed: int, device: int, out_dir: str,
             val_interval_nt=max(1, smoke_nt // 2), val_nt=min(cfg.val_nt, 2_000_000),
             val_split=cfg.val_split, mlm_p=cfg.mlm_p,
             corpus_nseq=cfg.corpus_nseq, corpus_tag=cfg.corpus_tag,
+            cluster_allowlist=cfg.cluster_allowlist,
             diversity_mode=cfg.diversity_mode, smoke_nt=smoke_nt)
     os.makedirs(out_dir, exist_ok=True)
 
@@ -144,7 +154,8 @@ def run(model_id: str, seed: int, device: int, out_dir: str,
     done = False
     while not done:
         gen = iter_mlm_batches(SPLIT_8080, "train", cfg.seed, cfg.context_nt,
-                               cfg.batch_nt, corpus_nseq=cfg.corpus_nseq)
+                               cfg.batch_nt, corpus_nseq=cfg.corpus_nseq,
+                               cluster_allowlist=allowlist)
         for batch in gen:
             if cumulative_nt >= cfg.budget_nt:
                 done = True
@@ -235,12 +246,16 @@ def main():
     ap.add_argument("--out-dir", required=True)
     ap.add_argument("--corpus-nseq", type=int, default=None)
     ap.add_argument("--corpus-tag", default="full")
+    ap.add_argument("--cluster-allowlist", default=None,
+                    help="parquet with cluster_id column (S2 cluster-"
+                         "stratified arm)")
     ap.add_argument("--smoke-nt", type=int, default=None)
     ap.add_argument("--resume-from", default=None)
     args = ap.parse_args()
     run(args.model, args.seed, args.device, args.out_dir,
         corpus_nseq=args.corpus_nseq, corpus_tag=args.corpus_tag,
-        smoke_nt=args.smoke_nt, resume_from=args.resume_from)
+        smoke_nt=args.smoke_nt, resume_from=args.resume_from,
+        cluster_allowlist=args.cluster_allowlist)
 
 
 if __name__ == "__main__":

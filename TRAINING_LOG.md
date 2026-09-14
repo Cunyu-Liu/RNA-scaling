@@ -385,3 +385,24 @@ c1M 1.26@32M —— 全部低于随机基线，学习正常。
 3. c1M@100M-nt 早期 probe F1=0.269 → final 0.315（上升）：小语料下
    继续训练 probe 改善——与 10M（0.214→0.174 下降）方向相反。
    **这是 S2（语料构成假设 H5）的核心早期证据。**
+
+## 2026-09-15（Day 4 晚：Q1-Q9 方案修订落地）
+
+### 代码落地
+1. **probe 层轴改相对深度（Q2 执行）**：rel_depth + depth_band
+   （early/middle/late）写入 probe_results.jsonl，汇总报 band 均值；
+2. **簇级分层抽样（Q3 执行）**：subsample.py 上线，c1Mcs arm 已生成
+   （1,000,011 序列 / 190,917 完整簇，seed=17）并加入 wave 队列；
+   prefix-c1M 保留为采样方式对照；
+3. data.py 支持 cluster_allowlist 流式过滤；train.py/supervisor 透传。
+
+### 两个新 arm 状态
+- c1Mcs（cluster-stratified 1M 语料）排队中（等 GPU 显存）；
+- RiNALMo-arch 轴（Q5）：排 100M 三种子之后，工程改造 3-7 天。
+
+### 两篇参考文精读结论（详见 DECISIONS_V1.1_20260915.md）
+- Nat Methods 数据量文：learning saturation point 分析框架直接采用
+  （S2 曲线标准统计量）；三多样性指标（Shannon/Gini-Simpson/Vendi）作为
+  S3 量化口径；其"多样性提升不改善性能"是 H5 的反向先验；
+- Schmirler 微调文：其"微调几乎总是赢"结论成为我们三协议矩阵的待检验
+  对象（Claim 2 组成部分）；删除 LoRA 的决策由其"LoRA≈全参微调"结论背书。

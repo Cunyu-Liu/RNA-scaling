@@ -55,13 +55,20 @@ def _apply_mlm(ids, seed: int):
 
 def iter_mlm_batches(path: str, split: str, seed: int, context_nt: int,
                       batch_nt: int, corpus_nseq: int | None = None,
-                      max_batches: int | None = None):
+                      max_batches: int | None = None,
+                      cluster_allowlist: set | None = None):
     """Yield dict batches: ids/targets (B, T) lists + valid-nt count.
 
     corpus_nseq caps the number of distinct sequences consumed from this
-    split (S2 corpus-size axis); None = full split.
+    split (S2 corpus-size axis, prefix variant — legacy control arm).
+    cluster_allowlist (S2 cluster-stratified variant, 2026-09-15): only
+    sequences whose cluster_id is in the allowlist are streamed; requires
+    reading the cluster_id column.
     """
     pf = pq.ParquetFile(path)
+    columns = ["split_membership", "canonical_sequence"]
+    if cluster_allowlist is not None:
+        columns.append("cluster_id")
     rows: list[tuple[list[int], list[int]]] = []
     cur_max = 0
     n_seq_seen = 0
@@ -82,12 +89,14 @@ def iter_mlm_batches(path: str, split: str, seed: int, context_nt: int,
             return False
         return (len(rows) + 1) * max(cur_max, L) > batch_nt
 
-    for rb in pf.iter_batches(
-            batch_size=50_000,
-            columns=["split_membership", "canonical_sequence"]):
+    for rb in pf.iter_batches(batch_size=50_000, columns=columns):
         d = rb.to_pydict()
-        for sm, seq in zip(d["split_membership"], d["canonical_sequence"]):
+        for i, (sm, seq) in enumerate(zip(d["split_membership"],
+                                          d["canonical_sequence"])):
             if sm != split:
+                continue
+            if cluster_allowlist is not None and \
+                    d["cluster_id"][i] not in cluster_allowlist:
                 continue
             if corpus_nseq is not None and n_seq_seen >= corpus_nseq:
                 break

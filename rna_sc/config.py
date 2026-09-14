@@ -47,6 +47,9 @@ class RNAMLMConfig:
     # S2 corpus-size axis: cap on unique train sequences (None = full train).
     corpus_nseq: int | None = None
     corpus_tag: str = "full"
+    # S2 cluster-stratified variant: parquet allowlist of cluster_ids
+    # (2026-09-15; supersedes prefix sampling for new arms).
+    cluster_allowlist: str | None = None
     # S3 diversity axis (deferred; placeholder for reweighting).
     diversity_mode: str = "raw"
     smoke_nt: int | None = None
@@ -80,6 +83,7 @@ class RNAMLMConfig:
             "mlm_p": self.mlm_p,
             "corpus_nseq": self.corpus_nseq,
             "corpus_tag": self.corpus_tag,
+            "cluster_allowlist": self.cluster_allowlist,
             "diversity_mode": self.diversity_mode,
             "smoke_nt": self.smoke_nt,
         }
@@ -89,10 +93,11 @@ def resolve_config(model_id: str, seed: int, device: str,
                    corpus_nseq: int | None = None,
                    corpus_tag: str = "full",
                    budget_nt: int | None = None,
-                   smoke_nt: int | None = None) -> RNAMLMConfig:
+                   smoke_nt: int | None = None,
+                   cluster_allowlist: str | None = None) -> RNAMLMConfig:
     spec = FAMILY[model_id]
     lr = BASE_LR * SCALE_LR_FACTOR.get(model_id, 1.0)
-    tag = corpus_tag if corpus_nseq is not None else "full"
+    tag = corpus_tag if corpus_nseq is not None or cluster_allowlist else "full"
     run_id = "rnasc_%s_s%s%s" % (spec.model_id.split("-")[-1], seed,
                                  "" if tag == "full" else "_" + tag)
     budget = budget_nt or BUDGET_NT
@@ -101,4 +106,5 @@ def resolve_config(model_id: str, seed: int, device: str,
         budget_nt=budget, lr=lr,
         warmup_nt=int(WARMUP_NT_FRAC * budget),
         corpus_nseq=corpus_nseq, corpus_tag=tag,
+        cluster_allowlist=cluster_allowlist,
         smoke_nt=smoke_nt)

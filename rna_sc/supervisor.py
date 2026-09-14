@@ -104,6 +104,9 @@ def launch_one(item, exclude) -> tuple:
             "--out-dir", out_dir]
     if nseq:
         args += ["--corpus-nseq", str(nseq), "--corpus-tag", tag]
+    al = item.get("cluster_allowlist")
+    if al:
+        args += ["--cluster-allowlist", al, "--corpus-tag", tag]
     ck = latest_ckpt(out_dir)
     if ck:
         args += ["--resume-from", ck]
