@@ -740,3 +740,16 @@ vs ncrna 的 10% 保留率 → C4 任务依赖性确认。
 - 全部后续 DONE run 均将自动: probe(20k/4k) -> s12_linkage -> s1_summary -> 日志
 
 - [auto] rnasc_30M_s17_c1M complete: nt=0.85B best_val=0.8960 fallback=0; final probe+linkage+s1_summary done
+
+- [auto] rnasc_10M_s17 complete: nt=2.00B best_val=0.8716 fallback=0; final probe+linkage+s1_summary done
+
+### Day 6 夜间收尾 (2026-09-15 22:30)
+
+watch_all 已自动完成 3 个正式 probe: 100M-s17 (E/M/L=0.215/0.278/0.311),
+c1M (0.219/0.296/0.295), 10M (0.145/0.120/0.119) — 全部与独立手算一致。
+
+s1_seed_table (论文主表生成器) 上线: 命名空间桥 (rnasc_/RNA-Sc-) 修复后,
+三行骨架已可复现, s29/s43/1M 完成后自动补全为 mean±std。
+
+进行中: 1M 93.5% (ETA ~1.5h); 100M-s29 80%/s43 83% (ETA ~4-5h);
+30M-full 49%/c10M 45%/c1Mcs 43%/c1Mcs-s29 25%。
