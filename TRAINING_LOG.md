@@ -779,3 +779,8 @@ s1_seed_table (论文主表生成器) 上线: 命名空间桥 (rnasc_/RNA-Sc-) �
 
 S1 主表状态: 5/11 行就位 (1M/10M/100M×1/30M-c1M/30M-c1Mcs);
 100M-s29/s43 完成后 100M 行变 3-seed mean±std; 30M-full/c10M 队列中。
+
+### Figure 1 preprint main figure (2026-09-16 04:40)
+- figs/fig1_layer_migration.png/.pdf: 7 curves + best-layer stars
+- data audit 7/7 vs probe JSONL recompute
+- watch_all post-chain: probe->linkage->summary->seed_table->fig1 auto
