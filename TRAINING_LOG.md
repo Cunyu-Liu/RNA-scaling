@@ -877,3 +877,15 @@ pooled) 结果, 最终科学结论待全量 runs + 严格 probe 后汇总。
   s17@GPU5 (53%, resume); 预计 ~2 天齐
 - 当前 7 训练进程并行: 30M×{s17,s29,s43,c10M} + 10M×{c5Mcs,c1Mcs} +
   100M-s29 (90%)
+
+### 2026-09-16 03:10: T2.2.1 S4 randinit 四档扩面完成 (H2 排除性证据表)
+- 四档 randinit17 probe (1M/10M/30M/100M, 全层, 20k/4k family split):
+  trained - randinit = 1M +0.051 / 10M +0.042 / 30M +0.161 / 100M +0.208
+- **科学发现**: 预训练增益随规模单调扩大, 30M 处陡增 (0.04→0.16) —
+  与 S1 主表的 F1 跳跃 (10M 0.17→30M 0.28) 同步; H2 (randinit 即含
+  任务无关特征) 在所有档位被排除; 1M/10M 档增益小 — 迁移能力在
+  30M+ 才真正建立 (层迁移 rel_depth 也在 30M+ 才进入深层)
+- 证据: evidence/s4_randinit_table.{md,json}; randinit 三 band 平坦
+  (无层结构) vs trained 有明确 late-band 优势 — 排除证据双重
+- T2.2.1 首半验收 (四档 randinit 表) 达成; 三协议版待 T1.2 协议
+  升级后统一重跑 (pooling 口径差异已记录)
