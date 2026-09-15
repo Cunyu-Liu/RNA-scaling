@@ -504,3 +504,37 @@ c1M 1.26@32M —— 全部低于随机基线，学习正常。
 - [x] S12 提前：infernal 环境装好，家族一致性表完成（2000 家族，
   evidence/s12_family_identity.json）；Rfam.cm 下载后补 CM 得分半轴；
 - [~] probe 类别平衡 + attention-pool 头：列入 T1.2.2（随三任务扩展一起）。
+
+## Day 6 (2026-09-15 上午) — T1 评测线推进
+
+### SSP (secondary-structure) 评测线落地
+- 数据: BEACON secondary-structure (bpRNA) 完整接入
+  - bpRNA.csv (13419 seqs, 含 dot-bracket) + TR0/VL0/TS0 npy pair matrices
+  - HF 分页修复: tree API 逐页 1000 → 13420 files 全枚举 (cursor 域名回写 hf-mirror)
+  - 校验: 50 样本 dot-bracket ↔ npy 矩阵 100% 一致 (agree=50, disagree=0)
+  - 下载并行化 16 threads, TS0 优先 (1305/1305), VL0, TR0 补全中
+- 代码: rnafteval 新增 tasks/ssp.py, finetune_ssp.py (PairHead 对称双头), baselines_ssp.py
+  - smoke PASS (GPU7, 46.3s, 350MB): ledger/F1/数据链路全通
+- v1 传统基线 (random split, n_test=300, max_len=192):
+  - bracket_prior: F1=0.0146 (P=0.0073/R=0.892) — 互补碱基先验
+  - kmer_lgbm_pair: F1=0.0427 (P=0.022/R=0.598) — local pair 特征 LGBM
+  - 结论: 局部特征天花板极低 → SSP 必须全局/层级证据 (LM 的价值空间)
+- 正式矩阵启动: RNA-Sc-10M × {frozen, head-only, lora} (GPU6/7) random split
+
+### S12 decoupling index 完成 (2026-09-15 08:30)
+- cmscan 5401 seqs (2000 fams × ~20) vs Rfam.cm, --cut_ga: 127 家族 GA 级命中
+- 解析修复: cmscan tblout target=CM/query=seq (与 cmsearch 相反); 驱动超时被
+  setsid 孤儿进程救回 (tbl 完整 2692 行)
+- Top decoupled: RF00163 DI=4.23 (id=0.62, cm=49.1 bits), RF04021 DI=3.81,
+  RF01787 DI=3.69 — 高 DI = 序列分歧但 CM 结构保守
+- 产物: evidence/s12_decoupling_index.json (+_full.json)
+- 待办: H6 验证需要把 DI 与 probe 层位/接触涌现对齐 (S12×S7 关联分析)
+
+### SSP v1 结论与 v2 修复
+- v1 random arm: frozen F1=0.0 — 无加权 BCE 在 ~1.5% 正对率下坍缩到负类
+  (loss 0.077→0.027 但模型只学 "无对") — 方法论教训, 已记录
+- v2: pos_weight BCE + VL0 阈值校准 (0.3-0.8 扫描)
+- family 基线修复: 用 mmseqs2 cluster parquet 而非 source-tag 分组
+- family split: 10647 seqs → 10257 簇 (train 8518/val 1065/test 1064)
+- family 基线 (v2): bracket_prior F1=0.0152, lgbm_pair F1=0.0465
+  (vs random: 0.0146/0.0427 — 家族级泛化轻微下降, 基线层面)
