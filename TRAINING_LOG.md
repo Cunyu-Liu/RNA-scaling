@@ -603,3 +603,24 @@ c1M 1.26@32M —— 全部低于随机基线，学习正常。
 核心结论不变且更稳: **最优层随规模单调加深 (1M/10M→L1, 30M→L4-7, 100M→L19)**,
 100M 的 late 带均值 F1 (0.301) 超过 early (0.219) — 与 Li et al. 蛋白质
 LM "低层主导" 相反方向。
+
+### C4 核心发现: 微调在家族切分下灾难性坍缩 (2026-09-15 10:20)
+
+ncRNA-family 任务 (13 类), RNA-Sc-10M 与 RiNALMo-micro 对照:
+
+| 模型 | 策略 | random ACC | family ACC | Δ(随机−家族) |
+|---|---|---|---|---|
+| RiNALMo-micro | frozen | 0.817±0.018 (n=3) | 0.696 | 0.12 |
+| RiNALMo-micro | lora | 0.923 | 0.084 | **0.84 (坍缩!)** |
+| RNA-Sc-10M | frozen | 0.375 | 0.214±0.018 (n=3) | 0.16 |
+| RNA-Sc-10M | lora | 0.745 | 0.072±0.006 (n=3) | **0.67 (坍缩!)** |
+| RNA-Sc-10M | full | 0.660 | 0.065±0.001 (n=3) | 0.59 (坍缩) |
+
+解读 (初步, 待 SSP/modification 任务交叉验证):
+- 参数高效/全量微调在 random split 上收益巨大 (lora +0.11~0.35 over frozen)
+- 但在 family split 上, 微调记住的是家族内序列相似性, 对未见家族
+  完全不迁移 → frozen 表征泛化性 > 微调表征 (C4 假设的直接证据)
+- RiNALMo frozen 家族 ACC (0.696) vs RNA-Sc frozen (0.214): 预训练数据
+  多样性差距 (36M vs 10M 语料) — 支撑 S2 数据轴假设
+- modification 任务 family split 下 frozen 0.72 vs random 0.68 —
+  无坍缩 (m6A 位点特征家族间共享) → 坍缩是任务依赖的
