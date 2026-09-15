@@ -139,6 +139,10 @@ def _cycle(handled):
                 cwd="/home/cunyuliu/rna-sc", capture_output=True, text=True)
             subprocess.run([PY, "-m", "rna_sc.s1_summary"],
                            cwd="/home/cunyuliu/rna-sc", capture_output=True)
+            subprocess.run([PY, "-m", "rna_sc.s1_seed_table"],
+                           cwd="/home/cunyuliu/rna-sc", capture_output=True)
+            subprocess.run([PY, "-m", "rna_sc.fig1_layer_migration"],
+                           cwd="/home/cunyuliu/rna-sc", capture_output=True)
             with open(TLOG, "a") as fh:
                 fh.write("\n- [auto] %s complete: nt=%.2fB best_val=%.4f "
                          "fallback=0; final probe+linkage+s1_summary done\n"
