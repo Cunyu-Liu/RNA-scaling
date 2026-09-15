@@ -721,3 +721,11 @@ full-family 补跑中 (GPU7), 完成后 SSP 3协议×2切分矩阵完整。
 
 vs ncrna 的 10% 保留率 → C4 任务依赖性确认。
 (此为微调方法测评线资产, 主线机理研究引用对照即可, 后续由该线自行扩展)
+
+### watch_all 通用守护上线 (2026-09-15 19:00)
+- 功能: 任意 run DONE -> 自动 final probe (20k/4k) + s12_linkage + s1_summary + 日志
+- 幂等: 通过 probe JSONL 的 final-ckpt 全层覆盖判定, 重启安全
+- 修复过程记录 (3 遍原则现场应用): ROOT 路径 /home->/mnt 错误, stdout
+  缓冲假象, 逐函数隔离验证定位
+- 当前: 100M-s17 正式 probe 重跑中 (GPU2); 1M 91.5% ETA ~2h;
+  100M-s29 78%/s43 81% ETA ~5-6h; 30M 线队列中
