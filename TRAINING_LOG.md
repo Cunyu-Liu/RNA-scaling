@@ -574,3 +574,19 @@ c1M 1.26@32M —— 全部低于随机基线，学习正常。
 - 教训入规程：选卡前必须 ① 用 torch device_count+get_device_properties 校验 CUDA 设备真实容量（MIG/整卡），② 以 nvidia-smi 实时查询（而非 supervisor 历史日志）计算 used/total 空闲额，③ 若 cuda:N 不存在或为 MIG 实例需换卡，GPU 6/7 不可作为整卡 ≥3GB 候选。
 
 （规则 6 未触发：8 个基础 run 中 5 个未 DONE；S1 scaling 对比表待全量完成 + 全部最终 probe 后定稿。10M/100M-s17/30M-c1M 的 probe F1 与 val 见 Day 5 深夜条目。）
+
+## Day 6 (2026-09-15 09:20) — 自动化链路收尾
+
+### 今日新增自动化
+1. watch_1m 守护: 1M DONE → 自动 20k/4k 最终 probe + s12_linkage + 日志
+2. probe per-class F1 (补丁): 每 rna_type 类别逐层 F1 → DI×层位联动数据
+3. acc2type.json: 3292 RF accession → rna_type 映射 (命名空间桥接)
+4. s12_linkage v2: type 级 DI 聚合 + Spearman (30M-c1M: 8 types, ρ=0.05 弱,
+   正式口径待 20k 样本 probe)
+
+### 进行中 (无人值守)
+- 1M 训练 1655/2000M nt (~83%, ETA ~今晚)
+- 100M-s29 1390M, 100M-s43 ~1360M (ETA 明晨)
+- 30M-full / c10M / c1Mcs / c1Mcs-s29 (supervisor 队列)
+- SSP v2 矩阵 wave2/3 (GPU5/6/7): 3策略×2切分
+- 训练巡检 cron 每 30min
