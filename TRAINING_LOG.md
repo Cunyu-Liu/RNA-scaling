@@ -889,3 +889,21 @@ pooled) 结果, 最终科学结论待全量 runs + 严格 probe 后汇总。
   (无层结构) vs trained 有明确 late-band 优势 — 排除证据双重
 - T2.2.1 首半验收 (四档 randinit 表) 达成; 三协议版待 T1.2 协议
   升级后统一重跑 (pooling 口径差异已记录)
+
+### 2026-09-16 04:05: T2.2.3 S6 涌现时间轴全量完成 — 线 2 独有主发现
+- **S6 全量 (10M s17, 19 ckpt × 20 层, 380 probe 行, 20k/4k family split)**:
+  - F1 非单调: 0.1B→0.5B 升至峰值 0.2497 (L18 late), 1.0B 后回落至
+    ~0.17 平台; best-layer 从 late/middle 带下移至 early (L1-L3)
+  - **跨模型时间轴三角验证**: 1M L1→L6 (上行) / 30M@0.1B L4 起点 /
+    10M L19→L1 (下行+回落) / 100M L2→L20 (强上行) — 终态 best-layer
+    位置 = 训练动力学终点态; 跨模型 final 对比 (10M early/30M mid/
+    100M late) 是动力学分岔, 不是静态属性
+  - **per-class 分解 (第三遍)**: 0.5B 峰→1.9B 谷的差由非 rRNA 类驱动
+    (misc_RNA 0.48→0.36, snoRNA 0.33→0, pre_miRNA 0.21→0, lncRNA
+    0.18→0, ncRNA 0.07→0); rRNA 反而 0.96→0.98 — 跨家族特征被从
+    深层挤出, rRNA 主通道加深 (语料 56% rRNA 偏置的因果链)
+  - 证据: evidence/s6_timeline.json + figs/fig_s6_emergence.png/pdf
+  - 命名: "pretraining-time feature attrition" (训练时间轴特征磨蚀)
+  - 预印本定位: 图 4/5 素材, 与 BERT probe 文献中期峰值对话
+- 100M-s29 @1882M (94%), ~1h 内 DONE
+- 30M s29/s43 全速训练中
