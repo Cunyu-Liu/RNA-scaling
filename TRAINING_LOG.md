@@ -731,3 +731,10 @@ vs ncrna 的 10% 保留率 → C4 任务依赖性确认。
   100M-s29 78%/s43 81% ETA ~5-6h; 30M 线队列中
 
 - [auto] rnasc_100M_s17 complete: nt=2.00B best_val=0.7964 fallback=0; final probe+linkage+s1_summary done
+
+### watch_all 修复闭环 (2026-09-15 20:30)
+- 根因链: (1) ROOT 路径错 (2) ssh 会话退出 SIGHUP 杀后台进程组 (3) 无异常守卫
+- 修复: cycle try/except + 每小时心跳 + cron */2min 保活 (monitoring/keep_watch_all.sh)
+- 端到端验证: 100M-s17 自动 probe 完成 (BAND E/M/L = 0.215/0.278/0.311,
+  late>early +0.096, 与手跑一致), 自动转 c1M
+- 全部后续 DONE run 均将自动: probe(20k/4k) -> s12_linkage -> s1_summary -> 日志
