@@ -827,3 +827,9 @@ S1 主表 (s1_seed_table, 清理后): 1M 0.1517 / 10M 0.1725 / 100M-s17 0.3352 /
 
 巡检者注: 本次为操作型巡检 (非科学结论); probe 数字均为 probe (day-1
 pooled) 结果, 最终科学结论待全量 runs + 严格 probe 后汇总。
+
+### T2.1.2 红队修正 A 执行: 语料轴三点曲线任务入队 (2026-09-16 06:50)
+- c5Mcs 生成: 5,000,013 seqs / 975,339 簇 (cluster-stratified, seed 17)
+- wave.json 新增: 10M×{c5Mcs, c1Mcs} — 与 10M-full 组成同模型三点
+  (语料 ~0.5B / ~1.2B / 2.0B nt 视语料实际大小), supervisor 自动调度
+- 目的: 语料量-性能曲线 + epoch 覆盖差异显式化 (红队 A 修正)
