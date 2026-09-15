@@ -753,3 +753,10 @@ s1_seed_table (论文主表生成器) 上线: 命名空间桥 (rnasc_/RNA-Sc-) �
 
 进行中: 1M 93.5% (ETA ~1.5h); 100M-s29 80%/s43 83% (ETA ~4-5h);
 30M-full 49%/c10M 45%/c1Mcs 43%/c1Mcs-s29 25%。
+
+### 事故 #9: 1M GPU 上下文静默丢失 (2026-09-15 17:25, 已根治)
+- 症状: 进程 R 态 CPU 100%, 日志 4min 前有更新但 GPU compute-apps 无此 PID,
+  /proc fd 无 nvidia 设备 → GPU 上下文丢失, CPU 空转假训练
+- 取证: evidence/1M_gpu_stall_20260915.txt
+- 处置: kill -> supervisor 5min 内自动 resume-from ckpt_1.8B GPU2, 损失 ~70M nt
+- 教训: "日志在更新"不等于"GPU 在算" — 巡检必须查 compute-apps 匹配
