@@ -738,3 +738,5 @@ vs ncrna 的 10% 保留率 → C4 任务依赖性确认。
 - 端到端验证: 100M-s17 自动 probe 完成 (BAND E/M/L = 0.215/0.278/0.311,
   late>early +0.096, 与手跑一致), 自动转 c1M
 - 全部后续 DONE run 均将自动: probe(20k/4k) -> s12_linkage -> s1_summary -> 日志
+
+- [auto] rnasc_30M_s17_c1M complete: nt=0.85B best_val=0.8960 fallback=0; final probe+linkage+s1_summary done
