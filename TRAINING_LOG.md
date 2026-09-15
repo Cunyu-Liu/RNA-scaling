@@ -760,3 +760,22 @@ s1_seed_table (论文主表生成器) 上线: 命名空间桥 (rnasc_/RNA-Sc-) �
 - 取证: evidence/1M_gpu_stall_20260915.txt
 - 处置: kill -> supervisor 5min 内自动 resume-from ckpt_1.8B GPU2, 损失 ~70M nt
 - 教训: "日志在更新"不等于"GPU 在算" — 巡检必须查 compute-apps 匹配
+
+- [auto] rnasc_30M_s17_c1Mcs complete: nt=0.90B best_val=0.9142 fallback=0; final probe+linkage+s1_summary done
+
+- [auto] rnasc_1M_s17 complete: nt=2.00B best_val=1.0824 fallback=0; final probe+linkage+s1_summary done
+
+### 1M + 30M-c1Mcs 完成并自动 probe (2026-09-16 02:00, watch_all)
+
+| run | best_val | probe best | rel-depth | E/M/L 带均值 | 备注 |
+|---|---|---|---|---|---|
+| 1M_s17 | 1.0824 | L6 0.1539 | 0.353 | 0.122/0.097/0.130 | 层曲线噪音大 (L8=0.009, L11=0.045), rel=0.353 证据弱; best_val 高 = 容量瓶颈 |
+| 30M-c1Mcs | 0.9142 | L6 0.2971 | 0.545 | 0.206/0.260/0.265 | 簇级抽样 c1Mcs (vs c1M prefix 0.636) |
+
+对比 c1M(prefix) vs c1Mcs(簇级): probe F1 0.310 vs 0.297, best-rel 0.636 vs
+0.545 — 前缀抽样稍优但同量级 (语料上限同为 ~0.85B nt)。
+1M 时间轴内部: 中途 probe best=L1 (100M-nt) -> final best=L6 (1.9B-nt),
+与 100M 的 L2->L19 一致 — 层带随训练推进加深跨尺度成立。
+
+S1 主表状态: 5/11 行就位 (1M/10M/100M×1/30M-c1M/30M-c1Mcs);
+100M-s29/s43 完成后 100M 行变 3-seed mean±std; 30M-full/c10M 队列中。
