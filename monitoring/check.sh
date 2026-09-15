@@ -22,4 +22,5 @@ if problems:
 else:
     print("no alerts")
 PYEOF
+$PY -m rna_sc.gpu_liveness >> "$OUT/status.txt" 2>&1
 tail -3 "$OUT/status.txt"
