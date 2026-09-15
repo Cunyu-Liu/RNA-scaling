@@ -784,3 +784,46 @@ S1 主表状态: 5/11 行就位 (1M/10M/100M×1/30M-c1M/30M-c1Mcs);
 - figs/fig1_layer_migration.png/.pdf: 7 curves + best-layer stars
 - data audit 7/7 vs probe JSONL recompute
 - watch_all post-chain: probe->linkage->summary->seed_table->fig1 auto
+
+- [auto] rnasc_100M_s17 complete: nt=2.00B best_val=0.7964 fallback=0; final probe+linkage+s1_summary done
+
+- [auto] rnasc_1M_s17 complete: nt=2.00B best_val=1.0824 fallback=0; final probe+linkage+s1_summary done
+
+- [auto] rnasc_30M_s17_c1M complete: nt=0.85B best_val=0.8960 fallback=0; final probe+linkage+s1_summary done
+
+- [auto] rnasc_30M_s17_c1Mcs complete: nt=0.90B best_val=0.9142 fallback=0; final probe+linkage+s1_summary done
+
+- [auto] rnasc_10M_s17 complete: nt=2.00B best_val=0.8716 fallback=0; final probe+linkage+s1_summary done
+
+### 巡检 + 事故#10 处置 (2026-09-15 22:30)
+
+**巡检汇总** (status.txt @20:34): 10 run = 5 DONE (100M-s17 2.00B/10M 2.00B/1M
+2.00B/30M-c1M 0.85B/30M-c1Mcs 0.90B) + 5 running (100M-s29 80%/s43 85%/30M-full
+50%/c10M 45%/c1Mcs-s29 30%)。cpu_fallback 全 0；无崩溃重试 (事故#9 已根治)；
+wave 8 基础 run 全在队未全 DONE, 不追加。
+
+**事故#10: c1Mcs-s17 supervisor 循环重拉 + probe 数据污染 (发现 20:50, 修复 21:35)**
+- 根因链: (1) supervisor `launch_one` 用 `ledger.update` (只改不建) -> wave 队列
+  拉起的 c1Mcs 两 run 从未有 ledger 行 (2) DONE 后 wave 循环查不到 done 状态
+  -> 18:03 从 900M ckpt 循环重拉第二 epoch (3) 第二 epoch 写出 1.0B ckpt +
+  覆盖 manifest DONE 帧 (4) 20:42 watch_all 命名空间 bug (scan_done 键 rnasc_*
+  vs probed_runs 键 RNA-Sc-*) -> 重启即全量重 probe, 用了被污染的 1.0B ckpt
+  写入 jsonl (12 行) + s1_scaling_summary (21:17)
+- 危害: 若不处置, c1Mcs 将跑到 2.0B (4 个 epoch) 且 S1 表 c1Mcs 行被第二
+  epoch 污染, 破坏 c1M(prefix, 1 epoch) vs c1Mcs(cluster, 1 epoch) 对照
+- 证据: evidence/c1Mcs_relaunch_20260915.txt; evidence/quarantine/ (隔离的
+  1.0B ckpt); probe_results.pre_inc10clean_20260915.jsonl (清理前快照)
+- 处置: (1) ledger 补 2 行 (s17=done/nt 902M, s29=running) (2) kill 第二
+  epoch 进程 (408190/1519987), manifest 从日志帧重建 (9 ckpt + 9 VAL, status
+  DONE/902M/0.9142, 原 running 帧备份 .bak) (3) jsonl 删 12 行污染 (4) 补丁
+  supervisor: upsert 建行 + adopted-DONE 回填日志 DONE 帧 (防 watch_all 漏
+  事件) (5) 补丁 watch_all: 命名空间桥修复 (6) s1_summary/s1_seed_table 重跑
+- 验证: supervisor 重启后 adopt 5 合法 run 且不再重拉 c1Mcs-s17 (观察 3 个
+  poll 周期); watch_all 补丁版运行 5min+ 无重 probe (jsonl mtime 不变);
+  S1 表 c1Mcs 行恢复 0.2971@0.9B (与 02:00 记录一致)
+
+S1 主表 (s1_seed_table, 清理后): 1M 0.1517 / 10M 0.1725 / 100M-s17 0.3352 /
+30M-c1M 0.3027 / 30M-c1Mcs 0.2971 (5/11 行; s29/s43 完成后补 mean±std)。
+
+巡检者注: 本次为操作型巡检 (非科学结论); probe 数字均为 probe (day-1
+pooled) 结果, 最终科学结论待全量 runs + 严格 probe 后汇总。

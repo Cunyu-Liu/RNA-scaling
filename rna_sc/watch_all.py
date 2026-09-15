@@ -81,7 +81,13 @@ def probed_runs() -> set[str]:
         # complete coverage = 0..max layer contiguous
         if layers and layers == set(range(max(layers) + 1)):
             out.add(run)
-    return out
+    # namespace bridge (inc10): scan_done keys are "rnasc_30M_s17_c1M"
+    # but probe jsonl keys are "RNA-Sc-30M_s17_c1M" — translate so the
+    # membership check in _cycle actually matches.
+    def _to_rid(run):
+        # RNA-Sc-30M_s17_c1M -> rnasc_30M_s17_c1M
+        return "rnasc_" + run[len("RNA-Sc-"):]
+    return { _to_rid(r) for r in out }
 
 
 def run_dir_of(rid: str) -> str:

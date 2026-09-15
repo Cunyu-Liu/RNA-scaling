@@ -80,6 +80,32 @@ def latest_ckpt(out_dir: str) -> str | None:
     return os.path.join(out_dir, cks[-1])
 
 
+def _log_missing_done(out_dir: str, mrow: dict) -> bool:
+    """Backfill a DONE frame line into the run log if absent (inc10:
+    adopted runs that finish while unmanaged lose the log DONE frame that
+    watch_all/s1_summary scan)."""
+    import glob
+    log = os.path.join(LOGS, os.path.basename(out_dir) + ".log")
+    if not os.path.exists(log):
+        return False
+    done_line = "DONE %s |" % (mrow.get("run_id") or
+                               os.path.basename(out_dir))
+    with open(log, "r+", errors="ignore") as fh:
+        for line in fh:
+            if line.startswith(done_line):
+                return False
+        fh.write(
+            "DONE %s | nt=%d steps=%d best_val=%.4f | %.0f nt/s "
+            "peak=%.0fMB fallback=%d\n" % (
+                mrow.get("run_id") or os.path.basename(out_dir),
+                mrow.get("final_nt") or 0, mrow.get("final_step") or 0,
+                mrow.get("best_val_loss") or 0.0,
+                mrow.get("throughput_nt_s") or 0.0,
+                mrow.get("peak_vram_mb") or 0.0,
+                mrow.get("cpu_fallback_count") or 0))
+    return True
+
+
 def _manifest_done(out_dir: str) -> bool:
     try:
         with open(os.path.join(out_dir, "manifest.json")) as fh:
@@ -116,7 +142,13 @@ def launch_one(item, exclude) -> tuple:
             ck or "fresh"))
         proc = subprocess.Popen(args, cwd=ROOT, stdout=lh, stderr=lh,
                                 start_new_session=True)
-    ledger.update(rid, "running", device=gpu, pid=proc.pid, out_dir=out_dir)
+    ledger.upsert({
+        "run_id": rid, "model_id": model_id, "seed": seed,
+        "corpus_tag": tag, "device": gpu, "out_dir": out_dir,
+        "status": "running", "pid": proc.pid,
+        "manifest_path": os.path.join(out_dir, "manifest.json"),
+        "note": "supervisor launch (inc10: upsert so DONE rows persist)",
+    })
     return proc, gpu, out_dir, rid, item
 
 
@@ -168,6 +200,11 @@ def main():
                         ledger.update(rid, "done")
                         print("[sup] adopted run %s manifest DONE" % rid,
                               flush=True)
+                        mrow = json.load(
+                            open(os.path.join(out_dir, "manifest.json")))
+                        if _log_missing_done(out_dir, mrow):
+                            print("[sup] %s DONE frame backfilled to log "
+                                  "(watch_all parity)" % rid, flush=True)
                         del procs[rid]
                         exclude.discard(gpu)
                         continue
