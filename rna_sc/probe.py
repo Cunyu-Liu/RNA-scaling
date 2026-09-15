@@ -59,9 +59,13 @@ class AttentionPoolProbe(nn.Module):
         return self.head(pooled)
 
 
-def load_encoder(run_dir: str) -> tuple[RNAMLMEncoder, dict]:
+def load_encoder(run_dir: str, ckpt_nt: int | None = None
+                  ) -> tuple[RNAMLMEncoder, dict]:
     cks = sorted([f for f in os.listdir(run_dir) if f.startswith("ckpt_")],
                  key=lambda f: int(f.split("_nt")[1].split("_")[0]))
+    if ckpt_nt is not None:
+        cks = [min(cks, key=lambda f: abs(
+            int(f.split("_nt")[1].split("_")[0]) - ckpt_nt))]
     ck = torch.load(os.path.join(run_dir, cks[-1]), map_location="cpu",
                     weights_only=False)
     mcfg = ck["cfg"]["arch"]
@@ -217,11 +221,15 @@ def main():
                     help="S4 control: probe a RANDOM-INIT model with this "
                          "seed using the architecture from --run-dir; "
                          "excludes the inductive-bias/overparam explanation")
+    ap.add_argument("--ckpt-nt", type=int, default=None,
+                    help="S6 emergence timeline: probe the ckpt whose nt is "
+                         "closest to this value (default: latest). Run name "
+                         "gets _ck{nt} suffix so jsonl rows stay distinct.")
     args = ap.parse_args()
     dev = "cuda:%d" % args.device
     guard = GPUGuard(dev)
     guard.check()
-    model, ck = load_encoder(args.run_dir)
+    model, ck = load_encoder(args.run_dir, args.ckpt_nt)
     if args.random_init is not None:
         import torch as _t
         _t.manual_seed(args.random_init)
@@ -263,6 +271,8 @@ def main():
         acc, f1, ypred = probe_one_layer(Xtr, y_tri, Xev, y_evi, len(classes), dev, return_pred=True)
         rec = {"run": os.path.basename(args.run_dir) +
                ("_randinit%s" % args.random_init if args.random_init
+                else "") +
+               ("_ck%d" % ck.get("nt", 0) if args.ckpt_nt is not None
                 else ""), "layer": li,
                "rel_depth": rel_depth(li), "depth_band": depth_band(li),
                "n_layers": L,
