@@ -152,7 +152,8 @@ class LinearProbe(nn.Module):
         return self.head(x)
 
 
-def probe_one_layer(X_tr, y_tr, X_ev, y_ev, n_classes, device, epochs=8):
+def probe_one_layer(X_tr, y_tr, X_ev, y_ev, n_classes, device, epochs=8,
+                    return_pred=False):
     d = X_tr.shape[1]
     probe = LinearProbe(d, n_classes).to(device)
     opt = torch.optim.AdamW(probe.parameters(), lr=1e-3, weight_decay=0.01)
@@ -172,8 +173,25 @@ def probe_one_layer(X_tr, y_tr, X_ev, y_ev, n_classes, device, epochs=8):
         pred = probe(Xev).argmax(-1)
         acc = (pred == yev).float().mean().item()
         f1 = _macro_f1(pred, yev, n_classes)
+        if return_pred:
+            return acc, f1, pred.cpu().tolist()
     return acc, f1
 
+
+
+def per_class_f1(pred, yev, n_classes):
+    out = []
+    for c in range(n_classes):
+        tp = sum(1 for p, y in zip(pred, yev) if p == c and y == c)
+        fp = sum(1 for p, y in zip(pred, yev) if p == c and y != c)
+        fn = sum(1 for p, y in zip(pred, yev) if p != c and y == c)
+        if tp + fn == 0:
+            out.append(None)
+            continue
+        prec = tp / max(1, tp + fp)
+        rec = tp / (tp + fn)
+        out.append(round(2 * prec * rec / max(1e-9, prec + rec), 4))
+    return out
 
 def _macro_f1(pred, yev, n_classes):
     f1s = []
@@ -242,7 +260,7 @@ def main():
     for li in range(L):
         Xtr = X_tr[li][keep_tr]
         Xev = X_ev[li][keep_ev]
-        acc, f1 = probe_one_layer(Xtr, y_tri, Xev, y_evi, len(classes), dev)
+        acc, f1, ypred = probe_one_layer(Xtr, y_tri, Xev, y_evi, len(classes), dev, return_pred=True)
         rec = {"run": os.path.basename(args.run_dir) +
                ("_randinit%s" % args.random_init if args.random_init
                 else ""), "layer": li,
@@ -251,6 +269,10 @@ def main():
                "ckpt_nt": ck.get("nt"), "n_classes": len(classes),
                "n_train": len(y_tri), "n_eval": len(y_evi),
                "acc": round(acc, 4), "f1_macro": round(f1, 4),
+               "per_class_f1": {classes[c]: v for c, v in
+                                zip(range(len(classes)),
+                                    per_class_f1(ypred, y_evi, len(classes)))
+                                if v is not None},
                "pooling": "per-token state mean-pool per sequence + linear "
                           "head (S7 sequencing tasks will use attention "
                           "pooling over tokens; this pooled probe is the "
