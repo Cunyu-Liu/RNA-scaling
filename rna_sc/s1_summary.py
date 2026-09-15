@@ -78,22 +78,29 @@ def scan_probes() -> dict:
             per_run[r["run"]].append(r)
     out = {}
     for run, rows in per_run.items():
-        # last full probe per run = highest n_train
-        rows.sort(key=lambda r: (r.get("n_train", 0), r.get("layer", 0)))
+        # OFFICIAL selection: FINAL checkpoint (max ckpt_nt) at full probe
+        # scale (n_train >= 4000). Mid-training ckpt probe rows (same n_train)
+        # are excluded — verified by the 3-pass audit 2026-09-15.
+        eligible = [r for r in rows if r.get("n_train", 0) >= 4000
+                    and r.get("ckpt_nt") is not None]
+        if not eligible:
+            continue                      # no full-scale probe yet
+        final_nt = max(r["ckpt_nt"] for r in eligible)
         best = {}
-        for r in rows:
-            if r.get("n_train", 0) >= 4000:   # official-ish probe scale
+        for r in eligible:
+            if r["ckpt_nt"] == final_nt:
                 best[r["layer"]] = r
-        if not best:
-            for r in rows:                     # fall back to small probes
-                best.setdefault(r["layer"], r)
         if not best:
             continue
         L = max(best) + 1
         f1s = [best[i]["f1_macro"] for i in range(L) if i in best]
         bands = collections.defaultdict(list)
         for i, r in best.items():
-            db = r.get("depth_band") or ("early" if r["layer"] / max(1, r.get("n_layers", 2)-1) <= 0.33 else "middle" if r["layer"] / max(1, r.get("n_layers", 2)-1) <= 0.66 else "late")
+            db = r.get("depth_band")
+            if not db:      # old-format rows: rebuild from layer index
+                rel = i / max(1, L - 1)
+                db = "early" if rel <= 0.33 else (
+                    "middle" if rel <= 0.66 else "late")
             bands[db].append(r["f1_macro"])
         bl = max((i for i in best), key=lambda i: best[i]["f1_macro"])
         out[run] = {
