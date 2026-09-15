@@ -538,3 +538,39 @@ c1M 1.26@32M —— 全部低于随机基线，学习正常。
 - family split: 10647 seqs → 10257 簇 (train 8518/val 1065/test 1064)
 - family 基线 (v2): bracket_prior F1=0.0152, lgbm_pair F1=0.0465
   (vs random: 0.0146/0.0427 — 家族级泛化轻微下降, 基线层面)
+
+## 2026-09-15（Day 6 上午：例行巡检——队列健康，无硬规则触发；100M-s17 probe 覆盖核查事故与口径更正）
+
+### 巡检快照（status 生成 2026-09-15 08:34 服务器本地）
+| run | 状态/GPU | nt 进度 | best/last val | fallback |
+|---|---|---|---|---|
+| 10M-full | **DONE** | 2000M/2000M（100%） | best 0.8716 | 0 |
+| 30M-c1M | **DONE**（1M 语料自然耗尽） | 850M | best 0.8960 | 0 |
+| 100M-s17 | **DONE** | 2000M/2000M（100%） | best 0.7964 | 0 |
+| 1M-full | RUNNING GPU7 | 1600M/2000M（80%） | last 1.0976 | — |
+| 100M-s29 | RUNNING GPU5 | 1300M/2000M（65%） | last 0.8260 | — |
+| 100M-s43 | RUNNING GPU0 | 1300M/2000M（65%） | last 0.8240 | — |
+| 30M-full | RUNNING GPU5 | 800M/2000M（40%） | last 0.8992 | — |
+| 30M-c10M | RUNNING GPU1 | 700M/2000M（35%） | last 0.9087 | — |
+| 30M-c1Mcs | RUNNING GPU3 | 500M/2000M（25%） | last 0.9491 | — |
+| 30M-c1Mcs-s29 | RUNNING GPU4（supervisor 08:31 启动） | 100M/2000M（5%） | last 1.1016 | — |
+
+### 规则执行结果
+1. **CPU fallback：零事件**。3 个 DONE run 的 manifest fallback=0；RUNNING run 无告警；check.sh 输出 no alerts。硬规则未触发；
+2. **崩溃/重启：零**。supervisor.log 全程无 attempt/relaunch/crash 记录；supervisor 已将 100M-s17（manifest DONE）收编，并于 08:31 启动 wave 第 10 项 c1Mcs-s29（GPU4）；
+3. **最终 probe 覆盖：实质已满足（附一处历史口径更正）**：
+   - 训练器在 2.0B 预算终点不落盘 ckpt（cadence=100M → 最后 ckpt=1900M，恰为 best_val ckpt；10M 与 100M-s17 各 19 个 ckpt、最大 1.9B，与 manifest nt_done≈2.0B 一致）——故 "probe_results.jsonl 中 ckpt_nt=2000M 记录" 对 DONE run 天然不存在；最终 probe 的正确判据 = **最后一个可用 ckpt（1.9B）上存在全量协议记录**；
+   - 按此判据：10M@1.9B（1900171155）✓、100M-s17@1.9B（1900122218）✓（即 Day 5 深夜已提交的 final probe，23 层全量 n_train=20000/n_eval=4000）、30M-c1M@800M（best_val ckpt，语料耗尽提前停）✓；
+   - **更正 Day 4 巡检笔误**：当时记 "10M 已含 ckpt_nt=2000M（200008867）"——200008867 实为 **200M**（0.2B，Day 1 首探点），非 2000M。本次巡检更正存档；
+4. **wave.json**：8 基础 run + 2 个 c1Mcs 后续任务共 10 项在队；未全部 DONE 且已含后续任务 → 不追加。
+
+### 事故记录：probe 误判两连 OOM + 一次冗余重复 probe（巡检操作失误，全程留痕）
+- 起因：将 ckpt_nt200013675（**200M**，主轨迹第 2 个 ckpt）误读为 2.0B，误判 100M-s17 缺最终 probe；
+- 尝试 1（GPU1）：误用 supervisor.log 中过期的 free 读数（15.4GB；彼时 GPU1 已被 editflow 等进程占满至 39.4GB）→ 状态收集阶段 OOM；证据日志：logs/probe_RNA-Sc-100M_s17_final_gpu1_oom_evidence.log；
+- 尝试 2（GPU6）：CUDA 设备 6 实为 **MIG 1g.5gb（4.75GB）实例**而非整卡（物理 GPU6/7 已开 MIG，torch 枚举 4.75GB；nvidia-smi 的 40GB 是整卡口径，与 CUDA 可分配容量不同）→ 再次 OOM；
+- 尝试 3（GPU5，约 8.4GB 整卡空闲）：运行成功，probe 加载最大 nt ckpt（1.9B）跑完 23 层全量协议，guard 校验 cpu_fallback=0 通过；
+- **结果定性**：该 probe 与已存在的 final probe（同一 1.9B ckpt、同全量协议）构成 **冗余重复记录**。probe 头部含 RNG（per-class 采样/线性头初始化），故 f1 与已有记录存在微小数值差（late-band 均值 0.3008 vs 0.3031，方向性结论一致）；
+- **数据处置**：遵循本文件对 smoke 记录的既有纪律——jsonl 为 append-only，**不删除**；下游汇总按 (run, ckpt_nt, n_train>=20000) 取**最新一条**记录去重，重复记录不得当作独立科学证据；
+- 教训入规程：选卡前必须 ① 用 torch device_count+get_device_properties 校验 CUDA 设备真实容量（MIG/整卡），② 以 nvidia-smi 实时查询（而非 supervisor 历史日志）计算 used/total 空闲额，③ 若 cuda:N 不存在或为 MIG 实例需换卡，GPU 6/7 不可作为整卡 ≥3GB 候选。
+
+（规则 6 未触发：8 个基础 run 中 5 个未 DONE；S1 scaling 对比表待全量完成 + 全部最终 probe 后定稿。10M/100M-s17/30M-c1M 的 probe F1 与 val 见 Day 5 深夜条目。）
