@@ -833,3 +833,47 @@ pooled) 结果, 最终科学结论待全量 runs + 严格 probe 后汇总。
 - wave.json 新增: 10M×{c5Mcs, c1Mcs} — 与 10M-full 组成同模型三点
   (语料 ~0.5B / ~1.2B / 2.0B nt 视语料实际大小), supervisor 自动调度
 - 目的: 语料量-性能曲线 + epoch 覆盖差异显式化 (红队 A 修正)
+
+### 2026-09-16 (Day 7) 夜巡: 多样性指标完成 + 30M 三-seed 补齐 (01:40-02:00)
+- **T2.3.2 语料多样性指标 (验收达成)**: 新增 rna_sc/corpus_diversity.py;
+  5 arms 全出表 (evidence/corpus_diversity.md/.json), commit f9abf37
+  - 关键发现 1 (方法学): prefix 采样 (c1M/c10M) seq-level 构成与 full
+    完全一致 (rRNA=56.4%), 但整簇采样 cs 臂 rRNA 更高 (c1Mcs 61.5%,
+    c5Mcs 59.0%) — 大簇按整簇保留; 采样方式本身改变家族构成, c1M vs
+    c1Mcs 对比 = 数据量 + 构成双重差异 (方法节显式声明)
+  - 关键发现 2: cluster-level 熵 c1M (1.9139) 反而最高 (prefix 切大簇
+    半, 小簇相对更丰富); cs 臂簇构成与 full 一致 (1.786 vs 1.785) —
+    整簇采样忠实保持了簇分布 (设计目的达成)
+  - 红队 E 交叉验证: full rRNA=56.4% 与交档记载一致 ✓
+- **30M 三-seed 补齐 (T2.1.3 关键路径)**: wave.json +30M-s29/s43-full
+  (14 条总); 三遍验证: 14 entries ✓ / 30M 条目 7 个 ✓ / supervisor 每周
+  期重读 wave.json (源码确认) ✓
+- **100M 三-seed 一致性**: 1.8B nt 处 val: s17 0.7985 / s29 0.7977 /
+  s43 0.7967 (散布 0.002) — seed 方差很小, slope 判定将很稳
+- **事故修复 (cron typo)**: keep_watch_all cron 误写 /mnt/cunyul2u/ 路径
+  (多打 2), 立即清除; /home 版为权威; /mnt 冗余副本删除
+- s43 99.1% (1982M/2B), DONE 后 watch_all 自动 probe; s29 90%;
+  10M-c5Mcs 23%, 10M-c1Mcs 10%
+
+- [auto] rnasc_100M_s43 complete: nt=2.00B best_val=0.7939 fallback=0; final probe+linkage+s1_summary done
+
+- [auto] rnasc_30M_s29_c1Mcs complete: nt=0.90B best_val=0.9129 fallback=0; final probe+linkage+s1_summary done
+
+### 2026-09-16 02:45: 100M 三-seed 关键节点 + T2.3.2b vendi 完成 (夜巡续)
+- **100M-s43 DONE + 自动 probe 完成**: nt=2.0B best_val=0.7939 (s17 0.7964
+  / s29 ~0.7977@1.8B); probe late band f1=0.3411, best layer late — 与 s17
+  (0.3352, late) 一致; seed_table 100M 行: n=2, F1=0.3440±0.0125
+- **100M 三-seed 一致性确认 (三遍)**: (1) val@1.8B: 0.7985/0.7977/0.7967
+  (散布 0.002); (2) final best_val: 0.7964/0.7939; (3) probe band 结构:
+  late>middle>early 两 seed 同型 — slope 判定输入稳定
+- **30M-s29-c1Mcs DONE + 自动 probe**: val=0.9129 (vs s17 0.9142); probe
+  F1=0.3453 (vs s17 0.2971) — c1Mcs 臂 seed 散布 ±0.034 显著大于 100M-full
+  ±0.0125: **小语料 + 簇采样的种子方差更大** (方法节 + limitation 记入);
+  best-layer 位置 s17 rel=0.545 vs s29 rel=0.91 — 层迁移位置在该臂不稳定
+- **T2.3.2b vendi 完成 (5/5 arms)**: full 9.53 / c10M 9.47 / c5Mcs 9.48 /
+  c1M 9.19 / c1Mcs 8.96 — c5Mcs 多样性几乎追平 full; c1Mcs 双重压低
+  (数据量小+构成偏移); commit 82cd846
+- **30M 三-seed 全部在途**: s29@GPU0 (fresh), s43@GPU4 (fresh),
+  s17@GPU5 (53%, resume); 预计 ~2 天齐
+- 当前 7 训练进程并行: 30M×{s17,s29,s43,c10M} + 10M×{c5Mcs,c1Mcs} +
+  100M-s29 (90%)
