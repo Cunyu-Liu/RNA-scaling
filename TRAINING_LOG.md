@@ -729,3 +729,5 @@ vs ncrna 的 10% 保留率 → C4 任务依赖性确认。
   缓冲假象, 逐函数隔离验证定位
 - 当前: 100M-s17 正式 probe 重跑中 (GPU2); 1M 91.5% ETA ~2h;
   100M-s29 78%/s43 81% ETA ~5-6h; 30M 线队列中
+
+- [auto] rnasc_100M_s17 complete: nt=2.00B best_val=0.7964 fallback=0; final probe+linkage+s1_summary done

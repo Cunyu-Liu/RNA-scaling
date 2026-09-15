@@ -93,7 +93,22 @@ def run_dir_of(rid: str) -> str:
 def main():
     print("[watch-all] start", flush=True)
     handled = set()
+    cycle = 0
     while True:
+        cycle += 1
+        try:
+            _cycle(handled)
+        except Exception:
+            import traceback
+            print("[watch-all] cycle error:\n%s" %
+                  traceback.format_exc()[-1500:], flush=True)
+        if cycle % 12 == 0:      # hourly heartbeat
+            print("[watch-all] alive cycle=%d handled=%d" %
+                  (cycle, len(handled)), flush=True)
+        time.sleep(300)
+
+
+def _cycle(handled):
         done = scan_done()
         probed = probed_runs()
         todo = [rid for rid, d in done.items()
@@ -130,7 +145,6 @@ def main():
                          % (rid, d["nt"] / 1e9, d["best_val"]))
             print("[watch-all] %s handled" % rid, flush=True)
             handled.add(rid)
-        time.sleep(300)
 
 
 if __name__ == "__main__":
