@@ -41,6 +41,12 @@ FAMILY = {
         target_params=100_000_000, role="scaling",
         note="flagship ~99.5M; deep-narrow; 3 formal seeds",
         seeds=(17, 29, 43)),
+    "RNA-Sc-650M": ModelSpec(
+        model_id="RNA-Sc-650M", d_model=1536, n_layers=30, n_heads=24, d_ff=6144,
+        target_params=650_000_000, role="scaling",
+        note="T2.1.3-slope-triggered extension (~645M est, deep-narrow; "
+             "single-GPU feasible ~20GB fp32; DP optional for speed)",
+        seeds=(17,)),
 }
 
 # S2 corpus-size axis: 30M model trained on 1M/10M/40M unique train sequences.
