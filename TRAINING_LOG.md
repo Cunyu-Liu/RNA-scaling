@@ -1060,3 +1060,17 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
   自然停止, 属设计内行为); 其非末位 ckpt probe (如 10M-c1Mcs
   0.9B L9 F1 0.188) 为中间证据, 不作最终结论
 - wave.json: 8 个基础 run 全部在队, 尚有 4 个未 DONE → 不追加
+
+### 2026-09-16 22:30: 30M-full final probe 定稿 + slope 更新 (0.143/decade)
+- **30M-s17 DONE (2.0B, val=0.8214) + final probe (1.9B ckpt, 协议一致)**:
+  F1=0.2656, best L11 (rel=1.0 最后一层!), E/M/L = 0.183/0.220/0.245
+  - 与 S6 30M 时间轴一致 (0.9B L8 -> 2.0B L11): 层迁移持续到最后一层
+  - 勘误: 之前 slope 用的 30M 0.2846 是 0.1B 早 ckpt 行 (当时 full
+    未完); 现在 final 0.2656 (选择逻辑正确切换)
+- **slope 重算: 0.1432/decade, CI95 [0.1245, 0.1670]** — CI 下界
+  4.1×eps(0.03), 650M 决策增强 (等 s29/s43 后最终定稿)
+- watch_all 幂等盲区发现+修复: probed_runs() 只查"全层覆盖", 未查
+  "final ckpt 的行" — S6 时间轴 run DONE 后被跳过; 已手动补 probe;
+  s1_seed_table/slope/fig1 已刷新
+- s1_slope_decision 30M 选择逻辑验证: final-ckpt 行优先 (1.9B) 而非
+  0.1B 行 ✓ (选择规则三遍检查通过)
