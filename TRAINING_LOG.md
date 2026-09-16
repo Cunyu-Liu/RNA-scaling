@@ -996,3 +996,25 @@ pooled) 结果, 最终科学结论待全量 runs + 严格 probe 后汇总。
   语料越小, 家族特征住得越深
 - 图: figs/fig_corpus3.png/.pdf; 证据: evidence/corpus3.json
 - epoch-覆盖差异已显式标注于图 (不假装同质, 红队 A 合规)
+
+### 2026-09-16 14:30: Day 7 战役总结 (夜巡+日巡全链路)
+**今日完成 (12 commits: f9abf37..28b4f0e)**:
+1. T2.3.2 语料多样性 5 arms (Shannon/GS + Vendi GPU 嵌入版) — 验收达成
+2. T2.2.1 S4 randinit 四档 H2 排除表 — 验收达成 (首半)
+3. T2.2.3 S6 四尺度时间轴 — 磨蚀发现 (10M 特有, U 型 F1 + 层下行)
+4. 100M 三-seed 定稿 (F1 0.3396±0.0117) — S1 主表核心
+5. T2.1.3 slope 初判 0.107/decade CI[0.088,0.131] → 650M 触发
+6. T2.1.2 语料三点 U 型 + val/F1 反转 — 解耦证据
+7. 650M spec 锁定 666.3M (e6c74da)
+8. 预印本骨架 v0.2 + abstract 四发现整合 (28b4f0e)
+
+**基础设施**: cron typo 事故修复; probe --ckpt-nt 功能 (S6 通道);
+watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
+聚合生效; gpu_liveness+check.sh 双保险验证有效
+
+**在途**: 30M 三-seed (s17 74%/s29 15%/s43 23%); 30M-c10M 71%;
+~1 天后 30M-s17 DONE → probe; ~2 天后三-seed 齐 → slope 定稿 → 650M
+
+**下一批优先级** (30M 齐前): 10M-c1Mcs 时间轴 (磨蚀 vs 多-epoch
+交互, ckpt 已有); 30M-c1Mcs 已有 2 seeds (s29 done) — slope 用
+30M-full s17 即可, 但 3-seed 是合同验收; S12 全家族版重跑 (100M)
