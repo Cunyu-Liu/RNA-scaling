@@ -979,3 +979,20 @@ pooled) 结果, 最终科学结论待全量 runs + 严格 probe 后汇总。
   在训 (63%) → 规则 6 (S1 scaling 表汇总) 未触发, 待 30M 定稿
 - 注: status.json 实际位于 /mnt/cunyuliu/rna-sc/ 根目录 (status/ 子目录
   只有 status.txt + cron.log), 后续巡检取数以此路径为准
+
+- [auto] rnasc_10M_s17_c5Mcs complete: nt=2.00B best_val=0.8830 fallback=0; final probe+linkage+s1_summary done
+
+### 2026-09-16 10:00: ★T2.1.2 语料三点曲线收官 (红队 A 修正闭环)
+- **10M × {c1Mcs, c5Mcs, full} 三点全齐 (各 2.0B nt, seed 17)**:
+  - c1Mcs  (0.9B unique, 2.2 ep): F1=0.1878 best L9 (middle 0.474)
+  - c5Mcs  (2.4B unique, 0.83 ep): F1=0.1524 best L4 (early 0.211)
+  - full   (14.1B unique, 0.14 ep): F1=0.1725 best L1 (early 0.053)
+- **三点 U 型 (非单调)**: 中间语料 c5Mcs 最差 — 既未充分重复也未
+  充分覆盖; 两端 (多-epoch 记忆 / 大-多样性) 各自更优
+- **val loss 与 probe F1 排序完全相反** (c1Mcs val 0.9815 最差但 F1
+  最好; full val 0.8716 最好 F1 中间) — **MLM 损失与跨家族可迁移性
+  解耦的直接证据** (预印本 4.4 节核心句)
+- best-layer rel_depth 随语料缩小单调上移 (0.053→0.211→0.474):
+  语料越小, 家族特征住得越深
+- 图: figs/fig_corpus3.png/.pdf; 证据: evidence/corpus3.json
+- epoch-覆盖差异已显式标注于图 (不假装同质, 红队 A 合规)
