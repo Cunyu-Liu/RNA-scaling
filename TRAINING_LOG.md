@@ -1029,3 +1029,14 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - 注意: DI 以 rna_type 聚合 (类级) 而非 Rfam 家族级 — 预注册的
   家族级版本需要 per-class F1 × Rfam 家族 DI 的映射表升级
   (T1.2.2 协议升级后做); 当前作为 4.5 节的初步证据
+
+### 2026-09-16 16:40: S6 磨蚀归因细化 — 与语料重复度无关
+- **10M-c1Mcs 时间轴 (4 ckpt, 0.1/0.3/0.5/0.7B, 全层)**:
+  0.1B L18 0.207 -> 0.3B L13 0.240 -> 0.5B L9 0.245 (峰) ->
+  0.7B L9 0.205 -> 0.9B(final) L9 0.188
+- 与 10M-full 同型 (峰后回落+层下移) — **磨蚀在 2.2-epoch 小语料
+  同样发生**, 排除"大语料见太多数据"解释; 磨蚀发生在第一→第二
+  epoch 之间 (0.5→0.9B), 是优化动力学 (训练时长) 的尺度特异现象
+- 预印本 4.3 节更新: 磨蚀 = f(model scale, training duration),
+  与 corpus repetition 无关; "erosion-capacity" 账户改为
+  "erosion-duration × capacity" 双因子
