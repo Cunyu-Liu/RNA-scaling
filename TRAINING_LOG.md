@@ -954,3 +954,28 @@ pooled) 结果, 最终科学结论待全量 runs + 严格 probe 后汇总。
   - 行动: 等语料三点 (c5Mcs ~1.5h) 后, 30M 三-seed 齐前预排
     650M 启动准备 (模型 spec + DP 适配 + 显存测算), 30M 定稿
     slope 后立即投 650M
+
+### 2026-09-16 08:51: 例行巡检 — 9/14 DONE、fallback 全 0、终 probe 全覆盖、队列不追加
+- **健康度 (status @ 08:34)**: 14 run = 9 DONE + 5 RUNNING; DONE run
+  cpu_fallback_count 全 0; RUNNING run (c5Mcs/30M-s17/30M-c10M/30M-s29/
+  30M-s43) 历史每条 validation fallback 均 0 → 硬规则未触发, 无需停训;
+  ledger 无 failed 行 (attempts 最高 1, 为 10M 伪重启历史已解决);
+  supervisor/watch_all 常驻, 5 个 train PID 全在 GPU, 无崩溃待诊
+- **2.0B 终 probe 核对 (规则 3)**: ckpt 间隔 100M、训练至 2.0B 收尾
+  不落 2.0B ckpt, best_checkpoint=1.9B → 终 probe 即 1.9B 全层记录。
+  probe_results.jsonl 核对: 100M_s17 0.3378@L19 / 100M_s29 0.3307@L11 /
+  100M_s43 0.3529@L16 (各 23 层), 10M_s17 0.1754@L1 (20 层), 1M_s17
+  0.1539@L6 (18 层), 均 n_train=20000/n_eval=4000 — **5/5 已完成,
+  无需补跑**; GPU6/7 空闲 (约 36.7G/33.5G free) 留作后续
+- **语料轴 DONE run 终态 probe**: 30M-c1M best 0.315 (0.80B, 语料上限
+  0.85B); 30M-c1Mcs-s17/s29 与 10M-c1Mcs 已由 auto pipeline probe (0.90B)
+- **RUNNING 进度**: 10M-c5Mcs 1.63B/2.0B (81%, val@1.6B=0.8965, 约 3h
+  后 DONE+自动终 probe); 30M-s17 1.27B (63%, val=0.8704); 30M-s17-c10M
+  1.26B (63%, val=0.8708) — 二者约 1 天内 DONE; 30M-s29 0.17B (8%,
+  val=1.1159) / 30M-s43 0.25B (12%, val=1.0042) — 约 2-3 天
+- **wave.json (规则 4)**: 14 条 = 全部 8 基础 run + 6 后续 (c1Mcs x2 /
+  c5Mcs / 10M-c1Mcs / 30M-s29-full / 30M-s43-full), 含后续任务 → 不追加
+- 8 基础 run: 6/8 DONE (1M/10M/100M x3/30M-c1M); 30M-full 与 30M-c10M
+  在训 (63%) → 规则 6 (S1 scaling 表汇总) 未触发, 待 30M 定稿
+- 注: status.json 实际位于 /mnt/cunyuliu/rna-sc/ 根目录 (status/ 子目录
+  只有 status.txt + cron.log), 后续巡检取数以此路径为准
