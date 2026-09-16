@@ -1018,3 +1018,14 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 **下一批优先级** (30M 齐前): 10M-c1Mcs 时间轴 (磨蚀 vs 多-epoch
 交互, ckpt 已有); 30M-c1Mcs 已有 2 seeds (s29 done) — slope 用
 30M-full s17 即可, 但 3-seed 是合同验收; S12 全家族版重跑 (100M)
+
+### 2026-09-16 15:00: S12 x 100M (预印本 4.5 节素材)
+- s12_linkage --run RNA-Sc-100M_s17: 18 类有 DI, 10 类进 linkage;
+  Spearman(DI, best-layer) = -0.244 (vs 30M-c1Mcs -0.640);
+  Spearman(DI, late-early) = -0.399 (vs 30M -0.362)
+- 解读: 100M 上 DI-层关联减弱 — 家族特征已充分深化 (与 S1/S6
+  的层迁移结论互恰); 30M-c1Mcs 的强关联 (-0.64) 是"中间态"信号
+- 存档: evidence/s12_linkage_100M_s17.json
+- 注意: DI 以 rna_type 聚合 (类级) 而非 Rfam 家族级 — 预注册的
+  家族级版本需要 per-class F1 × Rfam 家族 DI 的映射表升级
+  (T1.2.2 协议升级后做); 当前作为 4.5 节的初步证据
