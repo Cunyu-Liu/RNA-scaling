@@ -42,9 +42,9 @@ FAMILY = {
         note="flagship ~99.5M; deep-narrow; 3 formal seeds",
         seeds=(17, 29, 43)),
     "RNA-Sc-650M": ModelSpec(
-        model_id="RNA-Sc-650M", d_model=1536, n_layers=30, n_heads=24, d_ff=6144,
+        model_id="RNA-Sc-650M", d_model=1408, n_layers=28, n_heads=22, d_ff=5632,
         target_params=650_000_000, role="scaling",
-        note="T2.1.3-slope-triggered extension (~645M est, deep-narrow; "
+        note="T2.1.3-slope-triggered extension 666.3M (2.5%% dev); deep-narrow; "
              "single-GPU feasible ~20GB fp32; DP optional for speed)",
         seeds=(17,)),
 }
