@@ -77,6 +77,17 @@ def probed_runs() -> set[str]:
         if not elig:
             continue
         final_nt = max(r["ckpt_nt"] for r in elig)
+        # inc11 fix: compare against the run's TRUE final ckpt nt on
+        # disk (manifest). A run probed only at an early ckpt (S6-style
+        # rows) must NOT be considered final-probed once it is DONE.
+        rd = os.path.join(ROOT, "runs", run)
+        try:
+            with open(os.path.join(rd, "manifest.json")) as mh:
+                mnt = json.load(mh).get("final_nt") or 0
+        except (OSError, json.JSONDecodeError):
+            mnt = 0
+        if mnt and final_nt < mnt - 100_000_000:
+            continue    # probe predates the final ckpt -> re-probe
         layers = {r["layer"] for r in elig if r["ckpt_nt"] == final_nt}
         # complete coverage = 0..max layer contiguous
         if layers and layers == set(range(max(layers) + 1)):
