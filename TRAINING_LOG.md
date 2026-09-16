@@ -1040,3 +1040,23 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - 预印本 4.3 节更新: 磨蚀 = f(model scale, training duration),
   与 corpus repetition 无关; "erosion-capacity" 账户改为
   "erosion-duration × capacity" 双因子
+
+### 2026-09-16 20:34: 例行巡检 (check.sh + status.json + probe 对照)
+- 14 runs: 10 DONE / 4 RUNNING, 无崩溃, supervisor 重试 0 次,
+  cpu_fallback_count 全部为 0 (RUNNING 的 4 个经训练日志 grep 复核,
+  无 fallback/NaN 记录)
+- 在途 (85%/75%/20%/35%): 30M-s17 1.70B | 30M-c10M 1.50B |
+  30M-s29 0.40B | 30M-s43 0.70B; 全部 4 个 train PID 在卡,
+  GPU0-5 满, GPU6 空闲 ~33GB
+- DONE 汇总 (nt done / best_val_loss): 100M-s17 2.0B/0.7964,
+  100M-s29 2.0B/0.7956, 100M-s43 2.0B/0.7939, 10M 2.0B/0.8716,
+  10M-c5Mcs 2.0B/0.8830, 1M 2.0B/1.0824, 30M-c1M 850M(1 epoch 语料
+  耗尽)/0.8960, 30M-c1Mcs 902M/0.9142, 30M-s29-c1Mcs 902M/0.9129,
+  10M-c1Mcs 902M/0.9815
+- 最终 probe 核查 (probe_results.jsonl): 全部 2.0B-完成 run 均已有
+  ckpt_nt≈1.9B 全层 probe 记录 (100M x3 seeds, 10M, 10M-c5Mcs,
+  1M); 无需补跑, 本轮不启动新 probe 进程
+- 小语料 run 的 1.9B probe 缺失符合预期 (语料 <2.0B nt, 1 epoch 后
+  自然停止, 属设计内行为); 其非末位 ckpt probe (如 10M-c1Mcs
+  0.9B L9 F1 0.188) 为中间证据, 不作最终结论
+- wave.json: 8 个基础 run 全部在队, 尚有 4 个未 DONE → 不追加
