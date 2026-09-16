@@ -28,8 +28,8 @@ claims. Sections marked [PENDING] await runs in flight.
 
 ## 4. Results
 ### 4.1 S1 scaling (Table 1 = s1_seed_table; Fig 1 = fig1_layer_migration)
-- 1M 0.1517 / 10M 0.1725 / 30M [PENDING s17 mid-train] / 100M
-  0.3440±0.0125 (n=2, s29 in flight)
+- 1M 0.1517 / 10M 0.1725 / 30M [PENDING 3-seed in flight] / 100M
+  0.3396±0.0117 (n=3, FINAL)
 - Seed spread: 100M ±0.0125 vs 30M-c1Mcs ±0.0341 (small-corpus +
   cluster-sampling inflates variance)
 ### 4.2 S4 exclusion (Table = s4_randinit_table)
@@ -40,7 +40,9 @@ claims. Sections marked [PENDING] await runs in flight.
   0.1741@1.9B, best-layer late→early [evidence/s6_timeline.json,
   s6_cross_scale.json]
 - 30M weak attrition hint (late band -0.013 0.7B→0.9B) dwarfed by rise
-### 4.4 Corpus axis (diversity + 3-point curve) [PENDING 10M c5Mcs/c1Mcs]
+### 4.4 Corpus axis: c1Mcs F1=0.1878 (best L9 middle) vs full 0.1725
+  (best L1 early) — small-corpus multi-epoch wins at same params
+  [PENDING c5Mcs ~1.5h]
 - Composition shift: prefix arms keep full-56.4% rRNA; cs arms 59-61.5%
   [evidence/corpus_diversity.md]
 - Vendi: full 9.53 > c10M 9.47 ≈ c5Mcs 9.48 > c1M 9.19 > c1Mcs 8.96

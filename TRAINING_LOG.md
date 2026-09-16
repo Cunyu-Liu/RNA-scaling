@@ -918,3 +918,39 @@ pooled) 结果, 最终科学结论待全量 runs + 严格 probe 后汇总。
   因果印证 (磨蚀的宏观表现)
 - 100M 早 ckpt rel=0.045 (L1) -> 1.9B rel=0.91 (L20): 深层特征是
   预训练后期才建立的 (与交档 L2→L19 记录一致, 扩展为连续轨迹)
+
+### 2026-09-16 05:10: S6 第三遍验证 — 30M 全带轨迹细读 (措辞修正)
+- 30M 12 层三带均值: 0.3B→0.7B 全带上 (late 0.289→0.325);
+  0.7B→0.9B 轻微回落 (late -0.013) — 30M 有弱磨蚀苗头, 幅度远小于
+  10M (-0.07), 且 0.9B 仍高于 0.3B
+- 结论措辞修正: "磨蚀在 10M 最剧烈且造成终态反转; 30M 弱苗头被上升
+  淹没; 1M/100M 无" — 写入 S6 图注
+
+- [auto] rnasc_10M_s17_c1Mcs complete: nt=0.90B best_val=0.9815 fallback=0; final probe+linkage+s1_summary done
+
+### 2026-09-16 06:20: 语料轴第一点 + S6 四尺度完善收尾
+- **10M-c1Mcs DONE + 自动 probe**: 语料上限 0.90B (1M seqs, ~2.2
+  epoch), val=0.9815; probe best L9 (middle, rel=0.474) F1=0.1878
+  — vs 10M-full (14.1B, 0.14 epoch) F1=0.1725 L1(early):
+  同参数量下小语料+多epoch 反而更高 F1 + best 层更深; 语料三点
+  (c1Mcs 0.188 / c5Mcs pending / full 0.1725) 的 epoch-覆盖叙事
+  (红队 A 修正) 有了第一个数据点
+- S6 补充: 10M-c1Mcs 的时间轴也值得跑 (小语料多 epoch 是否磨蚀?)
+  → 排入下一批 (ckpt 已有 9 个)
+- s29 99%+ (1984M, lr 4.6e-08); c5Mcs 70% (1399M/2B)
+
+- [auto] rnasc_100M_s29 complete: nt=2.00B best_val=0.7956 fallback=0; final probe+linkage+s1_summary done
+
+### 2026-09-16 08:05: ★100M 三-seed 定稿 + T2.1.3 slope 初判 650M
+- **100M 三-seed 完整 (s17/s29/s43 各 2.0B, 全 fallback=0)**:
+  best_val 0.7964/0.7956/0.7939 (±0.0013); probe F1 0.3396±0.0117
+  (0.3378/0.3307/0.3529); best rel 0.712; E/M/L 0.237/0.306/0.318
+  — seed_table 100M 行定稿 (n=3)
+- **T2.1.3 预注册 slope 初判**: slope=(0.3396-0.2846)/log10(100/30)
+  = 0.1068/decade; bootstrap CI95 [0.0882, 0.1306]; CI 下界 = 2.9×eps
+  (0.03) -> **decision = "650M"** (触发第二阶段 4×A100 DP)
+  - 注意: 30M 侧暂为单 seed (0.2846); 30M-s29/s43 在训 (~2 天);
+    数量级不会翻转 (即使 30M±0.03, slope 仍 0.08-0.13 > eps)
+  - 行动: 等语料三点 (c5Mcs ~1.5h) 后, 30M 三-seed 齐前预排
+    650M 启动准备 (模型 spec + DP 适配 + 显存测算), 30M 定稿
+    slope 后立即投 650M
