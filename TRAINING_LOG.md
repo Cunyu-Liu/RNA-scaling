@@ -1074,3 +1074,21 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
   s1_seed_table/slope/fig1 已刷新
 - s1_slope_decision 30M 选择逻辑验证: final-ckpt 行优先 (1.9B) 而非
   0.1B 行 ✓ (选择规则三遍检查通过)
+
+### 2026-09-17 08:45: 巡检 patrol（规则复核 + 最终 probe 复检/补齐）
+- 状态快照 status.txt: 14 runs, 11 DONE, 3 RUNNING (30M-s17-c10M 1900M/95%,
+  30M-s29 700M/35%, 30M-s43 1100M/55%); no alerts; cpu_fallback 全部 =0（规则1 ✓）;
+  3 训练 PID 在 GPU、检查点持续写入 (c10M 08:15 / s29 05:43 / s43 06:34), 无崩溃、
+  无 supervisor 重试>5（规则2 ✓）
+- 8 基础 run: 7 DONE + 30M-c10M RUNNING（未全 DONE）→ wave.json 维持现状、不追加
+  后续任务（规则4 ✓; 规则6 未触发）
+- 最终 probe（规则3）: 按"latest=最高已存 ckpt≈1.9B"项目约定核查 probe_results.jsonl,
+  7 个 2.0B-DONE run（100M x3、10M、10M-c5Mcs、1M、30M）均已有 latest-ckpt 全层
+  probe 记录; 本轮按规则对 7 个 run 复核并重跑 final probe（GPU5/6/7 分派, 幂等追加
+  同 ckpt 行）, 7/7 进程正常退出, 记录 ckpt_nt≈1.9e9
+  - 说明: 各 run 目录最高已存 .pt 为 ckpt_nt1900*（1.9B）, 无 2.0B 检查点文件, 故
+    final probe 落点为 1.9B 属既定协议（时长/语料耗尽后停止, 非 smoke/proxy）
+- 运维备注: 首轮误将 3 个 probe 同时压 GPU6 触发 CUDA OOM, 已改分 GPU5/7 错峰重发
+  成功（后续 probe 并发建议≤2/卡）
+- 待办: 30M-c10M 及 3 个 30M 训练 run 未完成; 8/8 DONE 且 final probe 齐全后再生成
+  S1 scaling 对比表（val + probe F1）
