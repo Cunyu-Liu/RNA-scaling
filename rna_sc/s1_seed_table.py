@@ -26,6 +26,8 @@ FAMILY = {
     "RNA-Sc-1M_s17": "1M",
     "RNA-Sc-10M_s17": "10M",
     "RNA-Sc-30M_s17": "30M",
+    "RNA-Sc-30M_s29": "30M",
+    "RNA-Sc-30M_s43": "30M",
     "RNA-Sc-100M_s17": "100M",
     "RNA-Sc-100M_s29": "100M",
     "RNA-Sc-100M_s43": "100M",
