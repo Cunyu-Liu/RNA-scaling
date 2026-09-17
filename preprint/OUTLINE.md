@@ -1,4 +1,4 @@
-# Preprint skeleton v0.2 (2026-09-16, four core findings complete)
+# Preprint skeleton v0.3 (2026-09-17, corpus-axis two-scale + attrition attribution + probe determinism)
 
 Working title: "Scale-dependent feature attrition in a controlled RNA
 language-model family: pretraining dynamics, layer migration, and the
@@ -21,10 +21,11 @@ with best-layer depth migrating from early to late layers (rel 0.05
 at 10M - cross-family features peak mid-training (0.25 F1 at 0.5B nt)
 then attrit to a 0.17 plateau while the dominant-family channel
 sharpens (rRNA F1 0.96 -> 0.98, others -> 0) - a scale-specific
-erosion we link to corpus bias; (3) the corpus axis is U-shaped: at
-fixed compute, both small-corpus memorization (2.2 epochs, 1M seqs)
-and full-diversity exposure beat the middle regime, and val-loss rank
-inverts against transfer F1 - MLM loss and transferability decouple;
+erosion we link to corpus bias; (3) the corpus axis is scale-dependent: at 10M it is
+U-shaped (mid-corpus collapse), at 30M monotonic - capacity governs
+whether mid-size corpora remain viable; small-corpus multi-epoch wins
+at both scales, and val-loss rank inverts against transfer F1 - MLM
+loss and transferability decouple;
 (4) cluster-stratified sampling is not neutral: it shifts family
 composition (rRNA 56.4% -> 61.5%). Pre-registered slope analysis
 (0.107 F1/decade, CI [0.088, 0.131]) triggers a 650M continuation.
