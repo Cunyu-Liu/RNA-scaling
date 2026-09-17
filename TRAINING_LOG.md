@@ -1092,3 +1092,18 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
   成功（后续 probe 并发建议≤2/卡）
 - 待办: 30M-c10M 及 3 个 30M 训练 run 未完成; 8/8 DONE 且 final probe 齐全后再生成
   S1 scaling 对比表（val + probe F1）
+
+### 2026-09-17 09:20: ★probe 重复性方差事件 + 确定性根治 (inc12)
+- **发现**: jsonl 出现 322 行重复 (1M/30M/100M final ckpt 被重复
+  probe; 来源为另一自动化会话的 probe_RNA-Sc-*_final.log 系列,
+  与 watch_all 命名空间不同)
+- **科学发现**: 重复 probe 的 run-to-run 方差巨大 — 1M L4 达
+  0.0999 F1, 100M 早期层 0.02-0.05; 弱特征层受 probe 头初始化
+  主导 (未 seed 的 LinearProbe init + randperm shuffle)
+- **根治**: probe.py inc12 — 每层固定 seed (17+layer_idx), 头
+  初始化与数据顺序确定; 验证: 同 ckpt 两次 probe 逐位一致 ✓
+- **处置**: jsonl 去重 322 行 (first-writer-wins, 协议一致) +
+  56 行 smoke (<4000) 清理; seed_table 重跑恢复
+- **方法学结论 (入预印本方法节)**: probe 可重复性方差在弱层
+  可达 ±0.05-0.10 F1 — 所有报告数字均来自确定性 probe; 历史
+  非确定性 probe 的跨 run 比较需注明此方差上界
