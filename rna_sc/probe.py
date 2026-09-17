@@ -157,7 +157,11 @@ class LinearProbe(nn.Module):
 
 
 def probe_one_layer(X_tr, y_tr, X_ev, y_ev, n_classes, device, epochs=8,
-                    return_pred=False):
+                    return_pred=False, layer_seed=17):
+    # inc12: deterministic probe — head init and data order seeded per
+    # layer, so repeated probes of the same ckpt are reproducible
+    # (measured run-to-run delta was up to 0.10 F1 at weak layers).
+    torch.manual_seed(layer_seed)
     d = X_tr.shape[1]
     probe = LinearProbe(d, n_classes).to(device)
     opt = torch.optim.AdamW(probe.parameters(), lr=1e-3, weight_decay=0.01)
@@ -268,7 +272,9 @@ def main():
     for li in range(L):
         Xtr = X_tr[li][keep_tr]
         Xev = X_ev[li][keep_ev]
-        acc, f1, ypred = probe_one_layer(Xtr, y_tri, Xev, y_evi, len(classes), dev, return_pred=True)
+        acc, f1, ypred = probe_one_layer(
+            Xtr, y_tri, Xev, y_evi, len(classes), dev,
+            return_pred=True, layer_seed=17 + li)
         rec = {"run": os.path.basename(args.run_dir) +
                ("_randinit%s" % args.random_init if args.random_init
                 else "") +
