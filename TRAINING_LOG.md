@@ -1107,3 +1107,20 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - **方法学结论 (入预印本方法节)**: probe 可重复性方差在弱层
   可达 ±0.05-0.10 F1 — 所有报告数字均来自确定性 probe; 历史
   非确定性 probe 的跨 run 比较需注明此方差上界
+
+- [auto] rnasc_30M_s17_c10M complete: nt=2.00B best_val=0.8216 fallback=0; final probe+linkage+s1_summary done
+
+### 2026-09-17 14:00: 30M-c10M DONE — 语料轴七点全景 (两尺度对比)
+- **30M 语料轴四点齐** (全部自动链: DONE→probe→table):
+  c1Mcs 0.2971 (rel 0.545) / c1M 0.3150 (0.636) / c10M 0.2865
+  (1.000) / full 0.2656 (1.000)
+- **两尺度语料轴形态对比 (预印本 4.4 节核心)**:
+  - 10M: U 型 (中段 c5Mcs 塌陷 0.152)
+  - 30M: 单调 (c1M 0.315 最优 → full 0.266; 中段 c10M 0.287
+    稳定, 不塌)
+  - 解读: 10M 容量不足以同时记忆+泛化 (中段两头不沾); 30M 容量
+    使中段稳定 — 与 S6 磨蚀-容量交互互为印证; 小语料多-epoch
+    在两尺度都是最优 (2.35 ep 的 30M-c1M 0.315 = 全局最高 F1)
+- best-rel 对比: 30M 语料轴全在深层 (0.545-1.0), 10M 全在浅层
+  (0.053-0.474) — 层深度由模型规模主导, 语料影响次之
+- 图: figs/fig_corpus3.png (7 arms); 证据: evidence/corpus3.json

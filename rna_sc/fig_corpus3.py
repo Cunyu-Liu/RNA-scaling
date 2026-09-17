@@ -25,9 +25,13 @@ OUT = '/mnt/cunyuliu/rna-sc/evidence/corpus3.json'
 FIG = '/mnt/cunyuliu/rna-sc/figs/fig_corpus3'
 
 ARMS = [
-    ('c1Mcs', 'RNA-Sc-10M_s17_c1Mcs', 0.90, 2.22, '#DD8452'),
-    ('c5Mcs', 'RNA-Sc-10M_s17_c5Mcs', 2.40, 0.83, '#4C72B0'),
-    ('full',  'RNA-Sc-10M_s17',       14.13, 0.14, '#55A868'),
+    ('10M-c1Mcs', 'RNA-Sc-10M_s17_c1Mcs', 0.90, 2.22, '#DD8452'),
+    ('10M-c5Mcs', 'RNA-Sc-10M_s17_c5Mcs', 2.40, 0.83, '#4C72B0'),
+    ('10M-full',  'RNA-Sc-10M_s17',       14.13, 0.14, '#55A868'),
+    ('30M-c1Mcs', 'RNA-Sc-30M_s17_c1Mcs', 0.90, 2.22, '#C44E52'),
+    ('30M-c1M',   'RNA-Sc-30M_s17_c1M',   0.85, 2.35, '#937860'),
+    ('30M-c10M',  'RNA-Sc-30M_s17_c10M',  3.87, 0.52, '#8C8C8C'),
+    ('30M-full',  'RNA-Sc-30M_s17',       14.13, 0.14, '#55A868'),
 ]
 
 
@@ -38,7 +42,7 @@ def main():
         if d.get('n_train', 0) < 20000:
             continue
         for a, run, _, _, _ in ARMS:
-            if d['run'] == run and (a != 'full' or d.get('ckpt_nt', 0) >= 1_900_000_000):
+            if d['run'] == run and (not a.endswith('-full') or d.get('ckpt_nt', 0) >= 1_900_000_000):
                 rows[a][d['layer']] = d['f1_macro']
     res = {}
     for a, run, nt_uniq, epochs, color in ARMS:
@@ -77,7 +81,7 @@ def main():
     ax.set_xscale('log')
     ax.set_xlabel('unique corpus nt (B, log)')
     ax.set_ylabel('best-layer macro-F1')
-    ax.set_title('Corpus 3-point (10M model, 2.0B nt budget)')
+    ax.set_title('Corpus axis (10M + 30M, 2.0B nt budget)')
     ax = axes[1]
     rels = [res[a]['best_rel'] for a in res]
     ax.plot(xs, rels, marker='*', ms=12, color='#8172B3')
