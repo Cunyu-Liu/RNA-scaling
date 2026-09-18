@@ -1173,3 +1173,20 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 
 **遗留口径债务**: S4 randinit 表 + 10M-c1Mcs 时间轴 + s12_linkage
 是旧非确定性协议 — 下一批确定性重跑后升级预印本 v0.4
+
+- [auto] rnasc_30M_s29 complete: nt=2.00B best_val=0.8192 fallback=0; final probe+linkage+s1_summary done
+
+### 2026-09-18 14:30: ★★T2.1.3 slope 终稿 650M 触发 (合同级里程碑)
+- **30M 三-seed 完整** (s17/s29/s43 各 2.0B, fallback=0):
+  val 0.8214/0.8192/0.8186 (±0.0015); probe F1 0.2651±0.0162
+  (0.2466/0.2720/0.2767); best rel 0.788; E/M/L 0.194/0.230/0.247
+- **S1 主表终稿 (确定性协议)**: 1M 0.1604 / 10M 0.1731 /
+  30M 0.2651±0.0162 (n=3) / 100M 0.3394±0.0147 (n=3)
+- **T2.1.3 预注册 slope 终稿**: 0.142 F1/decade, bootstrap CI95
+  [0.1044, 0.1797] — CI 下界 3.5×eps(0.03) → **decision = 650M**
+  (T4.3.1 第二阶段触发)
+- **行动**: RNA-Sc-650M (666.3M, d1408 L28 H22 f5632, spec
+  e6c74da) 已入 wave.json (need 24GB 单卡); supervisor 将在 GPU
+  空间足够时自动启动; S6 需 2.0B nt @ ~1/6 100M 速度 ≈ 5-6 天
+- 30M 三 seed 的 best-rel: s17 0.727 / s29 0.091? (待查 s29 行)
+  / s43 — 层位置 seed 间波动, rel 深层为主
