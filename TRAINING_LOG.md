@@ -1190,3 +1190,14 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
   空间足够时自动启动; S6 需 2.0B nt @ ~1/6 100M 速度 ≈ 5-6 天
 - 30M 三 seed 的 best-rel: s17 0.727 / s29 0.091? (待查 s29 行)
   / s43 — 层位置 seed 间波动, rel 深层为主
+
+### 2026-09-18 15:00: supervisor 重启持 650M 等 GPU + Day 8 收官
+- supervisor 曾在 30M 三-seed 齐后判 wave complete 退出 — 650M
+  入队晚于其退出; 已重启, 现正确等待 24GB 单卡 (当前最大空闲
+  15.5GB, 外部占用); 轮询中, 有空间即自动启动
+- **Day 8 终态**: S1 主表 1M-100M 四档全 n>=1 (30M/100M 三
+  seed); slope 终稿 0.142 CI [0.104, 0.180] 650M 触发; 全部
+  probe 确定性协议; S6 四尺度 + 语料七点 + S4 四档 + S12 + 多样
+  性五臂 — 核心实验矩阵收口
+- 650M 训练 (~5-6 天) 期间: 预印本 v0.4 (randinit/c1Mcs 时间轴/
+  s12 确定性重跑), T2.2.2 S5 矩匹配对照, 10M c1M prefix arm 对照
