@@ -1152,3 +1152,24 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - 预印本 4.3 节终稿口径: "attrition strength is scale-dependent
   with an inverted-U shape (strongest at 10M)" — 1M 容量太小
   磨不动, 100M 容量足够防磨蚀, 10M 正好在"容量-语料张力"最大点
+
+- [auto] rnasc_30M_s43 complete: nt=2.00B best_val=0.8186 fallback=0; final probe+linkage+s1_summary done
+
+### 2026-09-18 02:30: Day 8 中夜总结 (s43 收官 + 等待 s29)
+**Day 7-8 完成 (17 commits: 9b1837e..34fbb71)**:
+1. 确定性 probe 革新: 发现重复性方差 (弱层 ±0.10 F1) → inc12 逐层
+   seed → bit-exact 验证 → 11 runs 重跑 → 37 个 S6 时间轴点重跑
+2. S6 磨蚀终版: 尺度倒 U 型 (10M -0.082 >> 30M -0.021 > 1M/100M
+   无); 与语料重复无关 (c1Mcs 复现)
+3. 30M-s43 DONE+probe: 30M n=2 (0.2616±0.0213); slope 0.149 仍
+   650M; 100M 侧三 seed 0.3394±0.0147
+4. watch_all 幂等盲区根治 (inc11: manifest final_nt 对照)
+5. 语料轴 7 点全景: 10M U 型 vs 30M 单调 (容量交互)
+6. 预印本 v0.3 (含 probe 确定性方法节)
+
+**在途**: 30M-s29 (76%, ~5h) — DONE 后 watch_all 自动 probe →
+30M n=3 → slope 终稿 → 650M 启动 (spec 666.3M 已锁定, supervisor
+自动抓 GPU)
+
+**遗留口径债务**: S4 randinit 表 + 10M-c1Mcs 时间轴 + s12_linkage
+是旧非确定性协议 — 下一批确定性重跑后升级预印本 v0.4
