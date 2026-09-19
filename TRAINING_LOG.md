@@ -1285,3 +1285,21 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
   交叉验证）
 - 1M/30M/100M 批次排队中（GPU6 串行）；v2（T1.2）：zero-shot/LoRA/
   full-FT + 任务三分法
+
+### 2026-09-19 15:28: T0.2.6 v1 全矩阵 16 格收官（Δ 随规模放大定律）
+- 四模型（1M/10M/30M/100M）× 两协议 × 两切分全格完成，ledger
+  16 done（含 smoke），GPU6 串行总 ~53 分钟
+- **核心发现 1——Δ(随机−家族) 随规模单调放大**（probe-balanced）：
+  1M +0.0552 → 10M +0.3373 → 30M +0.4378 → 100M +0.4344——
+  规模越大，random 切分可利用的家族内相似性越多（0.15→0.61），
+  真泛化（family 切分）几乎不涨（0.10→0.17）→ **协议敏感性
+  本身是规模的函数**；"随机切分下 bigger is better" 是度量
+  伪影的直接证据
+- **核心发现 2——协议×切分×规模三重交互**：meanpool 的 Δ 远小于
+  balanced（10M +0.0006 vs +0.3373）；1M meanpool Δ 甚至为负
+  （-0.0372）——协议选择系统性掩盖/放大泄漏效应（NABench 论断
+  的 RNA 自训家族版实证 + 协议维度扩展）
+- 层维度附带发现：30M/100M random 侧最佳层中段（8-10），family
+  侧早层反超——层依赖随切分翻转（后续可并入 S7 分析）
+- 证据：evidence/eval_matrix_v1_delta.json + eval/
+  eval_matrix_results.jsonl + eval_matrix.jsonl（ledger）
