@@ -1330,3 +1330,15 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
   （S4/c1Mcs/S12）→ S5 矩匹配（H3）→ 饱和点 → 评测矩阵 16 格
   （Δ 定律）→ k-mer 基线（良渚复现）→ Fig3 候选 → OUTLINE v0.4+
   （9 commits: b3c0ff0..07aa5fe 待推最后一个）
+
+### 2026-09-19 16:10: T1.1.1 bpRNA 数据接入完成（存量资产复用）
+- 发现 /mnt/cunyuliu/BPfold_data/bpRNA 已有 bpRNA-1M(2.0) 标准
+  TR0/VL0/TS0 切分（其他项目遗留，10814/198/1305 bpseq）
+- bprna_parse.py：bpseq -> parquet（name/source/split/seq/pairs，
+  1-based i<j 配对列表）+ 家族计数表；非连续位置重索引；断言
+  i<j<=len 单测过
+- 全量解析：**12,317 序列 0 失败，329,268 配对（184,174 长程
+  ≥24nt，S8 级配比）**；家族标签 = 文件名 SOURCE（RFAM 9594 /
+  CRW 669 / SRP 154 / tmRNA 145 / SPR 140 / RNP 112...）
+- 产出：data/bpRNA_parsed.parquet + evidence/bpRNA_family_counts.json
+- 下游：S7 结构 probe 扩面 / S13b 结构版钟形 / T3.3 三协议结构行
