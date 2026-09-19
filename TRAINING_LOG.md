@@ -1226,3 +1226,20 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - 650M 训练不受影响（GPU2 nt≈0.14B/2.0B，watch_all/cron 全链在岗）
 - 待办：S5 矩匹配（T2.2.2，650M 窗口）、T2.3.1 饱和点统计脚本、
   预印本 v0.4 数字更新
+
+### 2026-09-19 13:52: T2.2.2 S5 矩匹配对照完成（H3 排除，四档全）
+- probe.py 新增 --moment-matched（S5 控制）：先抓取 trained 各张量
+  均值/方差 → 再重造 seed-17 随机模型 → 逐张量归一化重标定到
+  trained 矩（74-146 tensors matched）；run 名 _mommatch17
+- **H3 排除表（inc12 确定性协议，GPU6 串行 16 分钟）**：
+  trained−mommatch = 1M +0.0286 / 10M +0.0478 / 30M +0.1233 /
+  100M +0.1668；mommatch 峰值 F1 0.123-0.160 ≈ randinit 水平
+  （0.101-0.158）——**匹配训练权重的一阶/二阶矩不能恢复任何
+  预训练收益；收益来自权重结构（特征），非好初始化**
+- 附带 bug 教训（自查第 2 遍抓出）：首版补丁先重造模型再"匹配"，
+  匹配对象错成随机模型自身（只做单位方差化）；修复为**先捕获
+  trained 矩再重造**。已验证 "moment-matched N tensors" 打印与
+  74/82 张量数合理
+- 表生成脚本入库 rna_sc/s5_mommatch_table.py（模式同 s4）
+- 至此 Li et al. 三对照（S4 randinit / S5 mommatch / S6 timeline）
+  全部确定性协议闭环——H2/H3 全档排除，H4 时间轴证据齐

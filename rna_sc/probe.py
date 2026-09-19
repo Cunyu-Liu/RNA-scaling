@@ -225,6 +225,12 @@ def main():
                     help="S4 control: probe a RANDOM-INIT model with this "
                          "seed using the architecture from --run-dir; "
                          "excludes the inductive-bias/overparam explanation")
+    ap.add_argument("--moment-matched", type=int, default=None,
+                    help="S5 control: probe a RANDOM-INIT model whose "
+                         "weights are moment-matched per-parameter-tensor "
+                         "to the trained run in --run-dir (seed controls "
+                         "the randomization before matching); excludes "
+                         "the good-init/weight-statistics explanation")
     ap.add_argument("--ckpt-nt", type=int, default=None,
                     help="S6 emergence timeline: probe the ckpt whose nt is "
                          "closest to this value (default: latest). Run name "
@@ -243,6 +249,33 @@ def main():
                               n_heads=mcfg["n_heads"], d_ff=mcfg["d_ff"])
         ck = dict(ck)
         ck["nt"] = 0
+    if args.moment_matched is not None:
+        import torch as _t
+        # capture TRAINED per-tensor moments BEFORE replacing the model
+        trained_sd = {k: v.clone() for k, v in model.state_dict().items()
+                      if v.is_floating_point()}
+        _t.manual_seed(args.moment_matched)
+        mcfg = ck["cfg"]["arch"]
+        model = RNAMLMEncoder(d_model=mcfg["d_model"],
+                              n_layers=mcfg["n_layers"],
+                              n_heads=mcfg["n_heads"], d_ff=mcfg["d_ff"])
+        with _t.no_grad():
+            new_sd = model.state_dict()
+            n_matched = 0
+            for k, v in new_sd.items():
+                if not v.is_floating_point() or v.numel() < 2:
+                    continue
+                t = trained_sd[k]
+                tm, ts = t.mean(), t.std()
+                vm, vs = v.mean(), v.std()
+                if ts > 0 and vs > 0:
+                    v.copy_((v - vm) / vs * ts + tm)
+                    n_matched += 1
+            model.load_state_dict(new_sd)
+            print("moment-matched %d tensors to trained moments" %
+                  n_matched)
+        ck = dict(ck)
+        ck["nt"] = 0
     L = ck["cfg"]["arch"]["n_layers"]
     # family-level split for the probe: family_validation vs family_test
     # (both disjoint from train by cluster construction; validation split is
@@ -259,6 +292,8 @@ def main():
             y_evi.append(cls_map[c])
             keep_ev.append(i)
     print("classes=%d train=%d eval=%d" % (len(classes), len(y_tri), len(y_evi)))
+    print("model mode: random-init=%s moment-matched=%s" %
+          (args.random_init, args.moment_matched))
     os.makedirs(os.path.dirname(EVAL_OUT), exist_ok=True)
 
     def rel_depth(li: int) -> float:
@@ -278,6 +313,8 @@ def main():
         rec = {"run": os.path.basename(args.run_dir) +
                ("_randinit%s" % args.random_init if args.random_init
                 else "") +
+               ("_mommatch%s" % args.moment_matched if
+                args.moment_matched is not None else "") +
                ("_ck%d" % ck.get("nt", 0) if args.ckpt_nt is not None
                 else ""), "layer": li,
                "rel_depth": rel_depth(li), "depth_band": depth_band(li),
