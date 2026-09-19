@@ -114,6 +114,13 @@ benchmarks.
   real (randinit/moment-matched excluded), but under family-level
   generalization that structure does not yet beat composition stats
   on rna_type; random-split "gains" are protocol artifacts
+- S4xS9 attribution triangle (controls on both splits): randinit/
+  mommatch capture only 11-18% of the trained random-split dividend
+  (10M +0.038/+0.041 vs +0.337; 100M-randinit +0.080 vs +0.434, RISING
+  with scale) while k-mer captures 105% — the leakage signal lives at
+  sequence-composition level; pretraining's contribution is learning
+  to READ it (signal x reader x protocol decomposition)
+  [evidence/s4x9_leakage_attribution.json]
 
 ## 5. Discussion
 - Attrition-capacity account; rRNA-bias causal chain (per-class
