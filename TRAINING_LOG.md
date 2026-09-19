@@ -1266,3 +1266,22 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - 结论链完整：H2 (S4) + H3 (S5) 全档排除 → 收益来自权重结构；
   H1 增益单调 + slope 触发 650M；H4 层迁移 + 磨蚀倒 U；H5 语料
   轴双形态；H6 初步（DI-峰层负相关）
+
+### 2026-09-19 14:25: T0.2.6 评测矩阵 runner 上线（S9 前置，冒烟+10M 定稿）
+- eval_matrix.py 入库：声明式 spec（模型×任务×协议×切分）+ eval ledger
+  （flock JSONL 防重，模式同训练 ledger）+ GPUGuard 拒绝 CPU 回退
+- 协议 v1：probe-balanced（class-weighted + cap10，红队修正 B）与
+  probe-meanpool（day-1 基线）；切分 v1：family（簇级不相连）与
+  random（family_validation 池内 i%5 行划分——**两科学性修正**：
+  禁止从 MLM train 池取样（会把预训练暴露与切分类型混杂）；random
+  侧家族重叠即协议要点，单变量隔离）
+- 自查 3 遍抓出并修复：GPUGuard 导入源错误 / 死函数含不存在列名 /
+  random 分支 tensor 堆叠类型
+- **10M 首个 Δ(随机−家族) 数据点（strong）**：
+  probe-balanced: family 0.1555 vs random 0.4928（Δ+0.337——家族
+  切分下性能崩塌至 1/3，NABench "simply cheating" 的自训家族实证）；
+  probe-meanpool: 0.1731 vs 0.1737（Δ≈0——协议选择掩盖泄漏效应，
+  协议×切分交互证据）；meanpool family 复现 day-1 值 0.1731（确定性
+  交叉验证）
+- 1M/30M/100M 批次排队中（GPU6 串行）；v2（T1.2）：zero-shot/LoRA/
+  full-FT + 任务三分法
