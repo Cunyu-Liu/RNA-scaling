@@ -1303,3 +1303,21 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
   侧早层反超——层依赖随切分翻转（后续可并入 S7 分析）
 - 证据：evidence/eval_matrix_v1_delta.json + eval/
   eval_matrix_results.jsonl + eval_matrix.jsonl（ledger）
+
+### 2026-09-19 15:45: T1.2.5 k-mer 基线组 v1（良渚结论 RNA 复现 + 预印本叙事闭环）
+- baselines_kmer.py：k-mer(1-6) 频率（5460 维）+ class-balanced
+  logistic；family 与 random（i%5 与 eval_matrix 完全可比）双切分
+- **核心结果（rna_type 任务）**：
+  family: k-mer 0.1630 vs LM 1M/10M/30M/100M 0.098/0.156/0.168/
+  0.170——家族级真泛化下 LM 对组成基线增益 ≈ 0（100M 仅 +0.007，
+  1M/10M 为负）→ 良渚 Nat Commun 2025 "困难切分 gLM 打不过简单
+  基线"在 RNA 受控家族复现
+  random: k-mer 0.5180 vs LM 0.153/0.493/0.605/0.604——k-mer 自身
+  Δ=+0.355：**泄漏是协议性质而非模型性质**（组成统计即可吃到）；
+  random 下的"规模收益"大部分是家族相似性泄漏
+- 与 S4/S5 组成完整三段论：(a) 预训练显著超越随机初始化/矩匹配
+  （权重结构真实存在）；(b) 但真泛化口径下结构收益未转化为超越
+  组成统计的下游增益；(c) random 切分放大的是家族相似性可利用度
+  ——"预训练有用"的表观证据在协议修正后大幅缩水
+- 证据：evidence/classical_baselines.json（kmer1-6+logistic v1；
+  LightGBM/one-hot CNN 随后补）
