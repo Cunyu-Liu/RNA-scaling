@@ -1356,3 +1356,16 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
   组成层泄漏特征"。三方交叉把 "what transfers" 从黑箱拆成
   信号（组成层）× 读取器（训练结构）× 协议（切分方式）三因子
 - 证据：evidence/s4x9_leakage_attribution.json；预印本 4.7 补强
+
+### 2026-09-19 17:35: 1M/10M 补种子入队（全档三 seed 目标）+ 回应质询
+- 用户质询三问（PPT 结果速览一）：1M/10M 单种子 / 10M best_rel=0.05
+  例外 / 主表缺 random 切分列
+- **行动 1**：wave.json 追加 RNA-Sc-1M_s29/s43 + 10M_s29/s43
+  （need 2/3GB，supervisor 每轮重读 wave 会自动捞——当前 8 卡
+  被外部占满在等待，有空即启动）；s1_seed_table FAMILY 映射扩展
+  四行——目标：五档全三 seed（1M ~11h ×2、10M ~17h ×2）
+- **行动 2（解释入档）**：10M best_rel=0.05 不是异常——S6 时间轴
+  显示 10M 最好层随训练持续下移（0.1B 时 L16/rel 0.84 → 1.1B 后
+  塌到 L1-3/rel 0.05-0.16），是磨蚀发现的层维度投影（中深层特征
+  被磨掉、只剩早期层）
+- **行动 3**：PPT 页 34 主表补 random 切分列 + 层位注记
