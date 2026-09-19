@@ -1243,3 +1243,16 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - 表生成脚本入库 rna_sc/s5_mommatch_table.py（模式同 s4）
 - 至此 Li et al. 三对照（S4 randinit / S5 mommatch / S6 timeline）
   全部确定性协议闭环——H2/H3 全档排除，H4 时间轴证据齐
+
+### 2026-09-19 14:05: T2.3.1 饱和点统计完成（corpus_saturation.py）
+- 95% 阈值 + 上升段插值 + 形态分类（monotone/U/mixed）+ 同 epoch
+  覆盖配对（红队修正 A）落进 corpus_saturation.json
+- **诚实结论：经典上升饱和点不存在**——两尺度均在最小唯一语料
+  臂达峰（10M 0.9B / 30M 0.85B）；30M 形态=monotone-fall
+  （0.316→0.302→0.287→0.247），10M 形态=mixed（0.186→0.152→0.173）
+- 固定 2.0B nt 预算下 "更多唯一数据 ≠ 更好"：饱和点报告为 argmax
+  臂（非渐进上界的 95%）——写预印本时按 "no classic saturation;
+  performance peaks at the smallest corpus arm under fixed exposure"
+  表述，配 epoch 覆盖标注
+- 同覆盖对：30M-c1M（2.35 ep）vs 30M-c1Mcs（2.22 ep）——prefix
+  vs 簇级分层归因用
