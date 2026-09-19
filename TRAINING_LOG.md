@@ -1321,3 +1321,12 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
   ——"预训练有用"的表观证据在协议修正后大幅缩水
 - 证据：evidence/classical_baselines.json（kmer1-6+logistic v1；
   LightGBM/one-hot CNN 随后补）
+
+### 2026-09-19 15:55: 预印本 OUTLINE 4.7 节（DELTA 定律 + 基线崩塌）入稿
+- 摘要新增 (5)：Δ 随规模单调放大 + k-mer 复现（泄漏=协议性质）
+  + 家族级评估下 LM 对组成基线优势崩塌至 ~0
+- 贡献列表新增 (e)；三段论叙事段入 4.7
+- 至此 Day 9 全部产出闭环：文档回写（4 件套）→ v0.4 确定性
+  （S4/c1Mcs/S12）→ S5 矩匹配（H3）→ 饱和点 → 评测矩阵 16 格
+  （Δ 定律）→ k-mer 基线（良渚复现）→ Fig3 候选 → OUTLINE v0.4+
+  （9 commits: b3c0ff0..07aa5fe 待推最后一个）

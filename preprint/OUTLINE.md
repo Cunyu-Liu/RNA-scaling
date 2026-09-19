@@ -28,7 +28,12 @@ whether mid-size corpora remain viable; small-corpus multi-epoch wins
 at both scales, and val-loss rank inverts against transfer F1 - MLM
 loss and transferability decouple;
 (4) cluster-stratified sampling is not neutral: it shifts family
-composition (rRNA 56.4% -> 61.5%). Pre-registered slope analysis
+composition (rRNA 56.4% -> 61.5%); (5) the random-vs-family split
+gap GROWS monotonically with scale (balanced probe DELTA +0.055 ->
++0.434 from 1M to 100M) and k-mer composition baselines reproduce it
+(own DELTA +0.355): leakage is a property of the split protocol, not
+the model — and under family-level evaluation the LM advantage over a
+classical composition baseline collapses to ~zero (+0.007 at 100M). Pre-registered slope analysis
 (0.142 F1/decade, bootstrap CI [0.104, 0.180]; 30M/100M each 3
 seeds) triggers a 650M continuation (in training).
 Results argue for scale- and corpus-aware interpretation of RNA LM
@@ -40,7 +45,9 @@ benchmarks.
 - Contribution list (4): (a) S1 scaling family 1M-100M with family-level
   eval; (b) layer-migration law (best rel_depth 0.05→0.86 with scale);
   (c) S6 feature-attrition discovery (10M non-monotonic); (d) corpus
-  axis: sampling-method composition shift + diversity metrics
+  axis: sampling-method composition shift + diversity metrics;
+  (e) DELTA scale law + classical-baseline collapse (protocol x split
+  x scale interaction)
 
 ## 3. Methods
 - Corpus: release22_split_8080, 29,012,227 seqs / 3,357,201 clusters
@@ -89,6 +96,24 @@ benchmarks.
   100M +0.1668; mommatch ~ randinit level (0.12-0.16) — weight
   statistics explain NONE of the transfer gain; H2+H3 both excluded
   [evidence/s5_mommatch_table.md]
+
+### 4.7 Protocol x split x scale: DELTA law + classical baselines (NEW 2026-09-19)
+- eval_matrix v1 (16 cells, flock ledger): DELTA(random-family) rises
+  monotonically with scale (balanced +0.055/+0.337/+0.438/+0.434);
+  meanpool DELTA ~ 0 (10M) / negative (1M) - protocol choice
+  systematically masks or amplifies leakage
+  [evidence/eval_matrix_v1_delta.json, figs/fig_eval_matrix_delta.png]
+- k-mer(1-6)+balanced logistic: family 0.1630 vs LM family 0.098/
+  0.156/0.168/0.170 — pretraining gain over composition baseline ~ 0
+  (Liangzhu NatCommun 2025 reproduces in a CONTROLLED RNA family);
+  k-mer own random 0.5180 (DELTA +0.355): composition statistics alone
+  eat the leakage — "bigger is better" under random splits is largely
+  family-similarity leakage, and it is a protocol property
+  [evidence/classical_baselines.json]
+- Narrative three-parter: S4/S5 show the trained weight STRUCTURE is
+  real (randinit/moment-matched excluded), but under family-level
+  generalization that structure does not yet beat composition stats
+  on rna_type; random-split "gains" are protocol artifacts
 
 ## 5. Discussion
 - Attrition-capacity account; rRNA-bias causal chain (per-class
