@@ -1342,3 +1342,17 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
   CRW 669 / SRP 154 / tmRNA 145 / SPR 140 / RNP 112...）
 - 产出：data/bpRNA_parsed.parquet + evidence/bpRNA_family_counts.json
 - 下游：S7 结构 probe 扩面 / S13b 结构版钟形 / T3.3 三协议结构行
+
+### 2026-09-19 16:35: S4×S9 交叉完成（泄漏归因三角定位）
+- eval_matrix 跑 randinit/mommatch 双切分（10M 全 + 100M randinit）
+- **归因表（probe-balanced，Δ=random−family）**：
+  trained 10M +0.337 / 100M +0.434（100%）
+  randinit 10M +0.038（11%）/ 100M +0.080（18%）
+  mommatch 10M +0.041（12%）
+  k-mer 基线 +0.355（105%）
+- **机制结论**：泄漏红利兑现需要训练过的权重结构（对照只吃到
+  11-18%），且随规模上升（容量越大读出越多组成层泄漏）；但 k-mer
+  吃到 105% → 信号本体在序列组成层，预训练的角色是"学会读取
+  组成层泄漏特征"。三方交叉把 "what transfers" 从黑箱拆成
+  信号（组成层）× 读取器（训练结构）× 协议（切分方式）三因子
+- 证据：evidence/s4x9_leakage_attribution.json；预印本 4.7 补强
