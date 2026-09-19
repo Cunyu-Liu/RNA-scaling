@@ -1,4 +1,4 @@
-# Preprint skeleton v0.4 (2026-09-19, deterministic-protocol closeout: S4/S5/S6/S12/c1Mcs all inc12; slope final)
+# Preprint skeleton v0.3 (2026-09-17, corpus-axis two-scale + attrition attribution + probe determinism)
 
 Working title: "Scale-dependent feature attrition in a controlled RNA
 language-model family: pretraining dynamics, layer migration, and the
@@ -15,8 +15,7 @@ corpora are dominated by a few abundant families (rRNA 56%). We train
 a controlled family of MLM encoders (1M-100M params, identical
 recipe, 2.0B nt budget, family-level evaluation on RNAcentral
 release22) and find: (1) transfer capability grows superlinearly at
-30M+ scale (deterministic randinit/moment-matched exclusion: gain
-+0.04 -> +0.17, weight statistics account for none of it),
+30M+ scale (randinit exclusion: gain +0.04 -> +0.21 across scales),
 with best-layer depth migrating from early to late layers (rel 0.05
 -> 0.86); (2) pretraining-time probe trajectories are non-monotonic
 at 10M - cross-family features peak mid-training (0.25 F1 at 0.5B nt)
@@ -29,8 +28,7 @@ at both scales, and val-loss rank inverts against transfer F1 - MLM
 loss and transferability decouple;
 (4) cluster-stratified sampling is not neutral: it shifts family
 composition (rRNA 56.4% -> 61.5%). Pre-registered slope analysis
-(0.142 F1/decade, bootstrap CI [0.104, 0.180]; 30M/100M each 3
-seeds) triggers a 650M continuation (in training).
+(0.107 F1/decade, CI [0.088, 0.131]) triggers a 650M continuation.
 Results argue for scale- and corpus-aware interpretation of RNA LM
 benchmarks.
 
@@ -53,42 +51,28 @@ benchmarks.
 
 ## 4. Results
 ### 4.1 S1 scaling (Table 1 = s1_seed_table; Fig 1 = fig1_layer_migration)
-- 1M 0.1604 / 10M 0.1731 / 30M 0.2651±0.0162 (n=3, FINAL) /
-  100M 0.3394±0.0147 (n=3, FINAL) — all inc12 deterministic
-  [evidence/s1_seed_table.json]
-- Seed spread: 100M ±0.0147 vs 30M ±0.0162 vs 30M-c1Mcs ±0.0098
-  (n=2); slope final 0.142 CI [0.104, 0.180] -> 650M
-  [evidence/s1_slope_decision.json]
+- 1M 0.1517 / 10M 0.1725 / 30M [PENDING 3-seed in flight] / 100M
+  0.3396±0.0117 (n=3, FINAL)
+- Seed spread: 100M ±0.0125 vs 30M-c1Mcs ±0.0341 (small-corpus +
+  cluster-sampling inflates variance)
 ### 4.2 S4 exclusion (Table = s4_randinit_table)
-- Trained-randinit (inc12, FINAL): 1M +0.0593 / 10M +0.0430 /
-  30M +0.1221 / 100M +0.1686; monotone in scale
-  [evidence/s4_randinit_table.md, rna_sc/s4_randinit_table.py]
+- Trained-randinit: 1M +0.05 / 10M +0.04 / 30M +0.16 / 100M +0.21
+  [evidence/s4_randinit_table.md]
 ### 4.3 S6 emergence timeline (Fig = fig_s6_cross_scale)
-- Four-scale four-dynamics; 10M attrition unique (inc12 FINAL):
-  peak 0.2549@0.5B → 0.1731@1.9B plateau, best-layer late→early;
-  attrition is duration-driven, NOT corpus-repetition: c1Mcs
-  (2.2-epoch) timeline reproduces it (peak 0.244@0.5B → 0.204@0.7B,
-  layer downshift L16→L6) [evidence/s6_timeline.json,
-  s6_cross_scale.json, v0.4 c1Mcs rerun 2026-09-19]
+- Four-scale four-dynamics; 10M attrition unique: peak 0.2497@0.5B →
+  0.1741@1.9B, best-layer late→early [evidence/s6_timeline.json,
+  s6_cross_scale.json]
 - 30M weak attrition hint (late band -0.013 0.7B→0.9B) dwarfed by rise
-### 4.4 Corpus axis (FINAL, inc12): c1Mcs 0.1862 (best L9) vs
-  c5Mcs 0.1519 vs full 0.1731 (best L1) — 10M U-shape; 30M four-arm
-  monotone-fall c1M 0.316 global best; saturation analysis: no classic
-  upward saturation, both scales peak at smallest unique-corpus arm
-  [evidence/corpus3.json, corpus_saturation.json]
+### 4.4 Corpus axis: c1Mcs F1=0.1878 (best L9 middle) vs full 0.1725
+  (best L1 early) — small-corpus multi-epoch wins at same params
+  [PENDING c5Mcs ~1.5h]
 - Composition shift: prefix arms keep full-56.4% rRNA; cs arms 59-61.5%
   [evidence/corpus_diversity.md]
 - Vendi: full 9.53 > c10M 9.47 ≈ c5Mcs 9.48 > c1M 9.19 > c1Mcs 8.96
 ### 4.5 S12 decoupling (30M-c1Mcs, n=10 fams)
-- Spearman(DI, best-layer), inc12 FINAL: 30M-c1Mcs -0.478 /
-  100M -0.384 / 30M-s29 -0.370 (n=10 types; high-DI families peak
-  EARLIER; association weakens with scale)
-  [evidence/s12_linkage_30M_s17_c1Mcs.json, s12_linkage_100M_s17.json]
-### 4.6 S5 moment-matched control (FINAL, inc12)
-- Trained-mommatch: 1M +0.0286 / 10M +0.0478 / 30M +0.1233 /
-  100M +0.1668; mommatch ~ randinit level (0.12-0.16) — weight
-  statistics explain NONE of the transfer gain; H2+H3 both excluded
-  [evidence/s5_mommatch_table.md]
+- Spearman(DI, best-layer) = -0.64 [evidence/s12_linkage.json]
+  [PENDING: full-127-family rerun on 100M]
+### 4.6 S5 moment-matched control [PENDING T2.2.2]
 
 ## 5. Discussion
 - Attrition-capacity account; rRNA-bias causal chain (per-class
@@ -97,11 +81,11 @@ benchmarks.
 
 ## 6. Limitations
 - Day-1 pooled probe protocol (upgrade planned T1.2.2)
-- Seed imbalance (1M/10M single-seed; 30M/100M 3-seed complete)
+- Seed imbalance (100M n=2→3; 30M full n=1→3 in flight)
 - rRNA 56.4% corpus bias; epoch-coverage differences on corpus axis
   (red-team A)
 - Attrition shown for rna_type task only [PENDING structure task]
 
 ## 7. Repro
 - Cunyu-Liu/RNA-scaling; ledger + manifest + probe jsonl; all commits
-  f9abf37..b228809
+  f9abf37..7a8dcd4

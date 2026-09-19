@@ -1256,3 +1256,13 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
   表述，配 epoch 覆盖标注
 - 同覆盖对：30M-c1M（2.35 ep）vs 30M-c1Mcs（2.22 ep）——prefix
   vs 簇级分层归因用
+
+### 2026-09-19 14:20: 预印本 OUTLINE v0.4（确定性数字全量入稿）
+- 4.1-4.6 全部刷新为 inc12 确定性终值：S1 主表（含 30M n=3）/
+  slope 0.142 CI [0.104,0.180] / S4 四档 / S5 矩匹配（新 4.6 节）/
+  S6+c1Mcs 归因 / S12 三 run linkage / 语料轴 + 饱和点结论
+- 剩余 3 个 PENDING 为真实未完成项（650M 结果 / BERT 中途峰文献 /
+  结构任务磨蚀）；v0.3 备份 OUTLINE_v0.3_backup_20260919.md
+- 结论链完整：H2 (S4) + H3 (S5) 全档排除 → 收益来自权重结构；
+  H1 增益单调 + slope 触发 650M；H4 层迁移 + 磨蚀倒 U；H5 语料
+  轴双形态；H6 初步（DI-峰层负相关）
