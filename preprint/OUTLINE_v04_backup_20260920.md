@@ -28,10 +28,9 @@ whether mid-size corpora remain viable; small-corpus multi-epoch wins
 at both scales, and val-loss rank inverts against transfer F1 - MLM
 loss and transferability decouple;
 (4) cluster-stratified sampling is not neutral: it shifts family
-composition (rRNA 56.4% -> 61.5%); (5) with all scales at 3 seeds, the 10M mean falls
-below 1M — the attrition 'valley' is systematic; the random-vs-family
-split gap GROWS monotonically with scale (balanced probe DELTA
-+0.055 -> +0.434 from 1M to 100M) and k-mer composition baselines reproduce it
+composition (rRNA 56.4% -> 61.5%); (5) the random-vs-family split
+gap GROWS monotonically with scale (balanced probe DELTA +0.055 ->
++0.434 from 1M to 100M) and k-mer composition baselines reproduce it
 (own DELTA +0.355): leakage is a property of the split protocol, not
 the model — and under family-level evaluation the LM advantage over a
 classical composition baseline collapses to ~zero (+0.007 at 100M). Pre-registered slope analysis
@@ -60,15 +59,12 @@ benchmarks.
   corpus_vendi.json]
 
 ## 4. Results
-### 4.1 S1 scaling (ALL-SCALE 3-SEED, inc12 deterministic, 2026-09-20)
-- 1M 0.1650±0.0131 / 10M 0.1535±0.0173 / 30M 0.2651±0.0162 /
-  100M 0.3394±0.0147 (all n=3, FINAL) [evidence/s1_seed_table.json]
-- **10M valley**: under 3 seeds the 10M mean falls BELOW 1M
-  (-0.0115): the mid-training peak (0.2549@0.5B) attrits to
-  below-1M level by 2.0B — attrition is systematic (all 3 seeds),
-  not seed noise; the 1M->10M segment is NEGATIVE growth
-- Slope decision reads 30M->100M only (pre-registered):
-  0.142 CI [0.104, 0.180] -> 650M triggered (in training, ~35%)
+### 4.1 S1 scaling (Table 1 = s1_seed_table; Fig 1 = fig1_layer_migration)
+- 1M 0.1604 / 10M 0.1731 / 30M 0.2651±0.0162 (n=3, FINAL) /
+  100M 0.3394±0.0147 (n=3, FINAL) — all inc12 deterministic
+  [evidence/s1_seed_table.json]
+- Seed spread: 100M ±0.0147 vs 30M ±0.0162 vs 30M-c1Mcs ±0.0098
+  (n=2); slope final 0.142 CI [0.104, 0.180] -> 650M
   [evidence/s1_slope_decision.json]
 ### 4.2 S4 exclusion (Table = s4_randinit_table)
 - Trained-randinit (inc12, FINAL): 1M +0.0593 / 10M +0.0430 /
@@ -82,12 +78,6 @@ benchmarks.
   layer downshift L16→L6) [evidence/s6_timeline.json,
   s6_cross_scale.json, v0.4 c1Mcs rerun 2026-09-19]
 - 30M weak attrition hint (late band -0.013 0.7B→0.9B) dwarfed by rise
-- **Attrition is task-specific (S7 bpRNA structure probe, 2026-09-20)**:
-  paired-position F1 1M 0.553 / 10M 0.568 / 30M 0.576 / 100M 0.589
-  — NO 10M layer-collapse on the structure task (best layers
-  mid-early, no L16->L1 downshift): attrition erodes family-
-  discrimination features, NOT structure features
-  [eval/probe_structure_results.jsonl, evidence/s7_structure_probe.json]
 ### 4.4 Corpus axis (FINAL, inc12): c1Mcs 0.1862 (best L9) vs
   c5Mcs 0.1519 vs full 0.1731 (best L1) — 10M U-shape; 30M four-arm
   monotone-fall c1M 0.316 global best; saturation analysis: no classic
@@ -132,25 +122,6 @@ benchmarks.
   to READ it (signal x reader x protocol decomposition)
   [evidence/s4x9_leakage_attribution.json]
 
-### 4.8 S14 RNS representation-quality (H8 first evidence, 2026-09-20)
-- Control set three-checks pass (KS p=1.0, mono dev 0.0006, 3x);
-  RNS@10: 1M 0.172 / 10M 0.104 / 30M 0.078 / 100M 0.077 vs
-  randinit 0.54-0.58 [evidence/s14_rns.json]
-- **Decoupling**: representation organization (RNS) saturates at 30M
-  while downstream F1 keeps rising 30M->100M — embedding-neighborhood
-  quality is NOT downstream usefulness (E14 direction; Prabakaran
-  cross-domain validation)
-
-### 4.9 S13b structure-version bell curve (H7 main test, 2026-09-20)
-- PRE-REGISTERED NEGATIVE RESULT: NOT-BELL (E13b-b path) — quadratic
-  peak x=1.745 outside the data NLL range (1.34-1.38): RNA-corpus
-  models never reach the over-confidence region; Hou's protein-domain
-  precondition is unmet at this corpus scale
-- 30 family points (5 models x 6 bpRNA sources); CI [-0.296, -0.050]
-  (family confounding: tmRNA low-NLL low-F1)
-  [evidence/s13b_bell.json] — v2 re-test when 650M widens the
-  confidence axis; limitation: corpus-scale constraint on confidence
-
 ## 5. Discussion
 - Attrition-capacity account; rRNA-bias causal chain (per-class
   decomposition); sampling method ≠ neutral (methods section)
@@ -161,9 +132,7 @@ benchmarks.
 - Seed imbalance (1M/10M single-seed; 30M/100M 3-seed complete)
 - rRNA 56.4% corpus bias; epoch-coverage differences on corpus axis
   (red-team A)
-- (RESOLVED 2026-09-20) Attrition task-specificity: structure task
-  shows NO 10M collapse — attrition is family-discrimination-specific
-  (4.3)
+- Attrition shown for rna_type task only [PENDING structure task]
 
 ## 7. Repro
 - Cunyu-Liu/RNA-scaling; ledger + manifest + probe jsonl; all commits

@@ -1424,3 +1424,13 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
   抓到，mislabeled randinit 行已从 jsonl 剔除 + 备份）；三小 bug
   （list/sum、device、编辑换行）全在冒烟阶段暴露
 - randinit 对照修复版重跑中（s7_ri_fixed.log）
+
+### 2026-09-20 17:20: 预印本 OUTLINE v0.5（五节升级入稿）
+- 4.1：全档三 seed 主表 + 10M 谷（系统性磨蚀，1M→10M 负增长）
+- 4.3：磨蚀任务特异性（S7 bpRNA 结构 probe 无 10M 层塌陷——
+  磨蚀侵蚀家族判别特征非结构特征）
+- 4.8（新）：S14 RNS 解耦（表征质量 30M 平台 vs 下游 F1 持续升）
+- 4.9（新）：S13b 预注册负结果（NOT-BELL，语料规模约束）
+- 摘要 (5) 升级含 10M 谷；limitation "attrition rna_type only"
+  标记 RESOLVED；v0.4 备份留档
+- 剩余 2 个 PENDING：650M 结果（训练中 35%）+ BERT 文献引用
