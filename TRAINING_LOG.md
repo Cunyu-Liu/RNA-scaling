@@ -1380,3 +1380,29 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - 用户对 PPT 三问的回应：单种子补齐（本批）/ 10M best_rel=0.05
   = 磨蚀签名（非异常，已在页 34 加脚注）/ random 切分列已补入
   主表（16 格数据）
+
+- [auto] rnasc_1M_s43 complete: nt=2.00B best_val=1.0893 fallback=0; final probe+linkage+s1_summary done
+
+- [auto] rnasc_1M_s29 complete: nt=2.00B best_val=1.0631 fallback=0; final probe+linkage+s1_summary done
+
+- [auto] rnasc_10M_s43 complete: nt=2.00B best_val=0.8754 fallback=0; final probe+linkage+s1_summary done
+
+- [auto] rnasc_10M_s29 complete: nt=2.00B best_val=0.8820 fallback=0; final probe+linkage+s1_summary done
+
+### 2026-09-20 00:35: ★五档全三 seed 达成——10M 谷发现（磨蚀系统性证实）
+- watch_all 自动链：4 补种 DONE → probe → s1_seed_table 自动并入，
+  零人工干预完成全档三 seed：
+  1M 0.1650±0.0131 / 10M 0.1535±0.0173 / 30M 0.2651±0.0162 /
+  100M 0.3394±0.0147
+- **10M 谷（新发现，入预印本）**：三 seed 下 10M 均值（0.1535）显著
+  低于 1M（0.1650）——10M 的 mid-training 峰（0.2549@0.5B）在
+  2.0B 全预算下塌到 1M 之下。磨蚀不是 seed 噪声（3 seed 全陷落）
+  而是 10M 尺度的系统性质；S6 磨蚀倒 U 的"10M 谷"在三 seed 统计
+  下加深
+- slope 判定澄清：规则设计只看 30M→100M 段（FAMILY 本就只含
+  30M/100M——预注册原文），10M 不参与判定；650M 触发决策不受
+  影响，继续有效
+- scaling 形态更新：1M→10M 为负增长（-0.0115），30M 起陡升——
+  "10M 处于容量-语料张力最大点"叙事从层维度（磨蚀）扩展到
+  终值维度（谷）
+- fig1 已刷新（五档三 seed 版）
