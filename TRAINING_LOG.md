@@ -1406,3 +1406,21 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
   "10M 处于容量-语料张力最大点"叙事从层维度（磨蚀）扩展到
   终值维度（谷）
 - fig1 已刷新（五档三 seed 版）
+
+### 2026-09-20 16:00: S7 结构 probe 四档 + S14 RNS 全量（Day 10 双新线落地）
+- **S7 结构 probe（bpRNA 配对位置二分类，首个非 rna_type 任务）**：
+  1M 0.5526 (L6/rel0.35) / 10M 0.5678 (L13/rel0.68) / 30M 0.5756
+  (L3/rel0.27) / 100M 0.5890 (L22/rel1.00)——结构任务上规模增益
+  平缓（+0.036/decade 级）且 best 层行为与 rna_type 完全不同
+  （中早层即有效，无磨蚀塌陷——磨蚀是任务特异性的！这补上了
+  预印本 limitation "attrition shown for rna_type only" 的关键
+  对照：结构 probe 无 10M 层塌陷）
+- **S14 RNS（H8 表征可靠性，控制集 KS p=1.0 三查过）**：
+  1M 0.172 / 10M 0.104 / 30M 0.078 / 100M 0.077 (RNS@10)——
+  randinit 0.54-0.58；**表征组织质量 1M→30M 单调改善后平台**，
+  与下游 F1 的 30M→100M 陡升完全解耦（E14 方向证据：嵌入
+  邻近结构 ≠ 下游有用性，Prabakaran claim 跨域验证 + 解耦发现）
+- 过程修复：probe_structure run_name 双重赋值 bug（自查第 2 遍
+  抓到，mislabeled randinit 行已从 jsonl 剔除 + 备份）；三小 bug
+  （list/sum、device、编辑换行）全在冒烟阶段暴露
+- randinit 对照修复版重跑中（s7_ri_fixed.log）
