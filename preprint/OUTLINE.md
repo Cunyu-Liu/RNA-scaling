@@ -88,6 +88,14 @@ benchmarks.
   mid-early, no L16->L1 downshift): attrition erodes family-
   discrimination features, NOT structure features
   [eval/probe_structure_results.jsonl, evidence/s7_structure_probe.json]
+- **Pretraining gain ~ ZERO on the structure task (CONTROL)**: 10M
+  randinit 0.5678 vs trained 0.5663 — paired-position linearity comes
+  from the architecture prior (ALiBi positional geometry), not
+  pretraining; CONTRAST with rna_type gains +0.04..+0.17 (S4).
+  Four-way convergence: S7 zero-gain + S12 high-DI-early-layer +
+  S13b not-bell + S14 rep/downstream decoupling -> at the 2.0B-nt
+  budget, RNA MLM pretraining transfers family-level sequence
+  statistics; structure information is largely NOT yet learned
 ### 4.4 Corpus axis (FINAL, inc12): c1Mcs 0.1862 (best L9) vs
   c5Mcs 0.1519 vs full 0.1731 (best L1) — 10M U-shape; 30M four-arm
   monotone-fall c1M 0.316 global best; saturation analysis: no classic
