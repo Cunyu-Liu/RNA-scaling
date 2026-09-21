@@ -1496,3 +1496,15 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
   结构性结论由非 rRNA 家族独立支撑——审稿人 E 质疑正面回应
 - 附带发现：去 rRNA 后 10M best 层 0.14（vs 含 rRNA 的 0.05）
   ——磨蚀塌层部分由 rRNA 通道驱动，非 rRNA 通道早层优势保留
+
+### 2026-09-21 18:10: S14 v2 家族分层交叉验证（T3.5.5 / C9.4 验收达成）
+- s14_family.py：11 家族 × {RNS@10（30M/1M）× per-family probe F1}
+  交叉（GPU1 重试成功——GPU6 外部挤占 OOM 后换卡策略生效）
+- **Spearman(RNS, probeF1) = −0.19**（弱负相关）：方向符合 E14a
+  （分离好→probe 好）但解释力弱 → 家族层面"表征分离 ≠ 下游
+  有用"解耦成立（与规模轴解耦互证）
+- 家族细节：rRNA RNS 0.025（分离最好）probe 0.97（最高）；
+  sRNA/snoRNA RNS 0.20-0.43 且 probe F1=0——**欠表示家族嵌入
+  更随机化**（Prabakaran 主张的 RNA 域验证，E14a/b 混合形态）
+- C9.4 验收：交叉验证表 + E14 判定齐（证据 s14_family_
+  crossval.json）
