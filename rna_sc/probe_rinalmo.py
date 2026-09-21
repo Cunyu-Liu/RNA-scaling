@@ -45,12 +45,12 @@ CLS, EOS, PAD = 1, 2, 0
 TOK = {"A": 6, "C": 7, "G": 8, "U": 9}
 
 
-def load_model():
+def load_model(ckpt_dir=CKPT_DIR):
     import multimolecule.models.rinalmo  # noqa: F401 (registers AutoConfig)
     from multimolecule.models.rinalmo import RiNALMoModel
     from multimolecule.tokenisers import RnaTokenizer
 
-    tok = RnaTokenizer.from_pretrained(CKPT_DIR)
+    tok = RnaTokenizer.from_pretrained(ckpt_dir)
     probe_ids = tok("".join(ALPHABET), add_special_tokens=False)[
         "input_ids"]
     assert list(probe_ids) == [TOK[c] for c in ALPHABET], (
@@ -63,7 +63,7 @@ def load_model():
           % (probe_ids, full[0], full[-1], tok.pad_token_id))
     assert tok.pad_token_id == PAD
 
-    m = RiNALMoModel.from_pretrained(CKPT_DIR)
+    m = RiNALMoModel.from_pretrained(ckpt_dir)
     m.eval()
     return m, m.config.num_hidden_layers
 
@@ -181,12 +181,23 @@ def main() -> int:
     ap.add_argument("--device", type=int, default=3)
     ap.add_argument("--n-train", type=int, default=20000)
     ap.add_argument("--n-eval", type=int, default=4000)
+    ap.add_argument("--ckpt-dir", type=str, default=CKPT_DIR)
+    ap.add_argument("--run-name", type=str, default=None)
+    ap.add_argument("--probe-seed", type=int, default=17)
     args = ap.parse_args()
     dev = "cuda:%d" % args.device
     GPUGuard(dev).check()
 
-    model, L = load_model()
-    print("RiNALMo loaded: %d layers (d=%s)" % (L, model.config.hidden_size))
+    model, L = load_model(args.ckpt_dir)
+    run_name = args.run_name
+    if run_name is None:
+        import re
+        tag = re.sub(r".*/", "", args.ckpt_dir.rstrip("/"))
+        run_name = "RiNALMo-%s" % tag
+    if args.probe_seed != 17:
+        run_name = "%s_pseed%d" % (run_name, args.probe_seed)
+    print("RiNALMo loaded: %d layers (d=%s) as %s" % (
+        L, model.config.hidden_size, run_name))
 
     X_tr, y_tr = collect_states(model, dev, "family_validation",
                                 args.n_train, L)
@@ -203,8 +214,8 @@ def main() -> int:
     for li in range(L):
         acc, f1, per_class = probe_one_layer(
             X_tr[li], y_tri, X_ev[li][keep_ev], y_evi, len(classes),
-            dev, layer_seed=17 + li, class_names=classes)
-        rec = {"run": RUN_NAME, "layer": li,
+            dev, layer_seed=args.probe_seed + li, class_names=classes)
+        rec = {"run": run_name, "layer": li,
                "rel_depth": round(li / (L - 1), 3),
                "depth_band": ("early" if li / (L - 1) <= 0.33 else
                               ("middle" if li / (L - 1) <= 0.66

@@ -128,11 +128,11 @@ def pad_batch(list_ids, device):
 
 
 def train_neural(make_model, tr_ids, ytr, ev_ids, yev, n_classes,
-                 device, guard, epochs=10, lr=1e-3, batch=64):
+                 device, guard, epochs=10, lr=1e-3, batch=64, seed=SEED):
     import torch
     import torch.nn as nn
 
-    torch.manual_seed(SEED)
+    torch.manual_seed(seed)
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
     model = make_model(n_classes).to(device)
@@ -148,7 +148,7 @@ def train_neural(make_model, tr_ids, ytr, ev_ids, yev, n_classes,
     for ep in range(epochs):
         guard.verify_cuda_alive()
         model.train()
-        perm = np.random.RandomState(SEED * 1000 + ep).permutation(len(tr_ids))
+        perm = np.random.RandomState(seed * 1000 + ep).permutation(len(tr_ids))
         for i in range(0, len(perm), batch):
             idx = perm[i:i + batch]
             ids, mask = pad_batch([tr_ids[j] for j in idx], device)
@@ -216,7 +216,7 @@ class RandEmbHead:
             def __init__(self, d=64):
                 super().__init__()
                 self.emb = nn.Embedding(VOCAB, d)
-                torch.manual_seed(SEED + 1)
+                torch.manual_seed(RANDEMB_SEED + 1)
                 nn.init.normal_(self.emb.weight, std=0.02)
                 self.emb.weight.requires_grad_(False)
                 self.score = nn.Linear(d, 1)
@@ -233,15 +233,23 @@ class RandEmbHead:
         return _M()
 
 
+RANDEMB_SEED = SEED
+
+
 def main() -> int:
+    global SEED, RANDEMB_SEED
     ap = argparse.ArgumentParser()
     ap.add_argument("--device", type=int, default=6)
     ap.add_argument("--n-train", type=int, default=20000)
     ap.add_argument("--n-eval", type=int, default=4000)
     ap.add_argument("--epochs", type=int, default=10)
+    ap.add_argument("--seed", type=int, default=SEED)
     ap.add_argument("--skip-lgbm", action="store_true")
     ap.add_argument("--skip-neural", action="store_true")
     args = ap.parse_args()
+
+    SEED = args.seed
+    RANDEMB_SEED = args.seed
 
     dev = "cuda:%d" % args.device
     guard = GPUGuard(dev)
@@ -288,10 +296,11 @@ def main() -> int:
                              ("randemb_head", RandEmbHead())):
             acc, f1 = train_neural(
                 factory.new, tr_ids, y_tr_fam, ev_ids, y_ev_fam, nc,
-                dev, guard, epochs=args.epochs)
+                dev, guard, epochs=args.epochs, seed=args.seed)
             results_fam[tag] = {
                 "acc": round(acc, 4), "f1_macro": round(f1, 4),
-                "baseline": "%s(seed17, %d ep)" % (tag, args.epochs)}
+                "baseline": "%s(seed%d, %d ep)" % (
+                    tag, args.seed, args.epochs)}
             print("[family] %-11s acc=%.4f f1=%.4f" % (tag, acc, f1))
 
     out["family"] = results_fam
@@ -324,17 +333,20 @@ def main() -> int:
                              ("randemb_head", RandEmbHead())):
             acc, f1 = train_neural(
                 factory.new, tr_ids2, ytr2, ev_ids2, yev2, nc,
-                dev, guard, epochs=args.epochs)
+                dev, guard, epochs=args.epochs, seed=args.seed)
             results_rand[tag] = {
                 "acc": round(acc, 4), "f1_macro": round(f1, 4),
-                "baseline": "%s(seed17, %d ep)" % (tag, args.epochs)}
+                "baseline": "%s(seed%d, %d ep)" % (
+                    tag, args.seed, args.epochs)}
             print("[random] %-11s acc=%.4f f1=%.4f" % (tag, acc, f1))
 
     out["random"] = results_rand
 
-    with open(OUT, "w") as fh:
+    out_path = OUT if args.seed == 17 else OUT.replace(
+        ".json", "_s%d.json" % args.seed)
+    with open(out_path, "w") as fh:
         json.dump(out, fh, indent=2)
-    print("saved", OUT)
+    print("saved", out_path)
     return 0
 
 
