@@ -96,6 +96,12 @@ benchmarks.
   S13b not-bell + S14 rep/downstream decoupling -> at the 2.0B-nt
   budget, RNA MLM pretraining transfers family-level sequence
   statistics; structure information is largely NOT yet learned
+- **De-rRNA robustness (red-team E, 2026-09-21)**: recomputing
+  macro-F1 over non-rRNA classes only — the scale trend, the 10M
+  valley (sharper: 0.062 < 0.074), and the layer-migration direction
+  ALL survive; absolute F1 shrinks ~25% (rRNA carries most absolute
+  performance) but every structural conclusion is independently
+  supported by non-rRNA families [evidence/derRNA_stratified.json]
 ### 4.4 Corpus axis (FINAL, inc12): c1Mcs 0.1862 (best L9) vs
   c5Mcs 0.1519 vs full 0.1731 (best L1) — 10M U-shape; 30M four-arm
   monotone-fall c1M 0.316 global best; saturation analysis: no classic
