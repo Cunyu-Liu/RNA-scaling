@@ -1470,3 +1470,18 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
   [-0.183, -0.166]；峰 x=1.765 仍在数据范围外（结论与 v1 小样本
   一致——稳健）
 - 650M：nt=1.12B/2.0B（56%），loss 0.61；预计 ~1.2 天完成
+
+### 2026-09-21 13:00: T1.3.2 首个外部模型（RNA-FM 96M）逐层 probe 完成
+- 服务器存量资产复用：RNA-FM_pretrained.pth（fairseq dict，ESM 式
+  12 层 d=640 FFN 8x vocab25）——probe_rnafm.py 最小复现前向
+  （FFN 8x 维度修正）
+- tokenizer 验证：current-token identity hit 0.40 > chance 0.25
+  （A/C/G/U=4/5/6/7 映射正确 + 模型真实工作）
+- **全量结果（20k/4k，inc12 协议）**：12 层 F1 从 0.1335 (L0)
+  单调降到 0.0582 (L11)——**best 在第 0 层（嵌入层）**；与自训
+  家族层行为完全相反（受控家族 best 深层 0.86，RNA-FM best 嵌入层）
+- **对照科学价值**：① RNA-FM 96M（官方更大语料）家族级 F1
+  0.1335 < RNA-Sc 100M 0.3394——官方模型在困难切分下同样脆弱
+  （良渚结论线 1 侧印证）；② 层行为反转 = 预训练配方（语料
+  构成/时长）主导层组织方式，不是参数量
+- 下一步：RiNALMo 三档接入（Zenodo 下载）
