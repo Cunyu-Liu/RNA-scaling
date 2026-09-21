@@ -18,7 +18,7 @@ import json
 
 EXT_OUT = "/mnt/cunyuliu/rna-sc/eval/probe_results_ext.jsonl"
 OUT = "/mnt/cunyuliu/rna-sc/evidence/derRNA_external.json"
-RUNS = ("RNA-FM-96M", "RiNALMo-micro-36M")
+RUNS = ("RNA-FM-96M", "RiNALMo-micro-36M", "RiNALMo-rinalmo", "RiNALMo-rinalmo-mega", "RiNALMo-rinalmo-giga")
 
 
 def macro_f1_excluding(per_class_f1, exclude_prefixes=("rRNA",)):
