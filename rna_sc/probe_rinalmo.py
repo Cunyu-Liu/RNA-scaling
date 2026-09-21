@@ -135,7 +135,7 @@ def collect_states(model, device, split, n_seq, L, context_nt=256,
 
 
 def probe_one_layer(X_tr, y_tr, X_ev, y_ev, n_classes, device, layer_seed,
-                    epochs=8):
+                    epochs=8, class_names=None):
     import torch.nn.functional as F
     torch.manual_seed(layer_seed)
     d = X_tr.shape[1]
@@ -169,7 +169,11 @@ def probe_one_layer(X_tr, y_tr, X_ev, y_ev, n_classes, device, layer_seed,
             prec = ctp / (ctp + cfp) if ctp + cfp else 0.0
             rec = ctp / (ctp + cfn) if ctp + cfn else 0.0
             f1s.append(2 * prec * rec / (prec + rec) if prec + rec else 0.0)
-    return acc, sum(f1s) / n_classes
+    per_class = {}
+    for c in range(n_classes):
+        name = class_names[c] if class_names else str(c)
+        per_class[name] = round(f1s[c], 4)
+    return acc, sum(f1s) / n_classes, per_class
 
 
 def main() -> int:
@@ -197,9 +201,9 @@ def main() -> int:
     best = None
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     for li in range(L):
-        acc, f1 = probe_one_layer(
+        acc, f1, per_class = probe_one_layer(
             X_tr[li], y_tri, X_ev[li][keep_ev], y_evi, len(classes),
-            dev, layer_seed=17 + li)
+            dev, layer_seed=17 + li, class_names=classes)
         rec = {"run": RUN_NAME, "layer": li,
                "rel_depth": round(li / (L - 1), 3),
                "depth_band": ("early" if li / (L - 1) <= 0.33 else
@@ -209,6 +213,7 @@ def main() -> int:
                "n_classes": len(classes),
                "n_train": len(y_tri), "n_eval": len(y_evi),
                "acc": round(acc, 4), "f1_macro": round(f1, 4),
+               "per_class_f1": per_class,
                "task": "rna_type classification (S11)",
                "split": "family_validation->family_test",
                "protocol": "probe-balanced (class-weighted, inc12 seed)"}
