@@ -1669,3 +1669,16 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - DRAFT_v1.md 写作纪律门升级：D4/D6/D11 ⚠️→✅（引用完整性）；
   D1-D11 全门通过（PENDING-650M 槽除外）
 - 650M 87%（1.74B，剩 ~5h）；300M 41M；rw1 123M 健康
+
+## Day 12 续七（2026-09-22 19:40）——Fig 5 生成（T4.1.5 落勾）
+- figs/fig5_controls_timeaxis.{png,pdf}（三面板）：
+  (a) 对照排除图——trained/randinit/moment-matched 四档对比 +
+  增益标注（+0.059/+0.043/+0.122/+0.169）；
+  (b) 时间轴四尺度轨迹——10M attrition valley（峰 0.2549@0.5B）
+  + 30M/100M 持续上升；
+  (c) best-layer 相对深度时间轴——10M 层塌缩签名 vs 大尺度层深化
+- 数字三遍核对：deltas 与 s4_randinit_table.json 逐位一致；
+  10M 峰 0.5B/0.2549 与 s6_cross_scale.json 一致
+- 至此 T4.1 图资产 4/6：Fig 1（已有四档版）/ Fig 3（delta 热图
+  已有）/ Fig 5（本次）/ Fig 5c（S14 已有）+ 外部模型图；
+  待 650M：Fig 1 升级五档版 + Fig 5b（S13b v2）
