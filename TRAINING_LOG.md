@@ -1682,3 +1682,12 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - 至此 T4.1 图资产 4/6：Fig 1（已有四档版）/ Fig 3（delta 热图
   已有）/ Fig 5（本次）/ Fig 5c（S14 已有）+ 外部模型图；
   待 650M：Fig 1 升级五档版 + Fig 5b（S13b v2）
+
+## Day 12 续八（2026-09-22 19:50）——表 1 生成（T4.1.6 落勾）
+- preprint/TABLE1_baselines.md：9 行完整基线总表（四档 LM +
+  randinit 对照 + 四条经典基线），列 = family F1 / random F1 /
+  Δ(rand−fam) / LM−最强经典基线
+- 数字三遍核对：CNN 三 seed [0.5617, 0.5295, 0.5117] → 0.5343
+  ±0.0207 与 TASKS 登记一致；LM−最强基线 1M −0.011 / 10M −0.022
+  / 30M +0.089 / 100M +0.163 与 4.12 节一致；k-mer Δ +0.355 一致
+- 表格自动生成脚本入库（rna_sc/table1_baselines.py，防手抄错数）
