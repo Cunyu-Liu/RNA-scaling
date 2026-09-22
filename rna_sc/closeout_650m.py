@@ -104,16 +104,13 @@ def chain_a(device: int):
                  % json.dumps(v.get("checks", {})))
     sh([PY, "-m", "rna_sc.s13b_bell", "--device", str(device)],
        "s13b_bell_v2_650m.log")
-    sh([PY, "-c",
-        "import sys; sys.path.insert(0, '.'); "
-        "import json, rna_sc.s13b_bell as m; "
-        "m.RUNS = m.RUNS + ['RNA-Sc-650M_s17']; "
-        "sys.argv = ['s13b_bell', '--device', '" + str(device) + "']; "
-        "m.main()"],
-       "s13b_bell_v2_650m.log")
     with open(TLOG, "a") as fh:
         fh.write("- [closeout] s13b_bell v2 (with 650M coverage point) "
                  "done; evidence/s13b_bell.json refreshed\n")
+    sh([PY, "-m", "rna_sc.fill_draft_650m"], "fill_draft_650m.log")
+    with open(TLOG, "a") as fh:
+        fh.write("- [closeout] DRAFT v1.1 auto-fill attempted "
+                 "(fill_draft_650m)\n")
 
 
 def chain_b(device: int):

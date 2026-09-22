@@ -1703,3 +1703,12 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
   derRNA_stratified.json 一致
 - T4.1 图表资产 6/6 主体完成（除 650M 依赖项：Fig 1 五档升级 +
   Fig 5b S13b v2）
+
+## Day 12 续十（2026-09-22 20:10）——DRAFT v1.1 自动填槽链上线
+- fill_draft_650m.py 入库：从 s1_final_verdict.json 自动填充
+  DRAFT_v1.md 的 7 处 PENDING-650M 槽（verdict 未就绪时无副作用
+  退出）；填前自动备份 DRAFT_v1_pre650M_backup.md
+- closeout_650m 链扩展为四段：DONE probe → 五档终判 → S13b v2 →
+  DRAFT v1.1 自动填槽（进程已重启加载新代码）
+- 至此 650M 收口全链无人值守化：训练→probe→终判→图表素材→
+  手稿填数字全部自动
