@@ -1592,3 +1592,13 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - 注意口径注记：len cap 192（v1 四档为 256）+ 逐序列前向——绝对值
   与 v1 略不可比（已写入 json note 字段），趋势结论不受影响
 - 30M-rw1 训练健康（nt=43M/2.0B，loss 1.29 正常区间）
+
+## Day 12 续二（2026-09-22 晚六）——T1.0.3 300M 锚点档启动（修订三执行）
+- 300M spec 注册（specs.py，commit 7101c49）：d=1024/L=24/h=16/ff=4096
+  → 302.1M（0.7% 标称偏差，家族 12% 容差带内；deep-narrow 形态）
+- 300M@2B iso-token 臂经 wave.json → supervisor 自动调度 GPU0 启动
+  （10:13Z，fresh）；~3-4 天完成
+- 科学角色：①补 100M→650M 对数轴 6.5× 空洞（触发判断外推→内插）；
+  ②300M@5.9B 语料最优锚点臂待本臂完成后排队（Claim-14 边界判据）
+- 当前集群全景：GPU0=300M / GPU2=650M(85%) / GPU3=30M-rw1(S3)，
+  三任务并行 + 收口链 + watch_all + cron 全链在岗
