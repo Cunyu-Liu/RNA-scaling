@@ -1646,3 +1646,15 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
   确认 rinalmo 0.2407/0.2532/0.2667、RNS 五档 0.172→0.068）
 - OUTLINE.md 4.8/4.10 节补图引用；本地 figs_v1/ 备份两图
 - 650M 87%（等收口）；300M 34M nt 健康；rw1 80M nt 健康
+
+## Day 12 续五（2026-09-22 19:40）——preprint DRAFT v1.0 撰写启动（T4.2）
+- DRAFT_v1.md 落盘（preprint/，380 行）：OUTLINE v0.7 全证据骨架扩写
+  成完整英文手稿草稿——Title/Abstract/Intro（四点动机）/Related
+  Work（含 REDIAL/DNA 分界）/Methods/Results 4.1-4.12 全节成文/
+  Discussion/Limitations/Repro + D1-D11 写作纪律自查门
+- 数字三遍核对：四档 seed 表均值、RNS 五档、slope CI 程序化比对
+  全部在文中逐位一致；650M 相关 7 处 PENDING-650M 占位槽（收口链
+  填充后升级 v1.1）
+- 写作纪律门：D1-D3/D7-D10 ✅；D4/D6/D11（完整参考文献列表）
+  标注 submission 时补——结构已留位
+- 状态：650M 87% / 300M 39M nt / rw1 117M nt 全健康
