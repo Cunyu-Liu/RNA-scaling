@@ -90,7 +90,8 @@ def validate(cfg, model, device) -> dict:
 def run(model_id: str, seed: int, device: int, out_dir: str,
         corpus_nseq: int | None = None, corpus_tag: str = "full",
         smoke_nt: int | None = None, resume_from: str | None = None,
-        cluster_allowlist: str | None = None) -> dict:
+        cluster_allowlist: str | None = None,
+        budget_nt: int | None = None) -> dict:
     dev = "cuda:%d" % device
     assert torch.cuda.is_available(), "CUDA required (no silent CPU fallback)"
     guard = GPUGuard(dev)
@@ -104,7 +105,8 @@ def run(model_id: str, seed: int, device: int, out_dir: str,
                                                len(allowlist)), flush=True)
     cfg = resolve_config(model_id, seed, dev, corpus_nseq=corpus_nseq,
                          corpus_tag=corpus_tag, smoke_nt=smoke_nt,
-                         cluster_allowlist=cluster_allowlist)
+                         cluster_allowlist=cluster_allowlist,
+                         budget_nt=budget_nt)
     if smoke_nt is not None:
         cfg = cfg.__class__(
             run_id=cfg.run_id, spec=cfg.spec, seed=cfg.seed, device=cfg.device,
@@ -250,12 +252,16 @@ def main():
                     help="parquet with cluster_id column (S2 cluster-"
                          "stratified arm)")
     ap.add_argument("--smoke-nt", type=int, default=None)
+    ap.add_argument("--budget-nt", type=int, default=None,
+                    help="override total nt budget (e.g. 5.9B corpus-"
+                         "optimal arm, T1.0.3/T1.0.4)")
     ap.add_argument("--resume-from", default=None)
     args = ap.parse_args()
     run(args.model, args.seed, args.device, args.out_dir,
         corpus_nseq=args.corpus_nseq, corpus_tag=args.corpus_tag,
         smoke_nt=args.smoke_nt, resume_from=args.resume_from,
-        cluster_allowlist=args.cluster_allowlist)
+        cluster_allowlist=args.cluster_allowlist,
+        budget_nt=args.budget_nt)
 
 
 if __name__ == "__main__":

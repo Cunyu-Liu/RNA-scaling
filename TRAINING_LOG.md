@@ -1712,3 +1712,14 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
   DRAFT v1.1 自动填槽（进程已重启加载新代码）
 - 至此 650M 收口全链无人值守化：训练→probe→终判→图表素材→
   手稿填数字全部自动
+
+## Day 12 续十一（2026-09-22 20:20）——5.9B 预算臂管线打通
+- train.py 补 --budget-nt 参数（run→resolve_config 全链贯通，warmup
+  按比例自适应；单测验证 300M@5.9B → budget 5.9B/warmup 0.0295B）
+- supervisor.py 支持 wave 条目 budget_nt 字段并重启加载新代码
+  ——正确 adopted 650M/300M 两个在跑 run（接管无缝）
+- T1.0.3 臂②300M@5.9B（corpus_tag=b59）入队 wave.json：等 650M
+  释放 GPU2 后 supervisor 自动拉起（Claim-14 语料最优锚点判据的
+  必需实验）；~7-9 天完成（5.9B nt 全语料 1 epoch）
+- 3×2 析因矩阵至此全部入轨：300M@2B（在跑）/ 300M@5.9B（排队）/
+  100M@5.9B（T1.0.4，视 300M@5.9B 进度排期）/ 650M@2B（在跑收口）

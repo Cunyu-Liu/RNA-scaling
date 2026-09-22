@@ -133,6 +133,9 @@ def launch_one(item, exclude) -> tuple:
     al = item.get("cluster_allowlist")
     if al:
         args += ["--cluster-allowlist", al, "--corpus-tag", tag]
+    bnt = item.get("budget_nt")
+    if bnt:
+        args += ["--budget-nt", str(bnt)]
     ck = latest_ckpt(out_dir)
     if ck:
         args += ["--resume-from", ck]
