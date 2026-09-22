@@ -257,9 +257,13 @@ def main() -> int:
     ap.add_argument("--device", type=int, default=6)
     ap.add_argument("--n-train", type=int, default=20000)
     ap.add_argument("--n-eval", type=int, default=4000)
+    ap.add_argument("--probe-seed", type=int, default=17)
     args = ap.parse_args()
     dev = "cuda:%d" % args.device
     GPUGuard(dev).check()
+    run_name = "RNA-FM-96M"
+    if args.probe_seed != 17:
+        run_name = "%s_pseed%d" % (run_name, args.probe_seed)
 
     ck = torch.load(CKPT, map_location="cpu", weights_only=False)
     sd = ck["model"]
@@ -289,8 +293,8 @@ def main() -> int:
     for li in range(L):
         acc, f1, per_class = probe_one_layer(
             X_tr[li], y_tri, X_ev[li][keep_ev], y_evi, len(classes),
-            dev, layer_seed=17 + li, class_names=classes)
-        rec = {"run": "RNA-FM-96M", "layer": li,
+            dev, layer_seed=args.probe_seed + li, class_names=classes)
+        rec = {"run": run_name, "layer": li,
                "rel_depth": round(li / (L - 1), 3),
                "depth_band": ("early" if li / (L - 1) <= 0.33 else
                               ("middle" if li / (L - 1) <= 0.66
