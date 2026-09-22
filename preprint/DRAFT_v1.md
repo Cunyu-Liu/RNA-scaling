@@ -369,12 +369,14 @@ regenerable from committed scripts.
 - D2 ✅ line-1/line-2 roles fixed in Introduction.
 - D3 ✅ negative results (NOT-BELL, composition floor) carry mechanism
   explanations.
-- D4/D6 ⚠️ TO COMPLETE at submission: full related-work citation pass
-  (BEACON/良渚/GARNET/RNAGym/NABench/RNAscope + protein anchors).
+- D4/D6 ✅ (2026-09-22 v1.0): full reference list compiled
+  (preprint/DRAFT_refs.md, 30 entries, memo-§9-verified pool; unverified
+  identifiers marked [id-verify] for the final bib pass — no fabricated
+  DOIs).
 - D7 ✅ claim wording: "no Li et al.-style mechanistic ablation as of
   2026-09"; configuration ablations acknowledged.
 - D8 ✅ "systematization" positioning.
 - D9 ✅ REDIAL boundary paragraph included.
 - D10 ✅ four-point motivation with RNA evidence.
-- D11 ⚠️ TO COMPLETE: Hou/Prabakaran/InterPLM cited in text; full
-  reference list at submission.
+- D11 ✅ (2026-09-22 v1.0): Hou/Prabakaran/InterPLM cited in text;
+  reference list complete (DRAFT_refs.md, refs 3-5).

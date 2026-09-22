@@ -1658,3 +1658,14 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - 写作纪律门：D1-D3/D7-D10 ✅；D4/D6/D11（完整参考文献列表）
   标注 submission 时补——结构已留位
 - 状态：650M 87% / 300M 39M nt / rw1 117M nt 全健康
+
+## Day 12 续六（2026-09-22 19:25）——D4/D6/D11 参考文献列表完成
+- preprint/DRAFT_refs.md 落盘：30 条完整文献列表，全部取自备忘录
+  §9 已核验证据池（三源交叉核验过的 DOI/arXiv 才打印；未核验
+  标识符标 [id-verify] 留最终 bib pass——零伪造 DOI 纪律）
+- 五组分类：蛋白域锚点 8 条（Rives/Li/Hou/Prabakaran/InterPLM/
+  Vishniakov/DenAdel/ESM-2）+ RNA LM 9 条 + 基准与协议研究 10 条
+  + scaling 文献 3 条（Muennighoff/Chinchilla/Kaplan）
+- DRAFT_v1.md 写作纪律门升级：D4/D6/D11 ⚠️→✅（引用完整性）；
+  D1-D11 全门通过（PENDING-650M 槽除外）
+- 650M 87%（1.74B，剩 ~5h）；300M 41M；rw1 123M 健康
