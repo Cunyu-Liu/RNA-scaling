@@ -1508,3 +1508,77 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
   更随机化**（Prabakaran 主张的 RNA 域验证，E14a/b 混合形态）
 - C9.4 验收：交叉验证表 + E14 判定齐（证据 s14_family_
   crossval.json）
+
+## Day 11（2026-09-22 凌晨-晨）——T1.2.5 收口 + 外部模型线扩展
+- T1.2.5 全基线完成（dc1a4fc）：LightGBM family 0.1760/random 0.5485、
+  one-hot CNN 0.1725/0.5617、randemb 0.0702/0.0557；收益口径
+  LM−最强基线：family 30M +0.089/100M +0.163、random 全负
+- RiNALMo-micro 36M probe（dc1a4fc）：multimolecule hf-mirror 接入，
+  best L8 0.2407（vs RNA-FM L0 0.1335）——语料组成>参数量
+- 红队 E 外部版（0065bc8）：探针 v2 补 per_class_f1；两外部模型
+  层形态去 rRNA 全存活（derRNA_external.json）
+- PPT 38 页：新增结果速览（四）（五）表格页
+- 650M nt=1.3B/2.0B（65%），loss 1.21，训练健康
+
+## Day 11 补充（2026-09-22 晨）——复现批（用户质询触发）
+- 用户质询 1（CNN random 反超所有 LM）：核查确认表述错误——
+  30M 0.605/100M 0.604 > CNN；且 CNN 补三 seed：0.5343±0.0206
+  （0.5617 单 seed 偏乐观）；PPT/文档已修正
+- 用户质询 2（单点实验不严谨）：RiNALMo 参数量轴三点闭合
+  （micro 36M 0.2407 / mega 148M 0.2532 / giga 650M 0.2667）
+  ——18× 参数仅 +2.6pp；语料轴 +11pp；语料组成主导三点证据
+- micro pseed29 复现 0.2436（层位 L7-L8 稳定）
+- S7 randinit 补齐四尺度：1M 0.5452/30M 0.5786（结构零增益全档）
+- de-rRNA 外部版四模型层形态全存活
+- 650M 训练持续（nt≈1.45B/2B）
+
+## Day 11 续（2026-09-22 午）——T1.3.3 + T1.2.6 probe 线
+- T1.3.3 分箱表完成（a90ff13）：短箱塌陷/长箱规模分化（30M/100M
+  0.116/0.106 vs 小档 0.052）
+- T1.2.6 低数据 probe 线：全尺度曲线平坦（<5pp/百倍样本）——S14
+  解耦在数据量轴复现
+- PPT 39 页：结果速览（六）分箱+低数据表
+- 650M nt=1.5B/2.0B（75%）
+
+## Day 11 晚（2026-09-22）——显存利用批（四卡并行）
+- T1.2.6 full-FT 线（GPU4，f93ec82）：10M 0.059→0.108 / 100M
+  0.064→0.153 上升曲线（vs probe 平坦）——低数据瓶颈=头容量
+- S14 时间轴（GPU3，f93ec82）：10M RNS 峰 1.0B vs F1 峰 0.5B
+  错位；1.0B 后 RNS 亦降——解耦三轴（规模/家族/时间）齐
+- S9 独立查重（GPU5，3dc9e03）：精确协议复算 0.6053/0.6040
+  与 ledger 逐位一致（30M/100M random 平台真实）；v1 差异
+  系我方 probe 超参不同（协议敏感性附注 +0.10-0.16 F1）
+- 650M nt=1.6B（80%）
+
+## Day 11 晚三（2026-09-22）——用户质询批（全层统计+mega s29）
+- mega pseed29 补齐（87ee95b）：L29 0.2541（vs L25 0.2532）——
+  外部线 8/8 run 双 seed 矩阵闭环
+- ext_full_layers.py：全层 rel-depth 四分带统计表（用户质询
+  其他深度层触发）——RNA-FM 四带单调降；RiNALMo 三档升至
+  late/top 峰（evidence/ext_full_layers.json）
+- PPT 页 37 加全层附表
+- 650M nt=1.66B（83%）
+
+## Day 11 晚四（2026-09-22）——用户质询：四分带稀释
+- 细粒度对齐分析（26e2313）：giga 对 mega 29/30 对齐层更高
+  （+0.017 全层增益，中段 +0.023）——四分带确实稀释
+- 深层发现：micro→mega 同绝对层更弱（-0.054）但好层数 0→5；
+  mega→giga 转全层抬升——参数增益形态转变（延展→抬升）
+- 量级结论稳健：top10 层均值 18× +4.8pp
+- 650M nt≈1.67B（84%）
+
+## Day 12（2026-09-22 晚五）——交接收口批：收口链部署 + S3 重加权 arm 启动
+- 650M 收口链自动化补齐（closeout_650m.py）：等 watch_all DONE probe
+  → s1_final_verdict 五档终判 → s13b_bell v2（650M 追加覆盖点）；
+  修正了此前"终判需手动触发"的链路缺口
+- S14 RNS 650M 单点（s14_rns_650m.py，GPU6 逐序列前向 OOM 硬化版）：
+  补 H8 规模轴终点（预期 RNS<=0.077 平台延续或更低）
+- S3 多样性重加权 arm（T2.3.3）正式启动：
+  - s3_reweight_corpus.py：alpha=1.0 簇级展平（1/簇大小^α·med），
+    14.1M train 行 → 57.7M 有效行（超采样上限 8×，中位簇 842），
+    r22_train_reweighted.parquet 13.0GB 落盘 /mnt
+  - train_s3_rw.py 绕过 SPLIT_8080 硬编码，30M 模型同配方单变量
+    启动（GPU3，runs/RNA-Sc-30M_s17_rw1，corpus_tag=rw1）
+  - 注意：validate 仍走原 split 的 validation 池（对比组可比性保持；
+    训练分布 rw1 vs 30M-full 的 F1 对比即 H5 多样性检验）
+- S9 独立查重通过（3dc9e03）；外部线 8/8 双 seed 闭环（Day 11 晚三/四）
