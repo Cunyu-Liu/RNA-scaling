@@ -1602,3 +1602,19 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
   ②300M@5.9B 语料最优锚点臂待本臂完成后排队（Claim-14 边界判据）
 - 当前集群全景：GPU0=300M / GPU2=650M(85%) / GPU3=30M-rw1(S3)，
   三任务并行 + 收口链 + watch_all + cron 全链在岗
+
+## Day 12 续三（2026-09-22 18:40）——巡检告警处置：rw1 误杀排查
+- 18:32 巡检抓到 ALERT GPU-CONTEXT-LOSS pid=1214842（rw1 的 bash 包装
+  进程，cron 守护脚本因 4 分钟日志 stale 判定 GPU 上下文丢失而 KILL）
+- 三遍核实结论：**误杀的是外层 bash wrapper，实际训练进程 1214846
+  （1h25m，GPU3 4.6GB，99.7% CPU）全程存活且健康**——log 滚动正常
+  （nt=80M/2.0B，loss 1.26-1.32），GPU3 利用率 100%
+- 根因：train_s3_rw.py 的 nohup 包装链比 supervisor 直启的进程多一层
+  bash（bash→python），cron 守护脚本的 stale-log 启发式盯的是 bash
+  pid（它本身不打日志 → 恒 stale）
+- 风险点（诚实登记）：①rw1 无 checkpoint 落盘（首个 VAL/ckpt 在
+  nt=100M；当前 80M）——若真挂将丢失 80M nt 进度，重启代价 45 分钟；
+  ②rw1 的 bash wrapper 已死，进程脱管（不影响训练，只影响守护）
+- 处置：训练进程保留不动（避免重启返工）；下次 cron 若再 KILL 会
+  miss（pid 已不存在）；后续 rw1 类自启 arm 改用 supervisor 队列
+  模式启动（守护一致性）——已作为纪律记入
