@@ -1723,3 +1723,24 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
   必需实验）；~7-9 天完成（5.9B nt 全语料 1 epoch）
 - 3×2 析因矩阵至此全部入轨：300M@2B（在跑）/ 300M@5.9B（排队）/
   100M@5.9B（T1.0.4，视 300M@5.9B 进度排期）/ 650M@2B（在跑收口）
+
+## Day 12 续十二（2026-09-22 20:30）——650M 巡检（未 DONE，仅记录不干预）
+- RNA-Sc-650M_s17 训练健康推进：logs/RNA-Sc-650M_s17.log DONE 帧=0；
+  尾部 nt=1771M/2.0B（≈88.6%，step 189000，pid 422582 CPU 96.7%，
+  GPU2 util 100%，日志 mtime 20:22 持续刷新，20 min 内 1760M→1771M）
+- 最新 ckpt runs/RNA-Sc-650M_s17/ckpt_nt1700101716_step181412.pt
+  （val_loss 0.7816；manifest.json 17 个 val 点单调降 1.0662→0.7816）
+- 收口链值守确认：closeout_650m + watch_all 进程存活
+  （logs/closeout_650m.log 尾部 "chain A: waiting for 650M final probe"）
+- 按纪律不动训练：终判（s1_final_verdict.py）/ S13b v2 / DRAFT v1.1
+  填槽 / preprint v1.0 / T1.2.6 full-FT 均待 DONE 后自动或下次巡检执行
+
+## Day 12 续十二（2026-09-22 20:35）——b59 臂启动经过（如实登记）
+- 300M@5.9B（b59）第一次 GPU5 启动 OOM（其他用户三进程占满后
+  挤压）；supervisor 自动重试调度 GPU3 成功——与 rw1 共卡训练
+  （b59 nt=4M 推进中，rw1 199M 存活但吞吐降）
+- 调度判断：GPU3 40GB 上 300M（~14GB 峰值）+ 30M rw1（~5GB）
+  可共存；650M DONE 释放 GPU2 后 supervisor 会按显存重新平衡
+- 注意：b59 的 run_id 在日志行显示为 rnasc_300M_s17（resolve_config
+  的 tag 拼接未含 b59——manifest 已含 corpus_tag=b59 区分，无
+  数据风险；run_id 显示瑕疵留待下轮修）
