@@ -41,6 +41,13 @@ FAMILY = {
         target_params=100_000_000, role="scaling",
         note="flagship ~99.5M; deep-narrow; 3 formal seeds",
         seeds=(17, 29, 43)),
+    "RNA-Sc-300M": ModelSpec(
+        model_id="RNA-Sc-300M", d_model=1024, n_layers=24, n_heads=16, d_ff=4096,
+        target_params=300_000_000, role="scaling",
+        note="T1.0.3 anchor tier (修订三): 302.1M (0.7% dev); fills "
+             "100M->650M 6.5x log-gap; corpus-optimal anchor "
+             "(5.9B/20~295M Chinchilla edge, Claim-14); single seed",
+        seeds=(17,)),
     "RNA-Sc-650M": ModelSpec(
         model_id="RNA-Sc-650M", d_model=1408, n_layers=28, n_heads=22, d_ff=5632,
         target_params=650_000_000, role="scaling",
