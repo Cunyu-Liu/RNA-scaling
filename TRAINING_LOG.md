@@ -1691,3 +1691,15 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
   ±0.0207 与 TASKS 登记一致；LM−最强基线 1M −0.011 / 10M −0.022
   / 30M +0.089 / 100M +0.163 与 4.12 节一致；k-mer Δ +0.355 一致
 - 表格自动生成脚本入库（rna_sc/table1_baselines.py，防手抄错数）
+
+## Day 12 续九（2026-09-22 19:55）——Fig 2 生成（T4.1.2 落勾）
+- figs/fig2_layerwise_tasks.{png,pdf}（2×2 四面板）：
+  (a) rna_type 逐层曲线四尺度（层迁移 + 10M 早期层签名）；
+  (b) 去 rRNA 分层散点（红队 E——全尺度趋势存活）；
+  (c) bpRNA 结构逐层曲线（平坦、无 10M 磨蚀——任务特异性）；
+  (d) 结构任务 trained vs randinit 柱状（|Δ|≤0.016 全档）
+- 数字核对：结构四档 trained best 0.5294/0.5663/0.5756/0.5890 与
+  G++.1 登记逐位一致；derRNA 散点 f1_all→f1_der 与
+  derRNA_stratified.json 一致
+- T4.1 图表资产 6/6 主体完成（除 650M 依赖项：Fig 1 五档升级 +
+  Fig 5b S13b v2）
