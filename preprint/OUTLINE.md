@@ -182,3 +182,40 @@ benchmarks.
 ## 7. Repro
 - Cunyu-Liu/RNA-scaling; ledger + manifest + probe jsonl; all commits
   f9abf37..b228809
+
+### 4.10 External model line (T1.3.2, 2026-09-22: corpus > params,
+three-point param axis)
+- Same pooled-linear probe protocol, family split:
+  RNA-FM-96M (general transcriptome): best L0 0.1335, monotonic decline
+  RiNALMo micro 36M / mega 148M / giga 650M (ncRNA-focused corpus):
+  0.2407 (L8) / 0.2532 (L25) / 0.2667 (L27)
+  [eval/probe_results_ext.jsonl]
+- **Param axis (same corpus): 18x params -> +2.6pp only** (log-scale
+  flat); corpus axis (same-scale params): ncRNA vs general = +11pp
+  -> corpus composition dominates family-level transfer
+- Layer-migration law holds cross-architecture/cross-corpus: best
+  rel depth 0.73/0.86/0.84 (deepens with scale, like controlled
+  family); RNA-FM L0-best is recipe-specific, not param-driven
+- Robustness: micro probe-seed29 replicates 0.2436 (L7, adjacent);
+  de-rRNA re-analysis: all 4 external models keep layer shape
+  [evidence/derRNA_external.json]
+
+### 4.11 Length bins + low-data regime (T1.3.3/T1.2.6, 2026-09-22)
+- Length bins (best-layer, mean-pool axis): short bin (16-127)
+  collapses at ALL scales (0.02-0.06); 512+ bin scale-differentiates
+  (30M 0.116 / 100M 0.106 vs 1M/10M ~0.052) — scale gains concentrate
+  on long sequences [evidence/t133_lengthbin.json]
+- Low-data probe curve FLAT at all scales (100->10000, <5pp per 100x
+  samples) — representation-downstream decoupling (4.8) replicates on
+  the data-size axis [evidence/t126_lowdata.json]
+- (protocol note: mean-pool axis; relative conclusions self-consistent)
+
+### 4.12 Classical baselines, full set (T1.2.5, 2026-09-22)
+- family: kmer+LightGBM 0.1760 > one-hot CNN 0.159+/-0.010 (3 seeds)
+  > logistic 0.1630 >> random-emb 0.0702
+- random: CNN 0.534+/-0.021 (3 seeds) — small LMs (1M/10M) BELOW a
+  supervised CNN; 30M/100M above by 4-7pp: leakage dividend partially
+  recoverable by pure supervised sequence models, not fully
+- LM-vs-strongest-classical (family): 30M +0.089, 100M +0.163 —
+  real LM increments cross the composition baseline only at scale
+  [evidence/classical_baselines_extra.json + s29/s43]
