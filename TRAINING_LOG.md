@@ -1618,3 +1618,31 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - 处置：训练进程保留不动（避免重启返工）；下次 cron 若再 KILL 会
   miss（pid 已不存在）；后续 rw1 类自启 arm 改用 supervisor 队列
   模式启动（守护一致性）——已作为纪律记入
+
+## Day 12 续四（2026-09-22 19:05）——650M 例行巡检（未 DONE，不打扰训练）
+- **RNA-Sc-650M_s17 进度 86.7%**（nt=1734M/2.0B，step=185000；log
+  DONE 帧计数=0，log 仍在滚动，GPU2 util 100%）
+- 最新 ckpt：runs/RNA-Sc-650M_s17/ckpt_nt1700101716_step181412.pt
+  （17:41 落盘，7.5G；对应 VAL best=0.7816 @nt=1700M）
+- 吞吐 ~6.4k nt/s（1600M→1700M 历时 4h22m）→ 剩余 266M nt，
+  ETA ≈ 2026-09-23 早 06:30 前后
+- 收口链在岗待命（无需人工干预）：watch_all（pid 3748436）+
+  closeout_650m --device 6（pid 1070350）将在 DONE 后自动执行
+  probe → s1_final_verdict 五档终判 → s13b_bell v2；当前
+  eval/probe_results.jsonl 无 RNA-Sc-650M_s17 行（符合预期，未 DONE）
+- 证据：logs/RNA-Sc-650M_s17.log 尾帧 / runs/RNA-Sc-650M_s17/
+  manifest.json（budget_nt=2.0B，17 次 validation 全程无 CPU 回退）
+
+## Day 12 续四（2026-09-22 19:10）——T4.1 图表工程启动（650M 等待窗口）
+- Fig 5c（S14 RNS，T4.1.5c）生成：figs/fig_s14_rns.{png,pdf}——
+  (a) 规模轴五档含 650M 终点 0.0684 + randinit 带 0.54-0.58；
+  (b) 10M 时间轴双峰错位（RNS 峰 1.0B vs F1 峰 0.5B）——H8 双轴
+  解耦的主图（fig_s14_rns.py）
+- 外部模型线图（4.10）生成：figs/fig_ext_corpus_vs_params.{png,pdf}
+  ——(a) RiNALMo 三档参数轴近平线（18× +2.6pp）+ 受控家族对照
+  (b) 语料轴对比（RNA-FM 96M 通用 0.1335 vs micro 36M ncRNA
+  0.2407——小参数 +11pp）
+- 数据三遍核对：绘图脚本数字与证据 JSON 逐位一致（程序化输出
+  确认 rinalmo 0.2407/0.2532/0.2667、RNS 五档 0.172→0.068）
+- OUTLINE.md 4.8/4.10 节补图引用；本地 figs_v1/ 备份两图
+- 650M 87%（等收口）；300M 34M nt 健康；rw1 80M nt 健康

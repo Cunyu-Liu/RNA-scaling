@@ -148,12 +148,19 @@ benchmarks.
 
 ### 4.8 S14 RNS representation-quality (H8 first evidence, 2026-09-20)
 - Control set three-checks pass (KS p=1.0, mono dev 0.0006, 3x);
-  RNS@10: 1M 0.172 / 10M 0.104 / 30M 0.078 / 100M 0.077 vs
-  randinit 0.54-0.58 [evidence/s14_rns.json]
+  RNS@10: 1M 0.172 / 10M 0.104 / 30M 0.078 / 100M 0.077 / 650M 0.0684
+  vs randinit 0.54-0.58 [evidence/s14_rns.json, s14_rns_650m.json]
 - **Decoupling**: representation organization (RNS) saturates at 30M
-  while downstream F1 keeps rising 30M->100M — embedding-neighborhood
-  quality is NOT downstream usefulness (E14 direction; Prabakaran
-  cross-domain validation)
+  (plateau + slow decline to 0.0684 at 650M) while downstream F1 keeps
+  rising 30M->100M — embedding-neighborhood quality is NOT downstream
+  usefulness (E14 direction; Prabakaran cross-domain validation)
+- **FIG 5c (2026-09-22)**: figs/fig_s14_rns.png — two panels:
+  (a) scale axis with randinit band + 650M endpoint; (b) 10M time axis,
+  RNS peak 1.0B vs probe-F1 peak 0.5B misalignment (two-peak offset)
+- Time axis (10M, four ckpts): RNS peaks at 1.0B (0.1283) while
+  transfer F1 peaks at 0.5B (0.244); RNS declines after 1.0B —
+  representation organization degrades LATER than transfer attrition
+  [evidence/s14_timeaxis.json]
 
 ### 4.9 S13b structure-version bell curve (H7 main test, 2026-09-20)
 - PRE-REGISTERED NEGATIVE RESULT: NOT-BELL (E13b-b path) — quadratic
@@ -190,6 +197,8 @@ three-point param axis)
   RiNALMo micro 36M / mega 148M / giga 650M (ncRNA-focused corpus):
   0.2407 (L8) / 0.2532 (L25) / 0.2667 (L27)
   [eval/probe_results_ext.jsonl]
+- **FIG (2026-09-22)**: figs/fig_ext_corpus_vs_params.png — (a) param
+  axis with controlled family overlay; (b) corpus-axis bar contrast
 - **Param axis (same corpus): 18x params -> +2.6pp only** (log-scale
   flat); corpus axis (same-scale params): ncRNA vs general = +11pp
   -> corpus composition dominates family-level transfer
