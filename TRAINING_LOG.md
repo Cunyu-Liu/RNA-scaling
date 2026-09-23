@@ -1744,3 +1744,84 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - 注意：b59 的 run_id 在日志行显示为 rnasc_300M_s17（resolve_config
   的 tag 拼接未含 b59——manifest 已含 corpus_tag=b59 区分，无
   数据风险；run_id 显示瑕疵留待下轮修）
+
+## Day 12 续十三（2026-09-22 21:20）——650M 巡检（未 DONE，仅记录不干预）
+- RNA-Sc-650M_s17 训练健康推进：logs/RNA-Sc-650M_s17.log **DONE 帧计数=0**
+  （grep -c DONE）；尾部 nt=1793M/2.0B（**≈89.7%**，step=191400，loss
+  0.88 波动正常，lr 余弦尾部 7.90e-06）；进程 pid 422582 存活（Sep19 起
+  CPU 96.7%，GPU2 util 100%）；日志 mtime 21:14 持续刷新——训练健康。
+  status.json 85.01% 系 ckpt 快照口径（17:41 第 17 ckpt），非停滞。
+- 最新 ckpt：runs/RNA-Sc-650M_s17/ckpt_nt1700101716_step181412.pt
+  （val_loss 0.7816；manifest.json 17 个 val 点单调降 1.0662→0.7816）。
+  第 18 ckpt（nt 1.8B）预计 ~23:00 落盘，DONE（2.0B）预计明日凌晨。
+- 收口链值守确认：closeout_650m 进程存活（pid 1948279，"chain A:
+  waiting for 650M final probe"→logs/closeout_650m.log）+ watch_all
+  存活（pid 3748436，Sep17 起，cycle 1632）+ /tmp/watch_pretrain_650.sh
+  kill -0 监听 pid 422582；eval/probe_results.jsonl 中 RNA-Sc-650M_s17
+  行数=0——未 DONE 不 probe，符合协议。DONE 后自动：probe→s1_final_
+  verdict 五档终判（evidence/s1_final_verdict.json）→S13b v2→DRAFT
+  v1.1 填槽，无需人工触发。
+- 同卡在训臂（不加干预）：300M@2B（pid 1441172，GPU0，nt=107M/2.0B，
+  manifest 已落 1 ckpt val_loss 1.0661）；300M@5.9B b59（pid 2046309，
+  GPU3，nt=21M，manifest 已含 corpus_tag=b59）；30M-rw1（pid 1214846，
+  GPU3，nt=220M/2.0B=11%，18:32 GPU-CONTEXT-LOSS 事件已消化）。
+  cron.log 尾部 no alerts、all 3 train PIDs present on GPUs。
+- 按纪律未执行：s1_final_verdict.py 手动触发 / TRAINING_LOG 终判落款
+  02_TASKS T2.1.3 收口 / preprint v1.0 / T1.2.6 full-FT 线——均待 DONE
+  后由收口链自动或下次巡检执行（GPU 全忙：0-5 卡 util 58-100%，无空
+  闲卡可启 full-FT）。
+
+## Day 12 续十四（2026-09-22 23:19）——650M 巡检（未 DONE，仅记录不干预）
+
+- RNA-Sc-650M_s17 训练健康推进：logs/RNA-Sc-650M_s17.log **DONE 帧计数=0**
+  （grep -c DONE）；尾部 nt=1837M/2.0B（**≈91.9%**，step=196000，loss
+  0.55 波动正常，lr 余弦尾部 4.97e-06）；进程 pid 422582 存活（3d16h，
+  CPU 96.8%，GPU2 util 100%），日志 mtime 23:07 持续刷新——训练健康。
+  按 100M nt/4.1h 节奏推算，DONE（2.0B）预计 09-23 早 06:00-07:00。
+- 最新 ckpt（第 18 个）：runs/RNA-Sc-650M_s17/ckpt_nt1800114281_step192108.pt
+  （21:50 落盘，提前于 21:20 预测的 ~23:00；val_loss=0.7776 best；
+  manifest.json 18 个 val 点单调降 1.0662@0.1B→0.7776@1.8B，无过拟合）。
+- 收口链值守确认：closeout_650m 进程存活（pid 1948279，20:02 起，
+  "chain A: waiting for 650M final probe"→logs/closeout_650m.log）+
+  watch_all 存活（pid 3748436，Sep17 起，cycle 1668）+ /tmp/
+  watch_pretrain_650.sh kill -0 监听 pid 422582；eval/probe_results.jsonl
+  中 RNA-Sc-650M_s17 行数=0——未 DONE 不 probe，符合协议；
+  s14_rns_650m.json（20:27）/ s1_final_verdict.json（12:06）均在位。
+- 同卡在训臂（不加干预）：300M@2B（pid 1441172，GPU0，99%）、
+  300M@5.9B b59（pid 2046309，GPU3）、30M-rw1（pid 1214846，GPU3）；
+  GPU6/7 为 S14 RNS 补点重跑与他方进程占用；cron.log：no alerts、
+  all 4 train PIDs present on GPUs，无 ALERTS / CPU FALLBACK。
+- 按纪律未执行：s1_final_verdict.py 手动触发 / 02_TASKS T2.1.3 收口 /
+  TRAINING_LOG 终判落款 / preprint v1.0 撰写 / T1.2.6 full-FT 线
+  （GPU 0-5 util 58-100% 全忙，无空闲卡）——均待 DONE 后由收口链
+  自动执行或下次巡检确认收口结果。
+
+- [closeout][WARN] 650M probe not complete after 6h wait; verdict deferred
+
+- [auto] rnasc_650M_s17 complete: nt=2.00B best_val=0.7757 fallback=0; final probe+linkage+s1_summary done
+
+- [fill_draft_650m] DRAFT v1.1 auto-fill: 6 slots replaced from s1_final_verdict (650M F1 0.3632, gain 2.4 pp, slope 0.0293); backup DRAFT_v1_pre650M_backup.md
+
+## Day 13（2026-09-23 13:20）——★650M DONE + 五档终判出（S1 收口）
+- 650M 凌晨 DONE（nt=2.0B，best_val 0.7757，fallback=0，5826 nt/s）；
+  watch_all 已自动完成全 28 层 probe（best L8 0.3632）
+- 收口链超时缺口如实登记：closeout_650m 的 6h 等待窗在 DONE 前耗尽
+  （凌晨 02:12 DONE vs 20:02 启动的 6h 窗），WARN 落款 verdict deferred
+  ——本次人工补跑 s1_final_verdict 成功收口（根因：等待窗应从 DONE
+  事件起算而非进程启动；修复入收口纪律）
+- **五档终判（evidence/s1_final_verdict.json）**：
+  1M 0.1650±0.0131 / 10M 0.1535±0.0173 / 30M 0.2651±0.0132 /
+  100M 0.3394±0.0120 / 650M 0.3632
+  - **650M_gain = +2.4pp（6.5× 参数）——与外部线 RiNALMo 18×+2.6pp
+    定量互证（跨家族收敛）**
+  - **slope 100M→650M = 0.0293 < ε=0.03：scaling 饱和确认**（触发
+    斜率 0.142 衰减 5 倍；full-axis 0.0829/decade）
+  - 10M 谷持续存在（650M 时代仍 10M < 1M）
+  - **层迁移终点非单调：650M best L8/rel 0.296（中早期）**——
+    100M rel 0.864 后回落，新现象（解释候选：650M 容量下中早期
+    层已足够承载家族级统计，深层过特化于 rRNA 通道——与 S12 DI
+    关联/磨蚀机制呼应；分析待下轮）
+- S14 650M 终点更新（20:27 重跑版）：RNS@10 0.062（< 前值 0.0684，
+  共卡拥挤下逐序列口径）——H8 平台+缓降结论不变
+- DRAFT v1.1 自动填槽完成（6/7 槽；1 槽 S13b v2 运行中待回填）
+- S13b v2（+650M 置信度覆盖点）GPU6 运行中

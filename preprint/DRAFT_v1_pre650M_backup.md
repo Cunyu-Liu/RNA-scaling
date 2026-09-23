@@ -1,7 +1,7 @@
 # DRAFT v1.0 (2026-09-22) — manuscript working draft
 
 > Status: full-prose draft expanded from OUTLINE v0.7. Every number is
-> evidence-linked. Slots marked [FILLED-650M-v1.1] are filled by the closeout
+> evidence-linked. Slots marked [PENDING-650M] are filled by the closeout
 > chain (s1_final_verdict / probe auto-chain). Do NOT cite smoke/proxy
 > numbers anywhere. Writing-discipline gates D1-D11 checked (see bottom).
 
@@ -48,7 +48,7 @@ parameter sweep within one model family gains only +2.6pp while a
 corpus-composition contrast gains +11pp at smaller scale: corpus
 dominates parameters for family-level transfer. A pre-registered slope
 rule (0.142 F1/decade, bootstrap CI [0.104, 0.180]) triggered a 650M
-continuation — verdict: 650M ABOVE 100M (650M F1 0.3632 vs 100M 0.3394, +2.4 pp; slope 100M→650M 0.0293, full-axis 0.0829). Our results argue for
+continuation [PENDING-650M: five-scale verdict]. Our results argue for
 scale-, corpus-, and protocol-aware interpretation of RNA LM benchmarks,
 and provide the first Li-et-al-style mechanistic controls (random-init,
 weight-statistics, pretraining-time, layer-wise) in the RNA domain.
@@ -164,8 +164,8 @@ tokenizer, MLM 15% (80/10/10), ALiBi positions, tied embedding head;
 budget each, identical optimizer/schedule; formal seeds 17/29/43 at
 30M/100M (three seeds), 17 at 1M/10M; checkpoints every 100M nt
 (pretraining-time axis). 300M anchor tier (d1024/L24, 302.1M) in
-training; 650M (666.3M) triggered by pre-registered slope rule —
-complete, final F1 0.3632 (best-layer rel 0.30)..
+training; 650M (666.3M) triggered by pre-registered slope rule
+[PENDING-650M].
 
 **Probes.** Linear probe on per-sequence pooled representations
 (family_validation → family_test, 20k/4k), macro-F1 over 19 ncRNA types;
@@ -203,9 +203,8 @@ Three-seed family-split probe F1: 1M 0.1650±0.0131, 10M 0.1535±0.0173,
 (−0.0115): the 1M→10M segment is negative under three seeds.
 Pre-registered slope on the 30M→100M segment: 0.142 F1/decade,
 bootstrap CI [0.104, 0.180], lower bound 3.5×ε — the 650M continuation
-was triggered by rule, not by taste. 650M final: F1 0.3632;
-full five-scale slope 0.0829 F1/decade; 10M valley persists in the
-650M era: True..
+was triggered by rule, not by taste [PENDING-650M: 650M F1, full five-
+scale slope, valley persistence].
 
 ### 4.2 The gain is not initialization or weight statistics
 
@@ -277,7 +276,7 @@ shrink toward the composition floor.
 ### 4.8 Representation quality saturates before downstream F1 (RNS)
 
 RNS@10: 1M 0.172 → 10M 0.104 → 30M 0.078 → 100M 0.077 → 650M 0.0684
-(confirmed), against randinit 0.54–0.58. Representation
+[PENDING-650M confirm], against randinit 0.54–0.58. Representation
 organization improves and plateaus at 30M while downstream F1 keeps
 rising 30M→100M. Time axis (10M): RNS peaks at 1.0B nt while transfer
 F1 peaks at 0.5B — organization degrades later than transfer.
@@ -289,8 +288,8 @@ Family-level NLL vs structure-F1: quadratic peak lies outside the data
 NLL range (peak x=1.745 vs data 1.34–1.38); CI [−0.296, −0.050].
 NOT-BELL under the pre-registered criterion: RNA-corpus models do not
 reach the over-confidence region within this budget/corpus scale —
-Hou's protein precondition is unmet here. [v2 re-test pending:
-closeout chain re-runs s13b with 650M's coverage.]
+Hou's protein precondition is unmet here. [PENDING-650M: v2 with
+widened confidence coverage.]
 
 ### 4.10 External replication: corpus composition > parameters
 
@@ -348,7 +347,8 @@ attention than parameter count.
 
 - Pooled day-1 probe protocol (upgrade to per-task protocol matrix
   planned); mean-pool axes are reported as relative conclusions only.
-- Seed imbalance: 3 seeds at 30M/100M, single seed elsewhere; 650M single seed (pre-registered).
+- Seed imbalance: 3 seeds at 30M/100M, single seed elsewhere; 650M
+  single seed [PENDING-650M].
 - rRNA 56.4% corpus bias: every headline claim re-verified under
   de-rRNA stratification (all survive; absolute F1 shrinks ≈25%).
 - Corpus-axis epoch-coverage differences are explicit (red-team A);
