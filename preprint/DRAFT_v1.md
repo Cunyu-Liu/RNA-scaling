@@ -289,8 +289,9 @@ Family-level NLL vs structure-F1: quadratic peak lies outside the data
 NLL range (peak x=1.745 vs data 1.34–1.38); CI [−0.296, −0.050].
 NOT-BELL under the pre-registered criterion: RNA-corpus models do not
 reach the over-confidence region within this budget/corpus scale —
-Hou's protein precondition is unmet here. [v2 re-test pending:
-closeout chain re-runs s13b with 650M's coverage.]
+Hou's protein precondition is unmet here. v2 (with 650M: 36 family
+points, NLL range widened to 1.03-1.37): still NOT-BELL - the
+negative result is robust to the widened confidence coverage.
 
 ### 4.10 External replication: corpus composition > parameters
 
