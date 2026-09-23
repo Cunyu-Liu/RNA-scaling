@@ -101,8 +101,18 @@
 - [ ] T1.2.5 传统基线组（Q4）：k-mer(1-6)+logistic / k-mer+LightGBM /
       one-hot CNN / random-emb+头【验收：每任务基线表 + 收益口径列
       （LM−最强基线）】
-- [ ] T1.2.6 低数据 regime（S10）：10²/10³/10⁴ 采样曲线（probe 与
+- [~] T1.2.6 低数据 regime（S10）：10²/10³/10⁴ 采样曲线（probe 与
       full FT 两条线）【验收：三任务学习曲线图 v1】
+      probe 线 + 10M/100M full-FT 两档完成（f93ec82/a90ff13，
+      evidence/t126_fullft.json：full-FT 上升 vs probe 平坦）；
+      **650M 扩档进行中**：v1 watcher 19:29 启动后在 GPU0 遭共卡
+      租户 OOM（rc=1，19:42:04，10M/100M 两档完成后中断——证据
+      logs/t126_fullft_650m.log）；v2 watcher 19:42:36 自愈重启
+      （pid 2718971，≥22GB 真实空闲判据 + 5 次重试 + 96h deadline），
+      当前 8 卡无 ≥22GB 空闲，每 10min 轮询等待；完成后落
+      evidence/t126_fullft.json（650M 槽）+ logs/t126_fullft_650m.done
+      【证据：evidence/t126_fullft.json + logs/t126_fullft_650m.log +
+      TRAINING_LOG Day 13 补四】
 
 ### T1.3 逐层 probe 全矩阵（S7）
 - [x] T1.3.1 rel_depth 层轴 + depth_band 汇总（已上线）
@@ -124,8 +134,14 @@
 - [ ] T2.1.2 **红队修正 A**：语料轴三点曲线改为 10M 档 × {c1Mcs, c5Mcs,
       full}（原 c40M 接近全量无意义）；epoch 覆盖差异显式入方法节
       （c1M ≈2.4 epoch vs full ≈34% 新鲜度，不假装同质）
-- [ ] T2.1.3 100M 处斜率判定（R1 预设规则）：slope>ε → 650M；≤ε → 止步
+- [x] T2.1.3 100M 处斜率判定（R1 预设规则）：slope>ε → 650M；≤ε → 止步
       【验收：slope 含 CI + 判定报告入 evidence/ + TRAINING_LOG 决策记录】
+      —— ✅ 已收口（2026-09-23）：触发判定 evidence/s1_slope_decision.json
+      （slope 0.142/decade，CI [0.104, 0.180]，decision=650M）；
+      终判 evidence/s1_final_verdict.json（650M F1 0.3632 > 100M 0.3394，
+      +2.4pp；slope 100M→650M 0.0293 < ε=0.03 → scaling 饱和，五档终局）；
+      650M 自动 probe evidence：eval/probe_results.jsonl 28/28 层全覆盖
+      （final_nt=1900122218，best L8）；TRAINING_LOG.md Day 13 落款。
 
 ### T2.2 对照实验（S4/S5/S6）
 - [x] S4 随机初始化对照（10M 档 probe：0.131 vs 0.214）

@@ -1841,3 +1841,60 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
   留 Fig 5b/附录位），fig1_layer_migration.png 重绘完成
 - 五档层曲线 + best-layer 迁移（1M rel0.47 → 10M 0.14 → 30M 0.79 →
   100M 0.86 → 650M 0.30 非单调终点）为论文 Fig 1 主图定稿版
+
+
+## Day 13 补三（2026-09-23 19:25）——晚巡检：650M 收口复核 + T2.1.3 归档 + T1.2.6 扩档启动
+- 晚巡检复核 DONE 帧（logs/RNA-Sc-650M_s17.log 尾部）：
+  DONE rnasc_650M_s17 | nt=2000003270 steps=213514 best_val=0.7757 |
+  5826 nt/s peak=15579MB fallback=0 ——与 manifest.json
+  （final_nt=2000003270, best_checkpoint=ckpt_nt1900122218_step202784.pt,
+  status=DONE, end_utc=2026-09-22T22:11:50Z）一致
+- watch_all 自动 probe 复核：eval/probe_results.jsonl RNA-Sc-650M_s17
+  28/28 层全覆盖于 final_nt=1900122218，best L8 F1=0.3632；
+  watch_all.log 见 "rnasc_650M_s17 DONE nt=2.00B val=0.7757 -> probe GPU2"
+- s1_final_verdict.py 幂等复跑：evidence/s1_final_verdict.json md5
+  前后一致（08f2542b...）——五档终判稳定（650M F1 0.3632 > 100M
+  0.3394，+2.4pp；slope 100M→650M 0.0293 < ε=0.03，scaling 饱和；
+  10M 谷持续；层迁移终点 650M rel 0.296 非单调）
+- 02_TASKS 收口：docs/TASKS_V2.md T2.1.3 勾选 ✅（验收三件套齐：
+  s1_slope_decision.json 触发判定 / s1_final_verdict.json 终判 /
+  TRAINING_LOG 决策记录）
+- preprint v1.0 线：DRAFT_v1.md 清理 fill_draft_650m 痕迹 4 处
+  （"650M PENDING"→五档表述、"True.."→规范句、"rel 0.30.."→"rel
+  0.296"、RNS 650M 0.0684→0.062 引 s14_rns_650m.json；摘要规模
+  1M–100M→1M–650M）——DRAFT v1.1 定稿版
+- T1.2.6 full-FT 扩档启动：fullft_lowdata.py RUNS 增 650M s17（v1.1
+  三档 10M/100M/650M）；t126_watch_launch.sh watcher 已起
+  （pid 2656868），gpu_pick 判 GPU0 真实空闲 19GB 后于 19:29 自动
+  启动（logs/t126_fullft_650m.log），产物 evidence/t126_fullft.json，
+  完成后落 logs/t126_fullft_650m.done；timeout 6h、单次退出、不覆盖
+  他人进程；同卡在训臂 300M s17 不受干预
+- 侧记：closeout_650m 的 6h 等待窗缺口已在前次落款登记（根因：
+  窗口应自 DONE 事件起算），本轮仅复核未重触发
+
+## Day 13 补四（2026-09-23 20:10）——晚巡检二：五档终判幂等复核 + t126 v1 OOM→v2 自愈记录
+
+- 五档终判幂等复核（本条由 20:01 独立会话执行）：复跑 s1_final_verdict.py
+  前后 evidence/s1_final_verdict.json md5 完全一致（08f2542b...）
+  ——五档表/checks 数字稳定可复现：650M F1 0.3632 > 100M 0.3394
+  （+2.4pp）；slope 100M→650M=0.0293 < ε=0.03（scaling 饱和）；
+  10M 谷持续；层迁移终点 rel 0.296（L8/28）非单调。与 Day 13 补三
+  的 13:24（6d35bf9）结论逐项吻合。
+- probe 复核：eval/probe_results.jsonl 中 RNA-Sc-650M_s17 全 28 层
+  覆盖于 final ckpt_nt=1900122218（early 9/middle 9/late 10），
+  best f1_macro=0.3632@L8——watch_all 自动收口口径无误。
+- 侧记 DRAFT 同步：本地论文/ 目录 DRAFT_v1.md 已回传 19:23 清理版
+  （md5 1a66c729...与远端一致；本地原 14:27 版已过时）。
+- **t126 watcher 事件补录（Day 13 补三落款 19:30 之后发生，此前未记）**：
+  v1 watcher（19:29 起，pid 2656868）在 GPU0 遭遇共卡租户 ramp，
+  backward 时 OOM 退出（===t126 fullft rc=1 19:42:04===，
+  证据 logs/t126_fullft_650m.log——OOM 堆栈 + 已跑完 10M/100M 两档
+  三点后 650M 未开始即中断）；**v2 watcher 19:42:36 自动自愈重启**
+  （pid 2718971 存活，gpu_pick ≥22GB 真实空闲判据 + 5 次重试 +
+  96h deadline），当前 8 卡均无 ≥22GB 空闲（GPU6/7 共卡 7.9/15.8GB
+  已用），watcher 每 10min 轮询等待，20:03 仍在 "no free GPU yet"。
+  v2 语义变化：等待窗从"进程启动"改为 deadline 循环，OOM 失败重试
+  间隔 30min，不会覆盖他人进程——v1 的 6h 超时缺口已由 v2 根治
+  （与 closeout_650m 6h 缺口登记同根因、不同实例）。
+- 在训 3 run 不打扰：300M s17 30%、300M b59 15%、30M rw1 40%
+  （status.md 18:20 口径，推进健康）。
