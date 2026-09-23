@@ -10,6 +10,7 @@ as the probe line (RandomState(SEED + nsub)).
 
 Output: evidence/t126_fullft.json
 Usage: python -m rna_sc.fullft_lowdata --device 4
+(v1.1: 650M s17 appended for the five-scale T1.2.6 full-FT curve)
 """
 from __future__ import annotations
 
@@ -31,6 +32,7 @@ SPLIT_8080 = "/mnt/cunyuliu/tokenizer-benchmark/data/derived/split/release22_spl
 RUNS = {
     "10M": "/mnt/cunyuliu/rna-sc/runs/RNA-Sc-10M_s17",
     "100M": "/mnt/cunyuliu/rna-sc/runs/RNA-Sc-100M_s17",
+    "650M": "/mnt/cunyuliu/rna-sc/runs/RNA-Sc-650M_s17",
 }
 OUT = "/mnt/cunyuliu/rna-sc/evidence/t126_fullft.json"
 ALPHABET = "ACGU"

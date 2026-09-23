@@ -101,18 +101,21 @@
 - [ ] T1.2.5 传统基线组（Q4）：k-mer(1-6)+logistic / k-mer+LightGBM /
       one-hot CNN / random-emb+头【验收：每任务基线表 + 收益口径列
       （LM−最强基线）】
-- [~] T1.2.6 低数据 regime（S10）：10²/10³/10⁴ 采样曲线（probe 与
+- [x] T1.2.6 低数据 regime（S10）：10²/10³/10⁴ 采样曲线（probe 与
       full FT 两条线）【验收：三任务学习曲线图 v1】
       probe 线 + 10M/100M full-FT 两档完成（f93ec82/a90ff13，
       evidence/t126_fullft.json：full-FT 上升 vs probe 平坦）；
-      **650M 扩档进行中**：v1 watcher 19:29 启动后在 GPU0 遭共卡
-      租户 OOM（rc=1，19:42:04，10M/100M 两档完成后中断——证据
-      logs/t126_fullft_650m.log）；v2 watcher 19:42:36 自愈重启
-      （pid 2718971，≥22GB 真实空闲判据 + 5 次重试 + 96h deadline），
-      当前 8 卡无 ≥22GB 空闲，每 10min 轮询等待；完成后落
-      evidence/t126_fullft.json（650M 槽）+ logs/t126_fullft_650m.done
+      **650M 扩档已完成（2026-09-23 22:41）**：v1 watcher 19:29 GPU0
+      OOM（rc=1 19:42:04）→ attempt 1 20:23 GPU2 OOM（rc=1 20:30:47）
+      → attempt 2 22:22:55 GPU1 启动，**22:41:45 rc=0 完成**
+      （650M 档三点 n=100/1000/10000 → f1 0.0947/0.1212/0.1564，
+      全三档 10M/100M/650M × 3 点落 evidence/t126_fullft.json，
+      logs/t126_fullft_650m.done 已落盘，watcher 单次退出）；
+      结论：650M full-FT 依旧最低数据最大优势（0.0947 vs 10M
+      0.0585 @n=100），full-FT 升 vs probe 平坦结论在五档口径下
+      成立。DRAFT_v1.md §4.11 已回填三档数字
       【证据：evidence/t126_fullft.json + logs/t126_fullft_650m.log +
-      TRAINING_LOG Day 13 补四】
+      TRAINING_LOG Day 13 补六】
 
 ### T1.3 逐层 probe 全矩阵（S7）
 - [x] T1.3.1 rel_depth 层轴 + depth_band 汇总（已上线）

@@ -1934,3 +1934,51 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
   待 GPU 空闲自动启动（attempt 1 OOM 后 30min 重试节奏，96h deadline）。
   本轮不干预 3 个在训 run：300M s17（GPU0）/ 300M b59（GPU3）/
   30M rw1（GPU3）。
+
+## Day 13 补六（2026-09-23 23:25）——23:20 巡检：t126 full-FT 650M 扩档完成收口 + 全链证据复核
+
+- DONE 帧复核（logs/RNA-Sc-650M_s17.log 尾部）：DONE rnasc_650M_s17
+  | nt=2000003270 steps=213514 best_val=0.7757 | 5826 nt/s peak=15579MB
+  fallback=0——与 runs/RNA-Sc-650M_s17/manifest.json（status=DONE,
+  final_nt=2000003270, best_checkpoint=ckpt_nt1900122218_step202784.pt,
+  end_utc=2026-09-22T22:11:50Z）逐位一致；19 个 ckpt、单 ckpt 7.5G。
+- watch_all 自动 probe 复核：eval/probe_results.jsonl 含 RNA-Sc-650M_s17
+  28/28 层（final ckpt_nt=1900122218，early 9/middle 9/late 10），
+  best L8 f1_macro=0.3632——收口链口径无误。
+- **五档终判第四次幂等复跑（23:1x）**：s1_final_verdict.py 复跑前后
+  evidence/s1_final_verdict.json md5 完全一致（08f2542b...，与
+  Day 13 13:24 / 补三 19:2x / 补四 20:01 / 补五 22:19 四次口径相同）
+  ——五档表数字稳定可复现：1M 0.1650±0.0107 / 10M 0.1535±0.0141 /
+  30M 0.2651±0.0132 / 100M 0.3394±0.0120 / 650M 0.3632（单 seed，
+  预注册）；650M_gain +2.4pp；slope 100M→650M = 0.0293 < ε=0.03
+  （scaling 饱和确认）；10M 谷持续；层迁移终点非单调（650M L8
+  rel=0.296）。
+- **T2.1.3 收口完好复核**：docs/TASKS_V2.md T2.1.3 ✅（验收三件套：
+  evidence/s1_slope_decision.json / evidence/s1_final_verdict.json /
+  TRAINING_LOG.md Day 13 落款）——无需重做。
+- **t126 full-FT 650M 扩档完成（本轮新事件，此前未记）**：v2 watcher
+  （pid 2718971，t126_watch_launch.sh）于 22:22:55 捕获 GPU1 真实
+  空闲，attempt 2 启动 fullft_lowdata.py（v1.1 三档 10M/100M/650M），
+  22:41:45 rc=0 完成——证据链：
+  - logs/t126_fullft_650m.log：[650M] fullft n=100/1000/10000 →
+    f1 0.0947/0.1212/0.1564（10M/100M 两档复跑一致：
+    0.0585/0.0753/0.1310 与 0.0639/0.1209/0.1360）
+  - evidence/t126_fullft.json（22:38:59 落盘）：三档 × 三点全量
+  - logs/t126_fullft_650m.done（22:39:04 落盘）：watcher 单次退出
+    （pid 2718971 不复存在，语义达成）
+  - 事件时间线：v1 19:29 GPU0 OOM（rc=1 19:42:04）→ attempt 1
+    20:23:37 GPU2 OOM（rc=1 20:30:47，共卡租户 ramp）→ attempt 2
+    22:22:55 GPU1 成功——v2 watcher 自愈判据（≥22GB 真实空闲 +
+    30min 重试 + 96h deadline）实战验证有效
+  - 结论：650M full-FT 在最低数据量 n=100 拿到最大低数据优势
+    （0.0947 vs 10M 0.0585），full-FT 升 / probe 平坦结论在
+    五档口径下成立
+- **交接文档同步（02_TASKS=TASKS_V2.md）**：T1.2.6 [~]→[x] 收口
+  （补录 650M 扩档完成 + 三档数字 + DRAFT 回填记录）。
+- **preprint v1.0 线**：DRAFT_v1.md §4.11 回填三档 full-FT 数字
+  （10²: 0.059/0.064/0.095；10⁴: 0.131/0.136/0.156；650M 低数据
+  优势表述 + evidence/t126_fullft.json 引用）——DRAFT v1.1 定稿版
+  八槽全满（七 650M 槽 + t126 低数据槽）。
+- 本轮不干预 3 个在训 run（健康推进）：300M s17 @781M/2.0B
+  （GPU0，lr 2.02e-04）/ 300M b59 @500M/5.9B（GPU3，lr 2.95e-04）/
+  30M rw1 @1046M/2.0B（GPU3，lr 2.81e-04）；t126 用的 GPU1 已释放。

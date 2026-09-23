@@ -23,7 +23,7 @@ RNA language models are being released and compared at a rapid pace, yet
 the scaling behavior of their transfer capability is poorly characterized
 in a domain whose reference corpus (RNAcentral) is dominated by a handful
 of abundant families (rRNA ≈56% of ncRNA nt). We train a controlled family
-of masked-language-model encoders (1M–100M parameters, identical recipe,
+of masked-language-model encoders (1M–650M parameters, identical recipe,
 2.0B-nt budget, family-level evaluation on a cluster-isolated
 RNAcentral release-22 split) and measure what pretraining actually
 transfers. Transfer grows with scale but non-monotonically: a 10M
@@ -86,7 +86,7 @@ promise is kept. Four observations motivate a controlled re-examination
    matrix / controlled family.)
 
 We therefore train a single-family, single-recipe RNA encoder ladder
-(1M/10M/30M/100M [+300M in flight, 650M PENDING]) on the
+(1M/10M/30M/100M/650M [+300M in flight]) on the
 cluster-isolated RNAcentral release-22 split, and evaluate with an
 explicit two-world design: family-level generalization (sequences from
 held-out clusters only) versus random splits (leakage by construction).
@@ -160,12 +160,13 @@ from clusters absent from training (S0 discipline).
 
 **Model family.** Bidirectional MLM encoders, single-nucleotide ACGU
 tokenizer, MLM 15% (80/10/10), ALiBi positions, tied embedding head;
-1M (d64/L18), 10M (d192/L20), 30M (d480/L12), 100M (d576/L23); 2.0B-nt
-budget each, identical optimizer/schedule; formal seeds 17/29/43 at
-30M/100M (three seeds), 17 at 1M/10M; checkpoints every 100M nt
-(pretraining-time axis). 300M anchor tier (d1024/L24, 302.1M) in
-training; 650M (666.3M) triggered by pre-registered slope rule —
-complete, final F1 0.3632 (best-layer rel 0.30)..
+1M (d64/L18), 10M (d192/L20), 30M (d480/L12), 100M (d576/L23),
+650M (d1408/L28, 666.3M); 2.0B-nt budget each, identical
+optimizer/schedule; formal seeds 17/29/43 at 30M/100M (three
+seeds), 17 at 1M/10M and 650M (pre-registered); checkpoints every
+100M nt (pretraining-time axis). 300M anchor tier (d1024/L24,
+302.1M) in training; 650M (666.3M) triggered by the pre-registered
+slope rule — complete, final F1 0.3632 (best-layer rel 0.296).
 
 **Probes.** Linear probe on per-sequence pooled representations
 (family_validation → family_test, 20k/4k), macro-F1 over 19 ncRNA types;
@@ -204,8 +205,8 @@ Three-seed family-split probe F1: 1M 0.1650±0.0131, 10M 0.1535±0.0173,
 Pre-registered slope on the 30M→100M segment: 0.142 F1/decade,
 bootstrap CI [0.104, 0.180], lower bound 3.5×ε — the 650M continuation
 was triggered by rule, not by taste. 650M final: F1 0.3632;
-full five-scale slope 0.0829 F1/decade; 10M valley persists in the
-650M era: True..
+full five-scale slope 0.0829 F1/decade; the 10M valley persists in
+the 650M era (10M 0.1535 < 1M 0.1650, three seeds).
 
 ### 4.2 The gain is not initialization or weight statistics
 
@@ -276,8 +277,10 @@ shrink toward the composition floor.
 
 ### 4.8 Representation quality saturates before downstream F1 (RNS)
 
-RNS@10: 1M 0.172 → 10M 0.104 → 30M 0.078 → 100M 0.077 → 650M 0.0684
-(confirmed), against randinit 0.54–0.58. Representation
+RNS@10: 1M 0.172 → 10M 0.104 → 30M 0.078 → 100M 0.077 → 650M
+0.062 (scale-axis endpoints from s14_rns.json, 650M from the
+one-by-one fp32 re-run s14_rns_650m.json), against randinit
+0.54–0.58. Representation
 organization improves and plateaus at 30M while downstream F1 keeps
 rising 30M→100M. Time axis (10M): RNS peaks at 1.0B nt while transfer
 F1 peaks at 0.5B — organization degrades later than transfer.
@@ -307,9 +310,15 @@ stratification preserves all layer shapes. (Fig: corpus vs params.)
 
 Short sequences (16–127nt) collapse at all scales (0.02–0.06); 512+
 bin scale-differentiates (30M/100M ≈0.11 vs 1M/10M ≈0.05) — scale
-gains concentrate on long sequences. Low-data probe curves are flat
-(<5pp per 100× samples) at all scales while full fine-tuning rises —
-the low-data bottleneck is probe-head capacity, not representation.
+gains concentrate on long sequences. In the low-data regime
+(10²/10³/10⁴ family-split samples), linear-probe curves are flat
+(<5pp per 100× samples) at all scales, while full fine-tuning
+rises: at 10² samples full-FT reaches 0.059/0.064/0.095
+(10M/100M/650M) and at 10⁴ reaches 0.131/0.136/0.156 — the
+650M tier holds the largest low-data advantage (0.095 vs 0.059
+at 10²), and the low-data bottleneck is probe-head capacity,
+not representation (evidence/t126_fullft.json,
+evidence/t126_lowdata.json).
 
 ### 4.12 Classical baselines, complete set
 
