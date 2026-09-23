@@ -24,13 +24,12 @@ RUNS = [
     ("RNA-Sc-1M_s17", "1M", "#888888"),
     ("RNA-Sc-10M_s17", "10M", "#1f77b4"),
     ("RNA-Sc-30M_s17", "30M", "#2ca02c"),
-    ("RNA-Sc-30M_s17_c1M", "30M-c1M", "#17becf"),
-    ("RNA-Sc-30M_s17_c1Mcs", "30M-c1Mcs", "#9467bd"),
     ("RNA-Sc-100M_s17", "100M", "#d62728"),
-    ("RNA-Sc-100M_s29", "100M-s29", "#ff9896"),
-    ("RNA-Sc-100M_s43", "100M-s43", "#e377c2"),
+    ("RNA-Sc-650M_s17", "650M", "#9467bd"),
     ("RNA-Sc-10M_s17_randinit17", "10M-randinit", "#7f7f7f"),
 ]
+SCALE_F1 = {"1M": 0.1650, "10M": 0.1535, "30M": 0.2651, "100M": 0.3394,
+            "650M": 0.3632}
 
 
 def official_layers(run):

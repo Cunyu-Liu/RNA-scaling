@@ -1834,3 +1834,10 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - DRAFT v1.1 第 7 槽回填完成——七槽全满，DRAFT v1.1 收口
 - 650M 收口全链闭环：S1 五档终判 + S14 终点 + S13b v2 + DRAFT 填槽
 - GPU2 已释放可接 T1.2.6 full-FT 扩档
+
+## Day 13 补二（2026-09-23 14:30）——Fig 1 五档主图升级
+- fig1_layer_migration.py 主 RUN 集换为五档（1M/10M/30M/100M/650M
+  + randinit 对照；去掉 c1M/c1Mcs/s29/s43 子线——语料臂与种子副本
+  留 Fig 5b/附录位），fig1_layer_migration.png 重绘完成
+- 五档层曲线 + best-layer 迁移（1M rel0.47 → 10M 0.14 → 30M 0.79 →
+  100M 0.86 → 650M 0.30 非单调终点）为论文 Fig 1 主图定稿版
