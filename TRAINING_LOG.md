@@ -1898,3 +1898,39 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
   （与 closeout_650m 6h 缺口登记同根因、不同实例）。
 - 在训 3 run 不打扰：300M s17 30%、300M b59 15%、30M rw1 40%
   （status.md 18:20 口径，推进健康）。
+
+## Day 13 补五（2026-09-23 22:20）——22:00 巡检：收口链复核 + t126 v2 等待中 + verdict 三次幂等一致
+
+- DONE 帧复核（logs/RNA-Sc-650M_s17.log 尾部 1111 行）：DONE rnasc_650M_s17
+  | nt=2000003270 steps=213514 best_val=0.7757 | 5826 nt/s peak=15579MB
+  fallback=0——与 runs/RNA-Sc-650M_s17/manifest.json（status=DONE,
+  final_nt=2000003270, best_checkpoint=ckpt_nt1900122218_step202784.pt,
+  end_utc=2026-09-22T22:11:50Z）逐位一致；最终 ckpt 19 个
+  （ckpt_nt1900122218_step202784.pt，7.5G，best_val 0.7757）。
+- watch_all 自动 probe 复核：eval/probe_results.jsonl 含 RNA-Sc-650M_s17
+  28/28 层（final ckpt_nt=1900122218，early 9/middle 9/late 10），
+  best L8 f1_macro=0.3632——收口链自动收口口径无误。
+- **五档终判第三次幂等复跑（22:19）**：s1_final_verdict.py 复跑前后
+  evidence/s1_final_verdict.json md5 完全一致（08f2542b...，与 Day 13
+  13:24 / Day 13 补三 19:2x / Day 13 补四 20:01 三次口径相同）——
+  五档表数字稳定可复现：
+  - 1M 0.1650±0.0107 / 10M 0.1535±0.0141 / 30M 0.2651±0.0132 /
+    100M 0.3394±0.0120 / 650M 0.3632（单 seed，预注册）
+  - 650M_gain +2.4pp（6.5× 参数）；slope 100M→650M = 0.0293 < ε=0.03
+    ——scaling 饱和确认；full-axis 0.0829 F1/decade
+  - 10M 谷持续存在（10M 0.1535 < 1M 0.1650）
+  - 层迁移终点非单调：650M best L8 rel=0.296（中早期）
+- 02_TASKS 收口状态复核：docs/TASKS_V2.md T2.1.3 已勾选 ✅（验收三件套
+  齐：evidence/s1_slope_decision.json 触发判定 / evidence/
+  s1_final_verdict.json 终判 / TRAINING_LOG.md Day 13 落款）——
+  T2.1.3 收口完好，无需重做。
+- preprint v1.0 线复核：DRAFT_v1.md 七槽已满（fill_draft_650m 6 槽 +
+  S13b v2 第 7 槽回填，摘要规模已表 1M–650M；git ff2830a/b96c146/
+  6d35bf9 落款）——DRAFT v1.1 定稿版在位，本轮继续撰写中。
+- T1.2.6 full-FT 扩档：t126 v2 watcher 存活（pid 2718971，t126_watch_
+  launch.sh，02:29+）；日志显示 21:01–22:02 每 10min "no free GPU yet"
+  （8 卡无 ≥22GB 真实空闲）；v1 首跑 10M/100M 两档六点已产
+  （logs/t126_fullft_650m.log + evidence/t126_fullft.json），650M 档
+  待 GPU 空闲自动启动（attempt 1 OOM 后 30min 重试节奏，96h deadline）。
+  本轮不干预 3 个在训 run：300M s17（GPU0）/ 300M b59（GPU3）/
+  30M rw1（GPU3）。
