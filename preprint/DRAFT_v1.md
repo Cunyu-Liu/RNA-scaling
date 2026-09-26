@@ -267,19 +267,36 @@ monotone decay with scale. High-decoupling families
 (structure-conserved, sequence-divergent) peak earlier, but the
 effect dilutes as capacity parks family statistics in mid-early
 layers — mechanistically tied to the layer-endpoint reversal (4.1).
-**Causal account (measured 09-26, six scales).** The reversal is not
+**Hypothesis M (post-hoc, grade-B evidence).** The reversal is not
 deep-layer degradation: the 650M late band holds F1 0.348 vs best 0.3632.
-Three converging causes: (a) the marginal non-rRNA gain of depth,
-(late−mid)/mid, decays with scale (+18% at 30M → +3% at 300M → +2% at
-650M) — family features are already extracted by mid layers; (b) the
-rRNA channel (56% of corpus) is decodable at ~0.97 F1 at every depth,
-so larger models fill deep capacity with corpus-majority tasks earlier
-(L8); (c) the random-mixing floor rises with depth (randinit non-rRNA
-floor 0.023 early → 0.049 late; mommatch 0.029 → 0.062) — deeper stacks
-mix more random channels, lowering deep-layer SNR. Net: the best-SNR
-layer migrates forward as capacity grows (0.957 at 300M → 0.296 at
-650M) — a corpus-supply-limited capacity reallocation, not a depth
-pathology.
+We propose a three-chain account, stated explicitly as a hypothesis
+(unlike H1–H8, which were pre-registered): (a) the marginal non-rRNA
+gain of depth, (late−mid)/mid, decays with scale (+18% at 30M → +3% at
+300M → +2% at 650M) — family features are already extracted by mid
+layers; (b) the rRNA channel (56% of corpus) is decodable at ~0.97 F1
+at every depth, so larger models fill deep capacity with corpus-
+majority tasks earlier (L8); (c) the random-mixing floor rises with
+depth (randinit non-rRNA floor 0.023 early → 0.049 late; mommatch
+0.029 → 0.062) — deeper stacks mix more random channels, lowering
+deep-layer SNR. Net: the best-SNR layer migrates forward as capacity
+grows (0.957 at 300M → 0.296 at 650M) — a corpus-supply-limited
+capacity reallocation, not a depth pathology.
+
+Falsifiable predictions (discriminating experiments): **P1 (CONFIRMED,
+09-27)** de-rRNA stratified probe (18 classes, rRNA excluded from
+train/eval): 100M best L16 (rel 0.73) / 300M L18 (0.78) / 650M L27
+(rel 1.00, F1 0.4585 — monotone above 300M 0.4026 and 100M 0.3192).
+With the rRNA class removed, the 650M reversal disappears entirely and
+the best layer returns to the deepest position — chain (b) is
+intervention-grade confirmed (B → A−), and family features are intact
+in deep layers (0.4585 is the highest de-rRNA F1 at any scale). **P2** 650M@5.9B (3× corpus, training) — the
+marginal depth gain should partially recover; if (late−mid)/mid stays
+≤2%, chain (a) is weakened. **P3** structure-pairing probes at
+300M/650M — best layer should not migrate deep with scale (structure
+never depends on pretraining corpus mix); a deep migration refutes
+hypothesis M. **P4** quantitative: the best-layer position at a new
+scale should be computable from the measured (a)–(c) quantities; a
+direction or position failure forces revision.
 
 ### 4.7 Protocol × split × scale: the leakage attribution triangle
 
