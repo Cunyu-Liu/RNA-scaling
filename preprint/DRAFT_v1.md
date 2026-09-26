@@ -216,8 +216,8 @@ non-monotone at six scales.
 ### 4.2 The gain is not initialization or weight statistics
 
 Random-init and moment-matched controls (deterministic protocol,
-four scales): trained − randinit = +0.059/+0.043/+0.122/+0.169;
-trained − moment-matched = +0.029/+0.048/+0.123/+0.167. Moment-matched
+six scales): trained − randinit = +0.059/+0.043/+0.122/+0.169/+0.133(300M)/+0.151(650M);
+trained − moment-matched = +0.029/+0.048/+0.123/+0.167/+0.146(300M)/+0.147(650M). Moment-matched
 ≈ random-init at every scale: weight statistics explain none of the
 transfer gain; the learned weight structure is real and grows with
 scale. (H2, H3 excluded.)
@@ -267,11 +267,24 @@ monotone decay with scale. High-decoupling families
 (structure-conserved, sequence-divergent) peak earlier, but the
 effect dilutes as capacity parks family statistics in mid-early
 layers — mechanistically tied to the layer-endpoint reversal (4.1).
+**Causal account (measured 09-26, six scales).** The reversal is not
+deep-layer degradation: the 650M late band holds F1 0.348 vs best 0.3632.
+Three converging causes: (a) the marginal non-rRNA gain of depth,
+(late−mid)/mid, decays with scale (+18% at 30M → +3% at 300M → +2% at
+650M) — family features are already extracted by mid layers; (b) the
+rRNA channel (56% of corpus) is decodable at ~0.97 F1 at every depth,
+so larger models fill deep capacity with corpus-majority tasks earlier
+(L8); (c) the random-mixing floor rises with depth (randinit non-rRNA
+floor 0.023 early → 0.049 late; mommatch 0.029 → 0.062) — deeper stacks
+mix more random channels, lowering deep-layer SNR. Net: the best-SNR
+layer migrates forward as capacity grows (0.957 at 300M → 0.296 at
+650M) — a corpus-supply-limited capacity reallocation, not a depth
+pathology.
 
 ### 4.7 Protocol × split × scale: the leakage attribution triangle
 
 Δ(random − family) under balanced probes grows with scale and
-saturates: +0.055 (1M) → +0.337 (10M) → +0.438 (30M) → +0.434 (100M);
+saturates and closes at six scales: +0.055 (1M) → +0.337 (10M) → +0.438 (30M) → +0.434 (100M) → +0.416 (300M) → +0.436 (650M); a strict post-30M plateau (random-split 650M 0.625 vs 30M 0.605, within +2pp);
 mean-pool probes mask it (Δ≈0). Classical baselines reproduce the gap
 from the composition side: k-mer logistic Δ = +0.355; one-hot CNN
 random-split 0.534±0.021 (3 seeds) vs family 0.159. Under family
@@ -321,8 +334,11 @@ stratification preserves all layer shapes. (Fig: corpus vs params.)
 ### 4.11 Length and data regimes
 
 Short sequences (16–127nt) collapse at all scales (0.02–0.06); 512+
-bin scale-differentiates (30M/100M ≈0.11 vs 1M/10M ≈0.05) — scale
-gains concentrate on long sequences. In the low-data regime
+bin scale-differentiates (30M 0.116 / 100M 0.106 / 300M 0.123 / 650M
+0.169 vs 1M/10M ≈0.05) — the long-sequence bin is the only one where
+650M extends beyond the 30M plateau, consistent with the capacity-
+redistribution account of the layer reversal; scale gains concentrate
+on long sequences. In the low-data regime
 (10²/10³/10⁴ family-split samples), linear-probe curves are flat
 (<5pp per 100× samples) at all scales, while full fine-tuning
 rises: at 10² samples full-FT reaches 0.059/0.064/0.095
