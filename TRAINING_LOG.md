@@ -2435,3 +2435,11 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - DRAFT_v1.md 五处数字同步：4.1 六档表+内插+终点逆转 / 4.5 语料
   收口（rw1 0.2408）/ 4.6 S12 六档衰减 / 4.8 时间轴 v2 容量门槛；
   程序化核对五项全过
+
+## Day 17 补六（2026-09-26 17:10）——C7 纪律审计通过（T4.2.5 前置门）
+- c7_audit.py 上线：程序化核对预印本全部图表 ↔ SPEC S-step 映射
+  ——10 图 + 5 表全部有映射行，**零表外实验**（C7 verdict: PASS）
+- 图表↔步骤映射入 evidence/c7_figure_audit.json（含 referenced_in
+  计数与文件存在性双查）
+- arXiv 前核查清单剩：[id-verify] 引用 30 条 DOI 终验 + D1-D11
+  全文最后一遍
