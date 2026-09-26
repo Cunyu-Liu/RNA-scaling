@@ -26,7 +26,9 @@ OUT_MD = "/mnt/cunyuliu/rna-sc/evidence/s4_randinit_table.md"
 TRAINED = {"1M": "RNA-Sc-1M_s17",
            "10M": "RNA-Sc-10M_s17",
            "30M": "RNA-Sc-30M_s17",
-           "100M": "RNA-Sc-100M_s17"}
+           "100M": "RNA-Sc-100M_s17",
+           "300M": "RNA-Sc-300M_s17",
+           "650M": "RNA-Sc-650M_s17"}
 
 
 def official_best(run_name: str) -> dict | None:

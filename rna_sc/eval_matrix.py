@@ -44,7 +44,7 @@ RESULTS = "/mnt/cunyuliu/rna-sc/eval/eval_matrix_results.jsonl"
 RUNS = "/mnt/cunyuliu/rna-sc/runs"
 
 MODELS_V1 = ["RNA-Sc-1M_s17", "RNA-Sc-10M_s17", "RNA-Sc-30M_s17",
-             "RNA-Sc-100M_s17"]
+             "RNA-Sc-100M_s17", "RNA-Sc-300M_s17", "RNA-Sc-650M_s17"]
 PROTOCOLS_V1 = ["probe-balanced", "probe-meanpool"]
 SPLITS_V1 = ["family", "random"]
 TASK_V1 = "rna_type"

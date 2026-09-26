@@ -171,21 +171,6 @@
       （status=DONE, final_nt=2000003270）/probe 28/28 层三口径
       复核一致——收口完好，无待办。
 
-      09-25 23:1x 第 14 次幂等复跑（用户指令会话，Day 15 补四落款）md5
-      仍不变（08f2542b...），DONE 帧（log line 1111）/manifest
-      （status=DONE, final_nt=2000003270）/probe 28/28 层三口径
-      复核一致——收口完好，无待办。
-
-      09-26 18:1x 第 15 次幂等复跑（用户指令会话，Day 17 补七落款）md5
-      仍不变（08f2542b...），DONE 帧（log line 1111）/manifest
-      （status=DONE, final_nt=2000003270）/probe 28/28 层三口径
-      复核一致——收口完好，无待办。
-
-      09-26 20:1x 第 16 次幂等复跑（用户指令会话，Day 17 补八落款）md5
-      仍不变（08f2542b...），DONE 帧（log line 1111）/manifest
-      （status=DONE, final_nt=2000003270）/probe 28/28 层三口径
-      复核一致——收口完好，无待办。
-
 ### T2.2 对照实验（S4/S5/S6）
 - [x] S4 随机初始化对照（10M 档 probe：0.131 vs 0.214）
 - [ ] T2.2.1 S4 扩面：四档全做 randinit probe + 三协议版

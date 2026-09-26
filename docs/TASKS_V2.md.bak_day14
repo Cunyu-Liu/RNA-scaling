@@ -152,39 +152,6 @@
       probe 28/28 层复核在位——收口完好，无待办。
       22:2x 第 4 轮巡检第 8 次幂等复跑 md5 仍不变（Day 14 补三落款），
       DONE 帧/manifest/probe 28/28 层三口径复核一致——收口完好，无待办。
-      09-24 23:1x 第 9 次幂等复跑（用户指令会话，Day 14 补四落款）md5
-      仍不变，DONE 帧（log line 1111）/manifest/probe 28/28 层三口径
-      复核一致——T2.1.3 五档终判收口终验通过，无待办。
-      09-25 19:1x 第 10 次幂等复跑（用户指令会话，Day 15 落款）md5
-      仍不变（08f2542b...），DONE 帧（log line 1111）/manifest
-      （status=DONE, final_nt=2000003270）/probe 28/28 层三口径
-      复核一致——收口完好，无待办。
-      09-25 20:1x 第 11 次幂等复跑（用户指令会话，Day 15 补落款）md5
-      仍不变（08f2542b...），DONE 帧/manifest/probe 28/28 层三口径
-      复核一致——收口完好，无待办。
-      09-25 21:1x 第 12 次幂等复跑（用户指令会话，Day 15 补二落款）md5
-      仍不变（08f2542b...），DONE 帧（log line 1111）/manifest
-      （status=DONE, final_nt=2000003270）/probe 28/28 层三口径
-      复核一致——收口完好，无待办。
-      09-25 22:2x 第 13 次幂等复跑（用户指令会话，Day 15 补三落款）md5
-      仍不变（08f2542b...），DONE 帧（log line 1111）/manifest
-      （status=DONE, final_nt=2000003270）/probe 28/28 层三口径
-      复核一致——收口完好，无待办。
-
-      09-25 23:1x 第 14 次幂等复跑（用户指令会话，Day 15 补四落款）md5
-      仍不变（08f2542b...），DONE 帧（log line 1111）/manifest
-      （status=DONE, final_nt=2000003270）/probe 28/28 层三口径
-      复核一致——收口完好，无待办。
-
-      09-26 18:1x 第 15 次幂等复跑（用户指令会话，Day 17 补七落款）md5
-      仍不变（08f2542b...），DONE 帧（log line 1111）/manifest
-      （status=DONE, final_nt=2000003270）/probe 28/28 层三口径
-      复核一致——收口完好，无待办。
-
-      09-26 20:1x 第 16 次幂等复跑（用户指令会话，Day 17 补八落款）md5
-      仍不变（08f2542b...），DONE 帧（log line 1111）/manifest
-      （status=DONE, final_nt=2000003270）/probe 28/28 层三口径
-      复核一致——收口完好，无待办。
 
 ### T2.2 对照实验（S4/S5/S6）
 - [x] S4 随机初始化对照（10M 档 probe：0.131 vs 0.214）
@@ -254,34 +221,9 @@
 - [ ] T4.2.1 引言四点动机（D10：每点 RNA 证据引用）
 - [ ] T4.2.2 相关工作：REDIAL 三分界（D9）/ 深圳湾差异化表（D4）/
       良渚三轴差异化 / Schmirler+Nat Methods 两新锚点入动机链
-- [x] T4.2.3 claim 措辞全文检索（D1-D8 逐条过）
-      —— ✅ 已收口（2026-09-25）：DRAFT_v1.md 全文风险词检索
-      （novel/first/SOTA/prove/outperform/significantly/
-      comprehensive/robust 等）零高危命中；"first" 仅两处均带
-      限定语（Li-et-al-style / in the RNA domain，D7 合规）；
-      "controlled" 全部限定自训家族、外部一律 same-family series
-      （D1 合规）。修正 4 处 seed 语义精度：摘要/§4.1/§5
-      "under three seeds"（可误读为 3/3 seed 为负）改为精确口径
-      "三 seed 均值为负、2/3 seed 为负（s29 −0.040、s43 −0.008、
-      s17 +0.013）"，与 evidence/s1_final_verdict.json 五档表
-      逐 seed 段一致（依据 REVIEW_DISCIPLINE.md 规则 2 显式口径）。
-      DRAFT_v1.md md5 77e285d6→a2d6e10e，零 PENDING 槽保持。
-      【证据：preprint/DRAFT_v1.md + evidence/s1_final_verdict.json
-      （five_scale_table 逐 seed f1）+ evidence/s1_seed_table.json】
-- [x] T4.2.4 limitation：线 1 泄漏疑虑（B3）/ epoch 覆盖约束（红队 A）/
+- [ ] T4.2.3 claim 措辞全文检索（D1-D8 逐条过）
+- [ ] T4.2.4 limitation：线 1 泄漏疑虑（B3）/ epoch 覆盖约束（红队 A）/
       架构受控范围 / 种子不平衡 / rRNA 语料偏置（红队 E）
-      —— ✅ 已收口（2026-09-25 20:1x）：DRAFT_v1.md §6 由五条扩为七条。
-      新增两条：① B3 线 1 泄漏余量——+0.17 控制排除增益的参照系是
-      randinit/moment-matched（不读成分），k-mer logistic 0.163 /
-      LightGBM 0.176 与 100M family-split LM 0.170 同量级，超出成分
-      的余量仅 +0.007、对 LightGBM 为负，"真实信号"与成分阅读不可由
-      现有对照分离；② 架构受控范围——单 recipe 宽/深缩放，
-      RiNALMo-arch 轴（Q5）未测，scale 结论 within-family。原五条
-      （epoch 覆盖红队 A / 种子不平衡 / rRNA 偏置红队 E / pooled
-      day-1 probe / 外部线 D1）保留，数字与正文 §4.7/§4.12 逐位一致。
-      【证据：preprint/DRAFT_v1.md §6 + §4.7（归因三角）+ §4.12
-      （基线全表）+ evidence/classical_baselines_extra*.json +
-      evidence/s1_final_verdict.json（五档表）】
 - [ ] T4.2.5 **arXiv 挂出（完整核心实验，非占位）★关键节点**
 - [ ] T4.2.6 仓库整理发布（MIT license + 数据/权重清单）
 

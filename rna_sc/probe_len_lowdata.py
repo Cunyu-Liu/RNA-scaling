@@ -38,6 +38,8 @@ RUNS = {
     "10M": ("/mnt/cunyuliu/rna-sc/runs/RNA-Sc-10M_s17", 1),
     "30M": ("/mnt/cunyuliu/rna-sc/runs/RNA-Sc-30M_s17", 7),
     "100M": ("/mnt/cunyuliu/rna-sc/runs/RNA-Sc-100M_s17", 21),
+    "300M": ("/mnt/cunyuliu/rna-sc/runs/RNA-Sc-300M_s17", 22),
+    "650M": ("/mnt/cunyuliu/rna-sc/runs/RNA-Sc-650M_s17", 8),
 }
 OUT_LEN = "/mnt/cunyuliu/rna-sc/evidence/t133_lengthbin.json"
 OUT_LOW = "/mnt/cunyuliu/rna-sc/evidence/t126_lowdata.json"
