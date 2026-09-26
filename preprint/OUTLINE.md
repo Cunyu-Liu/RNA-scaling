@@ -174,6 +174,12 @@ benchmarks.
   transfer F1 peaks at 0.5B (0.244); RNS declines after 1.0B —
   representation organization degrades LATER than transfer attrition
   [evidence/s14_timeaxis.json]
+- **Time axis v2 (2026-09-26): capacity gates the RNS peak** — 300M
+  (0.1201→0.0814) and 650M (0.1373→0.0662) decline MONOTONICALLY
+  through training (no mid-training peak): the 10M peak-then-drop is
+  a small-capacity phenomenon, structurally parallel to the F1
+  attrition valley (S6) — the capacity gate is the common root of
+  both [evidence/s14_timeaxis_v2.json]
 
 ### 4.9 S13b structure-version bell curve (H7 main test, 2026-09-20)
 - PRE-REGISTERED NEGATIVE RESULT: NOT-BELL (E13b-b path) — quadratic
