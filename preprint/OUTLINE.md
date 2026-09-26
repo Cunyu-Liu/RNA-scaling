@@ -110,6 +110,16 @@ benchmarks.
 - Composition shift: prefix arms keep full-56.4% rRNA; cs arms 59-61.5%
   [evidence/corpus_diversity.md]
 - Vendi: full 9.53 > c10M 9.47 ≈ c5Mcs 9.48 > c1M 9.19 > c1Mcs 8.96
+- **S3 reweighting arm closeout (2026-09-26, T2.3.3)**: 30M-rw1
+  (alpha=1.0 cluster-flattened, 57.7M effective rows) best F1 0.2408
+  < full 0.2651 — family-flattening HURTS family-level transfer.
+  H5 dual-axis verdict: quantity axis favors smaller corpus (c1M
+  0.316); diversity axis favors raw composition — at the 2.0B-nt
+  budget the corpus axis is governed by effective repetition of
+  high-signal families, not coverage diversity. Cross-domain
+  replication of DenAdel (Nat Methods 2026) single-cell negative
+  result; mechanism candidates in evidence/s3_rw1_closeout.json
+  [evidence/s3_rw1_closeout.json]
 ### 4.5 S12 decoupling (30M-c1Mcs, n=10 fams)
 - Spearman(DI, best-layer), inc12 FINAL: 30M-c1Mcs -0.478 /
   100M -0.384 / 30M-s29 -0.370 (n=10 types; high-DI families peak
