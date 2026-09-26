@@ -120,11 +120,14 @@ benchmarks.
   replication of DenAdel (Nat Methods 2026) single-cell negative
   result; mechanism candidates in evidence/s3_rw1_closeout.json
   [evidence/s3_rw1_closeout.json]
-### 4.5 S12 decoupling (30M-c1Mcs, n=10 fams)
+### 4.5 S12 decoupling (six-scale linkage complete, 2026-09-26)
 - Spearman(DI, best-layer), inc12 FINAL: 30M-c1Mcs -0.478 /
-  100M -0.384 / 30M-s29 -0.370 (n=10 types; high-DI families peak
-  EARLIER; association weakens with scale)
-  [evidence/s12_linkage_30M_s17_c1Mcs.json, s12_linkage_100M_s17.json]
+  100M -0.384 / **300M -0.339 / 650M -0.222** (n=10 types; high-DI
+  families peak EARLIER; association DECAYS monotonically with scale)
+  [evidence/s12_linkage_{30M_s17_c1Mcs,100M_s17,RNA-Sc-300M_s17,RNA-Sc-650M_s17}.json]
+- Mechanistic tie to the layer-endpoint reversal (4.1): capacity-
+  sufficient models park family-level statistics in mid-early layers
+  while deep layers specialize (rRNA channel) — DI differences dilute
 ### 4.6 S5 moment-matched control (FINAL, inc12)
 - Trained-mommatch: 1M +0.0286 / 10M +0.0478 / 30M +0.1233 /
   100M +0.1668; mommatch ~ randinit level (0.12-0.16) — weight
