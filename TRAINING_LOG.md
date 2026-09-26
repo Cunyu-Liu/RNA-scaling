@@ -2375,3 +2375,19 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
     D3 纪律合规）
 - 3×2 析因进度：300M@2B 98%（1.96B/2.0B，~2h DONE）；b59 26%
   （1.52B/5.9B）；Claim-14 判据等两臂齐
+
+- [auto] rnasc_300M_s17 complete: nt=2.00B best_val=0.7801 fallback=0; final probe+linkage+s1_summary done
+
+## Day 17 补（2026-09-26 15:58）——300M@2B 锚点档收口（T1.0.3 臂①落勾）
+- 300M@2B DONE（nt=2.0B，best_val 0.7801，fallback=0，5947 nt/s）；
+  watch_all 自动全 24 层 probe：**best L22 F1 = 0.3445（rel 0.957）**
+- **六档内插表（evidence/t103_300m2b_closeout.json）**：
+  1M 0.1650 / 10M 0.1535 / 30M 0.2651 / 100M 0.3394 / 300M 0.3445 /
+  650M 0.3632——**100M→300M 仅 +0.5pp（近平台确认）；300M→650M
+  +1.9pp**——iso-token 2B 线上段饱和在 300M 内已现
+- **层迁移终点逆转在六档确认**：rel 0.471→0.141→0.788→0.864→
+  0.957（300M 顶点）→0.296（650M 逆转）——非单调终点结构定型
+- Claim-14 中期判读：300M@2B 0.3445 近平台——**边界判据转交
+  300M@5.9B 臂（b59，26% 在训）**：若 5.9B 增益不显著 → 语料最优
+  边界 ≈300M 成立（Claim-14 可写）
+- 3×2 析因进度：2B 列全齐（1M-650M 六点）；5.9B 列 b59 在训
