@@ -111,6 +111,32 @@ family) via zero-supervision RNS;
 (e) external replication: corpus composition dominates parameter count
 for family-level transfer.
 
+
+### Narrative spine (how the eight hypotheses form one story)
+
+The paper is organized as a five-act funnel, each act removing one class
+of explanations until a single mechanism remains. **Act I — pose the
+question (H1):** a controlled six-scale ladder measures what scale
+actually buys; transfer grows non-monotonically to saturation (slope
+0.0293 < ε at 650M), so the question shifts from "how much" to "what is
+the carrier of the gain". **Act II — exclude the trivial (H2/H3):**
+random-init and moment-matched interventions show the carrier is the
+learned weight structure, not architecture or weight statistics. **Act
+III — locate the structure (H4/H6):** layer-wise probes show where that
+structure lives (layer migration endpoints; decoupled families lean
+early). **Act IV — separate real from apparent (leakage triangle +
+H8):** the Δ-law shows random-split gains are composition-level
+leakage with a 30M ceiling, while family-level transfer is the real
+signal; RNS shows representation quality saturates before downstream
+F1. **Act V — manipulate the corpus (H5 + hypothesis M + P1):** the
+corpus axes (quantity, diversity) and the de-rRNA intervention close
+the loop — deep-layer capacity is allocated to the corpus-majority
+(rRNA) channel as scale grows, which relocates the best probe layer
+forward; removing the channel (P1) eliminates the reversal. One
+sentence: *RNA-LM scaling is a corpus story, not a parameter story —
+within the corpus boundary, scale buys depth; beyond it, scale buys
+specialization (rRNA) and artifact (leakage).*
+
 ## 2. Related work
 
 **Protein-domain mechanistic studies (our template).** Rives et al.
@@ -197,7 +223,7 @@ E).
 
 ## 4. Results
 
-### 4.1 Transfer grows with scale — except a systematic 10M valley
+### 4.1 Transfer grows with scale 【Act I · H1】 — except a systematic 10M valley
 
 Six-scale family-split probe F1 (300M anchor tier added 2026-09-26):
 1M 0.1650±0.0131, 10M 0.1535±0.0173, 30M 0.2651±0.0162,
@@ -213,7 +239,7 @@ anchor closes the interpolation: 100M→300M only +0.5pp
 reverses (rel 0.864@100M → 0.957@300M peak → 0.296@650M) —
 non-monotone at six scales.
 
-### 4.2 The gain is not initialization or weight statistics
+### 4.2 The gain is not initialization 【Act II · H2/H3】 or weight statistics
 
 Random-init and moment-matched controls (deterministic protocol,
 six scales): trained − randinit = +0.059/+0.043/+0.122/+0.169/+0.133(300M)/+0.151(650M);
@@ -222,7 +248,7 @@ trained − moment-matched = +0.029/+0.048/+0.123/+0.167/+0.146(300M)/+0.147(650
 transfer gain; the learned weight structure is real and grows with
 scale. (H2, H3 excluded.)
 
-### 4.3 Pretraining-time attrition: a duration-specific valley
+### 4.3 Pretraining-time attrition 【Act III · H4 timeline】: a duration-specific valley
 
 Probe trajectories across 37 checkpoints: at 10M, family-discrimination
 F1 peaks mid-training (0.2549 at 0.5B nt) and decays to a 0.173 plateau;
@@ -234,7 +260,7 @@ peaks. **Attrition is task-specific**: the structure probe shows no 10M
 collapse (paired-position F1 0.553/0.568/0.576/0.589 across scales) —
 erosion targets family-discrimination features, not structure features.
 
-### 4.4 Structure probing: architecture prior, not pretraining
+### 4.4 Structure probing 【Act III · H4】: architecture prior, not pretraining
 
 Structure-probe randinit controls: |trained − randinit| ≤ 0.016 at all
 four scales (10M: 0.5678 vs 0.5663). Paired-position linearity comes
@@ -245,7 +271,7 @@ high-DI families, S13b not-bell, S14 decoupling): at 2.0B nt, RNA MLM
 pretraining transfers family-level sequence statistics; structure
 information is largely not yet learned.
 
-### 4.5 Corpus axis: capacity gates mid-size corpora
+### 4.5 Corpus axis 【Act V · H5】: capacity gates mid-size corpora
 
 10M: U-shape (c1Mcs 0.186 > full 0.173 > c5Mcs 0.152). 30M: monotone
 (c1M 0.316 global best). Small-corpus multi-epoch wins at both scales;
@@ -259,7 +285,7 @@ the corpus axis is governed by effective repetition of high-signal
 families, not coverage diversity (DenAdel single-cell negative result
 replicates cross-domain).
 
-### 4.6 Decoupling families peak in early layers
+### 4.6 Decoupling families 【Act III · H6】 peak in early layers
 
 Spearman(family decoupling index, best-layer), six scales complete:
 −0.478 (30M-c1Mcs) → −0.384 (100M) → −0.339 (300M) → −0.222 (650M) —
@@ -291,14 +317,25 @@ the best layer returns to the deepest position — chain (b) is
 intervention-grade confirmed (B → A−), and family features are intact
 in deep layers (0.4585 is the highest de-rRNA F1 at any scale). **P2** 650M@5.9B (3× corpus, training) — the
 marginal depth gain should partially recover; if (late−mid)/mid stays
-≤2%, chain (a) is weakened. **P3** structure-pairing probes at
-300M/650M — best layer should not migrate deep with scale (structure
-never depends on pretraining corpus mix); a deep migration refutes
-hypothesis M. **P4** quantitative: the best-layer position at a new
-scale should be computable from the measured (a)–(c) quantities; a
-direction or position failure forces revision.
+≤2%, chain (a) is weakened. **P3 (650M done, 300M rerunning)** structure-pairing
+probes — best-layer trajectory across scales 0.765 (1M) / 0.316 (10M) /
+0.273 (30M) / 1.000 (100M) / 0.556 (650M, L15, F1 0.597): no monotone
+deep migration, and structure F1 grows only +6.8pp over 650x scale —
+consistent with P3 (structure tasks do not participate in the
+corpus-occupancy mechanism); the 100M endpoint is a non-monotone
+outlier, not a trend. **P4 (TESTED, partially refuted)** quantitative
+leave-one-out extrapolation: a linear map from de-rRNA best-layer
+position to full-class position has LOO error 0.305 (acceptable only
+for 100M-650M: 0.10-0.26); a capacity-shift model fails outright (LOO
+0.745, errors >1.0 at both 10M and 650M). The capacity-to-layer
+mapping is therefore NOT a simple monotone function: the 10M valley
+(attrition regime) and the 650M reversal are regime transitions, not
+points on a line. Honest verdict: hypothesis M survives qualitatively
+(P1 intervention confirms chain b; P3 consistent), but its quantitative
+form is refuted — the corpus-capacity interaction is nonlinear, which
+we report as a boundary of the current account.
 
-### 4.7 Protocol × split × scale: the leakage attribution triangle
+### 4.7 Protocol × split × scale 【Act IV · leakage】: the leakage attribution triangle
 
 Δ(random − family) under balanced probes grows with scale and
 saturates and closes at six scales: +0.055 (1M) → +0.337 (10M) → +0.438 (30M) → +0.434 (100M) → +0.416 (300M) → +0.436 (650M); a strict post-30M plateau (random-split 650M 0.625 vs 30M 0.605, within +2pp);
@@ -315,7 +352,7 @@ lives at sequence-composition level, and pretraining's contribution is
 learning to read it. Under family-level evaluation, "scaling wins"
 shrink toward the composition floor.
 
-### 4.8 Representation quality saturates before downstream F1 (RNS)
+### 4.8 Representation quality saturates 【Act IV · H8】 before downstream F1 (RNS)
 
 RNS@10: 1M 0.172 → 10M 0.104 → 30M 0.078 → 100M 0.077 → 650M
 0.062 (scale-axis endpoints from s14_rns.json, 650M from the
@@ -328,7 +365,7 @@ training (no mid-training peak) — the 10M peak-then-drop is a
 capacity-insufficiency phenomenon, parallel to the F1 attrition
 valley: the capacity gate is the common root of both. (Fig 5c.)
 
-### 4.9 Structure-version confidence curve: pre-registered negative
+### 4.9 Structure-version confidence 【Act III · H7】 curve: pre-registered negative
 
 Family-level NLL vs structure-F1: quadratic peak lies outside the data
 NLL range (peak x=1.745 vs data 1.34–1.38); CI [−0.296, −0.050].
@@ -338,7 +375,7 @@ Hou's protein precondition is unmet here. v2 (with 650M: 36 family
 points, NLL range widened to 1.03-1.37): still NOT-BELL - the
 negative result is robust to the widened confidence coverage.
 
-### 4.10 External replication: corpus composition > parameters
+### 4.10 External replication 【Act V · cross-family】: corpus composition > parameters
 
 Same pooled probe, family split. RiNALMo micro 36M / mega 148M / giga
 650M (ncRNA-focused corpus): 0.2407 (L8) / 0.2532 (L25) / 0.2667 (L27)
@@ -348,7 +385,7 @@ a corpus contrast at smaller parameters gains +11pp. Layer-migration
 holds cross-architecture (best rel 0.73/0.86/0.84). De-rRNA
 stratification preserves all layer shapes. (Fig: corpus vs params.)
 
-### 4.11 Length and data regimes
+### 4.11 Length and data regimes 【Act IV/V · regimes】
 
 Short sequences (16–127nt) collapse at all scales (0.02–0.06); 512+
 bin scale-differentiates (30M 0.116 / 100M 0.106 / 300M 0.123 / 650M
