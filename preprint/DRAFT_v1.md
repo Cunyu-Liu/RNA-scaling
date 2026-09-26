@@ -27,7 +27,7 @@ of masked-language-model encoders (1M–650M parameters, identical recipe,
 2.0B-nt budget, family-level evaluation on a cluster-isolated
 RNAcentral release-22 split) and measure what pretraining actually
 transfers. Transfer grows with scale but non-monotonically: a 10M
-"attrition valley" falls below the 1M baseline under three seeds, driven
+"attrition valley" falls below the 1M baseline in three-seed mean (negative in 2/3 seeds), driven
 by duration-specific erosion of family-discrimination features (mid-
 training peak 0.25 F1 at 0.5B nt decays to 0.17) that spares the
 structure task. Two classical confounds are excluded experimentally:
@@ -199,14 +199,19 @@ E).
 
 ### 4.1 Transfer grows with scale — except a systematic 10M valley
 
-Three-seed family-split probe F1: 1M 0.1650±0.0131, 10M 0.1535±0.0173,
-30M 0.2651±0.0162, 100M 0.3394±0.0147. The 10M mean falls below 1M
-(−0.0115): the 1M→10M segment is negative under three seeds.
+Six-scale family-split probe F1 (300M anchor tier added 2026-09-26):
+1M 0.1650±0.0131, 10M 0.1535±0.0173, 30M 0.2651±0.0162,
+100M 0.3394±0.0147, 300M 0.3445 (single seed), 650M 0.3632. The 10M mean falls below 1M
+(−0.0115): the 1M→10M segment is negative in 2/3 seeds (s29 −0.040, s43 −0.008, s17 +0.013) — mean-level, not per-seed universal.
 Pre-registered slope on the 30M→100M segment: 0.142 F1/decade,
 bootstrap CI [0.104, 0.180], lower bound 3.5×ε — the 650M continuation
 was triggered by rule, not by taste. 650M final: F1 0.3632;
-full five-scale slope 0.0829 F1/decade; the 10M valley persists in
-the 650M era (10M 0.1535 < 1M 0.1650, three seeds).
+full-axis slope 0.0829 F1/decade; the 10M valley persists in
+the 650M era (10M 0.1535 < 1M 0.1650, three-seed means). The 300M
+anchor closes the interpolation: 100M→300M only +0.5pp
+(near-plateau) vs 300M→650M +1.9pp; the layer-migration endpoint
+reverses (rel 0.864@100M → 0.957@300M peak → 0.296@650M) —
+non-monotone at six scales.
 
 ### 4.2 The gain is not initialization or weight statistics
 
@@ -248,15 +253,20 @@ val-loss rank inverts against transfer F1 (MLM loss and transferability
 decouple). Sampling method is not neutral: cluster-stratified sampling
 shifts family composition (rRNA 56.4%→61.5%). Saturation analysis: no
 classic upward saturation point; both scales peak at the smallest
-unique-corpus arm.
+unique-corpus arm. Family-flattening reweighting (alpha=1.0, 57.7M
+effective rows) HURTS family-level transfer: 0.2408 vs 0.2651 raw —
+the corpus axis is governed by effective repetition of high-signal
+families, not coverage diversity (DenAdel single-cell negative result
+replicates cross-domain).
 
 ### 4.6 Decoupling families peak in early layers
 
-Spearman(family decoupling index, best-layer): −0.478 (30M-c1Mcs),
-−0.384 (100M), −0.370 (30M-s29); high-decoupling families
-(structure-conserved, sequence-divergent) peak earlier — consistent
-with early-layer features carrying transferable signal. Association
-weakens with scale as features deepen.
+Spearman(family decoupling index, best-layer), six scales complete:
+−0.478 (30M-c1Mcs) → −0.384 (100M) → −0.339 (300M) → −0.222 (650M) —
+monotone decay with scale. High-decoupling families
+(structure-conserved, sequence-divergent) peak earlier, but the
+effect dilutes as capacity parks family statistics in mid-early
+layers — mechanistically tied to the layer-endpoint reversal (4.1).
 
 ### 4.7 Protocol × split × scale: the leakage attribution triangle
 
@@ -282,9 +292,11 @@ RNS@10: 1M 0.172 → 10M 0.104 → 30M 0.078 → 100M 0.077 → 650M
 one-by-one fp32 re-run s14_rns_650m.json), against randinit
 0.54–0.58. Representation
 organization improves and plateaus at 30M while downstream F1 keeps
-rising 30M→100M. Time axis (10M): RNS peaks at 1.0B nt while transfer
-F1 peaks at 0.5B — organization degrades later than transfer.
-(Fig 5c.)
+rising 30M→100M. Time axis: at 10M RNS peaks at 1.0B while transfer
+F1 peaks at 0.5B; at 300M/650M RNS declines monotonically through
+training (no mid-training peak) — the 10M peak-then-drop is a
+capacity-insufficiency phenomenon, parallel to the F1 attrition
+valley: the capacity gate is the common root of both. (Fig 5c.)
 
 ### 4.9 Structure-version confidence curve: pre-registered negative
 
@@ -341,7 +353,7 @@ class scientific variable, not an implementation detail.
 
 The attrition valley adds a dynamics dimension: capacity gates whether
 mid-training cross-family features survive to the end of training.
-The 10M valley is systematic (3 seeds), duration-driven (subsampled-
+The 10M valley is robust at the three-seed mean level (2/3 seeds negative), duration-driven (subsampled-
 corpus replication), and task-specific (structure probing unaffected) —
 an erosion of family-discrimination features that co-occurs with
 sharpening of the dominant-family channel.
@@ -356,13 +368,25 @@ attention than parameter count.
 
 ## 6. Limitations
 
-- Pooled day-1 probe protocol (upgrade to per-task protocol matrix
-  planned); mean-pool axes are reported as relative conclusions only.
-- Seed imbalance: 3 seeds at 30M/100M, single seed elsewhere; 650M single seed (pre-registered).
-- rRNA 56.4% corpus bias: every headline claim re-verified under
-  de-rRNA stratification (all survive; absolute F1 shrinks ≈25%).
+- Story-1 leakage residue (red-team B3): the control-excluded gain
+  (+0.17 at 100M) is defined against random-init and moment-matched
+  controls, which do not read sequence composition; k-mer logistic
+  (0.163) and LightGBM (0.176) sit within ±0.01 of the 100M
+  family-split LM (0.170), so "real, weight-structured signal" and
+  composition reading are not separable by our controls — the
+  beyond-composition margin is +0.007 (negative vs LightGBM).
+- Architecture scope: the ladder is a single encoder recipe (width/
+  depth scaling only); architecture×scale interactions are untested
+  (RiNALMo-arch axis Q5 remains open), so scale claims are
+  within-family by construction.
 - Corpus-axis epoch-coverage differences are explicit (red-team A);
   saturation comparisons only within matched coverage.
+- Seed imbalance: 3 seeds at 30M/100M, single seed elsewhere; 650M
+  single seed (pre-registered).
+- rRNA 56.4% corpus bias: every headline claim re-verified under
+  de-rRNA stratification (all survive; absolute F1 shrinks ≈25%).
+- Pooled day-1 probe protocol (upgrade to per-task protocol matrix
+  planned); mean-pool axes are reported as relative conclusions only.
 - External line: same-family series, not controlled (D1 discipline).
 
 ## 7. Reproducibility
