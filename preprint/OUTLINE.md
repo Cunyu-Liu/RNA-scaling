@@ -88,6 +88,18 @@ benchmarks.
   mid-early, no L16->L1 downshift): attrition erodes family-
   discrimination features, NOT structure features
   [eval/probe_structure_results.jsonl, evidence/s7_structure_probe.json]
+- **H4 verdict (2026-09-26, upgraded from side-evidence)**: the
+  low-layer/reuse account holds in qualified form — (a) at 10M the
+  ONLY surviving transferable features after attrition are early-layer
+  (best rel 0.05-0.16); (b) at 300M+ family statistics park in
+  mid-early layers (300M rel 0.957 -> 650M rel 0.296 reversal), so
+  the classic "reuse means deep layers" reading fails at both ends;
+  (c) structure probing never depends on pretraining at any scale.
+  H4 reading: transferable features concentrate wherever capacity
+  allows family statistics — early under capacity stress, mid-late at
+  sufficiency, with the S12 DI linkage (sec 4.5) giving the
+  family-level texture. Li et al. early-layer dependence replicates
+  in RNA only in the attrition/insufficiency regimes.
 - **Pretraining gain ~ ZERO on the structure task (CONTROL)**: 10M
   randinit 0.5678 vs trained 0.5663 — paired-position linearity comes
   from the architecture prior (ALiBi positional geometry), not
