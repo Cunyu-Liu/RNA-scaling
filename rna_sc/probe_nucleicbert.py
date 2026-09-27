@@ -46,14 +46,46 @@ PAD, CLS, SEP = 0, 3, 4
 MAXLEN = 1024  # NB_CONFIG max_length
 
 
-def load_model(ckpt=CKPT):
+def load_model(ckpt=CKPT, random_init=None, moment_matched=None):
+    """random_init / moment_matched: H2/H3 decomposition controls (S4/S5
+    protocol parity with rna_sc.probe). random_init replaces all weights
+    with seeded init; moment_matched re-inits then matches per-tensor
+    mean/std to the TRAINED model (captures weight statistics, destroys
+    learned structure)."""
     sys.path.insert(0, REPO)
     from nucleicbert.models.bert import BERT, NB_CONFIG
     model = BERT(**NB_CONFIG)
-    sd = torch.load(ckpt, map_location="cpu")
-    if isinstance(sd, dict) and "state_dict" in sd:
-        sd = sd["state_dict"]
-    model.load_state_dict(sd)
+    if random_init is None and moment_matched is None:
+        sd = torch.load(ckpt, map_location="cpu")
+        if isinstance(sd, dict) and "state_dict" in sd:
+            sd = sd["state_dict"]
+        model.load_state_dict(sd)
+    else:
+        torch.manual_seed(random_init if random_init is not None
+                          else moment_matched)
+        if moment_matched is not None:
+            trained = BERT(**NB_CONFIG)
+            tsd = torch.load(ckpt, map_location="cpu")
+            if isinstance(tsd, dict) and "state_dict" in tsd:
+                tsd = tsd["state_dict"]
+            trained.load_state_dict(tsd)
+            trained_sd = {k: v.clone() for k, v in trained.state_dict().items()
+                          if v.is_floating_point()}
+            with torch.no_grad():
+                new_sd = model.state_dict()
+                n_matched = 0
+                for k, v in new_sd.items():
+                    if not v.is_floating_point() or v.numel() < 2:
+                        continue
+                    t = trained_sd[k]
+                    tm, ts = t.mean(), t.std()
+                    vm, vs = v.mean(), v.std()
+                    if ts > 0 and vs > 0:
+                        v.copy_((v - vm) / vs * ts + tm)
+                        n_matched += 1
+                model.load_state_dict(new_sd)
+                print("moment-matched %d tensors to trained moments"
+                      % n_matched)
     model.eval()
     return model, NB_CONFIG["num_hidden_layers"]
 
@@ -173,11 +205,24 @@ def main() -> int:
     ap.add_argument("--n-train", type=int, default=20000)
     ap.add_argument("--n-eval", type=int, default=4000)
     ap.add_argument("--probe-seed", type=int, default=17)
+    ap.add_argument("--random-init", type=int, default=None,
+                    help="H2 control: seeded random init (S4 parity)")
+    ap.add_argument("--moment-matched", type=int, default=None,
+                    help="H3 control: moment-matched re-init (S5 parity)")
     args = ap.parse_args()
     dev = "cuda:%d" % args.device
     GPUGuard(dev).check()
 
-    model, L = load_model()
+    run_name = RUN_NAME
+    if args.random_init is not None:
+        run_name = "%s_randinit%d" % (RUN_NAME, args.random_init)
+    elif args.moment_matched is not None:
+        run_name = "%s_mommatch%d" % (RUN_NAME, args.moment_matched)
+    print("model mode: random-init=%s moment-matched=%s -> run %s"
+          % (args.random_init, args.moment_matched, run_name))
+
+    model, L = load_model(random_init=args.random_init,
+                          moment_matched=args.moment_matched)
     print("NucleicBERT loaded: %d layers" % L)
 
     X_tr, y_tr = collect_states(model, dev, "family_validation",
@@ -204,7 +249,7 @@ def main() -> int:
         acc, f1, per_class = probe_one_layer(
             Xtr, y_tri, Xev, y_evi, len(classes), dev,
             layer_seed=args.probe_seed + li, class_names=classes)
-        rec = {"run": RUN_NAME, "layer": li,
+        rec = {"run": run_name, "layer": li,
                "rel_depth": round(li / max(1, L - 1), 3),
                "n_layers": L, "acc": round(acc, 4),
                "f1_macro": round(f1, 4), "per_class_f1": per_class,
