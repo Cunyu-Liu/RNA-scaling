@@ -260,7 +260,21 @@ peaks. **Attrition is task-specific**: the structure probe shows no 10M
 collapse (paired-position F1 0.553/0.568/0.576/0.589 across scales) —
 erosion targets family-discrimination features, not structure features.
 
-### 4.4 Structure probing 【Act III · H4】: architecture prior, not pretraining
+### 4.4 Structure probing 【Act III · H4】 — composition-floor correction (09-27)
+
+**Composition-floor audit (user-prompted).** A GC-identity-only rule
+(predict paired iff nucleotide in {G, C}) achieves macro-F1 0.576 on
+the bpRNA test set — G paired-rate 0.486 / C 0.449 vs A 0.258 / U 0.356,
+the Watson-Crick pairing prior. Random-init models score 0.53-0.586 at
+every layer because residual pathways preserve nucleotide identity; the
+composition floor, not structure, dominates this task. The trained gain
+over the floor climbs with scale: 1M -0.047 / 10M -0.010 / 30M -0.000 /
+100M +0.013 / 650M +0.021 — a real but tiny structural increment (2.1pp
+over 650x scale), crossing the floor only at >=100M. The task has the
+same composition shortcut as rna_type leakage (k-mer), and conclusions
+are requalified accordingly: S7 measures "structure beyond composition",
+not raw structure emergence. P3 (no deep migration of the best layer)
+is unaffected: the floor signal is layer-independent.: architecture prior, not pretraining
 
 Structure-probe randinit controls: |trained − randinit| ≤ 0.016 at all
 four scales (10M: 0.5678 vs 0.5663). Paired-position linearity comes
