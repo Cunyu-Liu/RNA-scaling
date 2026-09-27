@@ -150,6 +150,31 @@ def _cycle(handled):
                         timeout=14400)
             except subprocess.TimeoutExpired:
                 print("[watch-all] %s probe TIMEOUT" % rid, flush=True)
+            # H2/H3 auto-controls (inc11): randinit + mommatch for
+            # main family arms, idempotent via jsonl row check
+            base = os.path.basename(run_dir_of(rid))
+            main_arm = re.fullmatch(r"RNA-Sc-(1M|10M|30M|100M|300M|650M)_s17(_b59)?", base)
+            if main_arm:
+                for extra, label in (("--random-init 17", "randinit17"),
+                                     ("--moment-matched 17", "mommatch17")):
+                    clog = os.path.join(LOGS, "probe_%s_%s_auto.log" % (rid, label))
+                    have = any(
+                        ('"%s_%s"' % (base, label)) in line
+                        for line in open(PROBE_OUT))
+                    if have:
+                        print("[watch-all] %s %s already probed, skip" % (rid, label), flush=True)
+                        continue
+                    try:
+                        with open(clog, "w") as lf:
+                            subprocess.run(
+                                [PY, "-m", "rna_sc.probe", "--run-dir",
+                                 run_dir_of(rid)] + extra.split() +
+                                ["--device", str(gpu)],
+                                cwd="/home/cunyuliu/rna-sc", stdout=lf,
+                                stderr=lf, timeout=14400)
+                        print("[watch-all] %s %s control DONE" % (rid, label), flush=True)
+                    except subprocess.TimeoutExpired:
+                        print("[watch-all] %s %s TIMEOUT" % (rid, label), flush=True)
             r = subprocess.run(
                 [PY, "-m", "rna_sc.s12_linkage", "--run",
                  os.path.basename(run_dir_of(rid))],
