@@ -450,6 +450,30 @@ budget allocation (a 300M anchor [in training] near the release-22
 Chinchilla edge is the cost-effective point to test) deserve more
 attention than parameter count.
 
+### 5.1 What causes the three 30M plateaus? (added 09-27)
+
+Three channels plateau together at 30M under the 2.0B-nt budget: the
+leakage dividend (Delta), representation organisation (RNS), and the
+rRNA shuffle separation (P5). We test three candidate causes against
+existing intervention evidence. **Data quantity is excluded**: the S3
+corpus axis shows SMALLER unique corpora beat the full 14.1B-unique
+corpus at both 10M and 30M (c1M 0.316 vs full 0.247 at 30M), and 30M
+sits at 67 tokens/param — 3.3x above the Chinchilla optimum, so tokens
+are not the binding constraint. **A finite task-information channel is
+the leading explanation**: a zero-capacity k-mer baseline already
+reaches 0.518 random-split F1 (86% of the ~0.60 ceiling); twenty-fold
+capacity growth (30M -> 650M) moves neither the Delta plateau
+(0.605 -> 0.625) nor the rRNA separation (+5%) — the channel is capped
+by task structure (19-class family overlap with rRNA at 63.6% of
+corpus), not by model capacity or data volume. **A capacity gate
+complements it**: 30M is the smallest config that absorbs the full
+channel (10M sits below it, producing the attrition valley). The
+decisive intervention is pre-registered: 30M@5.9B (tokens x3, unique
+sequence exposure 0.14 -> 0.42 epoch, queued) — if all three plateaus
+persist unchanged, the data-quantity explanation is finally excluded
+and the finite-channel account closes; if any plateau moves, data
+quantity re-enters.
+
 ## 6. Limitations
 
 - Story-1 leakage residue (red-team B3): the control-excluded gain
