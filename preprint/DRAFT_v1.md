@@ -308,6 +308,20 @@ deep-layer SNR. Net: the best-SNR layer migrates forward as capacity
 grows (0.957 at 300M → 0.296 at 650M) — a corpus-supply-limited
 capacity reallocation, not a depth pathology.
 
+**P5 (TESTED 09-27, zero-supervision shuffle separation).**
+MLM likelihood separation (native minus position-shuffled, nats/token,
+same mask positions, family_test): rRNA 0.47 (1M) -> 1.07 (30M) -> 1.12
+(650M) — a strict post-30M plateau; non-rRNA 0.05 -> 0.31 (monotone);
+randinit control 0.002 (structure required). Verdict: P5a partially
+confirmed — the corpus-majority channel saturates by 30M while
+family-sequence statistics keep deepening, adding a third independent
+30M phenomenon (with the Delta-law plateau and the RNS plateau). P5b
+REFUTED: the rRNA-over-non-rRNA gap NARROWS (0.94 -> 0.81) rather than
+widens — chain (b) must be refined: rRNA-channel occupation completes
+by 30M; the capacity 650M reallocates to deeper layers carries finer
+long-range sequence constraints, not more rRNA statistics. We report
+this boundary honestly.
+
 Falsifiable predictions (discriminating experiments): **P1 (CONFIRMED,
 09-27)** de-rRNA stratified probe (18 classes, rRNA excluded from
 train/eval): 100M best L16 (rel 0.73) / 300M L18 (0.78) / 650M L27
