@@ -260,7 +260,50 @@ peaks. **Attrition is task-specific**: the structure probe shows no 10M
 collapse (paired-position F1 0.553/0.568/0.576/0.589 across scales) —
 erosion targets family-discrimination features, not structure features.
 
-### 4.4 Structure probing 【Act III · H4】 — composition-floor correction (09-27)
+### 4.4 Structure probing 【Act III · H4】 — composition floor, three references, multi-dataset (09-28)
+
+**Protocol corrections (self-audit).** (i) The probe-JSON "f1" column
+is paired-class F1, previously compared against the macro floor —
+metric mismatch; all numbers below are macro-F1. (ii) The 1M
+single-set row used a weak training subset (35k tokens vs 1.0M for
+other scales); under the full protocol the 1M trained gain is +0.007
+(not -0.047). (iii) A first multi-dataset run (v1) was invalidated by
+a label-shuffle bug (seqs/pairs shuffled with different seeds) and is
+excluded.
+
+**Multi-dataset generalization (user-prompted, three test sets).**
+Heads trained once on bpRNA TR0 (8,000 seqs, seed 17), evaluated
+unchanged on bpRNA-TS0, bpRNA-val, and ArchiveII (independent source,
+10 families). References: GC-rule floor; trigram (L-C-R one-hot)
+logistic floor with no model; random-init probed at the trained best
+layer. Floors (GC / trigram): TS0 0.576/0.592, val 0.608/0.616,
+ArchiveII 0.599/0.621. Trained macro-F1:
+
+| scale | TS0 | val | ArchiveII | TS0−trig | val−trig | Arch−trig |
+|---|---|---|---|---|---|---|
+| 1M | 0.592 | 0.610 | 0.625 | +0.001 | −0.006 | +0.004 |
+| 10M | 0.605 | 0.617 | 0.641 | +0.013 | +0.001 | +0.019 |
+| 30M | 0.616 | 0.637 | 0.654 | +0.024 | +0.021 | +0.033 |
+| 100M | 0.608 | 0.627 | 0.653 | +0.017 | +0.011 | +0.032 |
+| 650M | 0.626 | 0.662 | 0.659 | +0.034 | +0.046 | +0.038 |
+
+The pattern replicates on all three sets: (a) 1M sits at the trigram
+floor — linear heads decode local composition only; (b) the increment
+above the trigram floor grows with scale (650M +0.034..+0.046); (c)
+random-init at the same layer sits at the GC floor for 1M (0.572) and
+near the trigram floor for 10M (0.590) — what linear heads read from
+untrained networks is composition; pretraining's contribution at this
+budget is the increment above the trigram ceiling, not the absolute
+score. 30M/100M/650M random-init rows on the three sets are running
+(queued GPU0/6).
+
+Requalified conclusion: S7 measures "structure beyond local
+composition"; the linear-readout structure signal at 2.0B nt exists,
+is scale-dependent (0 at 1M → +0.04 at 650M), and is bounded by the
+trigram-floor gap. P3 (no deep migration) is unaffected: the floor
+signal is layer-independent.
+
+Original audit (superseded numbers, kept for provenance):
 
 **Composition-floor audit (user-prompted).** A GC-identity-only rule
 (predict paired iff nucleotide in {G, C}) achieves macro-F1 0.576 on
