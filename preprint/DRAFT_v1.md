@@ -294,14 +294,32 @@ random-init at the same layer sits at the GC floor for 1M (0.572) and
 near the trigram floor for 10M (0.590) — what linear heads read from
 untrained networks is composition; pretraining's contribution at this
 budget is the increment above the trigram ceiling, not the absolute
-score. 30M/100M/650M random-init rows on the three sets are running
-(queued GPU0/6).
+score. Random-init on the three sets (completed): 30M 0.596/0.611/
+0.623, 100M 0.612/0.630/0.636, and 650M collapses to 0.521/0.542/
+0.521 at layer 15 — a deep-layer readability collapse of the large
+untrained network. Same-layer trained-minus-randinit: 1M/10M/30M
++0.01..+0.03 (stable small increments), 100M ≈ 0 on TS0/val (+0.017
+on ArchiveII only), 650M +0.105/+0.120/+0.138.
+
+Two comparisons, two meanings. (A) Same-layer comparison mixes two
+effects: where the signal is readable and what the network knows.
+(B) Each-at-own-best-layer comparison (single-set full scans): 1M
++0.007, 10M -0.001, 30M -0.003, 100M +0.004 — pretraining does not
+raise the linear-readout ceiling at <=100M; it relocates readable
+signal (trained 100M best at L22 vs randinit best at L14). The
+650M +0.10..+0.14 same-layer excess is dominated by the randinit
+deep-layer collapse; the honest scale-dependent signal is the
+trained-minus-trigram increment (+0.034..+0.046 at 650M), which
+replicates on all three sets.
 
 Requalified conclusion: S7 measures "structure beyond local
-composition"; the linear-readout structure signal at 2.0B nt exists,
-is scale-dependent (0 at 1M → +0.04 at 650M), and is bounded by the
-trigram-floor gap. P3 (no deep migration) is unaffected: the floor
-signal is layer-independent.
+composition". On three test sets the composition ladder (GC rule →
+trigram → model) replicates; the beyond-trigram signal is 0 at 1M,
++0.02..+0.03 at 30M, and +0.03..+0.05 at 650M. Pretraining's role
+below 650M is relocating layer-readability, not raising the linear
+ceiling; only at 650M does a genuine increment above both the
+trigram floor and any randinit layer appear. P3 (no deep migration)
+is unaffected: the floor signal is layer-independent.
 
 Original audit (superseded numbers, kept for provenance):
 
