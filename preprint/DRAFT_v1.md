@@ -395,6 +395,31 @@ under-measure structural knowledge; structure-probing protocols
 should include a remote-interaction (attention) readout head by
 default, ideally with the pairing-symmetry inductive bias.
 
+**Wall diagnosis and the pair-level probe (v3/v4, user-prompted
+"think again").** Three diagnostic arms locate the readout wall
+precisely. (a) Partner-Oracle (hand the head the true partner's
+state): 0.998-0.9996 at all scales — the representation jointly
+encodes pairing at both endpoints. (b) Finetune-top2 (unfreeze last
+two layers end-to-end): 0.626/0.637/0.641 — the SAME ~0.64 wall as
+every readout head, so the wall is not the head or the training
+protocol. (c) Pair-level probe v4 (redefine the task from per-
+position classification to candidate-pair scoring: input (h_i, h_j,
+|i-j|), output paired?, trained on sampled positive/negative pairs):
+pair AUC 0.932 (30M) / 0.938 (100M) — far above the per-position
+wall, though top-L pair retrieval remains weak (P@L 0.04-0.05).
+
+Conclusion: the model's pairing knowledge is stored jointly at pair
+endpoints, not per-position. Any method that must FIND the partner
+(per-position heads, generic interaction heads, even top-2
+fine-tuning) hits ~0.64; a method given the candidate pair decodes
+it at 0.93+ AUC. The missing component for structure prediction
+from general RNA LMs is a pairing SOLVER (a candidate-generation /
+matching module, as in contact-map architectures), not more
+pretraining. This also reframes "structure emergence": at 2.0B nt
+the knowledge exists; what emerges with scale is the front-pass
+co-variation strength (Q10: +0.004 → +0.096), while the readout
+path determines what is measurable.
+
 Original audit (superseded numbers, kept for provenance):
 
 **Composition-floor audit (user-prompted).** A GC-identity-only rule
