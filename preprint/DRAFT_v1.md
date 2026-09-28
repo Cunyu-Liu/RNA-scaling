@@ -328,17 +328,37 @@ two possible readings: (A) pairing information is not learned, or
 a probe-free forward test: mask the paired position j, mutate its
 partner i to each alternative base, and measure the probability shift
 at j toward the NEW complement (COV), with an unpaired-position
-control (CTRL) isolating the composition channel. COV−CTRL per scale
-(n=4,920 mutation events each): 1M +0.0042, 10M +0.0050, 30M
-+0.0112, 100M +0.0203 — monotone with scale, and the old-complement
-probability drops symmetrically (−0.007→−0.025). The pairing signal
-IS learned and grows with scale; the linear probe under-reads it
-because pairing requires aggregating a distant position, which a
-single-layer head cannot do. The probe numbers are therefore a lower
-bound on structural knowledge, and the honest statement is: at 2.0B
-nt the model encodes measurable but weak pairing co-variation
-(+0.02 at 100M in probability units), far below what a dedicated
-structure model transfers, while linear readability of it is ~0.
+control (CTRL) isolating the composition channel. n=4,920 mutation
+events per arm.
+
+| arm | COV−CTRL | old-complement drop |
+|---|---|---|
+| 1M trained | +0.0042 | −0.007 |
+| 10M trained | +0.0050 | −0.007 |
+| 30M trained | +0.0112 | −0.015 |
+| 100M trained | +0.0203 | −0.025 |
+| 650M trained | +0.0957 | −0.102 |
+| 30M randinit | +0.0001 | — |
+| 650M randinit | +0.00004 | — |
+
+Three findings. (i) The co-variation signal is entirely learned: both
+randinit arms are ≈0 (≤0.0001), so the net contribution is the full
+trained value. (ii) It grows monotonically and super-linearly with
+scale — 650M jumps to +0.096, 4.7× the 100M value, with the
+old-complement probability dropping symmetrically (−0.102 ≈ −COV),
+the signature of genuine complement tracking. (iii) The linear probe
+severely under-reads this knowledge: the probe shows +0.03..+0.05
+(650M, three sets) while the forward test shows +0.096, because
+pairing requires aggregating a distant position, which a single
+linear head cannot do. Probe numbers are a lower bound.
+
+Honest restatement of S7: at 2.0B nt, the model DOES encode pairing
+co-variation (probability shifts up to 0.1 at 650M), the knowledge is
+invisible to linear probes at ≤100M, and the 650M scale crosses into
+probe-visible territory (+0.03..+0.05 over the trigram floor,
+replicated on three test sets). "Structure emergence" at our budgets
+is a forward-pass phenomenon before it is a linear-readout
+phenomenon.
 
 Original audit (superseded numbers, kept for provenance):
 
