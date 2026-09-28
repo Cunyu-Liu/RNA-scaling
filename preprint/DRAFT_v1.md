@@ -321,6 +321,25 @@ ceiling; only at 650M does a genuine increment above both the
 trigram floor and any randinit layer appear. P3 (no deep migration)
 is unaffected: the floor signal is layer-independent.
 
+**Co-variation sensitivity test (user-prompted: is the small probe
+increment an artifact?).** The linear-probe increment being tiny has
+two possible readings: (A) pairing information is not learned, or
+(B) it is learned but not linearly readable. We distinguish them with
+a probe-free forward test: mask the paired position j, mutate its
+partner i to each alternative base, and measure the probability shift
+at j toward the NEW complement (COV), with an unpaired-position
+control (CTRL) isolating the composition channel. COV−CTRL per scale
+(n=4,920 mutation events each): 1M +0.0042, 10M +0.0050, 30M
++0.0112, 100M +0.0203 — monotone with scale, and the old-complement
+probability drops symmetrically (−0.007→−0.025). The pairing signal
+IS learned and grows with scale; the linear probe under-reads it
+because pairing requires aggregating a distant position, which a
+single-layer head cannot do. The probe numbers are therefore a lower
+bound on structural knowledge, and the honest statement is: at 2.0B
+nt the model encodes measurable but weak pairing co-variation
+(+0.02 at 100M in probability units), far below what a dedicated
+structure model transfers, while linear readability of it is ~0.
+
 Original audit (superseded numbers, kept for provenance):
 
 **Composition-floor audit (user-prompted).** A GC-identity-only rule
