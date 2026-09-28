@@ -371,22 +371,29 @@ self-attention column over the sequence; attn_symm = attention with
 symmetrized (A+A^T)/2 scores, an inductive bias toward pairing
 symmetry.
 
-| scale | linear | pool16 | attn | attn_symm | randinit (all heads) |
+| scale | linear | pool16 | attn | attn_symm | randinit heads |
 |---|---|---|---|---|---|
 | 30M L3 | 0.612 | **0.641** | 0.630 | 0.629 | 0.590–0.596 |
 | 100M L22 | 0.621 | 0.622 | 0.621 | **0.635** | 0.569–0.594 |
+| 650M L15 | 0.610 | 0.615 | 0.629 | **0.635** | 0.50/0.58–0.59 |
 
-Findings (30M/100M; 650M queued): (i) a window-pooling head lifts 30M
-by +0.029 over linear — 3x the linear increment over the trigram
-floor — and the lift is absent on randinit (+0.001), attributing it
-to pretraining; (ii) at 100M the symmetrized attention head wins
-(+0.014 over linear), consistent with deep-layer representations
-supporting pairwise interaction; (iii) all heads sit at the same
-level on randinit, so the gains are not head capacity. The readout
-channel, not only the representation, gates structure readout: linear
-probes systematically under-measure structural knowledge, and probe
-protocols for structure tasks should include a remote-interaction
-head by default.
+Findings: (i) head type that wins depends on layer depth —
+window-pooling wins at shallow layers (30M L3: +0.029 over linear),
+symmetrized attention wins at deep layers (100M L22 and 650M L15:
++0.014..+0.025); (ii) at 650M the attention head reads +0.043 over
+the trigram floor vs linear's +0.018 — 2.4x the linear increment,
+releasing a substantial fraction of the +0.096 forward-pass
+co-variation signal; (iii) on randinit the attention heads also lift
+a collapsed deep layer (0.50 → 0.59 at 650M L15), i.e. part of the
+attention gain is generic aggregation, but the trained−randinit gap
+at the best head (+0.046) exceeds the linear head's own
+trigram-relative increment — the representation and the readout
+channel co-determine what is measurable; (iv) all heads sit within
+0.007 of each other on randinit at 30M/100M, so gains there are not
+head capacity. Protocol conclusion: linear probes systematically
+under-measure structural knowledge; structure-probing protocols
+should include a remote-interaction (attention) readout head by
+default, ideally with the pairing-symmetry inductive bias.
 
 Original audit (superseded numbers, kept for provenance):
 
