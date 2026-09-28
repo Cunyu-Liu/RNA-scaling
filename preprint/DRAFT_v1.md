@@ -360,6 +360,34 @@ replicated on three test sets). "Structure emergence" at our budgets
 is a forward-pass phenomenon before it is a linear-readout
 phenomenon.
 
+**Remote-context readout heads (user-prompted: replace the linear
+head with one that can aggregate remote context).** If the linear
+ceiling is an aggregation failure, a head with pairwise interaction
+should release the forward-pass knowledge. We swap ONLY the readout
+head (same layer, same TR0 train set, same TS0 eval, same macro-F1,
+same class weighting; head capacity capped, randinit controlled):
+pool16 = symmetric ±16-token mean pooling + MLP; attn = single-head
+self-attention column over the sequence; attn_symm = attention with
+symmetrized (A+A^T)/2 scores, an inductive bias toward pairing
+symmetry.
+
+| scale | linear | pool16 | attn | attn_symm | randinit (all heads) |
+|---|---|---|---|---|---|
+| 30M L3 | 0.612 | **0.641** | 0.630 | 0.629 | 0.590–0.596 |
+| 100M L22 | 0.621 | 0.622 | 0.621 | **0.635** | 0.569–0.594 |
+
+Findings (30M/100M; 650M queued): (i) a window-pooling head lifts 30M
+by +0.029 over linear — 3x the linear increment over the trigram
+floor — and the lift is absent on randinit (+0.001), attributing it
+to pretraining; (ii) at 100M the symmetrized attention head wins
+(+0.014 over linear), consistent with deep-layer representations
+supporting pairwise interaction; (iii) all heads sit at the same
+level on randinit, so the gains are not head capacity. The readout
+channel, not only the representation, gates structure readout: linear
+probes systematically under-measure structural knowledge, and probe
+protocols for structure tasks should include a remote-interaction
+head by default.
+
 Original audit (superseded numbers, kept for provenance):
 
 **Composition-floor audit (user-prompted).** A GC-identity-only rule
