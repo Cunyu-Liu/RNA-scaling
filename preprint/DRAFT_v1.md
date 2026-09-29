@@ -420,6 +420,31 @@ the knowledge exists; what emerges with scale is the front-pass
 co-variation strength (Q10: +0.004 → +0.096), while the readout
 path determines what is measurable.
 
+**Composition-prior correction for the pair-level probe (self-audit,
+same lesson as the GC floor).** The 650M-randinit DP pair-F1 (0.210)
+matching the trained value (0.200) exposed a confound: the pair
+probe's features (|i-j|, position, endpoint states) allow a strong
+distance+composition shortcut. A model-FREE baseline on the same
+protocol (features: log|i-j|, positions, one-hot nucleotide
+identities at both endpoints, complement indicator) reaches pair
+AUC 0.922 — versus 0.932 (30M), 0.938 (100M), 0.952 (650M), 0.881
+(RNA-FM L0, BELOW baseline). Net pretraining contribution above the
+composition+distance prior: +0.010 (30M), +0.016 (100M), +0.030
+(650M), −0.041 (RNA-FM). The parallel with the per-position floor
+is exact: composition ladders dominate both task formulations, and
+the honest structure signal is the increment above the matched
+prior — small, scale-dependent, and largest at 650M, consistent
+with the forward co-variation test (+0.096 at 650M) and invisible
+in a published 96M model. The DP solver result (pair-F1 0.17-0.20)
+is likewise prior-dominated and is NOT claimed as model knowledge;
+we report it as the methodological ceiling of prior-only pairing.
+Revised statement: general RNA LMs at our budgets encode pairing
+knowledge at the pair-endpoint level that is (i) real (+0.03 over
+matched composition prior at 650M), (ii) far from sufficient for
+structure prediction, and (iii) accessible only through matched-
+prior-controlled pair probes or forward co-variation tests, never
+through raw per-position or uncontrolled pair probes.
+
 Original audit (superseded numbers, kept for provenance):
 
 **Composition-floor audit (user-prompted).** A GC-identity-only rule
