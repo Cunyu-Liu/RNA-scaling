@@ -445,6 +445,23 @@ structure prediction, and (iii) accessible only through matched-
 prior-controlled pair probes or forward co-variation tests, never
 through raw per-position or uncontrolled pair probes.
 
+**External-model structure results (user-prompted comparison) and
+the parameter-count relation, stated carefully.** Under the same S7
+protocol: RNA-FM-96M best 0.587 (embedding layer L0; deep layers
+collapse to 0.37), RiNALMo-micro-33M 0.594 (L2), RiNALMo-mega-148M
+0.607 (L14), RiNALMo-micro randinit 0.380 (floor-level). Within the
+RiNALMo family a MILD parameter-count relation exists (micro→mega
++0.013), and the self-trained net increment also grows with scale
+(1M +0.00 → 650M +0.030); both are far smaller than the family-
+classification gains at the same scales (+0.33 at 650M) — structure
+signal grows slowly with parameters and is suppressed by the
+composition floor. Cross-family numbers (RNA-FM vs RiNALMo) are NOT
+comparable on a parameter axis (architecture/corpus/training
+confounded) — the same混杂 criticism we apply to mixed-model
+benchmarks. The 650M forward co-variation (+0.096) remains the only
+scale where the structure signal is simultaneously strong across
+measures; external-model forward co-variation tests are queued.
+
 Original audit (superseded numbers, kept for provenance):
 
 **Composition-floor audit (user-prompted).** A GC-identity-only rule
