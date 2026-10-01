@@ -493,16 +493,60 @@ over 650x scale), crossing the floor only at >=100M. The task has the
 same composition shortcut as rna_type leakage (k-mer), and conclusions
 are requalified accordingly: S7 measures "structure beyond composition",
 not raw structure emergence. P3 (no deep migration of the best layer)
-is unaffected: the floor signal is layer-independent.: architecture prior, not pretraining
+is unaffected: the floor signal is layer-independent.
 
-Structure-probe randinit controls: |trained − randinit| ≤ 0.016 at all
-four scales (10M: 0.5678 vs 0.5663). Paired-position linearity comes
+**Randinit controls (architecture prior, not pretraining).** 
+Structure-probe randinit controls: |trained − randinit| ≤ 0.02 at all
+six scales (10M: 0.5678 vs 0.5663; 300M/650M arms in fig update). Paired-position linearity comes
 from the ALiBi/encoder prior; pretraining contributes ≈0 on this task
 at this budget — the mirror image of the family-discrimination gains
 (+0.04..+0.17). Four-way convergence (S7 zero-gain, S12 early-layer
 high-DI families, S13b not-bell, S14 decoupling): at 2.0B nt, RNA MLM
 pretraining transfers family-level sequence statistics; structure
 information is largely not yet learned.
+
+**S4.4.9 NucleicBERT-style interpretability battery (10-01).** To test
+whether the "information present but not linearly readable" picture
+holds under forward, probe-free evidence — and to benchmark the
+NucleicBERT (Nat MI 2026) claims on our protocol — we ran a three-battery
+zero-supervision suite on NucleicBERT-404M and our RNA-Sc-650M, each with
+a random-init control (bpRNA TS0, n=80, len<=128, seed 17):
+
+(i) **MLI coupling** (paper Fig 5 counterpart): I_j->i = logp(x_i|x\i)
+- logp(x_i|x\i,x\j), paired positions vs distance-matched control
+positions. NucleicBERT: +0.030 vs -0.001, pair-vs-ctrl AUC 0.653;
+NB-randinit: exactly 0.0 (the cleanest negative control we have
+recorded). Our RNA-Sc-650M: +0.158 vs -0.001, AUC 0.743; its randinit
+0.492. Pairwise coupling is REAL, PRESENT IN BOTH CORPORA (ncRNA
+NucleicBERT and our general corpus), and STRONGER in our model —
+while the linear paired-position probe reads out only ~0.59-0.63 in
+both. The readout wall is not a corpus artifact.
+
+(ii) **Attention pair-tracking heads** (paper Fig 4d-f counterpart,
+pretraining-only): per (layer, head), attention mass from paired
+positions to their partner / to random positions. NucleicBERT
+concentrates pair-tracking heads in DEEP layers (L27-H8 ratio 617,
+L24-H28 150; band means early/mid/late = 1.5/1.1/3.3); our
+RNA-Sc-650M concentrates them in EARLY layers (L6-H0 ratio 16,140,
+L5-H1 2,784, L4-H19 460; band means = 104/1.4/1.4). The layer
+placement of pair-tracking heads is ARCHITECTURE-DEPENDENT (learned
+positional encodings vs ALiBi distance bias) — a novel contrast that
+the original paper's fine-tuned analysis does not surface.
+
+(iii) **Saliency at structure boundaries** (paper Fig 4b counterpart):
+under zero-supervision teacher-forced gradients, NucleicBERT shows NO
+boundary elevation (boundary 0.00049 < interior 0.00055) — the paper's
+boundary-peak claim does not replicate without fine-tuning; our 650M
+shows a weak boundary elevation (0.000174 vs 0.000166). We report this
+battery as the weakest of the three.
+
+Verdict: NucleicBERT's own interpretability evidence (saliency,
+attention, MLI) transfers to our protocol partially — its MLI claim
+replicates (and is stronger in our model), its boundary-saliency claim
+does not replicate zero-shot, and its attention analysis gains a new
+architecture contrast. Structure "emergence" in the forward sense
+(coupling) is present at both corpora; the linear-readout wall
+(~0.59-0.64) is the binding constraint.
 
 ### 4.5 Corpus axis 【Act V · H5】: capacity gates mid-size corpora
 
