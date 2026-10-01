@@ -462,6 +462,23 @@ benchmarks. The 650M forward co-variation (+0.096) remains the only
 scale where the structure signal is simultaneously strong across
 measures; external-model forward co-variation tests are queued.
 
+**RiNALMo-giga result and the corpus factor (full scan completed
+10-01).** The complete RiNALMo family under S7: micro(33M) 0.653
+(L11), mega(148M) 0.607 (L14), giga(650M) 0.728 (L32, last layer,
+deep-late surge L27→L32 0.678→0.728); every randinit arm flat at
+0.380 (L0). Two readings. (i) The parameter relation is NON-monotone
+(U-shape): micro > mega, giga recovers only via deep layers. (ii)
+The decisive cross-model cell: RiNALMo-giga (650M) 0.728 vs our
+RNA-Sc-650M 0.6255 at the SAME parameter count — a +0.10 gap whose
+only systematic difference is the pretraining corpus (RiNALMo's
+structured ncRNA/Rfam corpus vs our 2.0B-nt general corpus). Within
+our controlled family the same parameters moved structure F1 by
++0.03; the corpus moved it by +0.10. Combined with micro>mega, this
+suggests CORPUS COMPOSITION dominates PARAMETER COUNT for structure
+readout — a testable prediction for the 5.9B full-data arms (if
+corpus, not scale, is the lever, 650M@5.9B should gain little
+structure, while an Rfam-enriched corpus arm should gain much).
+
 Original audit (superseded numbers, kept for provenance):
 
 **Composition-floor audit (user-prompted).** A GC-identity-only rule
