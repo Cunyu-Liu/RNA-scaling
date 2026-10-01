@@ -547,6 +547,25 @@ does not replicate zero-shot, and its attention analysis gains a new
 architecture contrast. Structure "emergence" in the forward sense
 (coupling) is present at both corpora; the linear-readout wall
 (~0.59-0.64) is the binding constraint.
+**Attribution qualification (corpus vs architecture, 10-02).** The
++0.10 gap at 650M (RiNALMo-giga 0.728 vs ours 0.6255) must NOT be
+read as a pure corpus effect: the two models differ in positional
+encoding (RoPE vs ALiBi), depth/width ratio (33x1280 vs 28x1408),
+training recipes (ZLoss-style ESM-2 recipe vs ours), exposure regime
+(36M ncRNA sequences multi-epoch vs 2.0B-nt single pass), and
+tokenizer. Three observations bound the confound: (i) within the
+RiNALMo family the U-shape and the giga deep-layer surge (L27 0.678
+-> L32 0.728) occur under a FIXED architecture, so corpus/exposure
+remains the dominant within-family variable; (ii) our own battery
+(Q17) shows architecture determines WHERE pair-tracking heads live
+(early under ALiBi, deep under learned-PE) — architecture shapes
+readability, corpus shapes the learned increment; (iii) the
+pre-registered Rfam-enriched corpus arm on OUR architecture is the
+orthogonal test: if it reproduces a large structure gain, the corpus
+factor is confirmed with architecture held fixed. Until then the
+honest statement is: corpus is the leading SUSPECT, not the isolated
+cause.
+
 
 ### 4.5 Corpus axis 【Act V · H5】: capacity gates mid-size corpora
 
