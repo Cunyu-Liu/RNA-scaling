@@ -469,15 +469,20 @@ deep-late surge L27→L32 0.678→0.728); every randinit arm flat at
 0.380 (L0). Two readings. (i) The parameter relation is NON-monotone
 (U-shape): micro > mega, giga recovers only via deep layers. (ii)
 The decisive cross-model cell: RiNALMo-giga (650M) 0.728 vs our
-RNA-Sc-650M 0.6255 at the SAME parameter count — a +0.10 gap whose
-only systematic difference is the pretraining corpus (RiNALMo's
-structured ncRNA/Rfam corpus vs our 2.0B-nt general corpus). Within
+RNA-Sc-650M 0.6255 at the SAME parameter count — a +0.10 gap. The
+pretraining corpus is the most salient difference (RiNALMo's
+structured ncRNA/Rfam corpus vs our 2.0B-nt general corpus), but
+architecture and recipe co-vary (RoPE/33x1280/ESM-2-style multi-epoch
+on 36M sequences vs ALiBi/28x1408/single-pass 2.0B nt), so the gap
+is a JOINT corpus-architecture-recipe effect, with corpus as the
+leading suspect (Q18 qualification; within the RiNALMo family the
+U-shape and giga deep surge occur under fixed architecture). Within
 our controlled family the same parameters moved structure F1 by
-+0.03; the corpus moved it by +0.10. Combined with micro>mega, this
-suggests CORPUS COMPOSITION dominates PARAMETER COUNT for structure
-readout — a testable prediction for the 5.9B full-data arms (if
-corpus, not scale, is the lever, 650M@5.9B should gain little
-structure, while an Rfam-enriched corpus arm should gain much).
++0.03. Testable predictions for the 5.9B full-data arms (if corpus,
+not scale, is the lever, 650M@5.9B should gain little structure,
+while an Rfam-enriched corpus arm on OUR architecture should gain
+much — the orthogonal test that isolates corpus with architecture
+held fixed).
 
 Original audit (superseded numbers, kept for provenance):
 
