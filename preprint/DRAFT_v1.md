@@ -669,16 +669,56 @@ shrink toward the composition floor.
 
 ### 4.8 Representation quality saturates 【Act IV · H8】 before downstream F1 (RNS)
 
-RNS@10: 1M 0.172 → 10M 0.104 → 30M 0.078 → 100M 0.077 → 650M
-0.062 (scale-axis endpoints from s14_rns.json, 650M from the
-one-by-one fp32 re-run s14_rns_650m.json), against randinit
-0.54–0.58. Representation
-organization improves and plateaus at 30M while downstream F1 keeps
-rising 30M→100M. Time axis: at 10M RNS peaks at 1.0B while transfer
-F1 peaks at 0.5B; at 300M/650M RNS declines monotonically through
-training (no mid-training peak) — the 10M peak-then-drop is a
-capacity-insufficiency phenomenon, parallel to the F1 attrition
-valley: the capacity gate is the common root of both. (Fig 5c.)
+RNS@10: 1M 0.172 → 10M 0.104 → 30M 0.078 → 100M 0.077 → 300M 0.067
+→ 650M 0.062 (scale-axis endpoints from s14_rns.json; 300M/650M from
+the one-by-one re-runs s14_rns_{300m,650m}.json), against randinit
+0.54–0.58. Representation organization improves and plateaus at 30M
+while downstream F1 keeps rising 30M→100M. Time axis: at 10M RNS peaks
+at 1.0B while transfer F1 peaks at 0.5B; at 300M/650M RNS declines
+monotonically through training (no mid-training peak) — the 10M
+peak-then-drop is a capacity-insufficiency phenomenon, parallel to the
+F1 attrition valley: the capacity gate is the common root of both.
+(Fig 5c.)
+
+**Protocol note (vs Prabakaran & Bromberg).** We use k ∈ {10, 50, 100}
+(pools of 4,500 random / 1,500 real make k=1000 geometrically
+uninformative) and a single full-pool computation instead of 100
+subsampled repeats; a 10× random-pool regeneration bootstrap gives
+std ≤ 0.005 at every scale (1M 0.2247±0.0049, 30M 0.0934±0.0037,
+100M 0.0949±0.0041) — 26× smaller than the 1M→30M scale gap, so
+single-run conclusions stand (s14_rns_bootstrap.json).
+
+**Cross-model RNS (10-02).** On the same pools, published models
+split sharply: RiNALMo micro/mega/giga reach RNS 0.026/0.017/0.015 —
+below our entire controlled family (≥0.09), consistent with the
+ncRNA-focused corpus advantage (§4.10) — while RNA-FM-96M at 0.693
+is worse than our random-initialized controls (0.54–0.58). Across 8
+models (ours ×4, RiNALMo ×3, RNA-FM), Spearman(RNS@10, random-split
+family F1) = −0.60 (Pearson −0.84; excluding the RNA-FM outlier
+−0.39): at the model level RNS predicts random-split performance in
+the direction reported for proteins (their RNS–TM-score −0.70), but
+at the family level within one model the relation is weak (−0.19)
+and at the sequence level it is axis-dependent (below) — RNS is a
+model-level reliability indicator, not a sequence-level one.
+
+**RNS-binned structure evaluation (axis-dependence).** Binning TS0
+sequences into RNS terciles (same head, same layer): pair-F1
+low/mid/high = 0.4005/0.5011/0.4727 and long-range (≥24) F1 =
+0.5735/0.7430/0.7414 — the high-RNS bin is +18%/+29% vs the low bin,
+the OPPOSITE direction of the protein finding (−40%/−60%). A length
+confound is excluded (Spearman(length, RNS) = +0.19 points the wrong
+way; s14_bin_diag.json). Two candidate mechanisms: (i) the composition
+channel — high-RNS sequences are longer ncRNAs with stronger stem-GC
+statistics, and at 100M the structure readout is composition-dominated
+(§4.4); (ii) in the RNA domain high RNS marks "long and common"
+rather than "difficult". The family axis does NOT invert
+(sRNA/snoRNA: high RNS with probe F1 ≈ 0, the protein direction):
+which covarying axis dominates decides the sign — a methodological
+caution for using RNS as a per-sequence uncertainty proxy.
+Additionally, family-level RNS is uncorrelated with masked-marginal
+NLL (Spearman +0.14, Pearson −0.02): representation geometry,
+likelihood confidence, and downstream utility form a three-way
+decoupling (s14_rns_cov.json).
 
 ### 4.9 Structure-version confidence 【Act III · H7】 curve: pre-registered negative
 
