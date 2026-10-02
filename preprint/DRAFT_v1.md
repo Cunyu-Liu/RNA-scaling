@@ -239,6 +239,22 @@ anchor closes the interpolation: 100M→300M only +0.5pp
 reverses (rel 0.864@100M → 0.957@300M peak → 0.296@650M) —
 non-monotone at six scales.
 
+**Budget axis (3×2 factorial, first point closed 10-03).** 100M
+retrained at 5.9B nt (≈ full corpus + 3 epochs of repetition, same
+recipe/split/protocol; automated closeout chain): final F1 0.2989@L16
+vs 0.3263@L21 at 2.0B — **doubling-to-tripling the budget beyond the
+corpus is a −2.74pp NEGATIVE effect** at 100M. The 2.0B iso-token
+budget sits at or beyond this scale's compute-optimal point on a
+redundant ncRNA corpus (rRNA 63.6%): Muennighoff-style "repetition ≈
+fresh tokens" does not transfer to this regime. The best layer
+migrates down (L21→L16) — overtraining erosion, same family as the
+10M mid-training attrition (§4.3). The randinit control gain is intact
+(+0.141 vs +0.168 at 2B): the deficit lives inside the pretraining
+gain, not the control. Remaining arms (30M/300M/650M @5.9B) are
+training under the same automated chain; the pre-registered Claim-14
+verdict (corpus-optimal scale bound) reads from the completed 3×2
+table.
+
 ### 4.2 The gain is not initialization 【Act II · H2/H3】 or weight statistics
 
 Random-init and moment-matched controls (deterministic protocol,
