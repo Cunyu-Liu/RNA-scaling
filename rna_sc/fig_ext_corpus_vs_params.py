@@ -59,7 +59,8 @@ rnafm_f1, rnafm_L = best_f1("RNA-FM-96M")
 ctrl = json.load(open(os.path.join(MNT, "evidence",
                                    "s1_final_verdict.json")))["five_scale_table"]
 ctrl_pts = [(1e6, ctrl["1M"]["f1_mean"]), (1e7, ctrl["10M"]["f1_mean"]),
-            (3e7, ctrl["30M"]["f1_mean"]), (1e8, ctrl["100M"]["f1_mean"])]
+            (3e7, ctrl["30M"]["f1_mean"]), (1e8, ctrl["100M"]["f1_mean"]),
+            (3e8, 0.3445), (6.5e8, 0.3632)]
 
 fig, axes = plt.subplots(1, 2, figsize=(11, 4.2))
 

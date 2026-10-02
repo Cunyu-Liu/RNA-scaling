@@ -36,7 +36,8 @@ BPRNA = "/mnt/cunyuliu/rna-sc/data/bpRNA_parsed.parquet"
 OUT = "/mnt/cunyuliu/rna-sc/evidence/s13b_bell.json"
 FIG = "/mnt/cunyuliu/rna-sc/figs/fig_s13b_bell"
 RUNS = ["RNA-Sc-1M_s17", "RNA-Sc-10M_s17", "RNA-Sc-30M_s17",
-        "RNA-Sc-100M_s17", "RNA-Sc-10M_s17_randinit17"]
+        "RNA-Sc-100M_s17", "RNA-Sc-300M_s17", "RNA-Sc-650M_s17",
+        "RNA-Sc-10M_s17_randinit17"]
 PAD_ID, MASK_ID, IGNORE = 4, 5, -100
 
 

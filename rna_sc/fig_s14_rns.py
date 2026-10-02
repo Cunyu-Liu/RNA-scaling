@@ -32,7 +32,12 @@ for run, r in res.items():
     size = run.split("-")[-1].split("_")[0]      # 1M/10M/30M/100M
     scale_pts.append((size, r["RNS"]["10"], False))
 scale_pts.append(("650M", d65["RNS"]["10"], True))
-order = ["1M", "10M", "30M", "100M", "650M"]
+try:
+    d300 = json.load(open(os.path.join(MNT, "evidence", "s14_rns_300m.json")))
+    scale_pts.append(("300M", d300["RNS"]["10"], True))
+except Exception:
+    pass
+order = ["1M", "10M", "30M", "100M", "300M", "650M"]
 scale_pts.sort(key=lambda t: order.index(t[0]))
 
 ri_vals = [r["RNS"]["10"] for run, r in res.items() if "randinit" in run]

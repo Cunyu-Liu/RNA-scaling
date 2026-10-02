@@ -45,14 +45,23 @@ def free_gpu() -> int:
 
 
 def scan_done() -> dict[str, dict]:
-    """run_id -> {nt, best_val, fallback} for every DONE line."""
+    """run_id -> {nt, best_val, fallback} for every DONE line.
+
+    inc12-suffix fix: key by LOG FILENAME stem (RNA-Sc-300M_s17_b59.log
+    -> rnasc_300M_s17_b59), NOT the rid printed inside the DONE frame --
+    b59/rw1 arms print the bare id (rnasc_300M_s17), which collides with
+    the 2B main arm: the b59 DONE would (a) overwrite the main-arm entry
+    and (b) be skipped as already-probed, so 5.9B arms never got probed.
+    """
     out = {}
     for path in glob.glob(os.path.join(LOGS, "RNA-Sc-*.log")):
+        stem = os.path.basename(path)[: -len(".log")]
+        rid = stem.replace("RNA-Sc-", "rnasc_", 1)
         with open(path, errors="ignore") as fh:
             for line in fh:
                 m = DONE_RE.match(line.strip())
                 if m:
-                    rid, nt, steps, bv, ntps, peak, fb = m.groups()
+                    _, nt, steps, bv, ntps, peak, fb = m.groups()
                     out[rid] = {"nt": int(nt), "best_val": float(bv),
                                 "fallback": int(fb), "log": path}
     return out

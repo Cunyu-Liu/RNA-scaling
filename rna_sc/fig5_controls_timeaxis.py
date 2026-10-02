@@ -29,15 +29,16 @@ s4 = json.load(open(os.path.join(MNT, "evidence/s4_randinit_table.json")))
 s5 = json.load(open(os.path.join(MNT, "evidence/s5_mommatch_table.json")))
 s6 = json.load(open(os.path.join(MNT, "evidence/s6_cross_scale.json")))
 
+scales_a = ["1M", "10M", "30M", "100M", "300M", "650M"]
 scales = ["1M", "10M", "30M", "100M"]
 
 fig, axes = plt.subplots(1, 3, figsize=(15, 4.2))
 
 ax = axes[0]
-xs = list(range(len(scales)))
-tr = [s4[s]["trained"] for s in scales]
-ri = [s4[s]["randinit"] for s in scales]
-mm = [s5[s]["mommatch"] for s in scales]
+xs = list(range(len(scales_a)))
+tr = [s4[s]["trained"] for s in scales_a]
+ri = [s4[s]["randinit"] for s in scales_a]
+mm = [s5[s]["mommatch"] for s in scales_a]
 ax.plot(xs, tr, "o-", color="#1a6faf", lw=2.2, ms=8, label="trained")
 ax.plot(xs, mm, "^--", color="#e67e22", lw=1.8, ms=7,
         label="moment-matched (H3 ctrl)")
@@ -48,7 +49,7 @@ for x, t, r in zip(xs, tr, ri):
     ax.annotate("+%.3f" % (t - r), (x, (t + r) / 2), ha="center",
                 fontsize=8, color="#1a6faf")
 ax.set_xticks(xs)
-ax.set_xticklabels(scales)
+ax.set_xticklabels(scales_a)
 ax.set_xlabel("model scale")
 ax.set_ylabel("best-layer family-split F1")
 ax.set_title("(a) Controls excluded: gain survives\nweight statistics (H2/H3)")
@@ -95,6 +96,6 @@ fig.tight_layout()
 fig.savefig(OUT + ".png", dpi=200, bbox_inches="tight")
 fig.savefig(OUT + ".pdf", bbox_inches="tight")
 print("saved", OUT + ".png/.pdf")
-print("panel a: deltas", {s: round(s4[s]["delta"], 4) for s in scales})
+print("panel a: deltas", {s: round(s4[s]["delta"], 4) for s in scales_a})
 print("10M peak at nt_B=%.1f f1=%.4f" % (peak10["nt_B"],
                                           peak10["best_f1"]))

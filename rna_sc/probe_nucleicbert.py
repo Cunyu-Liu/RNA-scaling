@@ -113,8 +113,9 @@ def collect_states(model, device, split, n_seq, L, context_nt=256,
         ids = torch.tensor(
             [r[0] + [PAD] * (T - len(r[0])) for r in rows],
             dtype=torch.long, device=device)
-        # BERT.forward(input_ids, output_attentions=True) -> (mlm, attn, emb)
-        _, _, emb_list = model(ids, output_attentions=True)
+        # encoder(need_weights=None) still returns embeddings_list but
+        # skips materializing attention matrices (the OOM cause)
+        _, _, emb_list = model.encoder(ids, need_weights=None)
         # emb_list: list of (B,1,T,d) — [embedding, block1..blockL]
         pad = ids == PAD
         lengths = (~pad).sum(-1).clamp(min=1).float().unsqueeze(-1)

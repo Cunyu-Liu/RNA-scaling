@@ -25,9 +25,10 @@ MNT = "/mnt/cunyuliu/rna-sc"
 OUT = os.path.join(MNT, "figs", "fig2_layerwise_tasks")
 
 SCALES = ["RNA-Sc-1M_s17", "RNA-Sc-10M_s17", "RNA-Sc-30M_s17",
-          "RNA-Sc-100M_s17"]
+          "RNA-Sc-100M_s17", "RNA-Sc-300M_s17", "RNA-Sc-650M_s17"]
 colors = {"RNA-Sc-1M_s17": "#7f8c8d", "RNA-Sc-10M_s17": "#c0392b",
-          "RNA-Sc-30M_s17": "#27ae60", "RNA-Sc-100M_s17": "#1a6faf"}
+          "RNA-Sc-30M_s17": "#27ae60", "RNA-Sc-100M_s17": "#1a6faf",
+          "RNA-Sc-300M_s17": "#e07b39", "RNA-Sc-650M_s17": "#9467bd"}
 
 
 def final_layers(jsonl_path, run):
@@ -142,7 +143,7 @@ for line in open(os.path.join(MNT,
         if base not in best_tr or r["f1"] > best_tr[base]:
             best_tr[base] = r["f1"]
 
-order = ["1M", "10M", "30M", "100M"]
+order = ["1M", "10M", "30M", "100M", "300M", "650M"]
 labels, tr, ri = [], [], []
 for scale in order:
     base = "RNA-Sc-%s_s17" % scale
@@ -156,8 +157,10 @@ ax.bar([i - 0.18 for i in x], tr, width=0.36, color="#1a6faf",
 ax.bar([i + 0.18 for i in x], ri, width=0.36, color="#c0392b",
        alpha=0.75, label="randinit")
 for i, (t, r) in enumerate(zip(tr, ri)):
-    ax.text(i + 0.36, max(t, r) + 0.008, "|Δ|≤0.016", fontsize=7.5,
-            ha="right", color="#555")
+    if r == r:  # not NaN
+        ax.text(i + 0.36, max(t, r) + 0.008,
+                "Δ=%+.3f" % (t - r), fontsize=7.5,
+                ha="right", color="#555")
 ax.set_xticks(x)
 ax.set_xticklabels(labels)
 ax.set_ylim(0.45, 0.63)
