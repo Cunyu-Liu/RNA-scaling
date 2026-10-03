@@ -36,9 +36,11 @@
 
 ### RNA language models (evaluation targets / same-family series)
 
-9. Penić, M. et al. RiNALMo: a general-purpose RNA language model.
-   *Nature Communications* (2025). [micro/mega/giga checkpoints on
-   Zenodo — verified; id-verify]
+9. Penić, R.J., Vlašić, T., Huber, R.G., Wan, Y., Šikić, M. RiNALMo:
+   general-purpose RNA language models can generalize well on structure
+   prediction tasks. *Nature Communications* 16, 5671 (2025).
+   DOI 10.1038/s41467-025-60872-5; arXiv:2403.00043. [web-verified
+   2026-10-03, two-source rule; micro/mega/giga checkpoints on Zenodo]
 10. Chen, Z. et al. RNA-FM: a deep language model for RNA structure
     and function prediction. *Nature Methods* (2023). [id-verify]
 11. Wang, Y. et al. ERNIE-RNA: an enhanced RNA language model.
