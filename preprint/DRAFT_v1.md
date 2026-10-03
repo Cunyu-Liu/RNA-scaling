@@ -253,7 +253,7 @@ migrates down (L21→L16) — overtraining erosion, same family as the
 gain, not the control. Remaining arms (30M/300M/650M @5.9B) are
 training under the same automated chain; the pre-registered Claim-14
 verdict (corpus-optimal scale bound) reads from the completed 3×2
-table.
+table. (Fig 6.)
 
 ### 4.2 The gain is not initialization 【Act II · H2/H3】 or weight statistics
 
@@ -716,6 +716,7 @@ the direction reported for proteins (their RNS–TM-score −0.70), but
 at the family level within one model the relation is weak (−0.19)
 and at the sequence level it is axis-dependent (below) — RNS is a
 model-level reliability indicator, not a sequence-level one.
+(Fig 7.)
 
 **RNS-binned structure evaluation (axis-dependence).** Binning TS0
 sequences into RNS terciles (same head, same layer): pair-F1
