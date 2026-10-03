@@ -590,6 +590,27 @@ cause.
 
 ### 4.5 Corpus axis 【Act V · H5】: capacity gates mid-size corpora
 
+**Reweighting chain closed at three scales (10-03).** Cluster-level
+flattening of the rRNA-dominant prior (alpha=1.0), same budget/
+recipe/protocol: family-split probe F1 10M 0.1746 (L14) vs 0.1731
+full (+0.15pp), 30M 0.2408 vs 0.2466 (−0.58pp), 100M 0.2834 vs
+0.3263 (−4.29pp) — a cross-scale SIGN FLIP. The 10M increment is
+below seed-level std (three-seed spread ≈0.017), so the reading is
+"neutral-to-slightly-positive", not a positive effect claim; the
+scientific content is the three-point gradient. Mechanism —
+capacity-gated prior utility: when capacity is the binding constraint
+(10M), flattening a redundant prior frees effective capacity for
+underrepresented families; once capacity is sufficient (100M), the
+family-frequency distribution itself is learnable signal, and
+flattening it removes input the larger model was exploiting. This
+intersects the corpus-composition axis (§4.10: large-model gains come
+from corpus distribution information) and the capacity gate (§4.3/
+§4.8): the same intervention flips sign across the gate. (Protocol
+artifact noted: the reweighted corpus parquet ships train-only rows,
+so validate() logs 0/0 = best_val 0.0000 on all rw arms — training
+health verified by throughput, checkpointing, and probe behavior.)
+
+
 10M: U-shape (c1Mcs 0.186 > full 0.173 > c5Mcs 0.152). 30M: monotone
 (c1M 0.316 global best). Small-corpus multi-epoch wins at both scales;
 val-loss rank inverts against transfer F1 (MLM loss and transferability
