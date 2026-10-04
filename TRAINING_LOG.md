@@ -2572,3 +2572,13 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - best_val=0.0000 判因：重加权语料 parquet 仅含 train split，validate() 流空 0/0——协议性伪迹，不影响训练与 probe（三 rw1 臂同因，已入 verdict 文件注记）
 
 - [auto] rnasc_300M_s17_b59 complete: nt=5.90B best_val=0.7503 fallback=0; final probe+linkage+s1_summary done
+
+## Day 25（2026-10-04 晨→晚）——★300M@5.9B 收口：Claim-14 证伪 + 预算×尺度符号翻转
+
+- 300M_b59 DONE 帧（nt=5.90B best_val=0.7503）→ closeout 自动 probe 24 层合格行 best L22 f1=0.3821（rel 0.957）+ randinit 对照 24 行落地 → factorial_verdict 自动刷新
+- **3×2 析因第二点（300M 档）：预算效应 +3.76pp（0.3821 vs 2B 0.3445）——与 100M 档 −2.74pp 符号相反**；且 0.3821 > 650M@2B 0.3632，全线新最优
+- **Claim-14 预注册检验判 FAIL**：判据"300M@5.9B 增益 <1.0pp → 语料最优边界≈300M"，实测 +3.76pp ≫ 1.0pp → boundary_holds=false（factorial_verdict.json claim14_300M 字段）——"语料最优规模>300M、2.0B iso-token 主线对大尺度欠训"，预注册判据被实测推翻的正例，按科学纪律记录
+- 机制表述改写为 Chinchilla 式 compute-optimal 交互：每档尺度各有最优预算（100M 顶点≈2B，300M 顶点≥5.9B，650M 预期更高）——预算与尺度不可独立讨论；2.0B iso-token 只对小尺度近最优
+- DRAFT §4.1 预算段重写（两点表 + Claim-14 证伪声明，4931b41）+ §4 结构预测可检验预测段标注 300M 结果
+- fig6 v2 两点预算轴（红 −2.74pp / 绿 +3.76pp 箭头 + 650M 参照线 + Claim-14 证伪角标，bb7c7fa；像素级核验 4 元素齐）+ PPT slide 51（几何三查 0 问题，备份 .bak_day25_2210）
+- 在训：30M_b59 95%（今晚 DONE，凌晨 ~02:30 自动链收口）/ 650M_b59 56%；守卫链三进程存活 + keep_watch_all 每 2 分钟自愈确认
