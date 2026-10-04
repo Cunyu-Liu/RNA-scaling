@@ -2506,3 +2506,69 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
   也不会启动新 full-FT/preprint 相关 GPU 任务（两条线均已完成）。
 - 本轮不干预在训 run：300M b59（3d23h，nt≈1667M/5.9B 27.1%）/
   100M s17_b59（3h55m，waiting first manifest）。
+
+## Day 22 补（2026-10-02 14:4x）——交接运维批：watch_all 补丁 + b59 收口链 + 10M_rw1 重启 + 100M_rw1 补 probe
+
+- watch_all inc12-suffix 修复：b59/rw1 臂 DONE 帧 run_id 无后缀→旧逻辑下 5.9B 臂训完不会被自动 probe（被 2B 主臂遮蔽）；改为按日志文件名 stem key，22/22 DONE run 功能验证全对；值守进程带补丁重启（PID 4031944）
+- closeout_b59.py + factorial_verdict.py 部署并启动（PID 3121782，setsid 脱离会话）：4×5.9B 臂 DONE→自动 probe+randinit 对照（幂等）→全臂收口后 3×2 析因终判表 + Claim-14 检验（300M@5.9B vs @2B 增益 <1.0pp ⇒ 语料最优边界 ≈300M）→ evidence/factorial_verdict.json
+- 10M_rw1 死任务重启：supervisor 事故残留（rc=-9，run 目录空）→ train_s3_rw 手动 GPU6 重启（PID 3998144，真重加权语料版）
+- 100M_rw1 补 probe（DONE 未 probe 欠账）：best 0.2834@L21（23 层）< full 0.3394 → 重加权负效应 100M 档复现（−5.6pp）——H5 多尺度稳健性链第 2 点（30M −2.4pp / 100M −5.6pp / 10M 在训）
+- 月度监控 M1-M4 第 1 轮补跑（T5.2）：四项全绿（REDIAL 无后续/NABench v2 无痕/Li 团队无 RNA/无新受控自训工作）；related work 素材 +3
+- 代码提交 GitHub：commit 5a4d9ab（watch_all 补丁 + closeout_b59 + factorial_verdict + figs 300M 更新，10 文件 +288 行）
+- 在跑不打扰：4×5.9B 臂（100M ~86%/300M ~72%/30M ~49%/650M ~31%）+ 10M_rw1（~0.2B/2.0B）；watch_all/supervisor/closeout_b59 三链在岗
+- 教训登记：SSH 高频重置下启动远端长任务必须用 setsid + nohup 双保险（纯 nohup & 会随会话组被 HUP 波及）；pkill 自匹配用 rna_sc[.]xxx 模式排除自身
+
+## Day 22 补二（2026-10-02 15:0x）——closeout v3 + 10M_rw1 第三次重启 + 提交
+
+- closeout_b59 v3：run_probe 幂等检查改 parsed-json 匹配（旧字符串格式假设在 json.dump 空格差异下漏判 → 会重复跑 randinit probe 浪费 GPU）；功能验证：100M_rw1 23 行主 probe 正确识别、randinit 缺失正确检出；v3 进程 PID 3156228
+- 10M_rw1 第二次死亡（02:16 停写，与 01:45 同模式：log 干净终止无 stack）→ 第三次重启（PID 3156229，GPU6 空闲 4.19GB 充裕）→ 5 分钟后 nt=2M 推进确认健康；死因候选：外部租户瞬时显存挤压 / 宿主层干预——若再死一次则改用 GPU5 空闲段并加 systemd 级自动重启
+- git commit 64d8769 推送（v3 修复 + 清理临时 patch 脚本）
+- 100M_b59 已 96.3%（lr 1.01e-06 尾部）——预计今晚 DONE → closeout 自动 probe 链首次实战
+
+## Day 22 补三（2026-10-02 18:0x）——Q19 RNS 协议对照五问 + 分箱反向新发现
+
+- s14_bin_eval.py + s14_bin_diag.py 入库（commit 见 git log）：TS0 按 RNS@10 三分箱——高 RNS 箱 pair-F1 0.4727 vs 低箱 0.4005（+18.0%）、long-range 0.7414 vs 0.5735（+29.3%）——与蛋白论文 −40%/−60% 方向相反；长度混杂排除（Spearman(len,RNS)=+0.19）；机制两候选（组成通道/域差异）；家族轴不翻转（轴依赖警示）
+- 协议差异登记：k∈{10,50,100}（池约束）+ 单次计算（无 100 次欠采样）→ T3.5.8 bootstrap std 补缺
+- 新任务：T3.5.7（RNS×COV）/ T3.5.9 ✓（分箱）/ T1.2.7（eval_matrix RNS 协变量）
+- 问题与答案.md Q19 全节 + 巡检日志 + TASKS v3.21 同步
+
+## Day 22 补四（2026-10-02 20:3x）——Q20 跨模型 RNS 相关 + 行动项三落地
+
+- Q20 主结果：8 模型（自训 4 + RiNALMo×3 + RNA-FM）Spearman(RNS@10, random-F1) = −0.60（Pearson −0.84）——跨模型层复现蛋白论文方向；排除 RNA-FM 离群 −0.39；与家族层 −0.19 对照 → RNS 是模型级指标（跨模型强、家族层弱、序列分箱轴依赖）
+- 外部 random 探针新数据：micro 0.5422 / mega 0.5943 / giga 0.5442 / RNA-FM 0.0998（S9 矩阵外部行补缺）
+- T3.5.8 bootstrap：1M 0.2247±0.0049 / 30M 0.0934±0.0037 / 100M 0.0949±0.0041——std ≪ 档间差，单次计算结论稳（Q1 缺口闭合）
+- T3.5.7 家族层 RNS×NLL：Spearman +0.14 / Pearson −0.02——几何/似然解耦（第四条解耦证据）
+- RiNALMo 三档 RNS（0.015-0.026）低于自训全家族（≥0.09）——ncRNA 专注语料表征分离优势再证；RNA-FM RNS 0.69 比 randinit 还差
+- 100M_b59 98.7%（今晚 DONE，closeout 值守在岗）
+
+- [auto] rnasc_100M_s17_b59 complete: nt=5.90B best_val=0.7626 fallback=0; final probe+linkage+s1_summary done
+
+## Day 23（2026-10-03 01:0x）——★100M@5.9B 首臂收口：3×2 析因第一点 = 过训负效应
+
+- DONE 帧：nt=5900000359 steps=629042 best_val=0.7626 fallback=0——closeout_b59 v3 自动链首战成功（DONE→probe 23/23 层 0.2989@L16 + randinit 对照 0.1577@L20 全自动落地）
+- **3×2 析因第一点（100M 档）：5.9B 预算 −2.74pp（0.2989 vs 2B 0.3263）**——预算加倍（2.0→5.9B，接近全语料 1 epoch+重复）在 100M 档为负收益：2.0B 已在/超过该规模的 compute-optimal 点；语料重复（Muennighoff 重复有效区间假说）在 RNA 语料上不兑现
+- 与 Claim-14 方向一致（若 300M 复现 → "R22 语料可支撑的最大模型 ≈300M"边界判据更强）；与 30M 现象（S2 饱和点 0.85B）同族：**受控家族在 iso-token 2B 主线上的 budget 选择是接近最优的，增量预算买不到下游收益**
+- randinit 增益：0.2989-0.1577=+0.141（5.9B 臂的预训练增益与 2B 臂 +0.168 同量级——预算负效应发生在增益内部而非对照上）
+- closeout 链值守继续（300M b59 79%/30M 61%/650M 39% 在训）
+
+## Day 23 续（2026-10-03 04:0x）
+
+- 10M_rw1 第三次静默死亡（GPU6 cgroup 5.1GB 宿主内存份额判定）→ 迁移 GPU3 重启（PID 1552168，共卡限速 2.1k nt/s）；决策：H5 链已 30M/100M 双档结论，10M 为 camera-ready 前补齐项
+- DRAFT §4.1 主表回填 100M@5.9B 预算轴（d99a65a）：−2.74pp/L21→L16/randinit 完整/剩余臂 in flight
+- 在训：300M_b59 82.8% / 30M 64.4% / 650M 40.7%
+
+## Day 23 续二（2026-10-03 14:1x）
+
+- 论文 Fig 6（budget axis）/ Fig 7（cross-model RNS）生成 + DRAFT 挂接（fe95504）；PPT slide 49
+- 10M_rw1 67%（速度恢复 41k nt/s）；300M_b59 86%
+
+- [auto] rnasc_10M_s17_rw1 complete: nt=2.00B best_val=0.0000 fallback=0; final probe+linkage+s1_summary done
+
+## Day 24（2026-10-03 晚）——★10M_rw1 收口：H5 多尺度链符号翻转定论
+
+- 10M_rw1 DONE（nt=2.0B, 31556 nt/s, 20 层 probe L14 f1=0.1746）——closeout 链自动收口（含 randinit 对照待查）
+- **H5 三档终表（evidence/h5_rw_multiscale.json）**：重加权效应 10M **+0.15pp** / 30M −0.58pp / 100M −4.29pp——**跨尺度符号翻转**：压平 rRNA 主导先验仅在容量受限时有小正效应；容量足够后家族频率信息本身是可学习信号，压平即损失（容量门控的先验效用）
+- 注：10M 档正效应幅度小（+0.15pp < 种子间 std），定性为"翻转至中性/微正"而非强正效应——与 30M/100M 的明确负效应形成梯度
+- best_val=0.0000 判因：重加权语料 parquet 仅含 train split，validate() 流空 0/0——协议性伪迹，不影响训练与 probe（三 rw1 臂同因，已入 verdict 文件注记）
+
+- [auto] rnasc_300M_s17_b59 complete: nt=5.90B best_val=0.7503 fallback=0; final probe+linkage+s1_summary done

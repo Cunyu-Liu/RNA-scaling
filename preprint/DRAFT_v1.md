@@ -239,21 +239,33 @@ anchor closes the interpolation: 100M→300M only +0.5pp
 reverses (rel 0.864@100M → 0.957@300M peak → 0.296@650M) —
 non-monotone at six scales.
 
-**Budget axis (3×2 factorial, first point closed 10-03).** 100M
-retrained at 5.9B nt (≈ full corpus + 3 epochs of repetition, same
-recipe/split/protocol; automated closeout chain): final F1 0.2989@L16
-vs 0.3263@L21 at 2.0B — **doubling-to-tripling the budget beyond the
-corpus is a −2.74pp NEGATIVE effect** at 100M. The 2.0B iso-token
-budget sits at or beyond this scale's compute-optimal point on a
-redundant ncRNA corpus (rRNA 63.6%): Muennighoff-style "repetition ≈
-fresh tokens" does not transfer to this regime. The best layer
-migrates down (L21→L16) — overtraining erosion, same family as the
-10M mid-training attrition (§4.3). The randinit control gain is intact
-(+0.141 vs +0.168 at 2B): the deficit lives inside the pretraining
-gain, not the control. Remaining arms (30M/300M/650M @5.9B) are
-training under the same automated chain; the pre-registered Claim-14
-verdict (corpus-optimal scale bound) reads from the completed 3×2
-table. (Fig 6.)
+**Budget axis (3×2 factorial; two points closed 10-03/10-04).** Two
+arms retrained at 5.9B nt (≈ full corpus + ~3 epochs, same recipe/
+split/protocol; automated closeout chain), against the 2.0B iso-token
+main line:
+
+| scale | F1 @2.0B | F1 @5.9B | budget effect |
+|---|---|---|---|
+| 100M | 0.3263 (L21) | 0.2989 (L16) | **−2.74pp (overtraining)** |
+| 300M | 0.3445 (L22) | **0.3821 (L22)** | **+3.76pp (undertraining at 2B)** |
+
+The sign FLIPS across scale: at 100M the 2.0B budget is at/beyond
+compute-optimal on a redundant corpus (rRNA 63.6%; Muennighoff-style
+"repetition ≈ fresh tokens" does not transfer — the −2.74pp comes with
+a best-layer downshift L21→L16, overtraining erosion of §4.3 family,
+while the randinit gain is intact at +0.141 vs +0.168); at 300M the
+2.0B budget was UNDERtrained — +3.76pp from the fuller corpus, and
+0.3821@L22 exceeds the entire 2.0B main line INCLUDING 650M (0.3632):
+a 302M-parameter model at the full-corpus budget beats a 666M model
+at one-third of it. **The pre-registered Claim-14 boundary test is
+FALSIFIED** (pre-registered bar: 300M@5.9B gain < 1.0pp ⇒ corpus-
+optimal scale ≈300M; measured +3.76pp, boundary_holds=false) — we
+report this as-is: the correct generalization is Chinchilla-style
+compute-optimal interaction, not a hard corpus ceiling: each scale
+has its own optimal budget position, and the 2.0B iso-token design is
+near-optimal only for the smaller scales. Remaining arms (30M/650M
+@5.9B) are training under the same automated chain; the completed
+table will fill the interaction. (Fig 6.)
 
 ### 4.2 The gain is not initialization 【Act II · H2/H3】 or weight statistics
 
@@ -498,7 +510,10 @@ our controlled family the same parameters moved structure F1 by
 not scale, is the lever, 650M@5.9B should gain little structure,
 while an Rfam-enriched corpus arm on OUR architecture should gain
 much — the orthogonal test that isolates corpus with architecture
-held fixed).
+held fixed). [Family-F1 update 10-04: the budget×scale sign flip
+(§4.1) already shows the corpus lever is real at 300M (+3.76pp);
+whether it also moves STRUCTURE readout is the sharper version of
+this prediction, queued on the 650M@5.9B closeout.]
 
 Original audit (superseded numbers, kept for provenance):
 
