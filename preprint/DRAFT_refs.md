@@ -3,8 +3,9 @@
 > Source discipline: every entry below is drawn from the project memo's
 > §9 verified-evidence table (three-source cross-checked during
 > 2026-09-10..13 research). Identifiers shown ONLY where the memo
-> verified them; entries marked [id-verify] must have DOI/arXiv
-> confirmed in the final bib pass before submission (D6 gate).
+> verified them; the [id-verify] bib pass was COMPLETED 2026-10-04
+> (passes 1-5, 14 entries, 12 corrections, all DOIs/arXiv IDs
+> web-verified two-source; D6 gate: clean).
 
 ### Protein-domain anchors (methods template)
 
@@ -127,6 +128,7 @@ All in-text citations in DRAFT v1.0 map to this list. The following
 were deliberately NOT cited (memo §9 "勿引用" list + discipline):
 Deep Research weak matches (flow-matching RNA-FM title confusion;
 guided transfer learning for RNA-seq). Unverified identifiers are
-marked [id-verify] and must be resolved in the final bib pass —
+COMPLETED 2026-10-04: all 14 [id-verify] entries resolved (12
+corrections; see preprint/id_verify_log.md passes 1-5) —
 no DOI in this draft is fabricated; only memo-verified DOIs are
 printed.
