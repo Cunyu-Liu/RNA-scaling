@@ -2582,3 +2582,11 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - DRAFT §4.1 预算段重写（两点表 + Claim-14 证伪声明，4931b41）+ §4 结构预测可检验预测段标注 300M 结果
 - fig6 v2 两点预算轴（红 −2.74pp / 绿 +3.76pp 箭头 + 650M 参照线 + Claim-14 证伪角标，bb7c7fa；像素级核验 4 元素齐）+ PPT slide 51（几何三查 0 问题，备份 .bak_day25_2210）
 - 在训：30M_b59 95%（今晚 DONE，凌晨 ~02:30 自动链收口）/ 650M_b59 56%；守卫链三进程存活 + keep_watch_all 每 2 分钟自愈确认
+
+## Day 25 续三（2026-10-04 23:4x）——★S7 结构预测检验 300M 提前落地：预算也吃结构读出（+1.87pp）
+
+- GPU3 S7（probe_structure 300M_b59 final ckpt）完成：24 层全跑，best **L22 f1=0.6165（rel 0.957，acc 0.6819）** vs 300M@2B 0.5978@L22 → **预算效应 +1.87pp > 1pp 显著性门槛**；层位不动（L22→L22，无磨蚀迁移，对比 100M 档 L21→L16 前移）
+- **判读（预注册规则）**："预算增益仅限家族分类"的原预测在 300M 档被证伪——Chinchilla 式预算×尺度交互同样作用于结构读出通道；650M@5.9B 臂（56% 在训）成为决定性单元格（最大尺度是否同向或结构饱和）
+- 三口径核验 PASS：evidence/s7_structure_probe.json = eval/probe_structure_results.jsonl = 运行日志（全 0.6165@L22）；DRAFT 段落更新（e162371，零 PENDING 保持）+ /mnt 镜像
+- 顺手收尾：/mnt/cunyuliu/rna-sc/docs/ 镜像补齐 DRAFT_v1/DRAFT_refs/id_verify_log 三件（此前 docs/ 只有 TRAINING_LOG）；id-verify 全链关闭（pass 1-5，14 条核验 12 处修正，D6 引用门槛达成，e24f561）
+- 在训：30M_b59 ~97%（~1-2h 后 DONE 自动链）/ 650M_b59 56%；守卫链存活
