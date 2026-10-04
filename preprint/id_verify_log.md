@@ -71,3 +71,53 @@ qualifies every RNA-FM comparison in the paper — it is a 2022 preprint-era
 
 Remaining [id-verify]: 9 entries (DenAdel, Lin ESM-2, Wang ERNIE-RNA,
 Wang RNAErnie, BiRNA-BERT, HydraRNA, + others).
+
+
+# [id-verify] pass 3 (part 1) — ESM-2 + DenAdel
+
+Date: 2026-10-04. Two entries, both VERIFIED-WITH-CORRECTION.
+
+## Lin et al., ESM-2 / ESMFold
+**VERIFIED-WITH-CORRECTION**
+
+Science 379(6637), 1123-1130 (2023-03-16), DOI 10.1126/science.ade2574
+(science.org + Ovid + RosettaCommons citation, three-source). DRAFT_refs
+wrote "Science 377, 112-115 (2023)" — VOLUME AND PAGES BOTH WRONG
+(377→379, 112-115→1123-1130). Corrected.
+
+## DenAdel et al. (H5 reverse-prior source)
+**VERIFIED-WITH-CORRECTION**
+
+Actual title: "Evaluating the role of pretraining dataset size and
+diversity on single-cell foundation model performance". Nature Methods
+(2026), DOI 10.1038/s41592-026-03120-y (Broad Institute publications
+page + two arXiv citing papers). DRAFT_refs descriptive title
+"Saturation-point analysis of single-cell foundation models" is WRONG
+as a literal title — the saturation/plateau finding is the content, not
+the title. Corrected.
+
+
+# [id-verify] pass 3 (part 2) — ERNIE-RNA + RNAErnie
+
+Date: 2026-10-04.
+
+## ERNIE-RNA
+**VERIFIED-WITH-CORRECTION**
+
+Actual: "ERNIE-RNA: an RNA language model with structure-enhanced
+representations". Yin, W. et al. Nature Communications 16, 10076
+(2025-11-18), DOI 10.1038/s41467-025-64972-0 (PubMed PMID 41253752 +
+PMC12627772 + Semantic Scholar, three-source). DRAFT_refs wrote
+"11. Wang, Y. et al. ERNIE-RNA ... ICML 2024" — AUTHOR AND VENUE
+BOTH WRONG. The 2024 ICML/bioRxiv version was a preprint; the journal
+version (Nat Commun 2025) is the one to cite. Corrected.
+
+## RNAErnie (motif-aware)
+**VERIFIED**
+
+Wang, N. et al. Multi-purpose RNA language modelling with motif-aware
+pretraining and type-guided fine-tuning. Nature Machine Intelligence 6,
+548-557 (2024-05-13), DOI 10.1038/s42256-024-00836-4 (Crossref
+authoritative; thenamesdictionary/ICLR-review corroboration).
+DRAFT_refs "12. Wang, D." — FIRST INITIAL WRONG (Ning, not D.).
+Corrected.

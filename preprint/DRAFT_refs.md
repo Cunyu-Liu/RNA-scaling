@@ -30,12 +30,14 @@
 6. Vishniakov, D. et al. Tokenization to Transfer: Do Genomic
    Foundation Models Learn Good Representations? *ICLR 2026* Poster.
    [m42-health; DNA-domain random-init study; must-cite per SPEC 1.2]
-7. DenAdel, R. et al. Saturation-point analysis of single-cell
-   foundation models. *Nature Methods* (2026). [H5 reverse prior;
-   id-verify]
+7. DenAdel, A. et al. Evaluating the role of pretraining dataset
+   size and diversity on single-cell foundation model performance.
+   *Nature Methods* (2026). DOI 10.1038/s41592-026-03120-y. [H5
+   reverse-prior source; web-verified 2026-10-04; title corrected]
 8. Lin, Z. et al. Evolutionary-scale prediction of atomic-level
-   protein structure (ESM-2). *Science* 377, 112-115 (2023).
-   [id-verify]
+   protein structure with a language model. *Science* 379(6637),
+   1123-1130 (2023). DOI 10.1126/science.ade2574. [web-verified
+   2026-10-04 three-source; volume/pages corrected]
 
 ### RNA language models (evaluation targets / same-family series)
 
@@ -50,12 +52,15 @@
     [NEVER journal-published — Crossref/Europe-PMC/Semantic-Scholar
     three-source check 2026-10-04; prior 'Nature Methods 2023' and
     'Brief Bioinform bbaad445' claims both WRONG]
-11. Wang, Y. et al. ERNIE-RNA: an enhanced RNA language model.
-    *ICML 2024* (also *Nature Communications* 2025 version).
-    [id-verify]
-12. Wang, D. et al. Multi-purpose RNA language modelling with
-    motif-aware pretraining (RNAErnie). *Nature Machine
-    Intelligence* (2024). [id-verify]
+11. Yin, W. et al. ERNIE-RNA: an RNA language model with
+    structure-enhanced representations. *Nature Communications* 16,
+    10076 (2025). DOI 10.1038/s41467-025-64972-0. [web-verified
+    2026-10-04; author and venue corrected — cite the journal version]
+12. Wang, N. et al. Multi-purpose RNA language modelling with
+    motif-aware pretraining and type-guided fine-tuning (RNAErnie).
+    *Nature Machine Intelligence* 6, 548-557 (2024). DOI
+    10.1038/s42256-024-00836-4. [Crossref-verified 2026-10-04;
+    first author corrected: Ning Wang]
 13. RiboSpan: long-context (10K nt) 1.61B RNA encoder. arXiv:2608.22849
     (2026). [memo-verified; M4 monitoring list]
 14. BiRNA-BERT: adaptive dual tokenization for RNA. *Communications
