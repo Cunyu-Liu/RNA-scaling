@@ -63,10 +63,13 @@
     first author corrected: Ning Wang]
 13. RiboSpan: long-context (10K nt) 1.61B RNA encoder. arXiv:2608.22849
     (2026). [memo-verified; M4 monitoring list]
-14. BiRNA-BERT: adaptive dual tokenization for RNA. *Communications
-    Biology* (2025-11). [memo-verified; id-verify]
-15. HydraRNA: hybrid-architecture RNA LM. *Genome Biology* (2025-11).
-    [memo-verified; id-verify]
+14. Tahmid, M.T. et al. BiRNA-BERT allows efficient RNA language
+    modeling with adaptive tokenization. *Communications Biology* 8,
+    1621 (2025). DOI 10.1038/s42003-025-08982-0. [web-verified
+    2026-10-04; title and first author corrected]
+15. Li, G. et al. HydraRNA: a hybrid architecture based full-length
+    RNA language model. *Genome Biology* 26 (2025). DOI
+    10.1186/s13059-025-03853-7. [Crossref-verified 2026-10-04]
 16. Shulgina, A. et al. GARNET: generative RNA language models
     validated by ribosome thermotolerance experiments. *Nature
     Communications* 15, 10543 (2024).
