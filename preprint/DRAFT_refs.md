@@ -15,15 +15,18 @@
    Learning with Protein Language Models. *ICML 2024*, PMLR
    235:27351-27375. [full text read; zero-self-training fact verified
    via paper + repo + first-author CV — memo §2.3]
-3. Hou, F. et al. Fitness prediction through confidence-bounded
-   pretraining likelihood (inverted-U). *Nature Computational Science*
-   (2026). [S13 method source; id-verify]
-4. Prabakaran, R. & Bromberg, S. Quantifying uncertainty in protein
-   representations across models and tasks. *Nature Methods* (2026).
-   [S14 method source; PDF in 论文/ local archive; id-verify]
-5. Simon, J. & Zou, J. InterPLM: interpretable protein language model
-   concepts. *Nature Methods* (2025). [S15 source; PDF in 论文/
-   local archive; id-verify]
+3. Hou, C., Liu, D., Zafar, A. & Shen, Y. Understanding language
+   model scaling for protein fitness prediction. *Nature Computational
+   Science* (2026). DOI 10.1038/s43588-026-01010-z. [S13 method source;
+   web-verified 2026-10-04; title corrected, PMID 42443524]
+4. Prabakaran, R. & Bromberg, Y. Quantifying uncertainty in protein
+   representations across models and tasks. *Nature Methods* 23, 796-804
+   (2026). DOI 10.1038/s41592-026-03028-7. [S14 method source; web-verified
+   2026-10-04 two-source; coauthor corrected: Bromberg, Y.]
+5. Simon, E. & Zou, J. InterPLM: discovering interpretable features
+   in protein language models via sparse autoencoders. *Nature Methods*
+   22, 2107-2117 (2025). DOI 10.1038/s41592-025-02836-7. [S15 source;
+   Crossref-verified 2026-10-04; first name corrected: Elana Pearl Simon]
 6. Vishniakov, D. et al. Tokenization to Transfer: Do Genomic
    Foundation Models Learn Good Representations? *ICLR 2026* Poster.
    [m42-health; DNA-domain random-init study; must-cite per SPEC 1.2]
@@ -41,8 +44,12 @@
    prediction tasks. *Nature Communications* 16, 5671 (2025).
    DOI 10.1038/s41467-025-60872-5; arXiv:2403.00043. [web-verified
    2026-10-03, two-source rule; micro/mega/giga checkpoints on Zenodo]
-10. Chen, Z. et al. RNA-FM: a deep language model for RNA structure
-    and function prediction. *Nature Methods* (2023). [id-verify]
+10. Chen, J. et al. Interpretable RNA foundation model from
+    unannotated data for highly accurate RNA structure and function
+    predictions. arXiv:2204.00300 (2022); bioRxiv 10.1101/2022.08.06.503062.
+    [NEVER journal-published — Crossref/Europe-PMC/Semantic-Scholar
+    three-source check 2026-10-04; prior 'Nature Methods 2023' and
+    'Brief Bioinform bbaad445' claims both WRONG]
 11. Wang, Y. et al. ERNIE-RNA: an enhanced RNA language model.
     *ICML 2024* (also *Nature Communications* 2025 version).
     [id-verify]
