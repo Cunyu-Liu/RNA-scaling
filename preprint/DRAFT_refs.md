@@ -74,9 +74,10 @@
     validated by ribosome thermotolerance experiments. *Nature
     Communications* 15, 10543 (2024).
     DOI: 10.1038/s41467-024-54812-y. [memo-verified]
-17. Papazoglou, N. et al. Attention–structure alignment in nucleic
-    acid language models. *J. Chem. Inf. Model.* (2025).
-    [layer-wise precedent; id-verify]
+17. Papazoglou, I. et al. Predicting RNA structure utilizing
+    attention from pretrained language models. *J. Chem. Inf. Model.*
+    65, 6483-6498 (2025). DOI 10.1021/acs.jcim.5c02094. [layer-wise
+    precedent; web-verified 2026-10-04; title/initial corrected]
 
 ### RNA benchmarks and protocol studies
 
@@ -95,8 +96,10 @@
 22. Zero-shot 21-model RNA benchmark ("深圳湾"). *Briefings in
     Bioinformatics* (2026-03). DOI: 10.1093/bib/bbag098.
     [memo-verified]
-23. RNAGym: DMS fitness + structure benchmark. ICLR 2025 workshop
-    (Harvard Marks/Das Labs). [id-verify]
+23. Arora, R. et al. RNAGym: large-scale benchmarks for RNA fitness
+    and structure prediction. bioRxiv 10.1101/2025.06.16.660049 (2025).
+    [Harvard/Marks Lab; Crossref-verified 2026-10-04; cite preprint
+    record — ICLR-workshop attribution unconfirmed]
 24. mRNABench: mRNA-specific frozen-embedding evaluation.
     bioRxiv (2025-07). [Morris Lab]
 25. OmniGenBench: modular genomic-LM evaluation platform.
@@ -112,10 +115,11 @@
 
 28. Muennighoff, N. et al. Scaling data-constrained language models.
     *NeurIPS 2023*. [repetition-epoch validity bound]
-29. Hoffmann, J. et al. Training compute-optimal large language models
-    (Chinchilla). arXiv:2203.15556 (2022). [id-verify]
+29. Hoffmann, J. et al. Training compute-optimal large language
+    models (Chinchilla). arXiv:2203.15556 (2022). [arXiv-API-verified
+    2026-10-04]
 30. Kaplan, J. et al. Scaling laws for neural language models.
-    arXiv:2001.08361 (2020). [id-verify]
+    arXiv:2001.08361 (2020). [arXiv-API-verified 2026-10-04]
 
 ### Reference-integrity note (D6 gate)
 
