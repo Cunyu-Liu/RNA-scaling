@@ -2590,3 +2590,14 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - 三口径核验 PASS：evidence/s7_structure_probe.json = eval/probe_structure_results.jsonl = 运行日志（全 0.6165@L22）；DRAFT 段落更新（e162371，零 PENDING 保持）+ /mnt 镜像
 - 顺手收尾：/mnt/cunyuliu/rna-sc/docs/ 镜像补齐 DRAFT_v1/DRAFT_refs/id_verify_log 三件（此前 docs/ 只有 TRAINING_LOG）；id-verify 全链关闭（pass 1-5，14 条核验 12 处修正，D6 引用门槛达成，e24f561）
 - 在训：30M_b59 ~97%（~1-2h 后 DONE 自动链）/ 650M_b59 56%；守卫链存活
+
+- [auto] rnasc_30M_s17_b59 complete: nt=5.90B best_val=0.7928 fallback=0; final probe done
+
+## Day 26（2026-10-05 晨）——★30M@5.9B 收口：析因矩阵第三点（小尺度双任务均无预算增益）
+
+- 30M_b59 DONE 帧（nt=5.90B best_val=0.7928）→ closeout 自动 family probe 12 层 best L10 f1=0.1942 + randinit 对照落地 → factorial_verdict 手动刷新（VerdictRefresh 触发正常）
+- **3×2 析因第三点（30M 档）：family-F1 预算效应 −5.24pp（0.1942 vs 2B 0.2466）**——与 100M 档 −2.74pp 同号且更深，30M/100M/300M 构成单调预算翻转链：−5.24 / −2.74 / +3.76（pp，随尺度递增单调翻转），Chinchilla 式交互在 family 任务全矩阵成立
+- **S7 结构探测 30M@5.9B（GPU3 手动补位，~35 min 全 12 层）**：best L3 f1=0.5765 vs 30M@2B 0.5756 → **Δ=+0.09pp ≈ 0，且 < randinit17 对照 0.5786——预算增益在结构读出上 30M 档不存在**
+- 新证据结构：evidence/s7_structure_budget_matrix.json（4 尺度 ×2 预算全矩阵 + randinit 对照，替代单文件覆盖式 s7_structure_probe.json；300M 锚点文件已恢复）
+- 判读：结构任务的预算×尺度交互门槛高于 family（family 在 100M 即翻负、结构在 300M 才显 +1.87pp）——**两条读出通道的预算敏感尺度不同**；650M@5.9B 臂（61% 在训）仍是决定性单元格
+- 在训：650M_b59 61%（~2 天）；守卫链存活；GPU3 30M S7 完成后释放
