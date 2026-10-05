@@ -2601,3 +2601,5 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - 新证据结构：evidence/s7_structure_budget_matrix.json（4 尺度 ×2 预算全矩阵 + randinit 对照，替代单文件覆盖式 s7_structure_probe.json；300M 锚点文件已恢复）
 - 判读：结构任务的预算×尺度交互门槛高于 family（family 在 100M 即翻负、结构在 300M 才显 +1.87pp）——**两条读出通道的预算敏感尺度不同**；650M@5.9B 臂（61% 在训）仍是决定性单元格
 - 在训：650M_b59 61%（~2 天）；守卫链存活；GPU3 30M S7 完成后释放
+
+- 基建补位：monitoring/s7_650m_watchdog.sh（cron */30，28 层完整性门 + 失败重试 + lock 自清）——closeout_b59 自动链只覆盖 family probe，650M@5.9B 的 S7 结构探测此前无自动触发机制，现已补上（a1eb634）；650M_b59 当前 61%，ETA ~5.4 天
