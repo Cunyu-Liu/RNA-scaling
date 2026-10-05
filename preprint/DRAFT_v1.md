@@ -883,11 +883,24 @@ by task structure (19-class family overlap with rRNA at 63.6% of
 corpus), not by model capacity or data volume. **A capacity gate
 complements it**: 30M is the smallest config that absorbs the full
 channel (10M sits below it, producing the attrition valley). The
-decisive intervention is pre-registered: 30M@5.9B (tokens x3, unique
-sequence exposure 0.14 -> 0.42 epoch, queued) — if all three plateaus
+The decisive intervention was pre-registered: 30M@5.9B (tokens x3,
+unique sequence exposure 0.14 -> 0.42 epoch) — if all three plateaus
 persist unchanged, the data-quantity explanation is finally excluded
 and the finite-channel account closes; if any plateau moves, data
-quantity re-enters.
+quantity re-enters. **RESULT (10-05, b59 3-channel matrix,
+evidence/p5rns_b59_verdict.json): the finite-channel account is
+REFUTED in its strong form.** Two of three channels MOVE with budget
+and the movement is scale-amplified: RNS@10 tightens (100M 0.083 →
+0.052, 300M 0.067 → 0.043); P5 non-rRNA shuffle separation grows
++0.11/+0.29/+0.36 nats/token at 30M/100M/300M (0.08→0.19, 0.14→0.43,
+0.23→0.59) while rRNA separation plateaus ~0.9 as predicted. Only
+the family-Delta channel follows the finite-channel story (it moves
+NEGATIVELY below 300M). Revised account: the 30M triple-plateau is a
+FAMILY-CHANNEL phenomenon — zero-supervision structural statistics
+keep eating budget at every scale (Chinchilla-style), and the
+k-mer-reachable classification channel saturates. The S7 structure
+matrix (+0.09/+0.85/+1.87pp monotone) agrees with the P5 channel;
+the two zero-supervision and two readout views converge.
 
 ## 6. Limitations
 

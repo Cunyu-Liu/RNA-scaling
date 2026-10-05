@@ -2603,3 +2603,21 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - 在训：650M_b59 61%（~2 天）；守卫链存活；GPU3 30M S7 完成后释放
 
 - 基建补位：monitoring/s7_650m_watchdog.sh（cron */30，28 层完整性门 + 失败重试 + lock 自清）——closeout_b59 自动链只覆盖 family probe，650M@5.9B 的 S7 结构探测此前无自动触发机制，现已补上（a1eb634）；650M_b59 当前 61%，ETA ~5.4 天
+
+## Day 26 续（2026-10-05 下午）——★缺口普查补跑：S7 100M 格 + 预注册三通道检验落地（finite-channel 强形式被证伪）
+
+**缺口普查**（GPU 空余触发）：b59 收口链只覆盖 family probe——S7 结构矩阵缺 100M 格 + b59 randinit 对照全缺、30M_b59 mommatch 缺、DRAFT §5 预注册'30M@5.9B 决定性干预'三通道（Delta/RNS/P5）从未在 b59 臂上测过。
+
+**补跑落地（GPU1/3/5 并行）**：
+- S7 100M_b59（GPU1，~105 min）：best L21 f1=**0.5975** vs 2B 0.5890 → **+0.85pp**——结构通道预算效应**单调** +0.09/+0.85/+1.87pp（30M/100M/300M），与 family 通道符号翻转链（−5.24/−2.74/+3.76）形成双通道对照：family 是小尺度过训故事，结构是尺度门控欠训故事
+- S7 b59 randinit 对照 ×3（GPU5 队列）：30M 0.586 > trained 0.5765（composition-floor 同 2B 臂模式）✓；100M/300M 在跑
+- 30M_b59 mommatch17（GPU5）：best f1=0.1258 ≈ randinit 0.1208 ✓ 对照三件套对齐；closeout_b59.py 已修补 +mommatch 幂等块（650M 收口自动三件套）
+- **P5+RNS 三通道**（GPU3，p5rns_b59.py 新脚本 + 6-run 批）：30M/100M/300M × 2B/b59 全落
+  - RNS@10：100M 0.083→0.052、300M 0.067→0.043（预算改善表示质量）
+  - P5 non-rRNA 分离：0.08→0.19 / 0.14→0.43 / 0.23→0.59（+0.11/+0.29/+0.36 nats/token，**尺度放大**）
+  - P5 rRNA：~0.87-0.99 平台（预算效应小）
+- **协议校准**：P5 v1（无掩码 NLL）方向错误被 randinit 对照捕获（−0.01≈0 但 trained 反向）→ v2 MLM 同掩码位协议，30M@2B 复现主线 +0.80 vs +1.07 同号同量级，randinit −0.0105 vs 主线 0.0018 ✓；v1 运行按伪迹废弃
+
+**预注册裁决（evidence/p5rns_b59_verdict.json）**：DRAFT §5 预注册规则'若任一通道移动→数据量重新进入'——实测**三通道中两个移动且尺度放大**（RNS+P5），仅 family-Delta 通道维持 finite-channel。§5 结论改写：30M 三重平台是 family 通道现象；零监督结构统计在每个尺度都吃预算（Chinchilla 式）；k-mer 可达分类通道饱和。DRAFT 已更新（S7 100M 格 + 三通道 RESULT 段）。
+
+在训：650M_b59 ~61%（S7 watchdog 保障）；S7 100M/300M b59 randinit 队列 GPU5 在跑。
