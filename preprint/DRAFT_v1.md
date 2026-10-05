@@ -247,6 +247,7 @@ main line:
 
 | scale | F1 @2.0B | F1 @5.9B | budget effect |
 |---|---|---|---|
+| 30M | 0.2466 (L8) | 0.1942 (L10) | **−5.24pp (overtraining, deepest)** |
 | 100M | 0.3263 (L21) | 0.2989 (L16) | **−2.74pp (overtraining)** |
 | 300M | 0.3445 (L22) | **0.3821 (L22)** | **+3.76pp (undertraining at 2B)** |
 
@@ -264,9 +265,12 @@ optimal scale ≈300M; measured +3.76pp, boundary_holds=false) — we
 report this as-is: the correct generalization is Chinchilla-style
 compute-optimal interaction, not a hard corpus ceiling: each scale
 has its own optimal budget position, and the 2.0B iso-token design is
-near-optimal only for the smaller scales. Remaining arms (30M/650M
-@5.9B) are training under the same automated chain; the completed
-table will fill the interaction. (Fig 6.)
+near-optimal only for the smaller scales. The 30M row (closed 10-05) makes the flip
+MONOTONE in scale: −5.24 / −2.74 / +3.76 pp — the smaller the model,
+the deeper the overtraining deficit on the redundant corpus, and the
+crossover sits between 100M and 300M. Remaining arm (650M @5.9B) is
+training under the same automated chain; it completes the interaction.
+(Fig 6.)
 
 ### 4.2 The gain is not initialization 【Act II · H2/H3】 or weight statistics
 
@@ -523,7 +527,14 @@ classification: structure readout also eats budget at 300M. The
 original prediction ("budget gains are family-classification-only")
 is REFUTED at 300M; the 650M@5.9B arm remains the decisive cell
 (whether the same +budget gain holds at the largest scale, or
-structure saturates there).]
+structure saturates there). 30M update 10-05: S7 on the 30M@5.9B
+final checkpoint gives pair-position F1 0.5765 (L3) vs 30M@2B 0.5756
+(L3) — Δ +0.09pp, BELOW the randinit17 control (0.5786): at 30M the
+structure channel shows NO budget effect at all. So the two readout
+channels have different budget thresholds: family F1 already turns
+negative at 30M (−5.24pp) while structure needs 300M before any
+significant gain (+1.87pp) — full matrix in
+evidence/s7_structure_budget_matrix.json.]
 
 Original audit (superseded numbers, kept for provenance):
 
