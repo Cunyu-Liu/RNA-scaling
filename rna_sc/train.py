@@ -91,7 +91,8 @@ def run(model_id: str, seed: int, device: int, out_dir: str,
         corpus_nseq: int | None = None, corpus_tag: str = "full",
         smoke_nt: int | None = None, resume_from: str | None = None,
         cluster_allowlist: str | None = None,
-        budget_nt: int | None = None) -> dict:
+        budget_nt: int | None = None,
+        train_parquet: str | None = None) -> dict:
     dev = "cuda:%d" % device
     assert torch.cuda.is_available(), "CUDA required (no silent CPU fallback)"
     guard = GPUGuard(dev)
@@ -155,7 +156,8 @@ def run(model_id: str, seed: int, device: int, out_dir: str,
     gen = None
     done = False
     while not done:
-        gen = iter_mlm_batches(SPLIT_8080, "train", cfg.seed, cfg.context_nt,
+        gen = iter_mlm_batches(train_parquet or SPLIT_8080, "train",
+                               cfg.seed, cfg.context_nt,
                                cfg.batch_nt, corpus_nseq=cfg.corpus_nseq,
                                cluster_allowlist=allowlist)
         for batch in gen:
@@ -256,12 +258,15 @@ def main():
                     help="override total nt budget (e.g. 5.9B corpus-"
                          "optimal arm, T1.0.3/T1.0.4)")
     ap.add_argument("--resume-from", default=None)
+    ap.add_argument("--train-parquet", default=None,
+                    help="override TRAIN data source parquet (rfamcap arm; "
+                         "validate keeps streaming SPLIT_8080)")
     args = ap.parse_args()
     run(args.model, args.seed, args.device, args.out_dir,
         corpus_nseq=args.corpus_nseq, corpus_tag=args.corpus_tag,
         smoke_nt=args.smoke_nt, resume_from=args.resume_from,
         cluster_allowlist=args.cluster_allowlist,
-        budget_nt=args.budget_nt)
+        budget_nt=args.budget_nt, train_parquet=args.train_parquet)
 
 
 if __name__ == "__main__":
