@@ -40,7 +40,8 @@ EOF
 )
 [ "$S7DONE" = "True" ] && { touch "$DONEFLAG"; echo "[s7-watchdog-650m] already complete (28 layers)"; exit 0; }
 
-GPU=3
+GPU=$(nvidia-smi --query-gpu=index,memory.free,utilization.gpu --format=csv,noheader,nounits | awk -F, "\$2>=8000 && \$3<50 {print \$1; exit}")
+if [ -z "$GPU" ]; then echo "[s7-watchdog-650m] no free GPU >=8GB this cycle, will retry"; exit 0; fi
 touch "$LOCK"
 cd $ROOT
 CUDA_VISIBLE_DEVICES=$GPU nohup $PY -u -m rna_sc.probe_structure   --run-dir $MNT/runs/$RUN --device 0   > $MNT/logs/s7_650m_b59.log 2>&1

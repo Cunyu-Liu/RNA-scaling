@@ -2644,3 +2644,10 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - **发现并登记**：DRAFT Abstract 仍停在 650M@2B 时代——需补预算轴三档 + 三通道裁决两句（D-5，本周执行，arXiv 前必须）。
 - **文档同步**：docs/TASKS_V2.md 版本头升至 3.26（含附二反思自查）+ T1.0.4 执行状态更新至 10-06；本地镜像 DRAFT_v1/refs/id_verify_log 同步（md5 91de84d7 一致）；本地 01/02/03 交接文档 + 巡检日志全部回写。
 - 在训不打扰：650M_b59 唯一臂推进中，收口动作链全覆盖确认（family probe + randinit + mommatch 三件套 + S7 最后一格 + factorial_verdict 第 4 行，全部自动）。
+
+## Day 27 续（2026-10-06 15:1x）——收口链防御性加固（650M_b59 决定性单元格保障）
+
+- **closeout_b59 handled 判定加固**：旧逻辑 probe 子进程 OOM（rc≠0 但非 Timeout）也会被标记 handled → 该臂被跳过不再重试（300M 当时靠 watch_all 冗余兜底才落行，单点依赖侥幸）——改为 **handled 要求 probe 行真实落盘**（_final_rows 校验），失败则下轮 600s 后重试
+- **S7 650M watchdog GPU 加固**：GPU=3 硬编码 → 自动选空闲卡（free≥8GB 且 util<50%，awk 首个命中；无空卡则退出下轮重试）——650M 收口时点 GPU3 状态不可预知（其他课题进程波动），避免 watchdog 与他方进程同卡 OOM
+- **closeout_b59 重启**：旧 PID 3156228（跑旧代码）→ 新 PID 3688417（加固版，setsid+nohup 双保险）；已确认 30M/100M/300M 三臂幂等跳过（handled 命中已有行），仅等待 650M
+- 650M_b59 训练健康确认：nt=4255M/5900M（72.1%），GPU0 99% util；watchdog/keep_watch_all/supervisor 全链在岗

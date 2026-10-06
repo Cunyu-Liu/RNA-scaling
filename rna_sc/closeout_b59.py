@@ -159,8 +159,12 @@ def main() -> int:
                 except subprocess.TimeoutExpired:
                     print("[closeout-b59] %s probe TIMEOUT" % a, flush=True)
                 else:
-                    handled.add(a)
-                    print("[closeout-b59] %s probed" % a, flush=True)
+                    if _final_rows(a):
+                        handled.add(a)
+                        print("[closeout-b59] %s probed" % a, flush=True)
+                    else:
+                        print("[closeout-b59] %s probe FAILED (no rows; "
+                              "retry next cycle)" % a, flush=True)
         if all(arm_done(a) and arm_probed(a) for a in ARMS):
             factorial_verdict(args.device)
             json.dump(
