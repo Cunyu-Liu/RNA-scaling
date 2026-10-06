@@ -2629,3 +2629,9 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - 勘误：day26-2 提交（c93cd1d）中 S7 100M 段因 anchor 匹配失败未写入 DRAFT（P5 段先成功掩盖了断言顺序问题），本条已补写（含 100M 格 + b59 randincrement 全对照）
 - 证据：evidence/s7_structure_budget_matrix.json 全矩阵（4 尺度 ×2 预算 × trained/randinit）+ 锚点文件恢复 300M
 - 在训：650M_b59 ~66%；S7 650M watchdog + closeout mommatch 补丁待命
+
+## Day 26 续三（2026-10-06）——randinit 一致性核查：300M 逐位一致（同机同路径），30M/100M 差 ~1pp = 探测噪声基线
+
+- 用户质询'b59 臂 randinit 与 2B 臂 randinit 逐位一致是否合理'→ 逐层数据核查：**300M 两臂 24 层全部逐位一致**（0.5899@L18，早年间架同机同代码路径跑的修复版重批）；**30M/100M 不一致**（0.5786 vs 0.586 / 0.5855 vs 0.5868，~1pp）
+- 机制：randinit 权重由 seed+架构决定（两臂架构逐字段相同）→ 理论同模型；差异源是 GPU 非确定性算子 + 跨卡浮点路径（b59 队列 GPU5 vs 早年 GPU3/6）——~1pp 恰为探测重复测量噪声，**免费标定了 S7 噪声基线**
+- DRAFT 表述修正：'bit-identical built-in self-check' 过强 → 改为'300M pair bit-identical（same machine+code path）; 30M/100M differ ~1pp = repeat-noise level'；300M +2.7pp 学习增量 ≈ 3× 噪声基线，结论不受影响

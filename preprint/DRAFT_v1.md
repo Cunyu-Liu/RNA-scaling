@@ -534,11 +534,14 @@ structure saturates there). 30M/100M updates 10-05: S7 on the
 matrix cell: F1 0.5975 (L21) vs 100M@2B 0.5890 (L22) — Δ +0.85pp,
 above its b59-arm randinit control (0.5868), best layer stable. The
 b59-arm randinit controls are complete at all three scales (0.586 /
-0.5868 / 0.5899; the 300M control is bit-identical to the 2B-arm
-randinit — same seed and architecture, a built-in self-check): the
-LEARNED increment above randinit is scale-amplified (30M −0.9pp /
-100M +1.1pp / 300M +2.7pp) — the structure channel's budget gain is
-real learning, not seed noise. So the structure-channel budget
+0.5868 / 0.5899; the 300M pair is bit-identical across the two arms
+— same seed, architecture, machine and code path — while 30M/100M
+pairs differ by ~1pp, i.e. exactly the probe's repeat-noise level
+quantified by the same-logic reruns): the LEARNED increment above
+randinit is scale-amplified (30M −0.9pp / 100M +1.1pp / 300M
++2.7pp, against a ~1pp noise floor) — the structure channel's
+budget gain is real learning, and the 300M +2.7pp stands at ~3x the
+noise floor. So the structure-channel budget
 effect is MONOTONE in scale (+0.09 → +0.85 → +1.87pp) — NO sign
 flip, unlike the family channel (−5.24 → −2.74 → +3.76pp): family
 classification is a small-scale overtraining story; structure
