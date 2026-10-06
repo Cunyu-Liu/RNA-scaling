@@ -527,13 +527,22 @@ classification: structure readout also eats budget at 300M. The
 original prediction ("budget gains are family-classification-only")
 is REFUTED at 300M; the 650M@5.9B arm remains the decisive cell
 (whether the same +budget gain holds at the largest scale, or
-structure saturates there). 30M update 10-05: S7 on the 30M@5.9B
-final checkpoint gives pair-position F1 0.5765 (L3) vs 30M@2B 0.5756
-(L3) — Δ +0.09pp, BELOW the randinit17 control (0.5786): at 30M the
-structure channel shows NO budget effect at all. So the two readout
-channels have different budget thresholds: family F1 already turns
-negative at 30M (−5.24pp) while structure needs 300M before any
-significant gain (+1.87pp) — full matrix in
+structure saturates there). 30M/100M updates 10-05: S7 on the
+30M@5.9B final checkpoint gives pair-position F1 0.5765 (L3) vs
+30M@2B 0.5756 (L3) — Δ +0.09pp, BELOW its b59-arm randinit17 control
+(0.586): no budget effect at 30M. The 100M@5.9B arm closes the 4th
+matrix cell: F1 0.5975 (L21) vs 100M@2B 0.5890 (L22) — Δ +0.85pp,
+above its b59-arm randinit control (0.5868), best layer stable. The
+b59-arm randinit controls are complete at all three scales (0.586 /
+0.5868 / 0.5899; the 300M control is bit-identical to the 2B-arm
+randinit — same seed and architecture, a built-in self-check): the
+LEARNED increment above randinit is scale-amplified (30M −0.9pp /
+100M +1.1pp / 300M +2.7pp) — the structure channel's budget gain is
+real learning, not seed noise. So the structure-channel budget
+effect is MONOTONE in scale (+0.09 → +0.85 → +1.87pp) — NO sign
+flip, unlike the family channel (−5.24 → −2.74 → +3.76pp): family
+classification is a small-scale overtraining story; structure
+readout is a scale-gated undertraining story. Full matrix:
 evidence/s7_structure_budget_matrix.json.]
 
 Original audit (superseded numbers, kept for provenance):

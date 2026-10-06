@@ -2621,3 +2621,11 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 **预注册裁决（evidence/p5rns_b59_verdict.json）**：DRAFT §5 预注册规则'若任一通道移动→数据量重新进入'——实测**三通道中两个移动且尺度放大**（RNS+P5），仅 family-Delta 通道维持 finite-channel。§5 结论改写：30M 三重平台是 family 通道现象；零监督结构统计在每个尺度都吃预算（Chinchilla 式）；k-mer 可达分类通道饱和。DRAFT 已更新（S7 100M 格 + 三通道 RESULT 段）。
 
 在训：650M_b59 ~61%（S7 watchdog 保障）；S7 100M/300M b59 randinit 队列 GPU5 在跑。
+
+## Day 26 续二（2026-10-05 深夜）——S7 b59 randinit 对照全收口：结构通道学习增量尺度放大（−0.9/+1.1/+2.7pp）
+
+- S7 randinit 队列三臂全部完成（30M 0.586 / 100M 0.5868 / 300M 0.5899）→ 超出 randinit 的**学习增量**随尺度单调放大：30M −0.9pp（floor 区 trained<randinit）/ 100M +1.1pp / 300M +2.7pp——结构预算增益是真学习非种子噪声
+- 300M b59 randinit 与 2B 臂 randinit **逐位一致**（同 seed 同架构，天然自校验）✓
+- 勘误：day26-2 提交（c93cd1d）中 S7 100M 段因 anchor 匹配失败未写入 DRAFT（P5 段先成功掩盖了断言顺序问题），本条已补写（含 100M 格 + b59 randincrement 全对照）
+- 证据：evidence/s7_structure_budget_matrix.json 全矩阵（4 尺度 ×2 预算 × trained/randinit）+ 锚点文件恢复 300M
+- 在训：650M_b59 ~66%；S7 650M watchdog + closeout mommatch 补丁待命
