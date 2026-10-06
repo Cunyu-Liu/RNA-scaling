@@ -48,7 +48,22 @@ parameter sweep within one model family gains only +2.6pp while a
 corpus-composition contrast gains +11pp at smaller scale: corpus
 dominates parameters for family-level transfer. A pre-registered slope
 rule (0.142 F1/decade, bootstrap CI [0.104, 0.180]) triggered a 650M
-continuation — verdict: 650M ABOVE 100M (650M F1 0.3632 vs 100M 0.3394, +2.4 pp; slope 100M→650M 0.0293, full-axis 0.0829). Our results argue for
+continuation — verdict: 650M ABOVE 100M (650M F1 0.3632 vs 100M 0.3394, +2.4 pp; slope 100M→650M 0.0293, full-axis 0.0829).
+A pre-registered 3x2 budget-by-scale factorial (four arms retrained at
+the full 5.9B-nt corpus) then refutes the pre-registered corpus-ceiling
+claim (Claim-14: 300M@5.9B gain < 1.0 pp) and replaces it with a
+Chinchilla-style compute-optimal interaction: the budget effect on
+family-level transfer FLIPS sign monotonically across scale (-5.24 /
+-2.74 / +3.76 pp at 30M/100M/300M), and a 302M model at the full-
+corpus budget (0.3821) beats the entire 2.0B main line including 650M
+(0.3632). The interaction is readout-channel-specific: on the structure
+task the same budget effect is monotone positive (+0.09 / +0.85 /
++1.87 pp, learned increments above random-init controls -0.9 / +1.1 /
++2.7 pp), while a pre-registered three-channel test shows zero-
+supervision statistics (representation organization, shuffle
+separation) keep improving with budget at every scale — the "30M
+plateau" is a family-classification-channel phenomenon, not a global
+representation limit. Our results argue for
 scale-, corpus-, and protocol-aware interpretation of RNA LM benchmarks,
 and provide the first Li-et-al-style mechanistic controls (random-init,
 weight-statistics, pretraining-time, layer-wise) in the RNA domain.
