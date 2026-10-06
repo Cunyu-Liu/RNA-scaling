@@ -2635,3 +2635,12 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - 用户质询'b59 臂 randinit 与 2B 臂 randinit 逐位一致是否合理'→ 逐层数据核查：**300M 两臂 24 层全部逐位一致**（0.5899@L18，早年间架同机同代码路径跑的修复版重批）；**30M/100M 不一致**（0.5786 vs 0.586 / 0.5855 vs 0.5868，~1pp）
 - 机制：randinit 权重由 seed+架构决定（两臂架构逐字段相同）→ 理论同模型；差异源是 GPU 非确定性算子 + 跨卡浮点路径（b59 队列 GPU5 vs 早年 GPU3/6）——~1pp 恰为探测重复测量噪声，**免费标定了 S7 噪声基线**
 - DRAFT 表述修正：'bit-identical built-in self-check' 过强 → 改为'300M pair bit-identical（same machine+code path）; 30M/100M differ ~1pp = repeat-noise level'；300M +2.7pp 学习增量 ≈ 3× 噪声基线，结论不受影响
+
+## Day 27（2026-10-06 13:4x-15:0x）——交接核查批（用户四点质询响应：叙事/PPT 核对/反思/主线）
+
+- **集群终态盘点**：650M_b59 72%（nt≈4.25B/5.9B，~2-3 天，唯一在训臂）；30M_b59 DONE 已自动收口（closeout probe L10 0.1942 + randinit 0.1245@L6 + mommatch 0.1258 三件套齐）；五值守链在岗（closeout_b59 3156228 / watch_all 4031944 / supervisor 2034308 / keep_watch_all cron */2 / S7 650M watchdog cron */30）；8 卡全忙无空余整卡——逐一核查各卡真实空闲均不足以承载任何 rna_sc 任务（无被 gate 挡住的可用显存），无新训可提交。
+- **PPT 逐表数字核对（程序化）**：slide 33/39/48/50/51/52 全部表格数字与 evidence JSON 逐位一致（六档 F1/S4/S5/八假设/H5 三档/析因三点/S7 +1.87pp——0 错误）；发现并修复 4 页 stale 在训表述（slide 45/48/51/52 从 10-02~10-04 状态更新至 10-06 实测）；新增 slide 53（Day 26 收口页：析因第三点 + S7 结构预算矩阵 + 三通道裁决，23 项数字断言）；四遍验证全过；备份 .bak_day26_1420（本地 ppt/）。
+- **叙事链核查（五幕证据强度）**：Act I-V 逐幕核对——全部有预注册/干预级/多档三角支撑；骨架承接确认（P1-P5 预注册可证伪预测 + 符号翻转单调链 −5.24/−2.74/+3.76）；遗留弱点三项诚实登记（650M 决定性单元格在训 / +0.10 归因首要嫌疑级待 Rfam 富集臂正交判据 / 10M_rw1 +0.15pp<种子 std）——详见 docs/TASKS_V2.md 附二（R-A 表 + R-D 六项动作清单）。
+- **发现并登记**：DRAFT Abstract 仍停在 650M@2B 时代——需补预算轴三档 + 三通道裁决两句（D-5，本周执行，arXiv 前必须）。
+- **文档同步**：docs/TASKS_V2.md 版本头升至 3.26（含附二反思自查）+ T1.0.4 执行状态更新至 10-06；本地镜像 DRAFT_v1/refs/id_verify_log 同步（md5 91de84d7 一致）；本地 01/02/03 交接文档 + 巡检日志全部回写。
+- 在训不打扰：650M_b59 唯一臂推进中，收口动作链全覆盖确认（family probe + randinit + mommatch 三件套 + S7 最后一格 + factorial_verdict 第 4 行，全部自动）。
