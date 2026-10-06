@@ -2673,3 +2673,16 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - **双臂提交（多 GPU 并行）**：①100M_rfamcap GPU3（PID 3829868，nt=15M 推进 loss 1.33→1.22 正常下降）②30M_rfamcap GPU4（PID 3852730，nt=5M loss 1.33→1.32）；两卡占用 34.9/29.0GB 基本填满；650M_b59 主臂不受影响（GPU0 100%，nt=4275M/5.9B=72.5%）。
 - **设计说明（预注册）**：2.0B 预算 / 273.9M 语料 = 7.3 epoch 等效重复——与主线同预算对比是设计属性（预注册 rfamcap 臂即"同预算不同语料构成"）；判读规则：若 100M_rfamcap 结构探针 F1 显著超 100M@2B 主线（+2pp 以上）→ 语料因子在受控架构上被证实（+0.10 归因正交判据闭合）；若不超 → 架构/配方混杂权重上调。30M 档作容量门控对照（rw1 符号翻转预测：小容量档语料构成效应弱）。
 - 值守链全在岗；closeout_b59 加固版（3688417）继续等 650M；rfamcap 臂 DONE 后 watch_all（按日志文件名 key 的 inc12-suffix 修复版）将自动 probe——收口路径与 b59/rw1 同链。
+
+- [auto] rnasc_100M_s17_rfamcap complete: nt=0.27B best_val=1.2802 fallback=0; final probe+linkage+s1_summary done
+
+- [auto] rnasc_30M_s17_rfamcap complete: nt=0.27B best_val=1.2817 fallback=0; final probe+linkage+s1_summary done
+
+## Day 28（2026-10-07 00:35-01:0x）——★rfamcap 双臂 1-epoch 提前退出事故诊断与零返工修复
+
+- **事故发现**：rfamcap 双臂在 nt=273,922,165（恰为语料总 nt，1 epoch）DONE，未达预注册 2.0B 预算（7.3 epoch）——validate 正常（1.28，原池修复生效），训练本身健康。
+- **根因**：train.py 主循环在生成器耗尽时无条件 done=True（注释假设"budget 2.0B < 一个流式 epoch"——对 5.9B 全语料成立，对 273.9M 的 rfamcap 语料不成立）。
+- **修复（零返工）**：train.py epoch-loop 补丁——train_parquet 路径下生成器耗尽且未达预算时重启 epoch（打印 epoch boundary 帧）；resume 兼容性核查通过（快进在第 1 epoch 内完成 200M<273.9M，epoch 2+ 正常训练）。
+- **resume 续跑（不返工）**：100M 从 ckpt_nt200006790（GPU3，loss 1.11-1.14 正常）+ 30M 从 ckpt_nt200006790（GPU4，loss 1.17-1.23）——1 epoch 的训练成果保留（同 seed 同 mask 语义与 b59 臂重复训练行为一致，项目协议一致性保持）；train_s3_rfamcap.py 加 --resume-from 透传。
+- 30M 首次 resume 启动因 cwd 不对 ModuleNotFoundError（ssh 链式 cd 失效）→ 重启修复，现双臂 GPU3 34.3GB/GPU4 38.6GB 续跑健康；650M_b59 主臂 76.3%（nt=4500M）不受影响；值守三链在岗。
+- 教训入册：小语料臂（<预算）必须走 epoch-loop 路径；train_parquet 类臂启动前须核查"语料 nt vs 预算"关系（本应在语料构建时预判——1 epoch=273.9M < 2.0B 即必然多 epoch，已在 TRAINING_LOG 预注册段写明 7.3 epoch 但未检查加载器是否支持）。

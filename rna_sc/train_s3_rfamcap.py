@@ -21,6 +21,7 @@ def main() -> int:
     ap.add_argument("--seed", type=int, default=17)
     ap.add_argument("--device", type=int, required=True)
     ap.add_argument("--budget-nt", type=int, default=2_000_000_000)
+    ap.add_argument("--resume-from", default=None)
     args = ap.parse_args()
     tag = "rfamcap"
     scale = args.model.split("-")[-1]
@@ -31,6 +32,8 @@ def main() -> int:
            "--budget-nt", str(args.budget_nt),
            "--train-parquet",
            "/mnt/cunyuliu/rna-sc/data/r22_train_rfamcap.parquet"]
+    if args.resume_from:
+        cmd += ["--resume-from", args.resume_from]
     print("launch:", " ".join(cmd), flush=True)
     return subprocess.call(cmd)
 

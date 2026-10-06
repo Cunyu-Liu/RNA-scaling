@@ -215,9 +215,16 @@ def run(model_id: str, seed: int, device: int, out_dir: str,
                     flush=True)
                 with open(os.path.join(out_dir, "manifest.json"), "w") as fh:
                     json.dump(manifest, fh, indent=2, default=str)
-        # generator exhausted: full-split streaming epoch ends here.
+        # generator exhausted: one streaming epoch ends here.
         # corpus-capped arms cannot loop; full-split arms stop too (budget
         # 2.0B nt < one streaming epoch of 14.1M sequences, ~5.9B nt).
+        # train_parquet arms (rfamcap: 273.9M-nt corpus) MUST loop epochs
+        # until the nt budget is reached — pre-registered 7.3-epoch design.
+        if train_parquet is not None and cumulative_nt < cfg.budget_nt:
+            print("[%s] epoch boundary at nt=%d (< budget %d): restarting "
+                  "epoch" % (cfg.run_id, cumulative_nt, cfg.budget_nt),
+                  flush=True)
+            continue
         done = True
     guard.verify_cuda_alive()
     manifest.update({
