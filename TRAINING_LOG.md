@@ -2657,3 +2657,10 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - **Abstract 更新（D-5，arXiv 前必做项闭合）**：在 650M verdict 句后插入预算轴段落——①预注册 3×2 析因 + Claim-14 证伪声明（corpus-ceiling → Chinchilla-style compute-optimal interaction）；②family 通道符号翻转链 −5.24/−2.74/+3.76pp + 302M@5.9B 0.3821 > 全 2.0B 主线含 650M 0.3632；③readout-channel-specific：结构通道单调 +0.09/+0.85/+1.87pp（学习增量 −0.9/+1.1/+2.7pp above randinit）；④三通道裁决（"30M plateau" 是 family-classification-channel 现象非全局表征极限）
 - **三遍验证**：第一遍 13 项断言（数字+表述全过）；第二遍与 factorial_verdict/s7_structure_budget_matrix/p5rns_b59_verdict 三个 evidence JSON 交叉验证全过（deltas 与 budget_delta_pp 逐位一致）；第三遍零 PENDING / 3821 唯一 / 3632 两次均合法（旧 verdict 句+新参照句）/ 文档结构完整
 - 集群快照：650M_b59 72.2%（nt=4259M，GPU0 100%）；值守三链在岗（supervisor 13d18h / closeout_b59 加固版 3688417 / watch_all 4d13h）；8 卡全忙（用户其他课题进程占卡——非外部阻塞，无整卡空闲可提交新训；cron no alerts）
+
+## Day 27 续三（2026-10-06 14:2x-14:3x）——D-4 提前执行：fig6 v3 双通道版生成挂接（不等 650M）
+
+- **fig6 v3（make_fig6_v3.py，D-4 提前）**：单面板两点版 → 双面板三点版——左：family 通道符号翻转链全三档（30M −5.24 棕 / 100M −2.74 红 / 300M +3.76 绿箭头 + 0.3821 新全局最优标注 + Claim-14 证伪角标 + 650M@2B 参照线）；右：S7 结构通道单调 +0.09/+0.85/+1.87pp（绿箭头 + randinit 叉标记 + 学习增量说明）——**全部数字程序化读自 evidence JSON 零手抄**；650M@5.9B 格缺席时自动跳过、收口后重跑脚本即自升级（幂等再生成，无手改）。
+- **三遍验证**：第一遍 PIL 物理完整性（PNG 2520×960 RGBA verify 过）；第二遍数值溯源（标题链 −5.24/−2.74/+3.76 与 +0.09/+0.85/+1.87 同 JSON budget_delta_pp 逐位一致）；第三遍双面板渲染像素检查（左 8.5%/右 7.1% 非空白占比，双面板实体确认）。
+- **DRAFT 挂接**：§4.4 S7 矩阵段落尾加引用句（line 564：双通道并列 = 同一 budget×scale 交互的两个视图）；零 PENDING 保持。
+- R-D 状态：D-4 ✅（提前于 650M 收口，v3 版即三点闭环；650M 收口后重跑脚本自动加第四点无需改码）；D-5 ✅（上轮）；剩余 D-1/D-2/D-6 均锚定 650M 收口事件（自动链 + 收口后轮次）。

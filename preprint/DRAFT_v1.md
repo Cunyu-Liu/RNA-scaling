@@ -561,7 +561,7 @@ effect is MONOTONE in scale (+0.09 → +0.85 → +1.87pp) — NO sign
 flip, unlike the family channel (−5.24 → −2.74 → +3.76pp): family
 classification is a small-scale overtraining story; structure
 readout is a scale-gated undertraining story. Full matrix:
-evidence/s7_structure_budget_matrix.json.]
+evidence/s7_structure_budget_matrix.json. (Fig 6 v3, right panel: both channels side by side — the sign-flip and the monotone gain are two views of the same budget x scale interaction.)]
 
 Original audit (superseded numbers, kept for provenance):
 
