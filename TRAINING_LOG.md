@@ -2686,3 +2686,11 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - **resume 续跑（不返工）**：100M 从 ckpt_nt200006790（GPU3，loss 1.11-1.14 正常）+ 30M 从 ckpt_nt200006790（GPU4，loss 1.17-1.23）——1 epoch 的训练成果保留（同 seed 同 mask 语义与 b59 臂重复训练行为一致，项目协议一致性保持）；train_s3_rfamcap.py 加 --resume-from 透传。
 - 30M 首次 resume 启动因 cwd 不对 ModuleNotFoundError（ssh 链式 cd 失效）→ 重启修复，现双臂 GPU3 34.3GB/GPU4 38.6GB 续跑健康；650M_b59 主臂 76.3%（nt=4500M）不受影响；值守三链在岗。
 - 教训入册：小语料臂（<预算）必须走 epoch-loop 路径；train_parquet 类臂启动前须核查"语料 nt vs 预算"关系（本应在语料构建时预判——1 epoch=273.9M < 2.0B 即必然多 epoch，已在 TRAINING_LOG 预注册段写明 7.3 epoch 但未检查加载器是否支持）。
+
+## Day 28 续（2026-10-07 12:5x-13:1x）——D-6 部分提前：arXiv 前红队自查三遍全过 + Fig1/2 挂接补漏
+
+- **红队第一遍（措辞门 D1-D11 重跑）**："controlled" 全文 24 处逐处上下文判读——全部合规（仅修饰自训家族/实验轴，或转述 Li et al. 的 controlled experiments；外部模型一律 same-family series）；D7 禁止表述（"no ablation" 类）零命中；D9 REDIAL 分界段在位。
+- **红队第二遍（数字门 22 项）**：DRAFT 全文关键数字 vs evidence JSON 逐位核对——factorial 表 7 格 / S7 矩阵 4 组 / H5 三档 / S1 六档 / RNS Spearman 全部一致；外部模型 15 组数字（RiNALMo 0.728/0.653/0.607、RNA-FM 0.587、MLI 0.743、COV +0.096、slope 0.142 等）全部在文且有据。
+- **红队第三遍（结构门）+ 发现修复**：正文自身图引用只有 5c/6/7——**fig1_layer_migration（主图）与 fig2_layerwise_tasks 产物存在但正文零引用**（挂接遗漏）——已补挂（§4.1 层迁移句 + §4.4 结构 probe 段，commit 见下）；"Fig 4" 确认为转述 NucleicBERT 论文图（合法）；零 PENDING 保持；md5 6c115578。
+- 三任务并行健康：650M_b59 81.3%（nt=4796M）；100M_rfamcap 46%（nt=910M，epoch boundary 帧 ×2 = 多 epoch 循环生效实证）；30M_rfamcap 35%（nt=700M）；值守三链在岗；cron no alerts。
+- D-6 剩余部分（650M 收口后的最终数字回填 + Abstract 第 4 点句子 + fig6 自升级重跑）锚定收口事件。

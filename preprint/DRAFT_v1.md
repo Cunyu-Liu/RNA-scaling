@@ -253,7 +253,7 @@ the 650M era (10M 0.1535 < 1M 0.1650, three-seed means). The 300M
 anchor closes the interpolation: 100M→300M only +0.5pp
 (near-plateau) vs 300M→650M +1.9pp; the layer-migration endpoint
 reverses (rel 0.864@100M → 0.957@300M peak → 0.296@650M) —
-non-monotone at six scales.
+non-monotone at six scales. (Fig 1: best-layer depth vs scale, six-scale curves.)
 
 **Budget axis (3×2 factorial; two points closed 10-03/10-04).** Two
 arms retrained at 5.9B nt (≈ full corpus + ~3 epochs, same recipe/
@@ -584,7 +584,7 @@ Structure-probe randinit controls: |trained − randinit| ≤ 0.02 at all
 six scales (10M: 0.5678 vs 0.5663; 300M/650M arms in fig update). Paired-position linearity comes
 from the ALiBi/encoder prior; pretraining contributes ≈0 on this task
 at this budget — the mirror image of the family-discrimination gains
-(+0.04..+0.17). Four-way convergence (S7 zero-gain, S12 early-layer
+(+0.04..+0.17). (Fig 2: layer-wise curves, rna_type vs structure tasks.) Four-way convergence (S7 zero-gain, S12 early-layer
 high-DI families, S13b not-bell, S14 decoupling): at 2.0B nt, RNA MLM
 pretraining transfers family-level sequence statistics; structure
 information is largely not yet learned.
