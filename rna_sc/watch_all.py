@@ -137,6 +137,38 @@ def main():
 def _cycle(handled):
         done = scan_done()
         probed = probed_runs()
+        # rfamcap/multi-epoch recheck (2026-10-08): a run marked handled
+        # from a PREMATURE DONE (1-epoch exit) must be re-probed once the
+        # resumed run reaches its real budget DONE. probed_runs() already
+        # drops runs whose probe predates manifest final_nt; here we also
+        # un-mark handled for those, so the re-probe actually fires.
+        for rid in list(handled):
+            if rid in probed or rid not in done:
+                continue
+            rd = run_dir_of(rid)
+            try:
+                import json as _json
+                with open(os.path.join(rd, "manifest.json")) as _mh:
+                    _mnt = _json.load(_mh).get("final_nt") or 0
+            except (OSError, _json.JSONDecodeError):
+                continue
+            # probe rows' max ckpt for this run
+            _max_probe_nt = 0
+            try:
+                for line in open(PROBE_OUT):
+                    try:
+                        _r = _json.loads(line)
+                    except _json.JSONDecodeError:
+                        continue
+                    if _r.get("run") == "RNA-Sc-" + rid[len("rnasc_"):]:
+                        _max_probe_nt = max(_max_probe_nt,
+                                            _r.get("ckpt_nt") or 0)
+            except OSError:
+                pass
+            if _mnt and _max_probe_nt and _mnt - _max_probe_nt > 100_000_000:
+                print("[watch-all] %s probe stale (manifest %d > probe %d) "
+                      "-> requeue" % (rid, _mnt, _max_probe_nt), flush=True)
+                handled.discard(rid)
         todo = [rid for rid, d in done.items()
                 if rid not in probed and rid not in handled]
         for rid in todo:
