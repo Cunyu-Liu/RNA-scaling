@@ -2707,3 +2707,9 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - 隐患修复：rfamcap 双臂 1-epoch 提前 DONE 曾被 watch_all probe 早期 ckpt（0.3448@L18 / 0.2880@L7 = 200M ckpt 非终值）+ handled 内存标记会导致真 DONE 后 re-probe 被静默跳过——补丁按 manifest final_nt vs probe max ckpt_nt 复核 requeue（阈值 100M）。
 - 值守链换血：旧 watch_all（10-02 代码）kill → keep_watch_all cron 自愈拉起补丁版 PID 1084349；四进程 + 3 cron 全景终验在岗。
 - 在训：650M_b59 86.3% / rfamcap 100M 92% / 30M 66%（epoch-loop 修复生效：4 次 epoch boundary 重启实证）。
+
+## Day 29 续二（2026-10-08 01:4x）——GPU 审计 + closeout auto-fig 补丁（bcdade3）
+
+- GPU 审计：wave 24 条仅剩 650M_b59 running；GPU5 17.9GB 为外部租户包围的碎片空间；无可提交空位（8 卡按纪律占满）。
+- closeout_b59 auto-fig 补丁：verdict 刷新后自动重跑 make_result_figs_v2（fig6_v4 四点自升级 + fig1_v2），CPU 零 GPU；进程重启带补丁 PID 1132058。
+- 自升级链路三查通过；值守链（watch_all 1084349 + closeout 1132058 + supervisor 2034308 + 3 cron）终验在岗。
