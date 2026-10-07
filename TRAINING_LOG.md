@@ -2701,3 +2701,9 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - CJK 字体基建：Hiragino Sans GB 注册 ~/.local/share/fonts（matplotlib 中文渲染根治）。
 - 巡检：650M_b59 86%（nt=5.09B/5.9B GPU0 健康）；rfamcap 100M 92% / 30M 66%；值守五链在岗；8 卡全忙无空位。
 - 事故记录：TRAINING_LOG 曾被 cp 短镜像覆盖（9628a61 误提交）——本次已从 HEAD~1 恢复完整 2696 行历史并追加 Day 29，修正提交在后。
+
+## Day 29 续（2026-10-08 01:3x）——watch_all rfamcap requeue 补丁（1e28186）
+
+- 隐患修复：rfamcap 双臂 1-epoch 提前 DONE 曾被 watch_all probe 早期 ckpt（0.3448@L18 / 0.2880@L7 = 200M ckpt 非终值）+ handled 内存标记会导致真 DONE 后 re-probe 被静默跳过——补丁按 manifest final_nt vs probe max ckpt_nt 复核 requeue（阈值 100M）。
+- 值守链换血：旧 watch_all（10-02 代码）kill → keep_watch_all cron 自愈拉起补丁版 PID 1084349；四进程 + 3 cron 全景终验在岗。
+- 在训：650M_b59 86.3% / rfamcap 100M 92% / 30M 66%（epoch-loop 修复生效：4 次 epoch boundary 重启实证）。
