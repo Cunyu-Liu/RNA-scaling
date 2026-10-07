@@ -139,6 +139,22 @@ def factorial_verdict(device: int) -> None:
     with open(TLOG, "a") as fh:
         fh.write("\n- [closeout-b59] 3x2 factorial verdict refreshed "
                  "(evidence/factorial_verdict.json; Claim-14 test)\n")
+    # 2026-10-08 auto-fig patch: idempotent self-upgrade of fig6_v4 (4th
+    # point) + fig1_v2 after the verdict JSON gains the 650M row. Pure
+    # matplotlib on CPU; 10-min timeout guard.
+    try:
+        figlog = os.path.join(MNT, "logs", "closeout_b59_figs.log")
+        with open(figlog, "a") as lf:
+            subprocess.run(
+                [PY, "/home/cunyuliu/rna-sc/make_result_figs_v2.py"],
+                cwd=ROOT, stdout=lf, stderr=lf, timeout=600)
+        with open(TLOG, "a") as fh:
+            fh.write("\n- [closeout-b59] fig6_v4/fig1_v2 auto-refreshed "
+                     "(idempotent 4-point self-upgrade)\n")
+    except subprocess.TimeoutExpired:
+        with open(TLOG, "a") as fh:
+            fh.write("\n- [closeout-b59] fig auto-refresh TIMEOUT "
+                     "(rerun make_result_figs_v2.py manually)\n")
 
 
 def main() -> int:
