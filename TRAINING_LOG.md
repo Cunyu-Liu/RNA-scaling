@@ -2728,10 +2728,9 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - 三臂重整：清 7 个历史残留进程；100M@GPU1 / 300M@GPU2 / 30M@GPU5 全带 patience 5 在训（2.0B 预算，先收敛先停）。
 - 30M 为用户点名补充——三档对齐主线，A 判据插值完整。
 
-## Day 30（2026-10-09 00:2x-00:5x）——★30M_rfamcap 收口（H5 容量门控第三点）+ S7 正交判据主读数启动 + rinalmocorpus 臂发现
+## Day 30 续三（2026-10-08 22:0x）——第二轮 PPT 需求八项 + Rfam 补库
 
-- **30M_rfamcap DONE**（nt=2.0B 达预算，best_val 1.0685，epoch ×5）→ watch_all 自动 probe 24 行——**30M 语料构成效应 +0.34pp**（best L7 0.2880 vs 主线 L4 0.2846）：与 100M 档 +1.85pp 构成**语料构成效应随容量放大**的梯度（30M +0.34 / 100M +1.85）——与 rw1 符号翻转（容量门控）机制互洽：容量充足时家族分布信息是可学习信号，Rfam 富集强化它。
-- **S7 结构探针（正交判据主读数）100M_rfamcap 启动**：GPU3 40GB 被 root AlphaFold 进程瞬时占满（OOM 两次）→ 迁移 GPU6（38GB 空闲）成功运行（PID 1211018，CPU 99%，22 层逐层跑预计 ~1.5-2h）——判读规则预注册：结构 F1 超 100M@2B 的 0.5890 达 +2pp（≥0.609）→ 语料因子证实；family +1.85pp 只是先导。
-- **发现 rinalmocorpus 双臂在训**（用户/另一会话启动的语料臂：100M+30M @ rinalmo_corpus_v1.parquet，GPU5 共卡）——100M nt=280M/2.0B、30M nt=110M；与 rfamcap 构成语料轴三重对照（Rfam 富集 / RiNALMo 语料 / 通用主线）。
-- 650M_b59 93.3%（nt=5505M，lr 3.3e-06 尾部——数小时内 DONE，收口链就绪）。
-- 值守链在岗；cron no alerts。
+- 八项闭环：读出头阶梯图（线性0.61→DP0.20→Oracle0.998）+ RiNALMo 涌现图（giga 0.728 深层陡升）入页6；fig7_v3 相关性风格；H5 两面板重画；页4 650M@2B 0.3632+5.9B 在训标注；DRAFT B3 双向黑盒段；S8 二期 backlog。
+- Rfam 家族 fasta 下载启动（4227 文件，通道全通）；三库增补可行。
+- PPT CRC 事故：保存写坏→备份恢复重做（单次保存+CRC 校验固化）。
+- 在训：三语料臂健康（100M loss 已至 0.071）+ 650M_b59 93.4% + Rfam 348/4227。GitHub 1d3e5c5。
