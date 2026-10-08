@@ -2721,3 +2721,9 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - B 判据三格：random Δ +0.65/−0.6/+4.1pp vs family −5.24/−2.74/+3.76——B-BUDGET-IMMUNE-RANDOM（磨蚀打迁移不打记忆）。
 - watch_all 正则扩展三语料臂对照；rfamcap requeue 补丁实战验证通过（双臂终值 probe 落盘）。
 - 预注册 t435_preregistration.json 冻结（A/B/C 三判据）。GitHub 164c926 + 18ddc65。
+
+## Day 30 续二（2026-10-08 20:2x）——早停 + 30M 臂
+
+- train.py --early-stop-patience 补丁（808383e）：N 轮 val 无改善即 DONE（stop_reason/cosine_truncated 入 manifest，DONE 帧格式兼容值守链）。
+- 三臂重整：清 7 个历史残留进程；100M@GPU1 / 300M@GPU2 / 30M@GPU5 全带 patience 5 在训（2.0B 预算，先收敛先停）。
+- 30M 为用户点名补充——三档对齐主线，A 判据插值完整。
