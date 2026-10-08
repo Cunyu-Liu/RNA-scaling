@@ -28,9 +28,9 @@ ROOT = "/home/cunyuliu/rna-sc"
 
 ARMS = [
     ("RNA-Sc-100M", "runs/RNA-Sc-100M_s17_rinalmocorpus",
-     "logs/RNA-Sc-100M_s17_rinalmocorpus.log", 28.0),
+     "logs/RNA-Sc-100M_s17_rinalmocorpus.log", 6.0),
     ("RNA-Sc-300M", "runs/RNA-Sc-300M_s17_rinalmocorpus",
-     "logs/RNA-Sc-300M_s17_rinalmocorpus.log", 33.0),
+     "logs/RNA-Sc-300M_s17_rinalmocorpus.log", 10.0),
 ]
 
 
@@ -85,9 +85,9 @@ def main():
                 if free_gb(gpu) >= need:
                     launch(model_id, run_dir, log_rel, gpu)
                     break
-            else:
                 print("[t435-watch] %s waiting: no GPU >= %.0fGB free" %
                       (model_id, need), flush=True)
+                break
         if all_done:
             print("[t435-watch] both arms launched, exit", flush=True)
             return

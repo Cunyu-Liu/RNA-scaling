@@ -178,7 +178,10 @@ def stage_dedup_eval():
     n_total = n_removed = 0
     with open(tsv) as fh, open(out_tsv, "w") as fo:
         for line in fh:
-            rep, member = line.split("\t")[:2]
+            parts = line.rstrip("\n").split("\t")
+            if len(parts) < 2:
+                continue
+            rep, member = parts[0], parts[1]
             n_total += 1
             s = idx.get(member, "")
             if s and canon(s) in held:
@@ -212,7 +215,10 @@ def stage_parquet():
     n_clusters = set()
     with open(os.path.join(WORK, "clusters_dedup.tsv")) as fh:
         for line in fh:
-            rep, member = line.split("\t")[:2]
+            parts = line.rstrip("\n").split("\t")
+            if len(parts) < 2:
+                continue
+            rep, member = parts[0], parts[1]
             s = idx.get(member, "")
             if not s:
                 continue
