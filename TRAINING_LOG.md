@@ -2714,13 +2714,10 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - closeout_b59 auto-fig 补丁：verdict 刷新后自动重跑 make_result_figs_v2（fig6_v4 四点自升级 + fig1_v2），CPU 零 GPU；进程重启带补丁 PID 1132058。
 - 自升级链路三查通过；值守链（watch_all 1084349 + closeout 1132058 + supervisor 2034308 + 3 cron）终验在岗。
 
-- [auto] rnasc_100M_s17_rfamcap complete: nt=2.00B best_val=1.0370 fallback=0; final probe+linkage+s1_summary done
+## Day 30（2026-10-08 19:3x）——T4.3.5 全链执行收口
 
-## Day 29（2026-10-08 11:4x）——★100M_rfamcap 收口：语料因子正交判据第一读数 +1.85pp
-
-- **100M_rfamcap DONE**（nt=2,000,003,378 达预算，best_val 1.0370，epoch boundary ×6 = 7.3 epoch 循环健康）→ watch_all 自动 probe 46 行（22 层 × 多 ckpt）。
-- **第一读数（family 通道）**：全 ckpt best L18 F1=0.3448 vs 100M@2B 主线 0.3263（L21）→ **语料构成效应 +1.85pp**（final-ckpt 档 best L13 0.3297 = +0.34pp——取全 ckpt best 口径与主线一致）。
-- **判读（预注册规则的 family 部分）**：+1.85pp 与 b59 预算效应（+3.76pp@300M）同向同量级——Rfam 富集语料（3722 家族展平）在受控架构上确实改善 family 泛化；但**正交判据的主读数在结构通道**（预注册：结构 F1 超 100M@2B 0.5890 +2pp 即证实语料因子）——S7 结构探针待跑（rfamcap 臂不在 closeout_b59 自动链内，需手动/watchdog 补）。
-- 在训：650M_b59 90.1%（nt=5314M/5.9B，loss 0.99 lr 7.3e-06 余弦尾部——预计 ~10h 内 DONE）；30M_rfamcap 88.6%（nt=1771M/2.0B，epoch ×5）。
-- 值守链在岗（supervisor 15 天/watch_all 10h/closeout_b59 10h）；cron no alerts；GPU 0/3/4 训练满载。
-- 待办登记：①rfamcap 双臂 S7 结构探针（收口后补——正交判据主读数）②randinit 对照（rfamcap 臂）③650M 收口自动链就绪。
+- 语料建成：14.03M seqs / 6.75M clusters / 10.0B nt（RiNALMo 4.3 配方复刻 + B1 去重叠 14.9M）；两 bug 修复（tsv 换行/parquet schema）。
+- 双臂开训：300M GPU4 + 100M GPU1（GPU6 cgroup 陷阱两次 OOM 后迁移），2.0B iso-token，~2-3 天。
+- B 判据三格：random Δ +0.65/−0.6/+4.1pp vs family −5.24/−2.74/+3.76——B-BUDGET-IMMUNE-RANDOM（磨蚀打迁移不打记忆）。
+- watch_all 正则扩展三语料臂对照；rfamcap requeue 补丁实战验证通过（双臂终值 probe 落盘）。
+- 预注册 t435_preregistration.json 冻结（A/B/C 三判据）。GitHub 164c926 + 18ddc65。
