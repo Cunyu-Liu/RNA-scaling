@@ -92,7 +92,8 @@ def run(model_id: str, seed: int, device: int, out_dir: str,
         smoke_nt: int | None = None, resume_from: str | None = None,
         cluster_allowlist: str | None = None,
         budget_nt: int | None = None,
-        train_parquet: str | None = None) -> dict:
+        train_parquet: str | None = None,
+        early_stop_patience: int = 0) -> dict:
     dev = "cuda:%d" % device
     assert torch.cuda.is_available(), "CUDA required (no silent CPU fallback)"
     guard = GPUGuard(dev)
@@ -128,6 +129,8 @@ def run(model_id: str, seed: int, device: int, out_dir: str,
                             betas=(0.9, 0.95), weight_decay=0.1)
     step, cumulative_nt, last_ckpt_nt, last_val_nt = 0, 0, 0, 0
     best_val, best_ck = float("inf"), None
+    es_bad = 0            # early-stop: consecutive vals without improvement
+    stop_reason = "budget"
     if resume_from and os.path.exists(resume_from):
         payload = torch.load(resume_from, map_location=dev, weights_only=False)
         model.load_state_dict(payload["model"])
@@ -210,6 +213,16 @@ def run(model_id: str, seed: int, device: int, out_dir: str,
                      "val_loss": v["val_loss"], "path": ck_path})
                 if v["val_loss"] < best_val:
                     best_val, best_ck = v["val_loss"], ck_path
+                    es_bad = 0
+                else:
+                    es_bad += 1
+                    if early_stop_patience and es_bad >= early_stop_patience:
+                        print("[%s] EARLY-STOP: %d vals without improvement "
+                              "(best=%.4f @patience=%d) -> stop" % (
+                                  cfg.run_id, es_bad, best_val,
+                                  early_stop_patience), flush=True)
+                        stop_reason = "early_stop"
+                        done = True
                 print("[%s] VAL nt=%d step=%d val=%.4f (best=%.4f)" % (
                     cfg.run_id, cumulative_nt, step, v["val_loss"], best_val),
                     flush=True)
@@ -237,6 +250,9 @@ def run(model_id: str, seed: int, device: int, out_dir: str,
         "cpu_fallback_count": guard.cpu_fallback_count,
         "end_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "status": "DONE",
+        "stop_reason": stop_reason,
+        "early_stop_patience": early_stop_patience or None,
+        "cosine_truncated": (stop_reason == "early_stop"),
     })
     with open(os.path.join(out_dir, "manifest.json"), "w") as fh:
         json.dump(manifest, fh, indent=2, default=str)
@@ -268,12 +284,17 @@ def main():
     ap.add_argument("--train-parquet", default=None,
                     help="override TRAIN data source parquet (rfamcap arm; "
                          "validate keeps streaming SPLIT_8080)")
+    ap.add_argument("--early-stop-patience", type=int, default=0,
+                    help="stop after N consecutive val points without "
+                         "improvement (0 = disabled, budget-bound as "
+                         "before); user request 2026-10-08: patience 5")
     args = ap.parse_args()
     run(args.model, args.seed, args.device, args.out_dir,
         corpus_nseq=args.corpus_nseq, corpus_tag=args.corpus_tag,
         smoke_nt=args.smoke_nt, resume_from=args.resume_from,
         cluster_allowlist=args.cluster_allowlist,
-        budget_nt=args.budget_nt, train_parquet=args.train_parquet)
+        budget_nt=args.budget_nt, train_parquet=args.train_parquet,
+        early_stop_patience=args.early_stop_patience)
 
 
 if __name__ == "__main__":
