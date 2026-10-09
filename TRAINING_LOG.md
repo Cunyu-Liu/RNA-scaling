@@ -2740,3 +2740,9 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - rRNA 占比注入 PPT 页7（R22 68%/四库混合估 50-65%）；S8/nt/Ensembl 二期 backlog 入册 T4.3.6。
 - v2 语料合并 watcher 部署（073ac4e）：Rfam 下载完自动合并 v2 + 审计（2600/4227 进行中）。
 - 650M_b59 93.5% 收口在望（val 静默系验证慢非停滞，三查确认）；全链自动就位。
+
+## Day 31 续二（2026-10-09 19:0x）——第三轮修复 + v2 语料
+
+- 六问题修复：口径混用（fig2d_v2 双面板分口径）/ RiNALMo 键名 bug（5 曲线断言）/ fig7 标注表避让 / RNA-FM 0.0998 核验为负对照（family 0.1335 无红利 + RNS 0.693）/ H4 空（schema 误读，s6_cross_scale 真数据）/ H5 分图 + H6-H8 恢复。
+- v2 语料落成：Rfam 448 万新序列（B1 剔 281 万 held-out）→ v2 = 18.51M / 10.65B nt——RiNALMo 覆盖 39%→51%；重训决策待用户。
+- 650M_b59 95%；PPT 三遍+实机（a850a807）；GitHub 8358102。
