@@ -938,6 +938,22 @@ the two zero-supervision and two readout views converge.
   family-split LM (0.170), so "real, weight-structured signal" and
   composition reading are not separable by our controls — the
   beyond-composition margin is +0.007 (negative vs LightGBM).
+- Bidirectional corpus black-box (external-model comparisons, added
+  2026-10-08): our family-split evaluation is defined over OUR cluster
+  partition of RNAcentral R22; published models (RiNALMo, RNA-FM) were
+  trained on corpus manifests we cannot audit, which almost certainly
+  include sequences homologous to our evaluation families (their
+  four-database mix spans the whole ncRNA space). The comparison is
+  therefore doubly confounded in opposite directions: their corpus is a
+  black box to our split (possible same-family exposure → their
+  family-split numbers may be deflated or inflated, unknowable), and
+  our split is a black box to their training (we cannot verify what
+  they saw). Consequently all external-model rows are observational
+  anchors, not controlled attributions; the controlled corpus axis is
+  the replica arm (T4.3.5, RiNALMo-recipe corpus, B1 held-out removal
+  — direction-valid for the "corpus organization" factor while the
+  sequence-source factor remains approximated). We state this
+  explicitly to preempt both directions of reviewer attack.
 - Architecture scope: the ladder is a single encoder recipe (width/
   depth scaling only); architecture×scale interactions are untested
   (RiNALMo-arch axis Q5 remains open), so scale claims are

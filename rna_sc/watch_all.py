@@ -194,7 +194,7 @@ def _cycle(handled):
             # H2/H3 auto-controls (inc11): randinit + mommatch for
             # main family arms, idempotent via jsonl row check
             base = os.path.basename(run_dir_of(rid))
-            main_arm = re.fullmatch(r"RNA-Sc-(1M|10M|30M|100M|300M|650M)_s17(_b59)?", base)
+            main_arm = re.fullmatch(r"RNA-Sc-(1M|10M|30M|100M|300M|650M)_s17(_b59|_rfamcap|_rinalmocorpus)?", base)
             if main_arm:
                 for extra, label in (("--random-init 17", "randinit17"),
                                      ("--moment-matched 17", "mommatch17")):
