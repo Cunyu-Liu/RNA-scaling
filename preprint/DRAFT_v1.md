@@ -954,6 +954,22 @@ the two zero-supervision and two readout views converge.
   — direction-valid for the "corpus organization" factor while the
   sequence-source factor remains approximated). We state this
   explicitly to preempt both directions of reviewer attack.
+- Corpus-coverage statement (added 2026-10-10): the replica corpus
+  (v1) follows the published RiNALMo preprocessing recipe on the
+  RNAcentral R22 release plus Rfam family fastas (14.03M sequences,
+  10.04B nt; 51% of RiNALMo 36M sequence count; the residual gap is
+  the nt database and Ensembl portions). We hold this recipe-fixed
+  corpus constant across all arms, so the residual source difference
+  cancels within-corpus comparisons; the controlled corpus contrast
+  is recipe-replication itself (100M: +2.33pp family-split F1, S8
+  contact caliber +9%), not 100% sequence identity — which is neither
+  attainable (no published manifest) nor desirable (full nt inclusion
+  would force B1 removal of evaluation families, re-introducing the
+  leakage the discipline exists to prevent). A merged v2 corpus
+  (18.51M seqs, +Rfam full-family set) was evaluated and NOT
+  retrained: its increment over v1 is already covered by the rfamcap
+  arm, and retraining would add an uncontrolled variable mid-study.
+
 - Architecture scope: the ladder is a single encoder recipe (width/
   depth scaling only); architecture×scale interactions are untested
   (RiNALMo-arch axis Q5 remains open), so scale claims are

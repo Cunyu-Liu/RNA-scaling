@@ -2746,3 +2746,11 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - 六问题修复：口径混用（fig2d_v2 双面板分口径）/ RiNALMo 键名 bug（5 曲线断言）/ fig7 标注表避让 / RNA-FM 0.0998 核验为负对照（family 0.1335 无红利 + RNS 0.693）/ H4 空（schema 误读，s6_cross_scale 真数据）/ H5 分图 + H6-H8 恢复。
 - v2 语料落成：Rfam 448 万新序列（B1 剔 281 万 held-out）→ v2 = 18.51M / 10.65B nt——RiNALMo 覆盖 39%→51%；重训决策待用户。
 - 650M_b59 95%；PPT 三遍+实机（a850a807）；GitHub 8358102。
+
+- [auto] rnasc_100M_s17_rinalmocorpus complete: nt=2.00B best_val=0.8138 fallback=0; final probe+linkage+s1_summary done
+
+- [closeout-b59] 3x2 factorial verdict refreshed (evidence/factorial_verdict.json; Claim-14 test)
+
+- [closeout-b59] fig6_v4/fig1_v2 auto-refreshed (idempotent 4-point self-upgrade)
+
+- [auto] rnasc_650M_s17_b59 complete: nt=5.90B best_val=0.7491 fallback=0; final probe+linkage+s1_summary done
