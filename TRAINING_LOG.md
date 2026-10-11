@@ -2754,3 +2754,7 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - [closeout-b59] fig6_v4/fig1_v2 auto-refreshed (idempotent 4-point self-upgrade)
 
 - [auto] rnasc_650M_s17_b59 complete: nt=5.90B best_val=0.7491 fallback=0; final probe+linkage+s1_summary done
+
+- [auto] rnasc_300M_s17_rinalmocorpus complete: nt=2.00B best_val=0.7942 fallback=0; final probe+linkage+s1_summary done
+
+- [auto] rnasc_30M_s17_rinalmocorpus complete: nt=2.00B best_val=0.8323 fallback=0; final probe+linkage+s1_summary done
