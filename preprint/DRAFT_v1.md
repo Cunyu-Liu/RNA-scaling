@@ -55,7 +55,7 @@ claim (Claim-14: 300M@5.9B gain < 1.0 pp) and replaces it with a
 Chinchilla-style compute-optimal interaction: the budget effect on
 family-level transfer FLIPS sign monotonically across scale (−5.24 /
 −2.74 / +3.76 / +1.15 pp at 30M/100M/300M/650M; probe-seed retest at
-650M: 0.4464±0.012 across 3 seeds, +6.4pp over 300M@5.9B), and a 302M
+650M: 0.4491±0.015 across 3 seeds, +6.5pp over 300M@5.9B), and a 302M
 model at the full-corpus budget (0.3821) beats the entire 2.0B main
 line including 650M (0.3632). The interaction is readout-channel-
 specific: on the structure task the same budget effect is monotone
@@ -271,7 +271,7 @@ main line:
 | 30M | 0.2466 (L8) | 0.1942 (L10) | **−5.24pp (overtraining, deepest)** |
 | 100M | 0.3263 (L21) | 0.2989 (L16) | **−2.74pp (overtraining)** |
 | 300M | 0.3445 (L22) | **0.3821 (L22)** | **+3.76pp (undertraining at 2B)** |
-| 650M | 0.3632 (L8) | 0.3747 (L25; retest 0.4464±0.012) | **+1.15pp (retest +8.3pp; undertraining)** |
+| 650M | 0.3632 (L8) | 0.3747 (L25; retest 0.4491±0.015) | **+1.15pp (retest +8.6pp; undertraining)** |
 
 The sign FLIPS across scale: at 100M the 2.0B budget is at/beyond
 compute-optimal on a redundant corpus (rRNA 63.6%; Muennighoff-style
@@ -296,10 +296,10 @@ crossover sits between 100M and 300M. The 650M @5.9B arm (closed
 650M, and the U-curve right half is complete (300M turns positive,
 650M relaxes back): budget helps exactly the scales that 2.0B
 undertrained. A probe-seed retest (3 seeds, 29/43/61, 8000/4000
-samples) confirms 650M@5.9B > 300M@5.9B at 3/3 seeds (0.4464±0.012
-vs 0.3826±0.013, +6.4pp; the single-seed 0.3747<0.3821 inversion
+samples) confirms 650M@5.9B > 300M@5.9B at 3/3 seeds (0.4491±0.015
+vs 0.3826±0.013, +6.5pp; the single-seed 0.3747<0.3821 inversion
 was probe-head initialization noise, corrected 10-12), and the 650M
-budget effect under the retest protocol is +8.3pp (0.3632→0.4464).
+budget effect under the retest protocol is +8.6pp (0.3632→0.4491).
 Layer migration under budget: 650M best layer L8(2B)→L25(5.9B) —
 the shallow-endpoint reversal at 650M@2B is an undertraining
 artifact; the fuller budget restores the deep endpoint (rel 0.926).
@@ -713,7 +713,9 @@ family-split F1 by **+7.93 / +2.33 / +0.63pp** (0.3259@L9 / 0.3496@L17
 / 0.3508@L22 vs r22 baselines 0.2466/0.3263/0.3445) — a MONOTONE
 DECAYING corpus gradient: the corpus lever is worth nearly +8pp at
 30M and <1pp at 300M. The S8 contact caliber reproduces the direction
-at 100M (1.28× → 1.40× over random, +9%). Combined with §4.1: on this
+at 100M (precision over chance 1.28× → 1.40×, +9%; across scales the
+fold grows 1.19×/1.28×/1.53× at 30M/100M/650M vs randinit controls
+1.06×/0.92×/1.31×). Combined with §4.1: on this
 corpus family the scale axis saturates because the corpus axis
 saturates — "scaling is a corpus story" (corpus_arm_verdict.json).
 Spectrum extension (in flight, 10-13): MARS-ncRNA corpus arm
@@ -967,7 +969,7 @@ quantity re-enters. **RESULT (10-05, extended 10-13; b59 3-channel matrix,
 evidence/p5rns_b59_verdict.json + b59_random_delta.json): the
 finite-channel account is REFUTED in its strong form.** Two of three
 channels MOVE with budget and the movement is scale-amplified:
-RNS@10 tightens (100M 0.083 → 0.052, 300M 0.067 → 0.043); P5
+RNS@10 tightens (100M 0.0828 → 0.0515, 300M 0.0668 → 0.0425); P5
 non-rRNA shuffle separation grows +0.11/+0.29/+0.36 nats/token at
 30M/100M/300M (0.08→0.19, 0.14→0.43, 0.23→0.59) while rRNA
 separation plateaus ~0.9 as predicted. Only the family-Delta channel
