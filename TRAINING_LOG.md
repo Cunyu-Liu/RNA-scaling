@@ -2789,3 +2789,11 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - **arXiv 前置门状态**：措辞门 D1-D11 ✅（上轮）；数字门 22/22 语义一致 ✅（本轮）；bib gate ✅。剩余唯一项：四语料臂 probe 出值后 4.5 节收口。
 - 四臂训练健康推进（MARS 100M 129M/2B、300M 64M/2B；RNAcentral 100M 17M/2B、300M 9M/2B）。
 - GitHub push ae69940。
+
+## Day 36 值守巡检（2026-10-14 06:0x）——四臂健康 + 值守链补固
+
+- **四语料臂健康推进**：MARS 100M 270M/2B nt（VAL 0.9846 持续改善）/ MARS 300M 147M/2B（首 VAL 1.0879）/ RNAcentral 100M 146M/2B（首 VAL 1.1109）/ RNAcentral 300M 93M/2B（未及首 VAL 点）；日志 mtime 全部 <5 分钟；patience=5 + 2.0B 预算纪律在命令行确认。绝不提前停，跑到收敛或预算到顶。
+- **值守链判定（两处"死亡"均系正常退出）**：t437 watcher 日志末行 all arms launched, exit——4 臂全部提交完毕后按设计退出，非异常死亡、无待训臂遗留；supervisor 日志末行 wave complete（10-10 b59 波次收口后按设计退出），非死亡、无需拉起；watch_all PID 2144680 在岗 5h49m，_marscorpus/_rnacentral DONE 正则已确认在位。
+- **补固一处**：keep_watch_all.sh 脚本注释声称 cron 2min 但 crontab 缺行 → 补 */2 cron（WATCH_ALL_KEEPALIVE）；T437_KEEPALIVE + WATCH_ALL_KEEPALIVE 双自愈在位。
+- **GPU 全景**：0/1/3/4/5 在训（本侧 4 臂 + codonflow run_pretrain@GPU4）；GPU2 的 22 个 418MiB context 为 q_fill.py（e3rank/1016 计划，独立 keepalive 管辖，不属 rna-sc、不动）；GPU6 cgroup 4.75GB 硬限跳过；GPU7 codonflow/评测占用。无 ≥26GB 空闲卡。
+- **DONE probe 收口**：runs/ 无 DONE 标记臂，probe_results.jsonl 最新为 10-12 650M 逐层数据，无欠 probe 臂，无需手动补。
