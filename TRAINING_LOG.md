@@ -2768,3 +2768,14 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - **PPT（结果版 15→16 页）**：新页 16"预算买什么——双通道判定"（fig_dualchannel_v5 + 四尺度表 + 判读条）；备份 .bak_接管轮1013；三遍验证（zip 良构 74 entries/16 页/0 空页/md5 5419c49a）。
 - **定时任务（本地）**：×30min 集群值守巡检 + 每日 09:00 晨报推进（含月度竞争监控 M1-M4）两条已建。
 - **纪律重申**：GPU6 cgroup 4.75GB 硬限永不使用；rw1 类任务永不进 supervisor；PPT 改前备份/改后 CRC；eval ledger 幽灵 claim 需标 stale 才能重跑。
+
+## Day 36 续（2026-10-14 凌晨）——语料谱 4 臂并行全部上车 + 三次事故根治
+
+- **MARS 300M 臂 OOM 事故根治**：watcher v1 的 12GB 阈值误判（实际 300M 峰值 8GB 但 GPU5 被他人评测进程动态挤占）→ 手动 GPU5 启动成功（nt=56M 健康）。
+- **watcher 文件 NFS 截断事故**：patch 连续写入时 t437_gpu_watch.py 被 NFS 截断到 4096 字节（缺 if __name__、缺 t0）→ scp 整体重写 v5 完整版（.launch 幂等标记 + corpus_ready 门控 + waiting 循环）→ 常驻 PID 2475881 + */5 cron 自愈（T437_KEEPALIVE）。
+- **watch_all 正则扩展**：main_arm regex +_marscorpus/_rnacentral——否则语料臂 DONE 后不会被自动 probe（重大隐患，提前根治）；watch_all 重启 PID 2144679。
+- **RNAcentral 通用语料臂构建完成**：rnacentral_active.fasta 前 36M 行扫描 → **rnacentral_corpus.parquet 22.68M 序列 / 14.48B nt**（B1 剔 13.17M held-out，audit: t437_rnacentral_corpus_audit.json）。
+- **★语料谱 4 臂并行全部上车**：MARS 100M@GPU3 + MARS 300M@GPU5 + RNAcentral 100M@GPU3 + RNAcentral 300M@GPU5（同卡双臂显存实测 12.9/0.6GB 富余，四进程 100% util）——受控语料谱从 2 点扩到 4 点（r22/RiNALMo 配方/MARS/RNAcentral 通用），判据 A/B/C 按 04 方案预注册执行。
+- **/home 磁盘配额事故**：git 提交 Disk quota exceeded → 根因 tar_stage_v2 里 20G 损坏 rnasc_data 分卷（归档脚本 23:48 死在中途、命名循环重写）→ 删除后恢复（181G）；commit c6b3e3d 已推送。
+- **红队 D1-D11 预检**：controlled 28 处逐条合规（仅修饰自训段）；D7 禁语零命中；新增 5 处数字（0.6067/−1.85/13.31M/11.59B/+7.93/0.4464）全部入文。
+- 预计收口：4 臂各 ~1-2 GPU·天（2.0B nt，patience 5）；DONE 后 watch_all 自动 probe → corpus_arm_verdict 升级 4 点谱。
