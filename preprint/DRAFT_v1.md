@@ -53,17 +53,23 @@ A pre-registered 3x2 budget-by-scale factorial (four arms retrained at
 the full 5.9B-nt corpus) then refutes the pre-registered corpus-ceiling
 claim (Claim-14: 300M@5.9B gain < 1.0 pp) and replaces it with a
 Chinchilla-style compute-optimal interaction: the budget effect on
-family-level transfer FLIPS sign monotonically across scale (-5.24 /
--2.74 / +3.76 pp at 30M/100M/300M), and a 302M model at the full-
-corpus budget (0.3821) beats the entire 2.0B main line including 650M
-(0.3632). The interaction is readout-channel-specific: on the structure
-task the same budget effect is monotone positive (+0.09 / +0.85 /
-+1.87 pp, learned increments above random-init controls -0.9 / +1.1 /
-+2.7 pp), while a pre-registered three-channel test shows zero-
-supervision statistics (representation organization, shuffle
-separation) keep improving with budget at every scale — the "30M
-plateau" is a family-classification-channel phenomenon, not a global
-representation limit. Our results argue for
+family-level transfer FLIPS sign monotonically across scale (−5.24 /
+−2.74 / +3.76 / +1.15 pp at 30M/100M/300M/650M; probe-seed retest at
+650M: 0.4464±0.012 across 3 seeds, +6.4pp over 300M@5.9B), and a 302M
+model at the full-corpus budget (0.3821) beats the entire 2.0B main
+line including 650M (0.3632). The interaction is readout-channel-
+specific: on the structure task the same budget effect is monotone
+positive (+0.09 / +0.85 / +1.87 pp, learned increments above
+random-init controls −0.9 / +1.1 / +2.7 pp), while the random-split
+channel is budget-IMMUNE (|Δ| ≤ 2pp at four scales) — overtraining
+erodes transferable family statistics but not the memorization
+channel that random splits cash in. Controlled corpus swaps at fixed
+recipe and budget move family F1 by +7.93 / +2.33 / +0.63pp at
+30M/100M/300M (RiNALMo-recipe replica corpus), and a pre-registered
+three-channel test shows zero-supervision statistics (representation
+organization, shuffle separation) keep improving with budget at every
+scale — the "30M plateau" is a family-classification-channel
+phenomenon, not a global representation limit. Our results argue for
 scale-, corpus-, and protocol-aware interpretation of RNA LM benchmarks,
 and provide the first Li-et-al-style mechanistic controls (random-init,
 weight-statistics, pretraining-time, layer-wise) in the RNA domain.
@@ -265,6 +271,7 @@ main line:
 | 30M | 0.2466 (L8) | 0.1942 (L10) | **−5.24pp (overtraining, deepest)** |
 | 100M | 0.3263 (L21) | 0.2989 (L16) | **−2.74pp (overtraining)** |
 | 300M | 0.3445 (L22) | **0.3821 (L22)** | **+3.76pp (undertraining at 2B)** |
+| 650M | 0.3632 (L8) | 0.3747 (L25; retest 0.4464±0.012) | **+1.15pp (retest +8.3pp; undertraining)** |
 
 The sign FLIPS across scale: at 100M the 2.0B budget is at/beyond
 compute-optimal on a redundant corpus (rRNA 63.6%; Muennighoff-style
@@ -283,9 +290,21 @@ has its own optimal budget position, and the 2.0B iso-token design is
 near-optimal only for the smaller scales. The 30M row (closed 10-05) makes the flip
 MONOTONE in scale: −5.24 / −2.74 / +3.76 pp — the smaller the model,
 the deeper the overtraining deficit on the redundant corpus, and the
-crossover sits between 100M and 300M. Remaining arm (650M @5.9B) is
-training under the same automated chain; it completes the interaction.
+crossover sits between 100M and 300M. The 650M @5.9B arm (closed
+10-10) completes the 4th cell: **+1.15pp** (0.3747@L25, best_val
+0.7491) — the budget-by-scale interaction is 3.89pp between 100M and
+650M, and the U-curve right half is complete (300M turns positive,
+650M relaxes back): budget helps exactly the scales that 2.0B
+undertrained. A probe-seed retest (3 seeds, 29/43/61, 8000/4000
+samples) confirms 650M@5.9B > 300M@5.9B at 3/3 seeds (0.4464±0.012
+vs 0.3826±0.013, +6.4pp; the single-seed 0.3747<0.3821 inversion
+was probe-head initialization noise, corrected 10-12), and the 650M
+budget effect under the retest protocol is +8.3pp (0.3632→0.4464).
+Layer migration under budget: 650M best layer L8(2B)→L25(5.9B) —
+the shallow-endpoint reversal at 650M@2B is an undertraining
+artifact; the fuller budget restores the deep endpoint (rel 0.926).
 (Fig 6.)
+
 
 ### 4.2 The gain is not initialization 【Act II · H2/H3】 or weight statistics
 
@@ -686,6 +705,22 @@ the corpus axis is governed by effective repetition of high-signal
 families, not coverage diversity (DenAdel single-cell negative result
 replicates cross-domain).
 
+**Controlled corpus-swap arms (T4.3.5, 10-08/10-11).** Retraining
+30M/100M/300M on a RiNALMo-recipe replica corpus (Methods-4.3
+reconstruction: len 16-8192, dedup, mmseqs 0.7/0.8, held-out overlap
+removed; 14.03M seqs / 10.0B nt) at the SAME 2.0B-nt budget moves
+family-split F1 by **+7.93 / +2.33 / +0.63pp** (0.3259@L9 / 0.3496@L17
+/ 0.3508@L22 vs r22 baselines 0.2466/0.3263/0.3445) — a MONOTONE
+DECAYING corpus gradient: the corpus lever is worth nearly +8pp at
+30M and <1pp at 300M. The S8 contact caliber reproduces the direction
+at 100M (1.28× → 1.40× over random, +9%). Combined with §4.1: on this
+corpus family the scale axis saturates because the corpus axis
+saturates — "scaling is a corpus story" (corpus_arm_verdict.json).
+Spectrum extension (in flight, 10-13): MARS-ncRNA corpus arm
+(13.31M seqs / 11.59B nt, B1-clean) will extend the controlled corpus
+spectrum from 2 points to 3 (r22 / RiNALMo-recipe / MARS) at 100M and
+300M; an RNAcentral-general arm is queued behind it.
+
 ### 4.6 Decoupling families 【Act III · H6】 peak in early layers
 
 Spearman(family decoupling index, best-layer), six scales complete:
@@ -766,6 +801,20 @@ random-split dividend while k-mer captures 105% — the leakage signal
 lives at sequence-composition level, and pretraining's contribution is
 learning to read it. Under family-level evaluation, "scaling wins"
 shrink toward the composition floor.
+
+**Budget immunity of the random channel (fourth link, 10-08/10-13).**
+Retraining the b59 arms changes the two channels in opposite ways:
+family-split F1 moves −5.24/−2.74/+3.76/+1.15pp (the budget axis of
+§4.1), while random-split F1 moves only +0.65/−0.60/+4.10/**−1.85**pp
+(30M/100M/300M/650M; |Δ|<2pp at three of four scales) — the
+random-split score is pinned by family-overlap structure, not by
+training budget. Overtraining erosion attacks exactly the
+transferable family statistics and leaves the memorization channel
+untouched: budget neither monetizes additional leakage nor damages
+it (b59_random_delta.json; 650M cell measured 10-13, probe-balanced,
+random 0.6067@L25 vs 0.6252@2B). This closes the loop: random-split
+dividends are a property of the evaluation protocol (overlap), not a
+training-compute property.
 
 ### 4.8 Representation quality saturates 【Act IV · H8】 before downstream F1 (RNS)
 
@@ -914,20 +963,23 @@ The decisive intervention was pre-registered: 30M@5.9B (tokens x3,
 unique sequence exposure 0.14 -> 0.42 epoch) — if all three plateaus
 persist unchanged, the data-quantity explanation is finally excluded
 and the finite-channel account closes; if any plateau moves, data
-quantity re-enters. **RESULT (10-05, b59 3-channel matrix,
-evidence/p5rns_b59_verdict.json): the finite-channel account is
-REFUTED in its strong form.** Two of three channels MOVE with budget
-and the movement is scale-amplified: RNS@10 tightens (100M 0.083 →
-0.052, 300M 0.067 → 0.043); P5 non-rRNA shuffle separation grows
-+0.11/+0.29/+0.36 nats/token at 30M/100M/300M (0.08→0.19, 0.14→0.43,
-0.23→0.59) while rRNA separation plateaus ~0.9 as predicted. Only
-the family-Delta channel follows the finite-channel story (it moves
-NEGATIVELY below 300M). Revised account: the 30M triple-plateau is a
-FAMILY-CHANNEL phenomenon — zero-supervision structural statistics
-keep eating budget at every scale (Chinchilla-style), and the
-k-mer-reachable classification channel saturates. The S7 structure
-matrix (+0.09/+0.85/+1.87pp monotone) agrees with the P5 channel;
-the two zero-supervision and two readout views converge.
+quantity re-enters. **RESULT (10-05, extended 10-13; b59 3-channel matrix,
+evidence/p5rns_b59_verdict.json + b59_random_delta.json): the
+finite-channel account is REFUTED in its strong form.** Two of three
+channels MOVE with budget and the movement is scale-amplified:
+RNS@10 tightens (100M 0.083 → 0.052, 300M 0.067 → 0.043); P5
+non-rRNA shuffle separation grows +0.11/+0.29/+0.36 nats/token at
+30M/100M/300M (0.08→0.19, 0.14→0.43, 0.23→0.59) while rRNA
+separation plateaus ~0.9 as predicted. Only the family-Delta channel
+follows the finite-channel story (it moves NEGATIVELY below 300M);
+its random-split counterpart is budget-IMMUNE (§4.7 fourth link:
++0.65/−0.60/+4.10/−1.85pp, all four scales now closed 10-13).
+Revised account: the 30M triple-plateau is a FAMILY-CHANNEL
+phenomenon — zero-supervision structural statistics keep eating
+budget at every scale (Chinchilla-style), and the k-mer-reachable
+classification channel saturates. The S7 structure matrix
+(+0.09/+0.85/+1.87pp monotone) agrees with the P5 channel; the two
+zero-supervision and two readout views converge.
 
 ## 6. Limitations
 
