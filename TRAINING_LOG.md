@@ -2758,3 +2758,13 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - [auto] rnasc_300M_s17_rinalmocorpus complete: nt=2.00B best_val=0.7942 fallback=0; final probe+linkage+s1_summary done
 
 - [auto] rnasc_30M_s17_rinalmocorpus complete: nt=2.00B best_val=0.8323 fallback=0; final probe+linkage+s1_summary done
+
+## Day 36（2026-10-13）——新执行人接管轮：b59 random 650M 补格 + MARS 语料臂启动 + DRAFT/PPT 五处收口
+
+- **交接完成**：本地交接文档 9 份全读（00-05/巡检/问答）；服务器现状盘点（8 卡全忙：codonflow×2 + AF3 评测 + rna-ft-eval 微调矩阵 + q_fill 队列；watch_all PID 1084349 在岗；rna-sc 侧无在训 run，主实验全部收口）。
+- **650M_b59 random Δ 补格（05 文档 pending 项清零）**：run_b59_random.py 死循环 bug 根因定位——done_models() 只查 jsonl 结果行，而 10-10 崩溃时 ledger 留下 4 条 status=running 幽灵 claim → eval_matrix 永远 SKIP。修复：幽灵 claim 标记 stale-killed → eval_matrix 手动重跑（GPU2，避开 honghuiyang 24GB 评测进程的 OOM 竞争）→ 四格全落：probe-balanced random 0.6067@L25 / family 0.2037@L27 / meanpool 两格。**650M random Δ = −1.85pp（vs family +1.15pp）——B-BUDGET-IMMUNE-RANDOM 四尺度闭合（+0.65/−0.60/+4.10/−1.85）**；b59_random_delta.json 更新（pending 清空）。
+- **MARS 语料臂（04 语料谱扩展方案启动）**：服务器已有 semantic30m 现成语料（24M train 序列，MARS ncRNA 语义筛选 30M 全套）→ build_corpus_mars.py（B1 零泄漏剔除 14.88M held-out canonical）→ **mars_corpus.parquet 13.31M 序列 / 11.59B nt**（audit: t437_mars_corpus_audit.json）；t437_gpu_watch.py 部署（100M/300M 两臂，≥26GB 空卡自动提交，patience 5 早停，2.0B iso-token）——当前 8 卡全忙等待中；RNAcentral 通用语料臂（32.7GB fasta 在位）排 stage-2。
+- **DRAFT 五处补齐（md5 638bb436→commit 8bc2cba 已 push）**：①4.1 预算表加 650M 行（+1.15pp/复测 0.4464±0.012）+ 层迁移 L8→L25 叙事；②4.5 受控语料交换梯度（+7.93/+2.33/+0.63）+ MARS 谱系在途声明；③4.7 泄漏三角第 4 环（budget-immune random 通道）；④5.1 三通道矩阵补 650M 格交叉引用；⑤Abstract 更新（650M 格/复测/语料梯度/预算免疫四点入摘）。零 PENDING 保持。
+- **PPT（结果版 15→16 页）**：新页 16"预算买什么——双通道判定"（fig_dualchannel_v5 + 四尺度表 + 判读条）；备份 .bak_接管轮1013；三遍验证（zip 良构 74 entries/16 页/0 空页/md5 5419c49a）。
+- **定时任务（本地）**：×30min 集群值守巡检 + 每日 09:00 晨报推进（含月度竞争监控 M1-M4）两条已建。
+- **纪律重申**：GPU6 cgroup 4.75GB 硬限永不使用；rw1 类任务永不进 supervisor；PPT 改前备份/改后 CRC；eval ledger 幽灵 claim 需标 stale 才能重跑。
