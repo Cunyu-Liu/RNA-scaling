@@ -329,6 +329,19 @@ erosion targets family-discrimination features, not structure features.
 
 ### 4.4 Structure probing 【Act III · H4】 — composition floor, three references, multi-dataset (09-28)
 
+**Unsupervised contact probing (S8, 10-09).** A logistic head on
+layer-70% representations with pair features [h_i, h_j, |i−j|, h_i·h_j]
+and APC correction (top-L precision, long-range ≥24 nt, bpRNA
+sequence-level split, fit=40/eval=1305) gives precision-over-chance
+1.19×/1.28×/1.53× at 30M/100M/650M against randinit controls
+1.06×/0.92×/1.31×: the contact signal grows with scale and is
+pretraining-derived (650M trained−randinit +0.22×), while the corpus
+recipe independently moves it (100M r22 1.28× vs RiNALMo-recipe 1.40×).
+Absolute magnitudes remain near chance — the honest reading is that
+MLM self-supervision encodes weak but real pairing covariation, and
+the readout gap (position-level wall ~0.64) is the binding constraint
+(see §4.4 readout chain). (Fig: fig_s8_contact.)
+
 **Protocol corrections (self-audit).** (i) The probe-JSON "f1" column
 is paired-class F1, previously compared against the macro floor —
 metric mismatch; all numbers below are macro-F1. (ii) The 1M
