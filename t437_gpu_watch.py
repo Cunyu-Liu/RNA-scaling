@@ -28,6 +28,10 @@ ARMS = [
      "logs/RNA-Sc-100M_s17_rnacentral.log", 12.0),
     ("RNA-Sc-300M", "runs/RNA-Sc-300M_s17_rnacentral",
      "logs/RNA-Sc-300M_s17_rnacentral.log", 10.0),
+    ("RNA-Sc-30M", "runs/RNA-Sc-30M_s17_marscorpus",
+     "logs/RNA-Sc-30M_s17_marscorpus.log", 6.0),
+    ("RNA-Sc-30M", "runs/RNA-Sc-30M_s17_rnacentral",
+     "logs/RNA-Sc-30M_s17_rnacentral.log", 6.0),
 ]
 
 
