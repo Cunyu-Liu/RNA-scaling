@@ -90,7 +90,7 @@ def main():
                   ((time.time() - t0) // 60), flush=True)
             time.sleep(600)
             continue
-        for gpu in (2, 3, 5, 0, 1, 4, 7):
+        for gpu in (2, 3, 5, 0, 1, 4):
             if not remaining:
                 break
             fg = free_gb(gpu)

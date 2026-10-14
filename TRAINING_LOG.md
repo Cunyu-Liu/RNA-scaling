@@ -2815,3 +2815,9 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - **GPU 双进程澄清**：GPU3/GPU5 各有 2 条 rna_sc.train 进程（PPID=1，分离启动正常形态），分别为 100M/300M 的 marscorpus+rnacentral 两臂共卡（01:47 watcher 提交 rnacentral 时 GPU3/5 各剩 ~7.7GB 空闲，容得下 40GB 卡上第二条 40M 臂），属预期混部而非重复启动。
 - **DONE probe 收口**：runs/ 无 DONE 标记臂；probe_results.jsonl 最新仍为 10-12 650M 逐层（mtime 10-12 16:45），无欠 probe 臂，无需手动补。
 - **verdict/DRAFT/PPT 决策**：4 臂无一 DONE、probe 未出值，不满足预注册收口条件，今日继续冻结，待 4 点谱出值后同轮更新。
+
+## Day 36 续三（2026-10-14 午）——PPT 复测数字同步 + GPU7 cgroup 陷阱确认
+
+- **PPT 复测值同步修正（三遍验证）**：0.4464→0.4491（4 runs）+ ±0.012→±0.015 + +8.32→+8.59pp + 6.4→6.5pp（含跨 run 段落级修复）；终态扫描零残留（0.4464/±0.012/6.4pp/8.32pp 全清）；16 页 zip 良构，md5 5130f6e3；备份 .bak_数字门1014。
+- **★GPU7 cgroup 陷阱确认（纪律扩展）**：尝试在 GPU7 补语料谱 30M 双臂 → 新进程只见 4.75GiB 总容量（与 GPU6 同款 cgroup 限制；nvidia-smi 显示 40GB 是假象，历史日志只记了 GPU6）→ 两进程 OOM 秒退，清理 run 目录零残留，四主臂未受伤（训练正常推进）。**纪律更新：GPU6 与 GPU7 对新进程均不可用，t437 watcher 候选卡列表已剔除两卡。**30M 语料档两臂改为排队（等 100M/300M 四臂出卡后自动补位——watcher 需加 30M 臂，下轮处理或晨报任务驱动）。
+- 四臂进度：MARS 100M 489M/2B、300M 285M/2B；RNAcentral 100M 344M/2B、300M 210M/2B（loss 均进入 0.45-0.75 区间健康下降）。
