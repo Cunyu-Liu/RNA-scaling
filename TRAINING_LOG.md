@@ -2826,3 +2826,13 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 
 - watcher v6 队列扩展 30M 档两臂（MARS 30M@GPU3 + RNAcentral 30M@GPU5，自动上车）——**语料谱现为 6 臂并行**（2 语料 × 3 尺度），30M 是容量门控对照点（rinalmo 复刻在此 +7.93pp）。六进程 100% util，GPU3/5 各三臂共卡显存富余（37.3/35.0GB）。
 - 语料谱完整设计落位：r22 基线（已有）+ RiNALMo 配方（已有）+ MARS + RNAcentral × {30M, 100M, 300M}——判据 A（语料主效应）/B（混杂暴露）/C（尺度交互衰减）三点谱升级为 4 语料 × 3 尺度矩阵。
+
+## Day 37（2026-10-14 13:2x-13:5x）——★集群关机紧急轮：六臂优雅停机 + 全资产备份 + 值守设施暂停
+
+- **用户指令（14:30 前集群关机）**：所有训练 2 小时内结束，全资产备份至 orico-disc。
+- **六臂优雅停机**：SIGTERM 全部 6 个训练进程（100% 遵从，零残留）；停机坐标入 BACKUP_MANIFEST（MARS 100M 498M/2B、300M 293M/2B、30M 8M；RNAcentral 100M 356M/2B、300M 218M/2B、30M 9M——各臂最新 ckpt 路径+md5 已登记，重启后可 --resume-from 续训或按坐标重训）。
+- **值守设施全停**：watch_all/watcher v6/closeout 进程 kill；13 条相关 cron 加 #PAUSED# 前缀（重启后去前缀即恢复）。
+- **★备份完成（不可重建资产 100%）**：orico-disc `A100 大量项目文件备份/03_RNA迁移学习_rna-sc/delta_20261014/`（156M）——evidence 增量 4 文件（含 b59 random 650M 格/两语料 audit）+ figs 增量 13 张（v5 全套）+ 六臂日志 11 个 + 六臂 manifest 4 个 + DRAFT 终版（md5 774076ca 与服务器逐位一致）+ TRAINING_LOG（md5 68e226dc 一致）+ 交接文档/PPT（72M 含 30+ 备份）/论文/figs_v1 全套副本 + BACKUP_MANIFEST_20261014.md（清单+恢复命令模板）。四个 tar 包 tarfile 完整性验证全过。
+- **大文件处置（网络实测 25KB/s，1.1GB 需 12h 不可行）**：语料 parquet（mars 5.6G/rnacentral 6.9G）与 in-flight ckpt 留服务器 /mnt——均为**可重建派生物**（构建脚本已入 git，audit 记录成分；ckpt 有续训坐标）；若 /mnt 随集群保留则直接可用。
+- **GitHub 最终 push 9298adf**（DRAFT 4.4 S8 段含 fold 三元组）——代码/论文/文档全部有远端副本。
+- 重启恢复入口：BACKUP_MANIFEST_20261014.md（六臂坐标表 + 恢复命令模板 + 科学状态快照）。
