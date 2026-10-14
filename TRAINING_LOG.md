@@ -2797,3 +2797,21 @@ watch_all 自动链 5 次 DONE→probe→fig 全绿; s1_seed_table 三-seed
 - **补固一处**：keep_watch_all.sh 脚本注释声称 cron 2min 但 crontab 缺行 → 补 */2 cron（WATCH_ALL_KEEPALIVE）；T437_KEEPALIVE + WATCH_ALL_KEEPALIVE 双自愈在位。
 - **GPU 全景**：0/1/3/4/5 在训（本侧 4 臂 + codonflow run_pretrain@GPU4）；GPU2 的 22 个 418MiB context 为 q_fill.py（e3rank/1016 计划，独立 keepalive 管辖，不属 rna-sc、不动）；GPU6 cgroup 4.75GB 硬限跳过；GPU7 codonflow/评测占用。无 ≥26GB 空闲卡。
 - **DONE probe 收口**：runs/ 无 DONE 标记臂，probe_results.jsonl 最新为 10-12 650M 逐层数据，无欠 probe 臂，无需手动补。
+
+## Day 36 晨报（2026-10-14 09:0x）——四语料臂健康推进 + 决策不启新臂
+
+- **四臂进度/VAL（09:00 实测，日志 mtime 全部 <5min，无 DONE）**：MARS 100M 373M/2B（VAL 1.0939→0.9846→0.9492 三连降）/ MARS 300M 208M/2B（1.0879→0.9795）/ RNAcentral 100M 239M/2B（1.1109→0.9866）/ RNAcentral 300M 149M/2B（首 VAL 1.0947）；patience=5 + 2.0B 预算纪律在位，四进程 100% util。
+- **evidence/ 24h 新增 3 JSON**：t437_mars_corpus_audit.json（13.31M 序列/11.59B nt）、t437_rnacentral_corpus_audit.json（22.68M/14.48B nt）、b59_random_delta.json（650M 补格 −1.85pp，pending 清空）。
+- **事故-决策-吞吐-结论**：昨日三事故（300M OOM / t437 NFS 截断 / home 配额）均已闭环（见上方 Day 36 三条）；watch_all PID 2144680 在岗，DONE 自动 probe 链（正则含 _marscorpus/_rnacentral）就绪；T437_KEEPALIVE + WATCH_ALL_KEEPALIVE 双 cron 自愈在位。
+- **推进决策：今日不启动新臂**——语料谱 4 臂已全部上车（t437 watcher 按设计退出）；GPU 无 ≥26GB 空卡（0-5 在训、GPU2 q_fill 队列不触碰、GPU6 cgroup 4.75GB 硬限、GPU7 codonflow）；RNAcentral 臂已上车故 build_corpus_rnacentral.py 转备用。
+- **verdict/DRAFT/PPT 今日不动**：4 臂无一 DONE、probe 未出值，不满足预注册收口条件；待 4 点谱（r22/rinalmo/mars/rnacentral）出值后同轮更新 corpus_arm_verdict.json → DRAFT §4.5 → PPT（.bak 备份 + CRC 校验）。
+- **月度竞争监控 M1-M4**：今日非 1 日，不触发（下次 2026-11-01）。
+
+## Day 36 值守巡检（2026-10-14 12:1x）——四臂健康 + 无新 DONE，verdict/DRAFT/PPT 继续冻结
+
+- **GPU 全景（12:06）**：GPU0 34.4G/53%、GPU1 32.9G/63%、GPU2 36.5G/93%（q_fill 队列，不触碰）、GPU3 32.7G/100%、GPU4 37.2G/44%、GPU5 31.8G/100%、GPU6 8.2G cgroup 4.75GB 硬限跳过、GPU7 35.3G codonflow/评测占用；无 ≥26GB 空闲卡，不启新臂。
+- **四臂进度/VAL（12:09 实测，mtime 全部 <5min）**：MARS 100M 481M/2B（VAL 0.9846→0.9492→0.9165 三连降）/ MARS 300M 280M/2B（1.0879→0.9795，后续 VAL 待出）/ RNAcentral 100M 336M/2B（1.1109→0.9866→0.9580 三连降）/ RNAcentral 300M 205M/2B（1.0947→0.9879）；四进程 util 满载，patience=5 + 2.0B 预算纪律在位，绝不提前停。
+- **值守链判定**：t437_gpu_watch.py 为正常退出（日志末行 all arms launched, exit，01:47:56，MARS+RNAcentral 4 臂全提交后按设计退出），非死亡、无待训臂遗留；T437_KEEPALIVE cron 兜底在位。watch_all PID 2144680 在岗 cwd 正确（/home/cunyuliu/rna-sc，cycle=132 正常心跳；日志中段一次 ModuleNotFoundError 为失败拉起残留，已被 keep_watch_all.sh 自愈，当前实例健康）；WATCH_ALL_KEEPALIVE cron（*/2）在位。supervisor 波次收口正常退出状态不变。
+- **GPU 双进程澄清**：GPU3/GPU5 各有 2 条 rna_sc.train 进程（PPID=1，分离启动正常形态），分别为 100M/300M 的 marscorpus+rnacentral 两臂共卡（01:47 watcher 提交 rnacentral 时 GPU3/5 各剩 ~7.7GB 空闲，容得下 40GB 卡上第二条 40M 臂），属预期混部而非重复启动。
+- **DONE probe 收口**：runs/ 无 DONE 标记臂；probe_results.jsonl 最新仍为 10-12 650M 逐层（mtime 10-12 16:45），无欠 probe 臂，无需手动补。
+- **verdict/DRAFT/PPT 决策**：4 臂无一 DONE、probe 未出值，不满足预注册收口条件，今日继续冻结，待 4 点谱出值后同轮更新。
