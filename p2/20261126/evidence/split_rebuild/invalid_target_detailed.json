@@ -1,0 +1,11 @@
+{
+  "checked_at_utc": "2026-11-25T18:40:08.616487+00:00",
+  "unique_sequences": 566077,
+  "unique_clusters": 148607,
+  "cluster_coverage_of_3357201": 0.044265148258921645,
+  "same_sequence_cluster_rows_and_order_as_rfamcap": true,
+  "split_membership_mismatches_against_cluster_split": 116907,
+  "parquet_key_value_metadata": {
+    "b'ARROW:schema'": "b'/////+gAAAAQAAAAAAAKAAwABgAFAAgACgAAAAABBAAMAAAACAAIAAAABAAIAAAABAAAAAMAAAB8AAAANAAAAAQAAACg////AAABBRAAAAAcAAAABAAAAAAAAAAKAAAAY2x1c3Rlcl9pZAAAiP///8z///8AAAEFEAAAACQAAAAEAAAAAAAAABAAAABzcGxpdF9tZW1iZXJzaGlwAAAAALz///8QABQACAAGAAcADAAAABAAEAAAAAAAAQUQAAAAKAAAAAQAAAAAAAAAEgAAAGNhbm9uaWNhbF9zZXF1ZW5jZQAABAAEAAQAAAAAAAAA'"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "checked_at_utc": "2026-11-25T18:39:26.656574+00:00",
+  "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/data/release22_split_8080.parquet",
+  "bytes": 132848637,
+  "mtime_ns": 1795631240796210886,
+  "ctime_ns": 1795631240796210886,
+  "sha256": "6d4f86a96946278ee769a2086329b8060e3ae91c087e7216b8ca39099110f879",
+  "rows": 566077,
+  "schema": "canonical_sequence: string\nsplit_membership: string\ncluster_id: string",
+  "split_counts": {
+    "test": 63689,
+    "train": 449170,
+    "validation": 53218
+  },
+  "rna_type_present": false,
+  "equals_rfamcap_projection": false,
+  "rfamcap_source": "/root/rnaft_restore/03_RNA\u8fc1\u79fb\u5b66\u4e60_rna-sc/data_corpus/r22_train_rfamcap.parquet",
+  "rfamcap_rows": 566077
+}

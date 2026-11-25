@@ -1,0 +1,83 @@
+[
+  {
+    "run": "RNA-Sc-30M_s17",
+    "file": "ckpt_nt1900121822_step202784.pt",
+    "source_path": "/Volumes/orico-disc/A100 \u5927\u91cf\u9879\u76ee\u6587\u4ef6\u5907\u4efd/03_RNA\u8fc1\u79fb\u5b66\u4e60_rna-sc/runs_final2_ckpt/runs/RNA-Sc-30M_s17/ckpt_nt1900121822_step202784.pt",
+    "source_bytes": 398596406,
+    "source_sha256": "333205e3977a27aa4ffe403f2367ee024c9f867aac34599c82ad89fc6c39aab7",
+    "manifest_latest_nt": 1900121822,
+    "stripped_bytes": 132857079,
+    "stripped_sha256": "8b8990fad21e617568a5f0564babfc67a0abe2ff2cc4f8e4253cde3d6ba021e3",
+    "model_tensors": 101,
+    "model_keys_exact_order": true,
+    "model_tensors_bitwise_equal": true,
+    "strict_load": true,
+    "optimizer_present": false,
+    "nt": 1900121822,
+    "step": 202784,
+    "arch": {
+      "d_model": 480,
+      "n_layers": 12,
+      "n_heads": 8,
+      "d_ff": 1920,
+      "target_params": 30000000,
+      "positions": "ALiBi",
+      "tokenizer": "single-nucleotide ACGU",
+      "objective": "MLM 15% (80/10/10)"
+    }
+  },
+  {
+    "run": "RNA-Sc-100M_s17",
+    "file": "ckpt_nt1900122218_step202784.pt",
+    "source_path": "/Volumes/orico-disc/A100 \u5927\u91cf\u9879\u76ee\u6587\u4ef6\u5907\u4efd/03_RNA\u8fc1\u79fb\u5b66\u4e60_rna-sc/runs_final2_ckpt/runs/RNA-Sc-100M_s17/ckpt_nt1900122218_step202784.pt",
+    "source_bytes": 1099790422,
+    "source_sha256": "d5973fcda99688e09f48127cac96b74f478f3362c7b05137a2841e42622ef2cc",
+    "manifest_latest_nt": 1900122218,
+    "stripped_bytes": 366581575,
+    "stripped_sha256": "16fbcb9dd3c3459cc90cfe913bfa9f81e2a2ca1a481a1868aaed96f568b1e1c3",
+    "model_tensors": 189,
+    "model_keys_exact_order": true,
+    "model_tensors_bitwise_equal": true,
+    "strict_load": true,
+    "optimizer_present": false,
+    "nt": 1900122218,
+    "step": 202784,
+    "arch": {
+      "d_model": 576,
+      "n_layers": 23,
+      "n_heads": 9,
+      "d_ff": 2304,
+      "target_params": 100000000,
+      "positions": "ALiBi",
+      "tokenizer": "single-nucleotide ACGU",
+      "objective": "MLM 15% (80/10/10)"
+    }
+  },
+  {
+    "run": "RNA-Sc-650M_s17",
+    "file": "ckpt_nt1900122218_step202784.pt",
+    "source_path": "/Volumes/orico-disc/A100 \u5927\u91cf\u9879\u76ee\u6587\u4ef6\u5907\u4efd/03_RNA\u8fc1\u79fb\u5b66\u4e60_rna-sc/runs_final2_ckpt/runs/RNA-Sc-650M_s17/ckpt_nt1900122218_step202784.pt",
+    "source_bytes": 7995656198,
+    "source_sha256": "78115ff1f93b657ceed9323f6b5a04316864f31bf793be0ba35cb5e9682aa037",
+    "manifest_latest_nt": 1900122218,
+    "stripped_bytes": 2665198519,
+    "stripped_sha256": "2e412a1b388e58dcd3648e375afbaa12c99b825977f86282f7bfc6baa2f72e50",
+    "model_tensors": 229,
+    "model_keys_exact_order": true,
+    "model_tensors_bitwise_equal": true,
+    "strict_load": true,
+    "optimizer_present": false,
+    "nt": 1900122218,
+    "step": 202784,
+    "arch": {
+      "d_model": 1408,
+      "n_layers": 28,
+      "n_heads": 22,
+      "d_ff": 5632,
+      "target_params": 650000000,
+      "positions": "ALiBi",
+      "tokenizer": "single-nucleotide ACGU",
+      "objective": "MLM 15% (80/10/10)"
+    }
+  }
+]

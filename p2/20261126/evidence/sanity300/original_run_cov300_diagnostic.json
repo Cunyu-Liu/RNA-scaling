@@ -1,0 +1,102 @@
+{
+  "status": "PASS_CUDA_ORIGINAL_FUNCTION_COMPLETE",
+  "authoritative_script": "/home/cunyuliu/rna-sc-p2/code_git/run_cov300.py",
+  "authoritative_script_sha256": "c82ac6cf81ca7dd0943a458d500127d7608d9a138db97f1c6466c34b02dfad2f",
+  "weight_path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/weights/RNA-Sc-300M_s17/ckpt_nt1900122218_step202784.pt",
+  "weight_sha256": "465ca31b2c520c2aa5168a7d57f660c6191d4198ce5811489e7db7ee7edfc443",
+  "bpRNA_sha256": "20d4ed56fa4f1d6e485cb48fe7b0b4d11bfe0fda2049904622dcc35874d15c51",
+  "device": "NVIDIA GeForce RTX 5090",
+  "torch": "2.14.1+cu132",
+  "torch_cuda": "13.2",
+  "model_device": "cuda:0",
+  "result": {
+    "cov": {
+      "mean": 0.049601403558164184,
+      "n": 4920
+    },
+    "ctrl": {
+      "mean": 0.002685495074290041,
+      "n": 4920
+    },
+    "old_drop": {
+      "mean": -0.015350524670604382,
+      "n": 4920
+    },
+    "cov_minus_ctrl": 0.04691590848387414
+  },
+  "old_anchor_comparison": {
+    "cov": {
+      "old": 0.049607125636875415,
+      "new": 0.049601403558164184,
+      "old_hex": "0x1.9661aec849430p-5",
+      "new_hex": "0x1.9655aec3c6c3ap-5",
+      "bitwise_equal": false,
+      "difference": -5.7220787112316485e-06,
+      "n_equal": true
+    },
+    "ctrl": {
+      "old": 0.0026705753443465943,
+      "new": 0.002685495074290041,
+      "old_hex": "0x1.5e09a387ec050p-9",
+      "new_hex": "0x1.5ffe430908bddp-9",
+      "bitwise_equal": false,
+      "difference": 1.4919729943446789e-05,
+      "n_equal": true
+    },
+    "old_drop": {
+      "old": -0.015336274750000935,
+      "new": -0.015350524670604382,
+      "old_hex": "-0x1.f689ff3f325e1p-7",
+      "new_hex": "-0x1.f70188b7e55c0p-7",
+      "bitwise_equal": false,
+      "difference": -1.4249920603446806e-05,
+      "n_equal": true
+    },
+    "cov_minus_ctrl": {
+      "old": 0.04693655029252882,
+      "new": 0.04691590848387414,
+      "old_hex": "0x1.8081148fca82bp-5",
+      "new_hex": "0x1.8055ca933637cp-5",
+      "bitwise_equal": false,
+      "difference": -2.064180865467974e-05
+    }
+  },
+  "migrated_batch1_comparison": {
+    "cov": {
+      "old": 0.049601403558164184,
+      "new": 0.049601403558164184,
+      "old_hex": "0x1.9655aec3c6c3ap-5",
+      "new_hex": "0x1.9655aec3c6c3ap-5",
+      "bitwise_equal": true,
+      "difference": 0.0,
+      "n_equal": true
+    },
+    "ctrl": {
+      "old": 0.002685495074290041,
+      "new": 0.002685495074290041,
+      "old_hex": "0x1.5ffe430908bddp-9",
+      "new_hex": "0x1.5ffe430908bddp-9",
+      "bitwise_equal": true,
+      "difference": 0.0,
+      "n_equal": true
+    },
+    "old_drop": {
+      "old": -0.015350524670604382,
+      "new": -0.015350524670604382,
+      "old_hex": "-0x1.f70188b7e55c0p-7",
+      "new_hex": "-0x1.f70188b7e55c0p-7",
+      "bitwise_equal": true,
+      "difference": 0.0,
+      "n_equal": true
+    },
+    "cov_minus_ctrl": {
+      "old": 0.04691590848387414,
+      "new": 0.04691590848387414,
+      "old_hex": "0x1.8055ca933637cp-5",
+      "new_hex": "0x1.8055ca933637cp-5",
+      "bitwise_equal": true,
+      "difference": 0.0
+    }
+  },
+  "original_equals_migrated_batch1_bitwise": true
+}

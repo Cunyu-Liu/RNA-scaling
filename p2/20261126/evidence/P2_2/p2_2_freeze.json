@@ -1,0 +1,145 @@
+{
+  "task": "X-P22 / P2.2",
+  "protocol": "prereg/P2_2.md",
+  "status": "FROZEN_RANDOM_POOL_QC_PASS",
+  "seed": 17,
+  "model": "RNA-Sc-30M_s17",
+  "checkpoint_nt": 1900121822,
+  "n_layers": 12,
+  "rns_layer_zero_indexed": 8,
+  "max_nt": 192,
+  "min_nt": 24,
+  "max_per_source_queue": 40,
+  "common_per_source": 20,
+  "min_source_n_pre_pair": 12,
+  "min_source_n_post_pair": 12,
+  "max_pairs": 20,
+  "k": 10,
+  "bootstrap_n": 2000,
+  "n_selected": 109,
+  "n_conditions": 2013,
+  "n_sources": 6,
+  "sequence_ids_sha256": "73d568de9bf6d1a6a998c48b1eba7e9d3a92d89ffb843adb51e2edfacd77b7a0",
+  "frozen_sequences_sha256": "e5102b466f24073cabc92e9d93f54bed758c46810e7f89617af0186012d3b0a5",
+  "random_pool_sha256": "08c83be143b8ca27a2c281ea2d783a8b13e8870192b67b27ce3ef835271992ff",
+  "conditions_sha256": "57282217b5cc3820a328014531b0e58604e9ce8c326e11d0f94cf6745750756d",
+  "random_pool_qc": {
+    "ks_d": 0.0336,
+    "ks_p": 1.0,
+    "ks_pass": true,
+    "mono_max_deviation": 0.006141233485429887,
+    "mono_deviation_by_base": {
+      "A": 0.006141233485429887,
+      "C": 0.000510752979084983,
+      "G": 0.0043428756162511295,
+      "U": 0.0012876048900937742
+    },
+    "mono_pass": true,
+    "n_real": 109,
+    "n_random": 327,
+    "random_multiplier_exact": true,
+    "real_mono": {
+      "A": 0.25960625435209217,
+      "C": 0.2311198328796607,
+      "G": 0.27992656833575996,
+      "U": 0.2293473444324872
+    },
+    "random_mono": {
+      "A": 0.26574748783752206,
+      "C": 0.23060907990057572,
+      "G": 0.27558369271950883,
+      "U": 0.22805973954239342
+    },
+    "target_mono": {
+      "A": 0.25960625435209217,
+      "C": 0.2311198328796607,
+      "G": 0.27992656833575996,
+      "U": 0.2293473444324872
+    },
+    "target_di": {
+      "UU": 0.05972718001019888,
+      "UC": 0.05392656807751147,
+      "CC": 0.060874553799082104,
+      "CU": 0.05405405405405406,
+      "UG": 0.06323304436511984,
+      "GA": 0.06890617032126466,
+      "AC": 0.051185619581846,
+      "CA": 0.05583885772565018,
+      "AA": 0.08248342682304946,
+      "AU": 0.05322539520652728,
+      "UA": 0.05252422233554309,
+      "CG": 0.06132075471698113,
+      "GC": 0.06629270780214176,
+      "AG": 0.07171086180520143,
+      "GU": 0.06316930137684855,
+      "GG": 0.08152728199898011
+    },
+    "passed": true
+  },
+  "inputs": {
+    "bpRNA_split_parquet": {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/data/bpRNA_parsed.parquet",
+      "sha256": "20d4ed56fa4f1d6e485cb48fe7b0b4d11bfe0fda2049904622dcc35874d15c51",
+      "bytes": 1628162
+    },
+    "checkpoint": {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/weights/RNA-Sc-30M_s17/ckpt_nt1900121822_step202784.pt",
+      "sha256": "21b9e8594c46648610a9221019e3f0b1b846b7c652966111cb3e09100e8f7037",
+      "bytes": 132860263
+    },
+    "checkpoint_manifest": {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/weights/RNA-Sc-30M_s17/manifest.json",
+      "sha256": "3ad9c33665376f977db84fe6304c1abb05d1272e44decba221e2ea60b06723a4",
+      "bytes": 8655
+    },
+    "execution_script": {
+      "path": "/home/cunyuliu/rna-sc-p2/p2_2/run_p2_2.py",
+      "sha256": "0e9cfa6247b9f6eade30ddbd034edf9bb4d2f2f6e54064dea0c2fee43e692bd2",
+      "bytes": 46406
+    },
+    "run_cov300": {
+      "path": "/home/cunyuliu/rna-sc-p2/code_git/run_cov300.py",
+      "sha256": "c82ac6cf81ca7dd0943a458d500127d7608d9a138db97f1c6466c34b02dfad2f",
+      "bytes": 5577
+    },
+    "s14_rns": {
+      "path": "/home/cunyuliu/rna-sc-p2/code_git/rna_sc/s14_rns.py",
+      "sha256": "4d5dac6c92d28c1afdfa9a09b78acdd25c84fab99ea5b96fd1315c01e8363063",
+      "bytes": 9748
+    },
+    "s14_rns_ext": {
+      "path": "/home/cunyuliu/rna-sc-p2/code_git/rna_sc/s14_rns_ext.py",
+      "sha256": "eb7d05facdfe0c39c6d8cbda228be65727aa11d7a9727a87018d0d496bb9fa5d",
+      "bytes": 12209
+    },
+    "s14_rns_cov": {
+      "path": "/home/cunyuliu/rna-sc-p2/code_git/rna_sc/s14_rns_cov.py",
+      "sha256": "f115f30af72e5c75abcd8e52cea0814b025511209d75b2dc86f5e8bff5fc7457",
+      "bytes": 5119
+    },
+    "model_and_tokenizer": {
+      "path": "/home/cunyuliu/rna-sc-p2/code_git/rna_sc/model.py",
+      "sha256": "a89bb0242213f173650fab33790c84c7bd4d1a1566c9ad5774ae6f79b221f06d",
+      "bytes": 7560
+    },
+    "load_encoder": {
+      "path": "/home/cunyuliu/rna-sc-p2/code_git/rna_sc/probe.py",
+      "sha256": "b64dc55c4bff7bd1105635dd2a3a097d7d00aeed689d4f379a2f9273ccde1857",
+      "bytes": 14553
+    }
+  },
+  "tokenizer": {
+    "type": "single-nucleotide",
+    "ACGU": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "PAD": 4,
+    "MASK": 5,
+    "CLS": 6,
+    "vocab_total": 7
+  },
+  "source_label_scope": "coarse bpRNA source; not fine-grained Rfam ID"
+}

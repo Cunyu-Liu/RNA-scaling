@@ -1,0 +1,11 @@
+{
+  "status": "ADAPTED_TARGET_MISSING",
+  "resolved_split_8080": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/data/release22_split_8080.parquet",
+  "target_exists": false,
+  "sha256": {
+    "/home/cunyuliu/rna-sc-p2/sitecustomize.py": "fa0c4b800f2a20f14a21ca57502c7423742dbeb8c1bee0e08db9418e7ee4e4cb",
+    "/home/cunyuliu/rna-sc-p2/p2_python.sh": "5eeeff61cefb07dd816f6f78a51e51ba3a97adb6952e2b58f21f8ddabed7fa1e",
+    "/home/cunyuliu/rna-sc-p2/code_git/rna_sc/config.py": "e1fef7c37cd1ec2d79f95c872a773859bd517a6a3914e981f7d0557bc10295e6"
+  },
+  "activation": "PYTHONPATH=/home/cunyuliu/rna-sc-p2 or p2_python.sh"
+}

@@ -1,0 +1,138 @@
+{
+  "server": "server1",
+  "host": "ZDLg6Y",
+  "generated_at_utc": "2026-11-25T18:38:37.476163+00:00",
+  "target": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/data/release22_split_8080.parquet",
+  "roots": [
+    {
+      "root": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/data",
+      "exists": true,
+      "parquet": [
+        {
+          "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/data/archiveii.parquet",
+          "bytes": 280734,
+          "status": "READABLE",
+          "rows": 3975,
+          "schema": "id: string\nsequence: string\nsecondary_structure: string\nfamily: string"
+        },
+        {
+          "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/data/bpRNA_parsed.parquet",
+          "bytes": 1628162,
+          "status": "READABLE",
+          "rows": 12317,
+          "schema": "name: string\nsource: string\nsplit: string\nseq: string\npairs: list<element: list<element: int32>>\n  child 0, element: list<element: int32>\n      child 0, element: int32"
+        },
+        {
+          "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/data/release22_cluster_split.parquet",
+          "bytes": 18534325,
+          "status": "READABLE",
+          "rows": 3357201,
+          "schema": "cluster_id: string\nsplit: string"
+        },
+        {
+          "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/data/release22_split_8080.parquet",
+          "bytes": 132848637,
+          "status": "READABLE",
+          "rows": 566077,
+          "schema": "canonical_sequence: string\nsplit_membership: string\ncluster_id: string"
+        },
+        {
+          "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/data/subsamples/c1Mcs.parquet",
+          "bytes": 1607348,
+          "status": "READABLE",
+          "rows": 190917,
+          "schema": "cluster_id: string"
+        },
+        {
+          "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/data/subsamples/c5Mcs.parquet",
+          "bytes": 7463666,
+          "status": "READABLE",
+          "rows": 975339,
+          "schema": "cluster_id: string"
+        }
+      ]
+    },
+    {
+      "root": "/root/rna-sc",
+      "exists": true,
+      "parquet": []
+    },
+    {
+      "root": "/root/rnaft_restore/03_RNA迁移学习_rna-sc/data_corpus",
+      "exists": true,
+      "parquet": [
+        {
+          "path": "/root/rnaft_restore/03_RNA迁移学习_rna-sc/data_corpus/archiveii.parquet",
+          "bytes": 280734,
+          "status": "READABLE",
+          "rows": 3975,
+          "schema": "id: string\nsequence: string\nsecondary_structure: string\nfamily: string"
+        },
+        {
+          "path": "/root/rnaft_restore/03_RNA迁移学习_rna-sc/data_corpus/bpRNA_parsed.parquet",
+          "bytes": 1628162,
+          "status": "READABLE",
+          "rows": 12317,
+          "schema": "name: string\nsource: string\nsplit: string\nseq: string\npairs: list<element: list<element: int32>>\n  child 0, element: list<element: int32>\n      child 0, element: int32"
+        },
+        {
+          "path": "/root/rnaft_restore/03_RNA迁移学习_rna-sc/data_corpus/mars_corpus.parquet",
+          "bytes": 543686656,
+          "status": "UNREADABLE",
+          "error": "Parquet magic bytes not found in footer. Either the file is corrupted or this is not a parquet file."
+        },
+        {
+          "path": "/root/rnaft_restore/03_RNA迁移学习_rna-sc/data_corpus/r22_train_reweighted.parquet",
+          "bytes": 821833304,
+          "status": "UNREADABLE",
+          "error": "Parquet magic bytes not found in footer. Either the file is corrupted or this is not a parquet file."
+        },
+        {
+          "path": "/root/rnaft_restore/03_RNA迁移学习_rna-sc/data_corpus/r22_train_rfamcap.parquet",
+          "bytes": 173983882,
+          "status": "READABLE",
+          "rows": 566077,
+          "schema": "canonical_sequence_hash: string\ncanonical_sequence: string\nrna_type: string\nlength: int64\nlength_bin: string\nnum_accessions: int64\naccessions: string\ncluster_id: string\nfamily_annotation: string\nsplit_membership: string\nclan_annotation: string\neligible_family: bool"
+        },
+        {
+          "path": "/root/rnaft_restore/03_RNA迁移学习_rna-sc/data_corpus/release22_cluster_split.parquet",
+          "bytes": 18534325,
+          "status": "READABLE",
+          "rows": 3357201,
+          "schema": "cluster_id: string\nsplit: string"
+        },
+        {
+          "path": "/root/rnaft_restore/03_RNA迁移学习_rna-sc/data_corpus/rinalmo_corpus_v1.parquet",
+          "bytes": 415525072,
+          "status": "UNREADABLE",
+          "error": "Parquet magic bytes not found in footer. Either the file is corrupted or this is not a parquet file."
+        },
+        {
+          "path": "/root/rnaft_restore/03_RNA迁移学习_rna-sc/data_corpus/subsamples/c1Mcs.parquet",
+          "bytes": 1607348,
+          "status": "READABLE",
+          "rows": 190917,
+          "schema": "cluster_id: string"
+        },
+        {
+          "path": "/root/rnaft_restore/03_RNA迁移学习_rna-sc/data_corpus/subsamples/c5Mcs.parquet",
+          "bytes": 7463666,
+          "status": "READABLE",
+          "rows": 975339,
+          "schema": "cluster_id: string"
+        }
+      ]
+    },
+    {
+      "root": "/mnt/cunyuliu/tokenizer-benchmark",
+      "exists": false,
+      "parquet": []
+    },
+    {
+      "root": "/mnt/cunyuliu/rna-sc/data",
+      "exists": false,
+      "parquet": []
+    }
+  ],
+  "target_exists": true
+}

@@ -1,0 +1,6 @@
+{
+  "length_edges": null,
+  "length_rule": "<=q1; q1<L<=q2; q2<L<=q3; >q3",
+  "rns_rule": "<=q1; q1<RNS<=q2; >q2",
+  "arms": {}
+}

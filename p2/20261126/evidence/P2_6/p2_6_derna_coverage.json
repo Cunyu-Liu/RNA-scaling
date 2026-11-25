@@ -1,0 +1,391 @@
+{
+  "protocol": "prereg/P2_6.md",
+  "scope": "existing 20k official final rows",
+  "summary": {
+    "expected_run_checkpoints": 18,
+    "covered_run_checkpoints": 18,
+    "expected_deduplicated_layers": 362,
+    "covered_deduplicated_layers": 362,
+    "raw_selected_rows_before_dedup": 390,
+    "duplicate_rows_removed": 28,
+    "all_layers_evaluable": true,
+    "all_class_names_recognized": true,
+    "excluded_class_per_layer": "rRNA",
+    "remaining_class_count_per_layer": 9
+  },
+  "runs": [
+    {
+      "analysis_group": "rfamcap",
+      "scale": "30M",
+      "arm": "arm",
+      "source_file": "probe_results.jsonl",
+      "run": "RNA-Sc-30M_s17_rfamcap",
+      "selected_ckpt_nt": 1900086380,
+      "n_train": [
+        20000
+      ],
+      "expected_layers": 12,
+      "deduplicated_layers": 12,
+      "raw_rows": 12,
+      "duplicate_rows_removed": 0,
+      "available_checkpoints_n_train_ge_4000": [
+        200006790,
+        1900086380
+      ],
+      "status": "OK"
+    },
+    {
+      "analysis_group": "rfamcap",
+      "scale": "30M",
+      "arm": "main",
+      "source_file": "probe_results.jsonl",
+      "run": "RNA-Sc-30M_s17",
+      "selected_ckpt_nt": 1900121822,
+      "n_train": [
+        20000
+      ],
+      "expected_layers": 12,
+      "deduplicated_layers": 12,
+      "raw_rows": 12,
+      "duplicate_rows_removed": 0,
+      "available_checkpoints_n_train_ge_4000": [
+        100007541,
+        1900121822
+      ],
+      "status": "OK"
+    },
+    {
+      "analysis_group": "rfamcap",
+      "scale": "100M",
+      "arm": "arm",
+      "source_file": "probe_results.jsonl",
+      "run": "RNA-Sc-100M_s17_rfamcap",
+      "selected_ckpt_nt": 1900086380,
+      "n_train": [
+        20000
+      ],
+      "expected_layers": 23,
+      "deduplicated_layers": 23,
+      "raw_rows": 23,
+      "duplicate_rows_removed": 0,
+      "available_checkpoints_n_train_ge_4000": [
+        200006790,
+        1900086380
+      ],
+      "status": "OK"
+    },
+    {
+      "analysis_group": "rfamcap",
+      "scale": "100M",
+      "arm": "main",
+      "source_file": "probe_results.jsonl",
+      "run": "RNA-Sc-100M_s17",
+      "selected_ckpt_nt": 1900122218,
+      "n_train": [
+        20000
+      ],
+      "expected_layers": 23,
+      "deduplicated_layers": 23,
+      "raw_rows": 23,
+      "duplicate_rows_removed": 0,
+      "available_checkpoints_n_train_ge_4000": [
+        100007541,
+        1900122218
+      ],
+      "status": "OK"
+    },
+    {
+      "analysis_group": "rinalmocorpus",
+      "scale": "30M",
+      "arm": "arm",
+      "source_file": "probe_results.jsonl",
+      "run": "RNA-Sc-30M_s17_rinalmocorpus",
+      "selected_ckpt_nt": 1900104686,
+      "n_train": [
+        20000
+      ],
+      "expected_layers": 12,
+      "deduplicated_layers": 12,
+      "raw_rows": 12,
+      "duplicate_rows_removed": 0,
+      "available_checkpoints_n_train_ge_4000": [
+        1900104686
+      ],
+      "status": "OK"
+    },
+    {
+      "analysis_group": "rinalmocorpus",
+      "scale": "30M",
+      "arm": "main",
+      "source_file": "probe_results.jsonl",
+      "run": "RNA-Sc-30M_s17",
+      "selected_ckpt_nt": 1900121822,
+      "n_train": [
+        20000
+      ],
+      "expected_layers": 12,
+      "deduplicated_layers": 12,
+      "raw_rows": 12,
+      "duplicate_rows_removed": 0,
+      "available_checkpoints_n_train_ge_4000": [
+        100007541,
+        1900121822
+      ],
+      "status": "OK"
+    },
+    {
+      "analysis_group": "rinalmocorpus",
+      "scale": "100M",
+      "arm": "arm",
+      "source_file": "probe_results.jsonl",
+      "run": "RNA-Sc-100M_s17_rinalmocorpus",
+      "selected_ckpt_nt": 1900104686,
+      "n_train": [
+        20000
+      ],
+      "expected_layers": 23,
+      "deduplicated_layers": 23,
+      "raw_rows": 23,
+      "duplicate_rows_removed": 0,
+      "available_checkpoints_n_train_ge_4000": [
+        1900104686
+      ],
+      "status": "OK"
+    },
+    {
+      "analysis_group": "rinalmocorpus",
+      "scale": "100M",
+      "arm": "main",
+      "source_file": "probe_results.jsonl",
+      "run": "RNA-Sc-100M_s17",
+      "selected_ckpt_nt": 1900122218,
+      "n_train": [
+        20000
+      ],
+      "expected_layers": 23,
+      "deduplicated_layers": 23,
+      "raw_rows": 23,
+      "duplicate_rows_removed": 0,
+      "available_checkpoints_n_train_ge_4000": [
+        100007541,
+        1900122218
+      ],
+      "status": "OK"
+    },
+    {
+      "analysis_group": "rinalmocorpus",
+      "scale": "300M",
+      "arm": "arm",
+      "source_file": "probe_results.jsonl",
+      "run": "RNA-Sc-300M_s17_rinalmocorpus",
+      "selected_ckpt_nt": 1900104686,
+      "n_train": [
+        20000
+      ],
+      "expected_layers": 24,
+      "deduplicated_layers": 24,
+      "raw_rows": 24,
+      "duplicate_rows_removed": 0,
+      "available_checkpoints_n_train_ge_4000": [
+        1900104686
+      ],
+      "status": "OK"
+    },
+    {
+      "analysis_group": "rinalmocorpus",
+      "scale": "300M",
+      "arm": "main",
+      "source_file": "probe_results.jsonl",
+      "run": "RNA-Sc-300M_s17",
+      "selected_ckpt_nt": 1900122218,
+      "n_train": [
+        20000
+      ],
+      "expected_layers": 24,
+      "deduplicated_layers": 24,
+      "raw_rows": 24,
+      "duplicate_rows_removed": 0,
+      "available_checkpoints_n_train_ge_4000": [
+        1900122218
+      ],
+      "status": "OK"
+    },
+    {
+      "analysis_group": "b59_budget",
+      "scale": "30M",
+      "arm": "arm",
+      "source_file": "probe_results_b59_family.jsonl",
+      "run": "RNA-Sc-30M_s17_b59",
+      "selected_ckpt_nt": 5800296014,
+      "n_train": [
+        20000
+      ],
+      "expected_layers": 12,
+      "deduplicated_layers": 12,
+      "raw_rows": 12,
+      "duplicate_rows_removed": 0,
+      "available_checkpoints_n_train_ge_4000": [
+        5800296014
+      ],
+      "status": "OK"
+    },
+    {
+      "analysis_group": "b59_budget",
+      "scale": "30M",
+      "arm": "main",
+      "source_file": "probe_results.jsonl",
+      "run": "RNA-Sc-30M_s17",
+      "selected_ckpt_nt": 1900121822,
+      "n_train": [
+        20000
+      ],
+      "expected_layers": 12,
+      "deduplicated_layers": 12,
+      "raw_rows": 12,
+      "duplicate_rows_removed": 0,
+      "available_checkpoints_n_train_ge_4000": [
+        100007541,
+        1900121822
+      ],
+      "status": "OK"
+    },
+    {
+      "analysis_group": "b59_budget",
+      "scale": "100M",
+      "arm": "arm",
+      "source_file": "probe_results_b59_family.jsonl",
+      "run": "RNA-Sc-100M_s17_b59",
+      "selected_ckpt_nt": 5800296014,
+      "n_train": [
+        20000
+      ],
+      "expected_layers": 23,
+      "deduplicated_layers": 23,
+      "raw_rows": 23,
+      "duplicate_rows_removed": 0,
+      "available_checkpoints_n_train_ge_4000": [
+        5800296014
+      ],
+      "status": "OK"
+    },
+    {
+      "analysis_group": "b59_budget",
+      "scale": "100M",
+      "arm": "main",
+      "source_file": "probe_results.jsonl",
+      "run": "RNA-Sc-100M_s17",
+      "selected_ckpt_nt": 1900122218,
+      "n_train": [
+        20000
+      ],
+      "expected_layers": 23,
+      "deduplicated_layers": 23,
+      "raw_rows": 23,
+      "duplicate_rows_removed": 0,
+      "available_checkpoints_n_train_ge_4000": [
+        100007541,
+        1900122218
+      ],
+      "status": "OK"
+    },
+    {
+      "analysis_group": "b59_budget",
+      "scale": "300M",
+      "arm": "arm",
+      "source_file": "probe_results_b59_family.jsonl",
+      "run": "RNA-Sc-300M_s17_b59",
+      "selected_ckpt_nt": 5800296014,
+      "n_train": [
+        20000
+      ],
+      "expected_layers": 24,
+      "deduplicated_layers": 24,
+      "raw_rows": 24,
+      "duplicate_rows_removed": 0,
+      "available_checkpoints_n_train_ge_4000": [
+        5800296014
+      ],
+      "status": "OK"
+    },
+    {
+      "analysis_group": "b59_budget",
+      "scale": "300M",
+      "arm": "main",
+      "source_file": "probe_results.jsonl",
+      "run": "RNA-Sc-300M_s17",
+      "selected_ckpt_nt": 1900122218,
+      "n_train": [
+        20000
+      ],
+      "expected_layers": 24,
+      "deduplicated_layers": 24,
+      "raw_rows": 24,
+      "duplicate_rows_removed": 0,
+      "available_checkpoints_n_train_ge_4000": [
+        1900122218
+      ],
+      "status": "OK"
+    },
+    {
+      "analysis_group": "b59_budget",
+      "scale": "650M",
+      "arm": "arm",
+      "source_file": "probe_results_b59_family.jsonl",
+      "run": "RNA-Sc-650M_s17_b59",
+      "selected_ckpt_nt": 5800296014,
+      "n_train": [
+        20000
+      ],
+      "expected_layers": 28,
+      "deduplicated_layers": 28,
+      "raw_rows": 56,
+      "duplicate_rows_removed": 28,
+      "available_checkpoints_n_train_ge_4000": [
+        5800296014
+      ],
+      "status": "OK"
+    },
+    {
+      "analysis_group": "b59_budget",
+      "scale": "650M",
+      "arm": "main",
+      "source_file": "probe_results.jsonl",
+      "run": "RNA-Sc-650M_s17",
+      "selected_ckpt_nt": 1900122218,
+      "n_train": [
+        20000
+      ],
+      "expected_layers": 28,
+      "deduplicated_layers": 28,
+      "raw_rows": 28,
+      "duplicate_rows_removed": 0,
+      "available_checkpoints_n_train_ge_4000": [
+        1900122218
+      ],
+      "status": "OK"
+    }
+  ],
+  "missing_official_20k": [],
+  "excluded_or_unavailable": [
+    {
+      "item": "RFamCap ckpt_nt=200006790",
+      "status": "EXCLUDED_NONFINAL",
+      "reason": "Official RFamCap terminal checkpoint is 1900086380; retracted +1.85pp is not used."
+    },
+    {
+      "item": "RFamCap ckpt_nt=1800083135 family layers",
+      "status": "NOT_EVALUABLE_MISSING_FAMILY_LAYERS",
+      "reason": "No old family per-layer rows; no de-rRNA value inferred. Not the preregistered terminal headline."
+    },
+    {
+      "item": "Early main checkpoints below selected final ckpt",
+      "status": "EXCLUDED_BY_FINAL_CHECKPOINT_RULE",
+      "reason": "Includes old 30M/100M rows without per_class_f1; they are not official final rows."
+    }
+  ],
+  "p2_5_retest": {
+    "status": "PENDING_P2_5",
+    "covered": false,
+    "reason": "This task explicitly executes existing 20k only."
+  }
+}

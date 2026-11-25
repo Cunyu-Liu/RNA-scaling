@@ -1,0 +1,80 @@
+{
+  "cov": {
+    "mean": 0.24872231996994307,
+    "n": 4920
+  },
+  "ctrl": {
+    "mean": 0.0010656848717230528,
+    "n": 4920
+  },
+  "old_drop": {
+    "mean": -0.0944850419407826,
+    "n": 4920
+  },
+  "cov_minus_ctrl": 0.24765663509822,
+  "model_key": "rinalmo_giga",
+  "mode": "trained",
+  "seed": 17,
+  "n_conditions": 1640,
+  "condition_ids_sha256": "e1ce3102698eb5f4fc2b3b0560dd4d679351ebd99f77e9b7aa6e4d2f5de17ec6",
+  "conditions_sha256": "549db1834f6990beb437d22948cf1356ba15fa99c2bef6dbcfee8c84abc8f001",
+  "initial_condition_batch": 16,
+  "final_condition_batch": 16,
+  "oom_reductions": [],
+  "elapsed_seconds": 56.44093871116638,
+  "peak_allocated_mib": 6341.24462890625,
+  "peak_reserved_mib": 7870.0,
+  "cpu_fallback_count": 0,
+  "per_condition_file": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/results/P2_3/p2_3_external_cov_per_condition_rinalmo_giga_trained.jsonl",
+  "per_condition_sha256": "319696a5a308d4f828b0aa71ea8480d80675e37b430bb7d1412560c51838cfcc",
+  "model_info": {
+    "model": "RiNALMo-giga",
+    "mode": "trained",
+    "weight_source": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/ext/rinalmo-giga/model.safetensors",
+    "tokenizer": {
+      "ACGU": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "CLS": 1,
+      "EOS": 2,
+      "MASK": 4,
+      "PAD": 0,
+      "logits_vocab": 28
+    },
+    "loading_report": {
+      "missing_keys": [
+        "lm_head.decoder.bias"
+      ],
+      "unexpected_keys": [],
+      "mismatched_keys": [],
+      "error_msgs": [],
+      "missing_decoder_bias_is_zero": true
+    }
+  },
+  "smoke": {
+    "status": "PASS",
+    "device": "cuda:0",
+    "model_device": "cuda:0",
+    "bf16_autocast": true,
+    "logits_vocab": 28,
+    "probabilities_finite": true,
+    "cpu_fallback_count": 0,
+    "peak_allocated_mib": 3764.873046875,
+    "tokenizer_assertions": {
+      "ACGU": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "CLS": 1,
+      "EOS": 2,
+      "MASK": 4,
+      "PAD": 0,
+      "logits_vocab": 28
+    }
+  }
+}

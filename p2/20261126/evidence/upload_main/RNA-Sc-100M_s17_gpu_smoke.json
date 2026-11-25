@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "run": "RNA-Sc-100M_s17",
+  "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/weights/RNA-Sc-100M_s17/ckpt_nt1900122218_step202784.pt",
+  "bytes": 366586871,
+  "sha256": "7e73e31317b7a4eac601356942bff4dd885729556f5255b9c079b61749d3bb45",
+  "sha256_matches_remote_strip_record": true,
+  "local_torch28_container_sha256": "16fbcb9dd3c3459cc90cfe913bfa9f81e2a2ca1a481a1868aaed96f568b1e1c3",
+  "container_matches_local_torch28": false,
+  "source_and_tensor_bitwise_verified": true,
+  "strict_load": true,
+  "model_tensors": 189,
+  "optimizer_present": false,
+  "ckpt_nt": 1900122218,
+  "step": 202784,
+  "torch": "2.14.1+cu132",
+  "torch_cuda_build": "13.2",
+  "device_name": "NVIDIA GeForce RTX 5090",
+  "model_device": "cuda:0",
+  "logits_device": "cuda:0",
+  "logits_shape": [
+    2,
+    128,
+    7
+  ],
+  "logits_dtype": "torch.bfloat16",
+  "logits_finite": true,
+  "peak_memory_allocated_mib": 559.86,
+  "peak_memory_reserved_mib": 612.0
+}

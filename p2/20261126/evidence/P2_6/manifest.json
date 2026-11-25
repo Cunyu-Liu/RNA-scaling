@@ -1,0 +1,78 @@
+{
+  "task": "P2_6",
+  "created_utc": "2026-11-25T18:26:45.519344+00:00",
+  "protocol": "prereg/P2_6.md",
+  "scope": "Existing 20k de-rRNA reaggregation only; P2.5 pending",
+  "compute": "CPU Python standard library only; no GPU used",
+  "backup_root_read_only": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc",
+  "inputs": [
+    {
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/eval/probe_results.jsonl",
+      "bytes": 2327316,
+      "sha256": "a9bc5f93232ed51d094e66634e2609794e1221af6667d20beafc5a778e0e0315"
+    },
+    {
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/eval/probe_results_b59_family.jsonl",
+      "bytes": 984738,
+      "sha256": "0373b139c4466e8af0cfa40d842a69b507fbe1d356fe8b1eab47e443d69f383f"
+    },
+    {
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/code_git/rna_sc/der_rna.py",
+      "bytes": 5690,
+      "sha256": "6405c5b86f42d2f0bc6146d7f7e2a957bcabfb71887b357f2e71baab1c2cca76"
+    }
+  ],
+  "function_reference": "code_git/rna_sc/der_rna.py::macro_f1_excluding",
+  "outputs": [
+    {
+      "path": "run_p2_6_derna.py",
+      "bytes": 24404,
+      "sha256": "48e26c275771205ed546ed04a296183200eb6554dfba9947d0cb487ca2ff06fc"
+    },
+    {
+      "path": "p2_6_derna_layers.csv",
+      "bytes": 77057,
+      "sha256": "af2ac669ee6a90ae561c4bf3effeea284f663053f13da6600fe51e5f4c5bed85"
+    },
+    {
+      "path": "p2_6_derna_headlines.csv",
+      "bytes": 2302,
+      "sha256": "03ee6514029ea5031007263e0694c57b5a21c14f332e54f7a67d6674d080caa5"
+    },
+    {
+      "path": "p2_6_derna_headlines.json",
+      "bytes": 10192,
+      "sha256": "94f78da074835f09fb81181a77691fe748afba671495d5287589bdf5f5a9d181"
+    },
+    {
+      "path": "p2_6_derna_coverage.json",
+      "bytes": 10057,
+      "sha256": "b14be8749495f43476399130bd32e16a0645b327461e054990da99771aeaac99"
+    },
+    {
+      "path": "p2_6_gaps.csv",
+      "bytes": 694,
+      "sha256": "9e62ecb2c7dccf8ac474d9bbec59e9f630992e165943abf262b76ee9f981021a"
+    },
+    {
+      "path": "p2_6_report.md",
+      "bytes": 2279,
+      "sha256": "77d97b5221310972987b3d66bf056a805537f3366d43ed013efc59f6b7b4fbfb"
+    },
+    {
+      "path": "p2_6_validation.json",
+      "bytes": 368,
+      "sha256": "c52155d2ba11d283b5e8a53518c381c3256919d18e8a13ba80a180775b972a7f"
+    }
+  ],
+  "validation": {
+    "status": "PASS",
+    "headline_recomputed_from_layers_csv": true,
+    "max_absolute_f1_recalculation_error": 4.4444448121794267e-11,
+    "unique_group_run_ckpt_layer_rows": 362,
+    "duplicate_650m_b59_rows_not_counted_as_seeds": true,
+    "checkpoint_rules_verified": true,
+    "all_official_layers_have_nine_non_rrna_classes": true,
+    "p2_5_not_substituted_by_20k": true
+  }
+}

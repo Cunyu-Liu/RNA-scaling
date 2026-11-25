@@ -1,0 +1,246 @@
+{
+  "generated_at_utc": "2026-11-25T18:38:36.461822+00:00",
+  "backup_root_read_only": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc",
+  "parquet_sources": [
+    {
+      "path": "archiveii.parquet",
+      "bytes": 280734,
+      "sha256": "8a60bdf9c88e76542a656ea3e3b72f7ce49c2429c18a77f924eb9a144be689af",
+      "read_status": "READABLE",
+      "rows": 3975,
+      "row_groups": 1,
+      "fields": [
+        {
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "name": "sequence",
+          "type": "string"
+        },
+        {
+          "name": "secondary_structure",
+          "type": "string"
+        },
+        {
+          "name": "family",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "bpRNA_parsed.parquet",
+      "bytes": 1628162,
+      "sha256": "20d4ed56fa4f1d6e485cb48fe7b0b4d11bfe0fda2049904622dcc35874d15c51",
+      "read_status": "READABLE",
+      "rows": 12317,
+      "row_groups": 1,
+      "fields": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "source",
+          "type": "string"
+        },
+        {
+          "name": "split",
+          "type": "string"
+        },
+        {
+          "name": "seq",
+          "type": "string"
+        },
+        {
+          "name": "pairs",
+          "type": "list<element: list<element: int32>>"
+        }
+      ]
+    },
+    {
+      "path": "mars_corpus.parquet",
+      "bytes": 543686656,
+      "sha256": "da592c4021fe5589d172e7423d8608383925dbe4b7930a66b542887c04812ed3",
+      "read_status": "UNREADABLE",
+      "error": "Parquet magic bytes not found in footer. Either the file is corrupted or this is not a parquet file."
+    },
+    {
+      "path": "r22_train_reweighted.parquet",
+      "bytes": 821833304,
+      "sha256": "cee6b45a166b9d83246dad1b3c799e87777d665e3d1fa0b50410718592b1114a",
+      "read_status": "UNREADABLE",
+      "error": "Parquet magic bytes not found in footer. Either the file is corrupted or this is not a parquet file."
+    },
+    {
+      "path": "r22_train_rfamcap.parquet",
+      "bytes": 173983882,
+      "sha256": "a0caa60a63762bc1f14db740c13fb05aaef058e43fa1ab3af8099e2bcc4e9a7f",
+      "read_status": "READABLE",
+      "rows": 566077,
+      "row_groups": 1,
+      "fields": [
+        {
+          "name": "canonical_sequence_hash",
+          "type": "string"
+        },
+        {
+          "name": "canonical_sequence",
+          "type": "string"
+        },
+        {
+          "name": "rna_type",
+          "type": "string"
+        },
+        {
+          "name": "length",
+          "type": "int64"
+        },
+        {
+          "name": "length_bin",
+          "type": "string"
+        },
+        {
+          "name": "num_accessions",
+          "type": "int64"
+        },
+        {
+          "name": "accessions",
+          "type": "string"
+        },
+        {
+          "name": "cluster_id",
+          "type": "string"
+        },
+        {
+          "name": "family_annotation",
+          "type": "string"
+        },
+        {
+          "name": "split_membership",
+          "type": "string"
+        },
+        {
+          "name": "clan_annotation",
+          "type": "string"
+        },
+        {
+          "name": "eligible_family",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "release22_cluster_split.parquet",
+      "bytes": 18534325,
+      "sha256": "c25e7337393ddce39859192be2a1eb6b031371cad6925962ebfe74f99142e1c1",
+      "read_status": "READABLE",
+      "rows": 3357201,
+      "row_groups": 4,
+      "fields": [
+        {
+          "name": "cluster_id",
+          "type": "string"
+        },
+        {
+          "name": "split",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "rinalmo_corpus_v1.parquet",
+      "bytes": 415525072,
+      "sha256": "0fc7ce9d70b9b8b2735267831dc1b3d1c261e6ac82678ddd577e29ca99faf08e",
+      "read_status": "UNREADABLE",
+      "error": "Parquet magic bytes not found in footer. Either the file is corrupted or this is not a parquet file."
+    },
+    {
+      "path": "subsamples/c1Mcs.parquet",
+      "bytes": 1607348,
+      "sha256": "114a513a37edce1b345c952467fa6c80a0b26b1cc024fff498bfbc1a8085b6c5",
+      "read_status": "READABLE",
+      "rows": 190917,
+      "row_groups": 1,
+      "fields": [
+        {
+          "name": "cluster_id",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "subsamples/c5Mcs.parquet",
+      "bytes": 7463666,
+      "sha256": "ee4e1d3b3b0f37c2922d07af57f22f90c8b285578039d12f4ce143c1dadc71ee",
+      "read_status": "READABLE",
+      "rows": 975339,
+      "row_groups": 1,
+      "fields": [
+        {
+          "name": "cluster_id",
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "rinalmo_work": [
+    {
+      "path": "rinalmo_corpus_work/extract.done",
+      "bytes": 69,
+      "sha256": "a5d3f8c19b1b8653f7f629a52bb6da73583efdf9505b4bd0a7d669ffbc91d442",
+      "content": "2026-10-08 16:52:58 {\"rows\": 28922968, \"sources\": {\"r22\": 28922968}}"
+    },
+    {
+      "path": "rinalmo_corpus_work/dedup_eval.done",
+      "bytes": 60,
+      "sha256": "27f125f4c34f28b6421dda45e7c3e2937b54f55a372841fb857bd7f126ae1e62",
+      "content": "2026-10-08 19:11:30 {\"removed\": 14896089, \"kept\": 14026879}"
+    },
+    {
+      "path": "rinalmo_corpus_work/cluster.done",
+      "bytes": 21,
+      "sha256": "7e2ca2fa794f701fbee4b2a87869478eba2bad44d69bbf9679aa34edd894954b",
+      "content": "2026-10-08 17:28:18"
+    },
+    {
+      "path": "rinalmo_corpus_work/mmseqs_out_cluster.tsv",
+      "bytes": 553569726,
+      "sha256": "ae74f08390cbcc5513acf7d52372463447a655a49e6aeceac56a3154a8311436",
+      "lines": 28922968
+    },
+    {
+      "path": "rinalmo_corpus_work/clusters_dedup.tsv",
+      "bytes": 268634139,
+      "sha256": "44bf562a5787ab2422fa44493b79cf31a9c4f3e934eca95bb510812aacffdc5c",
+      "lines": 14026879
+    },
+    {
+      "path": "rinalmo_corpus_work/mmseqs_out_rep_seq.fasta",
+      "bytes": 223838208,
+      "sha256": "6c1d734ab4618de2c89b6936f58d1515ffd516b4d1d391106cd03b88828808fd",
+      "lines": 720223
+    },
+    {
+      "missing_required_intermediates": [
+        "all_raw.fasta",
+        "all_uniq.fasta"
+      ],
+      "reason": "Member IDs alone cannot restore canonical_sequence; dedup_eval also removes held-out rows."
+    }
+  ],
+  "cluster_split_audit": {
+    "rows": 3357201,
+    "unique_clusters": 3357201,
+    "null_cluster_ids": 0,
+    "split_counts": {
+      "family_validation": 227978,
+      "train": 3022118,
+      "family_test": 45281,
+      "validation": 30780,
+      "test": 31044
+    },
+    "matches_family_index_summary": true
+  },
+  "tokenizer_benchmark_commit": "a236530f8348f7d02ff74c15ce9267ee0989954f"
+}

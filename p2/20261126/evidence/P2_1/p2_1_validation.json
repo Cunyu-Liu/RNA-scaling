@@ -1,0 +1,76 @@
+{
+  "acceptance_complete": true,
+  "adjudication_verdict": "not_reproduced",
+  "cuda_fallback_count_total": 0,
+  "epochs_all_rows": 6,
+  "expected_layer_rows": 105,
+  "layer_rows": 105,
+  "max_peak_reserved_mib": 3232.0,
+  "n_eval_seqs": 1305,
+  "n_eval_seqs_requested": 1500,
+  "n_tokens_eval": 164418,
+  "n_tokens_train": 1006208,
+  "n_train_seqs": 8000,
+  "prediction_recomputation": [
+    {
+      "all_layers_recomputed_from_saved_predictions": true,
+      "predictions_sha256": "16103954ce68becefa20c75863e080ee2b117a94870c45c2c245b806a98bdbb9",
+      "shape": [
+        23,
+        164418
+      ],
+      "unit": "RNA-Sc-100M_s17_rfamcap_ckpt1800083135"
+    },
+    {
+      "all_layers_recomputed_from_saved_predictions": true,
+      "predictions_sha256": "1a9f951661f95414b20ecede7fdfe78c7f72950589975eb9ff661b45e6c80ce8",
+      "shape": [
+        23,
+        164418
+      ],
+      "unit": "RNA-Sc-100M_s17_rfamcap_ckpt1900086380"
+    },
+    {
+      "all_layers_recomputed_from_saved_predictions": true,
+      "predictions_sha256": "a522345078a437c70c1dec30a20935eaf5db2ccf65fea5691fa22833ec3094af",
+      "shape": [
+        12,
+        164418
+      ],
+      "unit": "RNA-Sc-30M_s17_rfamcap_ckpt1900086380"
+    },
+    {
+      "all_layers_recomputed_from_saved_predictions": true,
+      "predictions_sha256": "285458a1cefec8307d7b4f2cb1806454fa7c56336a0fe041b49bd47dffb805d6",
+      "shape": [
+        12,
+        164418
+      ],
+      "unit": "RNA-Sc-30M_s17_rfamcap_ckpt1800083135"
+    },
+    {
+      "all_layers_recomputed_from_saved_predictions": true,
+      "predictions_sha256": "94c254658c610e5aea7a68542c61269720729890e0ea47724bcf362b1436ff08",
+      "shape": [
+        23,
+        164418
+      ],
+      "unit": "RNA-Sc-100M_s17_rfamcap_randinit17"
+    },
+    {
+      "all_layers_recomputed_from_saved_predictions": true,
+      "predictions_sha256": "68068988f7403fa352fcdc9df2c7233c79ad34876ce26a1f34c35b424b1c693c",
+      "shape": [
+        12,
+        164418
+      ],
+      "unit": "RNA-Sc-30M_s17_rfamcap_randinit17"
+    }
+  ],
+  "probe_batch_size_all_rows": 512,
+  "sample_sha256": "8691716d86ec9a6db8f60da6af53a5e72f8d5d9f9d7b8674e5db5d2c2f6938c8",
+  "sample_sha256_unique": true,
+  "status": "PASS",
+  "unique_run_layer_keys": 105,
+  "units_complete": 6
+}

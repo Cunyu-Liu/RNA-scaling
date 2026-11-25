@@ -1,0 +1,7 @@
+arm,run,layer,metric,n_sequences,n_metric_sequences,raw_low_n,raw_mid_n,raw_high_n,raw_low_mean_f1,raw_mid_mean_f1,raw_high_mean_f1,delta_raw_high_minus_low_pp,delta_raw_ci95_pp,delta_raw_relative_high_minus_low_pct,delta_adjusted_high_minus_low_pp,delta_adjusted_ci95_pp,valid_length_layers,n_valid_length_layers,adjusted_layer_effects_pp,partial_spearman_rns_f1_given_length,spearman_len_rns,spearman_len_f1,decision,decision_code,historical_reference_raw_relative_pct,pair_coordinates,head_seed,bootstrap_seed,bootstrap_n
+100M,RNA-Sc-100M_s17,16,all_position,0,0,,,,,,,,null,,,null,[],0,null,,,,不可裁决：共享随机池源表缺失/不匹配，臂未执行,NOT_RUN_SOURCE_BLOCKED,18.0,corrected_1based_to_0based,17,17,2000
+100M,RNA-Sc-100M_s17,16,long_range,0,0,,,,,,,,null,,,null,[],0,null,,,,不可裁决：共享随机池源表缺失/不匹配，臂未执行,NOT_RUN_SOURCE_BLOCKED,29.3,corrected_1based_to_0based,17,17,2000
+650M,RNA-Sc-650M_s17,20,all_position,0,0,,,,,,,,null,,,null,[],0,null,,,,不可裁决：共享随机池源表缺失/不匹配，臂未执行,NOT_RUN_SOURCE_BLOCKED,,corrected_1based_to_0based,17,17,2000
+650M,RNA-Sc-650M_s17,20,long_range,0,0,,,,,,,,null,,,null,[],0,null,,,,不可裁决：共享随机池源表缺失/不匹配，臂未执行,NOT_RUN_SOURCE_BLOCKED,,corrected_1based_to_0based,17,17,2000
+randinit,RNA-Sc-100M_s17_randinit17,16,all_position,0,0,,,,,,,,null,,,null,[],0,null,,,,不可裁决：共享随机池源表缺失/不匹配，臂未执行,NOT_RUN_SOURCE_BLOCKED,,corrected_1based_to_0based,17,17,2000
+randinit,RNA-Sc-100M_s17_randinit17,16,long_range,0,0,,,,,,,,null,,,null,[],0,null,,,,不可裁决：共享随机池源表缺失/不匹配，臂未执行,NOT_RUN_SOURCE_BLOCKED,,corrected_1based_to_0based,17,17,2000

@@ -1,0 +1,56 @@
+{
+  "status": "BLOCKED_MISSING_SOURCE",
+  "target_path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/data/release22_split_8080.parquet",
+  "target_exists": false,
+  "target_sha256": null,
+  "old_evidence_expected": {
+    "rows": 29012227,
+    "clusters": 3357201,
+    "split_counts": {
+      "family_test": 7082895,
+      "family_validation": 7525752,
+      "test": 108979,
+      "train": 14130321,
+      "validation": 164280
+    }
+  },
+  "cluster_split": {
+    "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/data/release22_cluster_split.parquet",
+    "sha256": "c25e7337393ddce39859192be2a1eb6b031371cad6925962ebfe74f99142e1c1",
+    "rows": 3357201,
+    "columns": [
+      "cluster_id",
+      "split"
+    ],
+    "schema": "<pyarrow._parquet.ParquetSchema object at 0x7f80c2c79c40>\nrequired group field_id=-1 schema {\n  optional binary field_id=-1 cluster_id (String);\n  optional binary field_id=-1 split (String);\n}\n",
+    "split_counts": {
+      "family_test": 45281,
+      "family_validation": 227978,
+      "test": 31044,
+      "train": 3022118,
+      "validation": 30780
+    },
+    "missing_required_columns": [
+      "split_membership",
+      "canonical_sequence",
+      "rna_type"
+    ]
+  },
+  "equivalent_reconstruction_possible": false,
+  "reason": "The cluster table has one row per cluster and no sequence or RNA-type columns; it cannot reconstruct the old 29,012,227-row sequence table.",
+  "impact": [
+    "P2.5 family_validation/family_test probe input remains blocked",
+    "P2.7 family_validation random-protocol input remains blocked"
+  ],
+  "search": {
+    "find_exit": 0,
+    "path_count": 76,
+    "exact_target_hits": [],
+    "roots": [
+      "/root/rna-sc",
+      "/root/rnaft_restore",
+      "/teams/HoulabData_1788502323/liucunyu"
+    ],
+    "pattern": "*8080*"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "cov": {
+    "mean": 0.049601403558164184,
+    "n": 4920
+  },
+  "ctrl": {
+    "mean": 0.002685495074290041,
+    "n": 4920
+  },
+  "old_drop": {
+    "mean": -0.015350524670604382,
+    "n": 4920
+  },
+  "cov_minus_ctrl": 0.04691590848387414,
+  "model_key": "rnasc300m_s17_main_batch1",
+  "mode": "trained",
+  "seed": 17,
+  "n_conditions": 1640,
+  "condition_ids_sha256": "e1ce3102698eb5f4fc2b3b0560dd4d679351ebd99f77e9b7aa6e4d2f5de17ec6",
+  "conditions_sha256": "549db1834f6990beb437d22948cf1356ba15fa99c2bef6dbcfee8c84abc8f001",
+  "initial_condition_batch": 1,
+  "final_condition_batch": 1,
+  "oom_reductions": [],
+  "elapsed_seconds": 26.937864780426025,
+  "peak_allocated_mib": 1816.189453125,
+  "peak_reserved_mib": 1958.0,
+  "cpu_fallback_count": 0,
+  "per_condition_file": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/results/sanity300/rnasc300m_main_batch1_per_condition.jsonl",
+  "per_condition_sha256": "3e2f0c1561a74a04623277b83ff60a779925ffea5f1e92aeeeee50860b83d623",
+  "model_info": {
+    "checkpoint_nt": 1900122218,
+    "checkpoint_step": 202784,
+    "weight_path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/weights/RNA-Sc-300M_s17/ckpt_nt1900122218_step202784.pt",
+    "weight_sha256": "465ca31b2c520c2aa5168a7d57f660c6191d4198ce5811489e7db7ee7edfc443"
+  },
+  "diagnostic": "Only condition batch changed 16 to 1 to match authoritative run_cov300.py"
+}

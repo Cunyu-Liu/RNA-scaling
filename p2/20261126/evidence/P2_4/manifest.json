@@ -1,0 +1,237 @@
+{
+  "task": "X-P24 / P2.4",
+  "status": "BLOCKED_INPUT_SOURCE_VERIFIED",
+  "created_utc": "2026-11-25T18:48:55.488660+00:00",
+  "formal_run_started": false,
+  "completed_arms": [],
+  "input_blocker": {
+    "task": "X-P24 / P2.4",
+    "status": "BLOCKED_MISMATCHED_SOURCE",
+    "created_utc": "2026-11-25T18:41:22.460697+00:00",
+    "reasons": [
+      "rows 566077 != 29012227",
+      "split_counts differ from the legacy verified asset",
+      "missing columns: ['rna_type']"
+    ],
+    "actual": {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/data/release22_split_8080.parquet",
+      "sha256": "6d4f86a96946278ee769a2086329b8060e3ae91c087e7216b8ca39099110f879",
+      "rows": 566077,
+      "row_groups": 1,
+      "columns": [
+        "canonical_sequence",
+        "split_membership",
+        "cluster_id"
+      ],
+      "split_counts": {
+        "test": 63689,
+        "train": 449170,
+        "validation": 53218
+      }
+    },
+    "expected": {
+      "rows": 29012227,
+      "split_counts": {
+        "family_test": 7082895,
+        "family_validation": 7525752,
+        "test": 108979,
+        "train": 14130321,
+        "validation": 164280
+      },
+      "required_columns": [
+        "split_membership",
+        "canonical_sequence",
+        "rna_type"
+      ],
+      "legacy_verification": "results/upload_main/split8080_deep_verify_legacy.json"
+    },
+    "formal_run_started": false,
+    "coordinate_validation": {
+      "passed": true,
+      "cases": {
+        "one_based_1_4_marks_0_3": true,
+        "zero_is_invalid_one_based": true,
+        "out_of_cap_excluded": true,
+        "long_range_1_25_marks_0_24": true,
+        "short_range_1_24_excluded": true
+      },
+      "rule": "i0=i-1; j0=j-1"
+    }
+  },
+  "environment": {
+    "python": "3.10.22",
+    "platform": "Linux-5.15.0-161-generic-x86_64-with-glibc2.31",
+    "torch": "2.14.1+cu132",
+    "torch_cuda": "13.2",
+    "cuda_available": true,
+    "cuda_device": "NVIDIA GeForce RTX 5090",
+    "numpy": "2.2.6",
+    "pandas": "2.2.2",
+    "pyarrow": "25.0.1"
+  },
+  "gpu": {
+    "max_project_budget_bytes": 21474836480,
+    "units": []
+  },
+  "validation": {
+    "status": "BLOCKED_INPUT_SOURCE_VERIFIED",
+    "checks": {
+      "coordinate_validation": true,
+      "cuda_bf16_head_seed_smoke": true,
+      "six_decision_rows": true,
+      "no_formal_rows_without_source": true,
+      "all_six_not_run": true,
+      "no_numeric_delta_claims": true
+    },
+    "formal_delta_or_ci_produced": false
+  },
+  "inputs": [
+    {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/results/P2_4/code/analyze_p2_4.py",
+      "bytes": 20872,
+      "sha256": "9760781949c23e9aa1138c82b3036f10f844f98b1fab0650ce5e8606477ac7f2"
+    },
+    {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/results/P2_4/code/finalize_p2_4.py",
+      "bytes": 3480,
+      "sha256": "dc251d336d32a4642da6993ce22c138dfea26d5de234b993767a59c3a18f8e52"
+    },
+    {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/results/P2_4/code/p2_4_common.py",
+      "bytes": 7410,
+      "sha256": "f3d68771b3d4e069f30976eeb9432327d17c4af715cfb3c0764685640ea89695"
+    },
+    {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/results/P2_4/code/prepare_p2_4.py",
+      "bytes": 8093,
+      "sha256": "7e4189ce6aa4dedb4c32c3fa7a1e24a43102f15dde39d688b4ca41308953ea25"
+    },
+    {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/results/P2_4/code/run_p2_4.py",
+      "bytes": 11245,
+      "sha256": "b283fe939c5cf648ccd225b1794f45e7caad2e4d251634a2904571040bdb602d"
+    },
+    {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/results/P2_4/code/run_p2_4.sh",
+      "bytes": 919,
+      "sha256": "2821afe2f2ce2f7f91795e2fc75caefc81c04b87c8600644e3c9d609b5c58365"
+    },
+    {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/results/P2_4/code/validate_p2_4.py",
+      "bytes": 6491,
+      "sha256": "8902e1a8ba2de3a4397d1aea0b902cd673f48a46f1bbcf4cb428e30b5acc7614"
+    },
+    {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/results/P2_4/prereg/P2_4.md",
+      "bytes": 5877,
+      "sha256": "e5c2324e629883843cc7ce942591448f78da4313687575dac126ad45341f1131"
+    },
+    {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/results/P2_4/prereg/README.md",
+      "bytes": 5796,
+      "sha256": "3cee67a2618dec0417edb00ff0ac139345c933d846f16e770b05239fad2c7bf9"
+    },
+    {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/data/bpRNA_parsed.parquet",
+      "bytes": 1628162,
+      "sha256": "20d4ed56fa4f1d6e485cb48fe7b0b4d11bfe0fda2049904622dcc35874d15c51"
+    },
+    {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/weights/RNA-Sc-100M_s17/ckpt_nt1900122218_step202784.pt",
+      "bytes": 366586871,
+      "sha256": "7e73e31317b7a4eac601356942bff4dd885729556f5255b9c079b61749d3bb45"
+    },
+    {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/weights/RNA-Sc-650M_s17/ckpt_nt1900122218_step202784.pt",
+      "bytes": 2665204775,
+      "sha256": "0631ccb128900f84eb02fb0c4396ae1de5b2330d1ea003465f4134098e63512d"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "figs/p2_4_length_control.png",
+      "bytes": 62731,
+      "sha256": "c205e8c222f1fd021e82475990d121d854b103acc15c2657a1296577341c6934"
+    },
+    {
+      "path": "logs/analyze.log",
+      "bytes": 80,
+      "sha256": "1852cb8c0ab6f1be9f4fbe675c5571877c789b798d43beb99a771851606f0e9b"
+    },
+    {
+      "path": "logs/nvidia_smi_smoke.txt",
+      "bytes": 2149,
+      "sha256": "0f7e2c5551708f1f60c2f5ee7c26ae74639f49046738f304fd842de83006c633"
+    },
+    {
+      "path": "logs/nvidia_smi_smoke_retry.txt",
+      "bytes": 2149,
+      "sha256": "d9da1acbba0a5922325e2392cf6aa3d15d7f386cadd7eccc3c947f22e4563a4c"
+    },
+    {
+      "path": "logs/prepare.log",
+      "bytes": 141,
+      "sha256": "ac42cbef20c3a1d929830f2a6c3b1adaae7c8bf1a4d0e63d6f7556580755a993"
+    },
+    {
+      "path": "logs/smoke.log",
+      "bytes": 480,
+      "sha256": "e792557331caae63bfd0ad7d2ba1f0340115c4f2ad44f788f29e43a9c11d0b95"
+    },
+    {
+      "path": "logs/smoke_bf16_residual.log",
+      "bytes": 288,
+      "sha256": "71cdf8cbae31820e948ca5ee3288e867bbd6e8275a7a5ad978f122ba56770e6c"
+    },
+    {
+      "path": "logs/synthetic_analysis_validation.log",
+      "bytes": 725,
+      "sha256": "1b10423f7cb1bbf35d1383af5344603951d5d8ff913bd0ca6e19ad0633e93858"
+    },
+    {
+      "path": "logs/validate.log",
+      "bytes": 246,
+      "sha256": "5aef2e69bbf640c62f998427807a6cb4f4d3843fac7d02c63739dd2104db1c6d"
+    },
+    {
+      "path": "p2_4_bin_cells.csv",
+      "bytes": 6688,
+      "sha256": "cfc5f43c6e34850540f05ea58f0fadede0e77843e7954d71fe9b41c36412814d"
+    },
+    {
+      "path": "p2_4_bin_per_sequence.csv",
+      "bytes": 124,
+      "sha256": "e8ae5c10a32fbb1cb31b2050f4a12beaeb1eec769f3101882ab69ac08a09a92b"
+    },
+    {
+      "path": "p2_4_coordinate_validation.json",
+      "bytes": 254,
+      "sha256": "7b9521b1d1d71432dd9b3170f7d26fd0f5f775b004d16f27a8f7e200c94d0b5f"
+    },
+    {
+      "path": "p2_4_input_blocker.json",
+      "bytes": 1434,
+      "sha256": "705c6be7fcfa3d64162306b04300cdb0cab945c5ebbb0f47957e11a6da36b698"
+    },
+    {
+      "path": "p2_4_length_decision.csv",
+      "bytes": 1782,
+      "sha256": "b4cad02d782e1cbcb8a0d3266e6b86e9645ddfef4dfc56d63c8f3d515ac9aed1"
+    },
+    {
+      "path": "p2_4_length_decision.json",
+      "bytes": 4080,
+      "sha256": "11abf3204fc30ae7012345ae62a9e21357b97b4304c68308aaeb834e2ddd199a"
+    },
+    {
+      "path": "p2_4_rns_bin_edges.json",
+      "bytes": 130,
+      "sha256": "d2210a5c7023ecf46ebe7831dacd197ede374abb4e93701799d76413ddbdef43"
+    },
+    {
+      "path": "p2_4_validation.json",
+      "bytes": 320,
+      "sha256": "7db1d19e200e1fd10c9bbffd78e9dfb8e5e88905d65a4430436e42c8d8ce0095"
+    }
+  ]
+}

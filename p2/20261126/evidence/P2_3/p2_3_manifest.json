@@ -1,0 +1,220 @@
+{
+  "task": "X-P23 / P2.3",
+  "status": "COMPLETE_WITH_RNA_FM_NOT_RUN_WEIGHT_MISSING",
+  "created_unix": 1795627778.5232236,
+  "script": "/home/cunyuliu/rna-sc-p2/p2_3/run_p2_3_cov.py",
+  "script_sha256": "693c5b8fd37fc76c057f24905ad544a03ccaad119bea069f0e6cc88fed8e007b",
+  "authoritative_source_sha256": "c82ac6cf81ca7dd0943a458d500127d7608d9a138db97f1c6466c34b02dfad2f",
+  "bpRNA": {
+    "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/data/bpRNA_parsed.parquet",
+    "sha256": "20d4ed56fa4f1d6e485cb48fe7b0b4d11bfe0fda2049904622dcc35874d15c51"
+  },
+  "conditions_sha256": "549db1834f6990beb437d22948cf1356ba15fa99c2bef6dbcfee8c84abc8f001",
+  "weights": {
+    "rnasc300m_sanity": {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/weights/RNA-Sc-300M_s17_b59/ckpt_nt5800296014_step618357.pt",
+      "sha256": "8fa707c702bd8d380e46fa2ae616d5534e13f3bf7515bcb23e8d94e4a05404ae",
+      "bytes": 1208462391
+    },
+    "rinalmo_micro": {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/ext/rinalmo/model.safetensors",
+      "sha256": "3c3d0d2212c813b5759b98c4857e63e8278920ac54984c01967a68ed8b0b7aba",
+      "bytes": 134009168
+    },
+    "nucleicbert": {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/ext/nucleicbert_repo/pretrained.pt",
+      "sha256": "f40630f4054b0bac255eb70fa1e2999d56749f4fc22919be041e5114bcbe11dc",
+      "bytes": 1616879490
+    },
+    "rinalmo_mega": {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/ext/rinalmo-mega/model.safetensors",
+      "sha256": "a0e74d5cb944c9cfed51800e30f1af19239f9f92a036558ec132181c927c962f",
+      "bytes": 592312640
+    },
+    "rinalmo_giga": {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/ext/rinalmo-giga/model.safetensors",
+      "sha256": "0b3f73b5c80d267f0b7e92655b28f16088e3d5a595c6dae631b52142aa38bcda",
+      "bytes": 2603729260
+    }
+  },
+  "tokenizer_and_adapter_files": [
+    {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/ext/rinalmo/config.json",
+      "sha256": "90435f56ea8340285559de802af5583ad9ca7f8f5aad0a4f053195e635a4ae5e"
+    },
+    {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/ext/rinalmo/tokenizer_config.json",
+      "sha256": "a24dcb1791884b7227e37b14369a865c9885d2ec3d26819bc1be7bae846f12e8"
+    },
+    {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/ext/rinalmo-mega/config.json",
+      "sha256": "c502a93c509483e15a861fda726ab0bb80654d783830ec522e7b9296155292de"
+    },
+    {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/ext/rinalmo-mega/tokenizer_config.json",
+      "sha256": "a24dcb1791884b7227e37b14369a865c9885d2ec3d26819bc1be7bae846f12e8"
+    },
+    {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/ext/rinalmo-giga/config.json",
+      "sha256": "04fb8fad8cf6f7a89ca0c6008ecc872a82c9bb27b054a1043b327614fbe06e9d"
+    },
+    {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/ext/rinalmo-giga/tokenizer_config.json",
+      "sha256": "a24dcb1791884b7227e37b14369a865c9885d2ec3d26819bc1be7bae846f12e8"
+    },
+    {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/ext/nucleicbert_repo/nucleicbert/tokenizers/noncoding_seqs.json",
+      "sha256": "9c0aebbd7e72afdf628a0045c12df28fcb7d4d524eb67954b60755f28e5529e2"
+    },
+    {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/ext/nucleicbert_repo/nucleicbert/models/bert.py",
+      "sha256": "b51c19e4a42b81f6d0c64e58b208dac6beeecc19a54647addc8a97e58d57e41b"
+    }
+  ],
+  "environment": {
+    "python": "3.10.22 | packaged by conda-forge | (main, Oct  6 2026, 23:02:24) [GCC 14.4.0]",
+    "platform": "Linux-5.15.0-161-generic-x86_64-with-glibc2.31",
+    "packages": {
+      "torch": "2.14.1+cu132",
+      "numpy": "2.2.6",
+      "pandas": "2.2.2",
+      "pyarrow": "25.0.1",
+      "transformers": "5.20.2",
+      "multimolecule": "0.2.3",
+      "tokenizers": "0.23.3",
+      "safetensors": "0.8.0",
+      "matplotlib": "3.10.9"
+    },
+    "cuda_available": true,
+    "cuda_device": "NVIDIA GeForce RTX 5090",
+    "torch_cuda": "13.2"
+  },
+  "outputs": {
+    "p2_3_cov_conditions.jsonl": {
+      "sha256": "549db1834f6990beb437d22948cf1356ba15fa99c2bef6dbcfee8c84abc8f001",
+      "bytes": 830479
+    },
+    "p2_3_cov_freeze.json": {
+      "sha256": "77c797ddc0b617d8dccd092bf470e2d85a6af3d372499af3c81009c1399eaa01",
+      "bytes": 35503
+    },
+    "p2_3_external_cov.csv": {
+      "sha256": "8be08b4ee4cfe4c40d2228076e69149ef49c6eacf062aa89c2dade9519495a3f",
+      "bytes": 1309
+    },
+    "p2_3_external_cov.json": {
+      "sha256": "c9c1a8627ab12bd8b274d398a678da4b14558d7a67afbc8b01a5267cebd664ec",
+      "bytes": 2826
+    },
+    "p2_3_external_cov.pdf": {
+      "sha256": "ba0b1b2ad32aba4c907f41c2fefd83940ec6518c5d8d4b36eccd13aaed7774ac",
+      "bytes": 19543
+    },
+    "p2_3_external_cov.png": {
+      "sha256": "3845e1ee550d23c32808388a60258af004300cc06407197717af44e1ba3074cd",
+      "bytes": 121063
+    },
+    "p2_3_external_cov_per_condition.jsonl": {
+      "sha256": "99042e7961170d76cdacfd97d0959a7a5c7320e7f8e8dc0a2e414f6469a0c712",
+      "bytes": 10688409
+    },
+    "p2_3_external_cov_per_condition_nucleicbert_randinit17.jsonl": {
+      "sha256": "4e3b0d6ebe7dc137a2158d4bef3461ce7f72ea11e9c22ed5c36576ab6a8d22a4",
+      "bytes": 1352315
+    },
+    "p2_3_external_cov_per_condition_nucleicbert_trained.jsonl": {
+      "sha256": "882ad1076c7d22f35ad839f883c5313383c24bd65d07fcdddca78f445a3043d9",
+      "bytes": 1314745
+    },
+    "p2_3_external_cov_per_condition_rinalmo_giga_randinit17.jsonl": {
+      "sha256": "64a708ac5c73d5fed8f58ce59d07fc7e6a3c6b65acf560c61d8a29b6ec99b9f3",
+      "bytes": 1352172
+    },
+    "p2_3_external_cov_per_condition_rinalmo_giga_trained.jsonl": {
+      "sha256": "319696a5a308d4f828b0aa71ea8480d80675e37b430bb7d1412560c51838cfcc",
+      "bytes": 1313025
+    },
+    "p2_3_external_cov_per_condition_rinalmo_mega_randinit17.jsonl": {
+      "sha256": "b2b0a685f1bc920fad462295c273aa50a05fa8f1f9d6000e3698ba17124a763c",
+      "bytes": 1355984
+    },
+    "p2_3_external_cov_per_condition_rinalmo_mega_trained.jsonl": {
+      "sha256": "05b1f0ebb122963945cf5c182bbcf9758bbef2e01fb7af88cfa1a7ba63621c5b",
+      "bytes": 1317117
+    },
+    "p2_3_external_cov_per_condition_rinalmo_micro_randinit17.jsonl": {
+      "sha256": "e2eb487f6dfab47d097fffa8a3f961ab865aa5db4896024f346b413a57f00a25",
+      "bytes": 1359331
+    },
+    "p2_3_external_cov_per_condition_rinalmo_micro_trained.jsonl": {
+      "sha256": "ff75a20f348242d4cf00cd030627aa2d37948ccd8c25dc5cabd186170816c2c3",
+      "bytes": 1323720
+    },
+    "p2_3_nucleicbert_pair.json": {
+      "sha256": "19dbd9d0ae944b28d762037e16de1b18cd3e1e15f620e5511c23c6ba929705ef",
+      "bytes": 4379
+    },
+    "p2_3_nucleicbert_randinit17.json": {
+      "sha256": "f44d031b8dc07eac476cf31ed958a9388789f97db0a73dc2d19a4b8cb383ebdb",
+      "bytes": 1742
+    },
+    "p2_3_nucleicbert_trained.json": {
+      "sha256": "9d7f4eeaa57d1fd593fe1691836bcd81b7ac5e56afd51a8350cdfa49dcd9124a",
+      "bytes": 1804
+    },
+    "p2_3_rinalmo_giga_pair.json": {
+      "sha256": "d73a28b39b5b8b78749e6cc323b3af2b59260e22494abf0e1bdb7b9f58f2d583",
+      "bytes": 4646
+    },
+    "p2_3_rinalmo_giga_randinit17.json": {
+      "sha256": "d64d53f7e760fdd15daadaa29982e1869fa9b4ccb3def1f9062f97d876293242",
+      "bytes": 1766
+    },
+    "p2_3_rinalmo_giga_trained.json": {
+      "sha256": "c2306f13d61fc0cf2d53af2530c38cce1d81628b6a322a23979aedcba054ee99",
+      "bytes": 2011
+    },
+    "p2_3_rinalmo_mega_pair.json": {
+      "sha256": "8e0977cead7e25eed534bc17b9e8f3113f40e0a0fe91ad4e9196e263f55a4d30",
+      "bytes": 4644
+    },
+    "p2_3_rinalmo_mega_randinit17.json": {
+      "sha256": "d6aff5cb875716c79b6f81161bccdb8e2c3311bffddba18440f8dfc50fed3d35",
+      "bytes": 1764
+    },
+    "p2_3_rinalmo_mega_trained.json": {
+      "sha256": "35bed895ec5c4e6fcc9a5446a8c30907c3ddd23d448cb991e19b316e7944dc25",
+      "bytes": 2011
+    },
+    "p2_3_rinalmo_micro_pair.json": {
+      "sha256": "1040e04b2baf2003c2066d0acbf8700443dd1ec31da1eb8ce2f6f78c593299c1",
+      "bytes": 4659
+    },
+    "p2_3_rinalmo_micro_randinit17.json": {
+      "sha256": "02b1b6ebb711a2ea3bbcb59c74f65f3a475e225b67431b6877cd08bcb4d0d5c4",
+      "bytes": 1767
+    },
+    "p2_3_rinalmo_micro_trained.json": {
+      "sha256": "349a16d31d310314a4800eb37a2999bf0a410c5715f288cc99b234baad11d65f",
+      "bytes": 2017
+    },
+    "p2_3_rnafm_status.json": {
+      "sha256": "0d5161ae9eba55922b21cf2382f46db877d10b794b6a58e1a6596cabafe825f9",
+      "bytes": 107
+    },
+    "p2_3_rnasc300m_b59_substitute_diagnostic.json": {
+      "sha256": "dab1e887ec01f95c85f391156eb242a60a2a6a0a2f963a4d37600134858272d1",
+      "bytes": 2401
+    },
+    "p2_3_rnasc300m_b59_substitute_diagnostic_per_condition.jsonl": {
+      "sha256": "ee02dd74e8a54f83e3dc5a381c675a267e9c88e3e374dbf6ba04b206628c979e",
+      "bytes": 1335864
+    },
+    "p2_3_validation.json": {
+      "sha256": "95ae512209360eba9b1073038525e5ff78a6ab988041728de57f9f6720ccbfdb",
+      "bytes": 2139
+    }
+  },
+  "rna_fm": "NOT_RUN_WEIGHT_MISSING",
+  "rnasc300m_sanity": "SUBSTITUTE_B59_ANCHOR_MISMATCH"
+}

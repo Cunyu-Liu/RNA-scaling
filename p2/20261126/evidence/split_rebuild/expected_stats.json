@@ -1,0 +1,72 @@
+{
+  "target_schema_minimum": [
+    "split_membership",
+    "canonical_sequence",
+    "rna_type"
+  ],
+  "deep_verify": {
+    "alphabet_counts": {
+      "A": 29009257,
+      "C": 29006295,
+      "G": 29008086,
+      "U": 29009979
+    },
+    "checked_at_utc": "2026-09-13T09:22:59.369361Z",
+    "clusters": 3357201,
+    "file": "/mnt/cunyuliu/tokenizer-benchmark/data/derived/split/release22_split_8080.parquet",
+    "leak_clusters_spanning_splits": 0,
+    "leak_exact_sequences_spanning_splits": 0,
+    "length_bins": {
+      "16-4096": 28756105,
+      "4097-16384": 208293,
+      "<16": 8891,
+      ">16384": 38938
+    },
+    "pass": true,
+    "rows": 29012227,
+    "seq_len_max": 583414,
+    "seq_len_min": 10,
+    "split_counts": {
+      "family_test": 7082895,
+      "family_validation": 7525752,
+      "test": 108979,
+      "train": 14130321,
+      "validation": 164280
+    },
+    "split_ratios": {
+      "family_test": 0.2441,
+      "family_validation": 0.2594,
+      "test": 0.0038,
+      "train": 0.487,
+      "validation": 0.0057
+    }
+  },
+  "artifact_sha256": {
+    "release22_split_8080.parquet": "eaa9e44ff760d79ad0f52debb555ebf808afa6adda7bb09644215bec72586b8a",
+    "release22_split_9090.parquet": "a63c39c0ec606153442ed4eb42e25968f1eca180ec423fe05dcf2b9b21772ae7",
+    "temporal_ood_clean.parquet": "21176a849940f7fb0af3a3436e184c566b5341db2dcecfaa213b8638ba04a426",
+    "release22_cluster_8080.parquet": "bd8347ab0bfdf5c2970789730f5315544ffd7f5e73136622eba80406b75c06ca",
+    "release22_cluster_9090.parquet": "b887bfdf98fdc58f18239cbc3d8ad688bd6f06e34a3aa7b83c34e8334b74b811"
+  },
+  "upstream_counts": {
+    "fasta_records": 30191670,
+    "primary_records": 29252916,
+    "qc_records": 938754,
+    "deduplicated_records": 29012227,
+    "duplicates_merged": 240689
+  },
+  "cluster_split_counts": {
+    "family_validation": 227978,
+    "train": 3022118,
+    "family_test": 45281,
+    "validation": 30780,
+    "test": 31044
+  },
+  "provenance": {
+    "deep_verify": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/evidence/split8080_deep_verify.json",
+    "family_index_summary": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/evidence/family_index_summary.json",
+    "acceptance_repo": "https://github.com/Cunyu-Liu/tokenizer-benchmark",
+    "acceptance_commit": "a236530f8348f7d02ff74c15ce9267ee0989954f",
+    "acceptance_file": "docs/acceptance/P1_acceptance.json"
+  }
+}

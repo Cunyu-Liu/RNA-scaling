@@ -1,0 +1,44 @@
+{
+  "status": "PASS_EVIDENCE_INTEGRITY_ANCHOR_MISMATCH_RETAINED",
+  "trained": {
+    "bitwise_recompute": {
+      "cov": true,
+      "ctrl": true,
+      "old_drop": true,
+      "cov_minus_ctrl": true
+    },
+    "condition_order_identical": true,
+    "n_cov": 4920,
+    "n_ctrl": 4920,
+    "cpu_fallback_count": 0
+  },
+  "randinit17": {
+    "bitwise_recompute": {
+      "cov": true,
+      "ctrl": true,
+      "old_drop": true,
+      "cov_minus_ctrl": true
+    },
+    "condition_order_identical": true,
+    "n_cov": 4920,
+    "n_ctrl": 4920,
+    "cpu_fallback_count": 0
+  },
+  "batch1_diagnostic": {
+    "bitwise_recompute": {
+      "cov": true,
+      "ctrl": true,
+      "old_drop": true,
+      "cov_minus_ctrl": true
+    },
+    "condition_order_identical": true,
+    "n_cov": 4920,
+    "n_ctrl": 4920,
+    "cpu_fallback_count": 0
+  },
+  "all_condition_ids_identical": true,
+  "original_equals_migrated_batch1_bitwise": true,
+  "protocol_identity": true,
+  "anchor_bitwise_pass": false,
+  "external_cov_confidence_upgrade": "FROZEN"
+}

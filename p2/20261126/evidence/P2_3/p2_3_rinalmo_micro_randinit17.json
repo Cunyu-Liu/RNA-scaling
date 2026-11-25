@@ -1,0 +1,72 @@
+{
+  "cov": {
+    "mean": 9.000002277818153e-07,
+    "n": 4920
+  },
+  "ctrl": {
+    "mean": -1.5237401012422108e-05,
+    "n": 4920
+  },
+  "old_drop": {
+    "mean": 0.0004481940799036889,
+    "n": 4920
+  },
+  "cov_minus_ctrl": 1.6137401240203922e-05,
+  "model_key": "rinalmo_micro",
+  "mode": "randinit17",
+  "seed": 17,
+  "n_conditions": 1640,
+  "condition_ids_sha256": "e1ce3102698eb5f4fc2b3b0560dd4d679351ebd99f77e9b7aa6e4d2f5de17ec6",
+  "conditions_sha256": "549db1834f6990beb437d22948cf1356ba15fa99c2bef6dbcfee8c84abc8f001",
+  "initial_condition_batch": 16,
+  "final_condition_batch": 16,
+  "oom_reductions": [],
+  "elapsed_seconds": 15.51538634300232,
+  "peak_allocated_mib": 2279.837890625,
+  "peak_reserved_mib": 3556.0,
+  "cpu_fallback_count": 0,
+  "per_condition_file": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/results/P2_3/p2_3_external_cov_per_condition_rinalmo_micro_randinit17.jsonl",
+  "per_condition_sha256": "e2eb487f6dfab47d097fffa8a3f961ab865aa5db4896024f346b413a57f00a25",
+  "model_info": {
+    "model": "RiNALMo-micro-36M",
+    "mode": "randinit17",
+    "weight_source": null,
+    "tokenizer": {
+      "ACGU": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "CLS": 1,
+      "EOS": 2,
+      "MASK": 4,
+      "PAD": 0,
+      "logits_vocab": 28
+    },
+    "loading_report": null
+  },
+  "smoke": {
+    "status": "PASS",
+    "device": "cuda:0",
+    "model_device": "cuda:0",
+    "bf16_autocast": true,
+    "logits_vocab": 28,
+    "probabilities_finite": true,
+    "cpu_fallback_count": 0,
+    "peak_allocated_mib": 2151.63525390625,
+    "tokenizer_assertions": {
+      "ACGU": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "CLS": 1,
+      "EOS": 2,
+      "MASK": 4,
+      "PAD": 0,
+      "logits_vocab": 28
+    }
+  }
+}

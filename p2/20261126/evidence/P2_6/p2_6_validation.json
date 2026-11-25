@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "headline_recomputed_from_layers_csv": true,
+  "max_absolute_f1_recalculation_error": 4.4444448121794267e-11,
+  "unique_group_run_ckpt_layer_rows": 362,
+  "duplicate_650m_b59_rows_not_counted_as_seeds": true,
+  "checkpoint_rules_verified": true,
+  "all_official_layers_have_nine_non_rrna_classes": true,
+  "p2_5_not_substituted_by_20k": true
+}

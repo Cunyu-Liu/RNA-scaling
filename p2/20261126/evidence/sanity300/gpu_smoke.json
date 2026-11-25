@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "run": "RNA-Sc-300M_s17",
+  "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/weights/RNA-Sc-300M_s17/ckpt_nt1900122218_step202784.pt",
+  "sha256": "465ca31b2c520c2aa5168a7d57f660c6191d4198ce5811489e7db7ee7edfc443",
+  "strict_load": true,
+  "model_tensors": 197,
+  "optimizer_present": false,
+  "checkpoint_nt": 1900122218,
+  "checkpoint_step": 202784,
+  "torch": "2.14.1+cu132",
+  "torch_cuda_build": "13.2",
+  "device_name": "NVIDIA GeForce RTX 5090",
+  "model_device": "cuda:0",
+  "logits_device": "cuda:0",
+  "logits_shape": [
+    2,
+    128,
+    7
+  ],
+  "logits_dtype": "torch.bfloat16",
+  "logits_finite": true,
+  "peak_memory_allocated_mib": 1768.9482421875,
+  "peak_memory_reserved_mib": 1806.0,
+  "cpu_fallback_count": 0
+}

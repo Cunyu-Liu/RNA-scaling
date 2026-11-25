@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "cases": {
+    "one_based_1_4_marks_0_3": true,
+    "zero_is_invalid_one_based": true,
+    "out_of_cap_excluded": true,
+    "long_range_1_25_marks_0_24": true,
+    "short_range_1_24_excluded": true
+  },
+  "rule": "i0=i-1; j0=j-1"
+}

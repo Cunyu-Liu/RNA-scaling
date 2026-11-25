@@ -1,0 +1,4 @@
+item,status,reason,required_followup
+official_20k_rfamcap_rinalmocorpus_b59,NO_GAP,18/18 run-checkpoints and 362/362 deduplicated layers have non-null per-class F1.,None for the preregistered 20k reaggregation.
+P2.5_8k_4k_five_layer_windows_seeds_29_43_61,PENDING_P2_5,P2.5 per-class retest rows are not an input to this 20k-only task.,"After P2.5, select de-r best per seed and five-layer window; report 300M/650M means, ddof=1 SD, and three paired differences."
+RFamCap_1800083135,NOT_EVALUABLE_MISSING_FAMILY_LAYERS,No old family layer ledger at this checkpoint; weights alone cannot supply per-class F1.,No inference; only a separately authorized family probe evaluation could fill it.

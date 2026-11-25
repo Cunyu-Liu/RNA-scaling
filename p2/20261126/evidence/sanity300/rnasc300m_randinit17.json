@@ -1,0 +1,54 @@
+{
+  "cov": {
+    "mean": -0.0005501234744925324,
+    "n": 4920
+  },
+  "ctrl": {
+    "mean": -0.0004714661467123807,
+    "n": 4920
+  },
+  "old_drop": {
+    "mean": 0.0005148444328517691,
+    "n": 4920
+  },
+  "cov_minus_ctrl": -7.86573277801517e-05,
+  "model_key": "rnasc300m_s17_main",
+  "mode": "randinit17",
+  "seed": 17,
+  "n_conditions": 1640,
+  "condition_ids_sha256": "e1ce3102698eb5f4fc2b3b0560dd4d679351ebd99f77e9b7aa6e4d2f5de17ec6",
+  "conditions_sha256": "549db1834f6990beb437d22948cf1356ba15fa99c2bef6dbcfee8c84abc8f001",
+  "initial_condition_batch": 16,
+  "final_condition_batch": 16,
+  "oom_reductions": [],
+  "elapsed_seconds": 13.42163372039795,
+  "peak_allocated_mib": 2781.74365234375,
+  "peak_reserved_mib": 3438.0,
+  "cpu_fallback_count": 0,
+  "per_condition_file": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/results/sanity300/rnasc300m_randinit17_per_condition.jsonl",
+  "per_condition_sha256": "4f4699f6ea1bce6eb42d8ccd301a3e523aee3009f3d763bc8bb5a299aebd85a5",
+  "model_info": {
+    "architecture": {
+      "d_model": 1024,
+      "n_layers": 24,
+      "n_heads": 16,
+      "d_ff": 4096,
+      "target_params": 300000000,
+      "positions": "ALiBi",
+      "tokenizer": "single-nucleotide ACGU",
+      "objective": "MLM 15% (80/10/10)"
+    },
+    "random_init_seed": 17,
+    "source": "same architecture as main-arm checkpoint; all parameters reinitialized"
+  },
+  "smoke": {
+    "status": "PASS",
+    "device": "cuda:0",
+    "model_device": "cuda:0",
+    "bf16_autocast": true,
+    "logits_vocab": 7,
+    "probabilities_finite": true,
+    "cpu_fallback_count": 0,
+    "peak_allocated_mib": 1761.888671875
+  }
+}

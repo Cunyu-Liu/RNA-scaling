@@ -1,0 +1,11 @@
+{
+  "find_exit": 0,
+  "path_count": 76,
+  "exact_target_hits": [],
+  "roots": [
+    "/root/rna-sc",
+    "/root/rnaft_restore",
+    "/teams/HoulabData_1788502323/liucunyu"
+  ],
+  "pattern": "*8080*"
+}

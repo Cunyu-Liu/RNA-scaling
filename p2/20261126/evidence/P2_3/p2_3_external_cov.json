@@ -1,0 +1,82 @@
+{
+  "protocol": "P2.3 pooled COV minus unpaired CTRL",
+  "external_models": "observational anchors only",
+  "conditions_sha256": "549db1834f6990beb437d22948cf1356ba15fa99c2bef6dbcfee8c84abc8f001",
+  "n_conditions": 1640,
+  "models": [
+    {
+      "model_key": "rinalmo_micro",
+      "model": "RiNALMo-micro-36M",
+      "scope": "observational_anchor",
+      "status": "COMPLETE",
+      "cov": 0.1149553648529228,
+      "ctrl": 0.0015442531033752348,
+      "cov_minus_ctrl": 0.11341111174954757,
+      "old_drop": -0.042389434207143493,
+      "n_cov": 4920,
+      "n_ctrl": 4920,
+      "randinit17_cov": 9.000002277818153e-07,
+      "randinit17_ctrl": -1.5237401012422108e-05,
+      "randinit17_cov_minus_ctrl": 1.6137401240203922e-05,
+      "randinit17_old_drop": 0.0004481940799036889,
+      "trained_minus_randinit": 0.11339497434830736
+    },
+    {
+      "model_key": "nucleicbert",
+      "model": "NucleicBERT-404M",
+      "scope": "observational_anchor",
+      "status": "COMPLETE",
+      "cov": 0.013457312375284369,
+      "ctrl": 0.0026649024892159232,
+      "cov_minus_ctrl": 0.010792409886068445,
+      "old_drop": 0.0006143766351241043,
+      "n_cov": 4920,
+      "n_ctrl": 4920,
+      "randinit17_cov": -3.7117399335876713e-06,
+      "randinit17_ctrl": -3.92498403060727e-06,
+      "randinit17_cov_minus_ctrl": 2.1324409701959834e-07,
+      "randinit17_old_drop": -7.538936986792378e-07,
+      "trained_minus_randinit": 0.010792196641971426
+    },
+    {
+      "model_key": "rinalmo_mega",
+      "model": "RiNALMo-mega",
+      "scope": "observational_anchor",
+      "status": "COMPLETE",
+      "cov": 0.20037126857141407,
+      "ctrl": 0.0005981922410343046,
+      "cov_minus_ctrl": 0.19977307633037977,
+      "old_drop": -0.0790379559575755,
+      "n_cov": 4920,
+      "n_ctrl": 4920,
+      "randinit17_cov": -0.00025286592308401576,
+      "randinit17_ctrl": -0.00023410581714829537,
+      "randinit17_cov_minus_ctrl": -1.876010593572039e-05,
+      "randinit17_old_drop": 0.00025645633932293917,
+      "trained_minus_randinit": 0.19979183643631548
+    },
+    {
+      "model_key": "rinalmo_giga",
+      "model": "RiNALMo-giga",
+      "scope": "observational_anchor",
+      "status": "COMPLETE",
+      "cov": 0.24872231996994307,
+      "ctrl": 0.0010656848717230528,
+      "cov_minus_ctrl": 0.24765663509822,
+      "old_drop": -0.0944850419407826,
+      "n_cov": 4920,
+      "n_ctrl": 4920,
+      "randinit17_cov": -0.00036540406659563504,
+      "randinit17_ctrl": -0.00038225998121457614,
+      "randinit17_cov_minus_ctrl": 1.6855914618941104e-05,
+      "randinit17_old_drop": 0.00021294396828738896,
+      "trained_minus_randinit": 0.24763977918360106
+    },
+    {
+      "model_key": "rna_fm",
+      "model": "RNA-FM-96M",
+      "scope": "observational_anchor",
+      "status": "NOT_RUN_WEIGHT_MISSING"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "cov": {
+    "mean": 0.04957731208609388,
+    "n": 4920
+  },
+  "ctrl": {
+    "mean": 0.0026793007557787906,
+    "n": 4920
+  },
+  "old_drop": {
+    "mean": -0.015332180466989151,
+    "n": 4920
+  },
+  "cov_minus_ctrl": 0.04689801133031509,
+  "model_key": "rnasc300m_sanity",
+  "mode": "trained",
+  "seed": 17,
+  "n_conditions": 1640,
+  "condition_ids_sha256": "e1ce3102698eb5f4fc2b3b0560dd4d679351ebd99f77e9b7aa6e4d2f5de17ec6",
+  "conditions_sha256": "549db1834f6990beb437d22948cf1356ba15fa99c2bef6dbcfee8c84abc8f001",
+  "initial_condition_batch": 16,
+  "final_condition_batch": 16,
+  "oom_reductions": [],
+  "elapsed_seconds": 13.589604616165161,
+  "peak_allocated_mib": 2781.74365234375,
+  "peak_reserved_mib": 3438.0,
+  "cpu_fallback_count": 0,
+  "per_condition_file": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/results/sanity300/p2_3_rnasc300m_sanity_per_condition.jsonl",
+  "per_condition_sha256": "51b363c35f5818afc17303aac1a0eec2683dfe7ad8f8fe34fb1cbe090551be83",
+  "model_info": {
+    "checkpoint_nt": 1900122218,
+    "checkpoint_step": 202784,
+    "weight_path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/weights/RNA-Sc-300M_s17/ckpt_nt1900122218_step202784.pt",
+    "weight_sha256": "465ca31b2c520c2aa5168a7d57f660c6191d4198ce5811489e7db7ee7edfc443"
+  },
+  "smoke": {
+    "status": "PASS",
+    "device": "cuda:0",
+    "model_device": "cuda:0",
+    "bf16_autocast": true,
+    "logits_vocab": 7,
+    "probabilities_finite": true,
+    "cpu_fallback_count": 0,
+    "peak_allocated_mib": 1761.888671875
+  },
+  "old_anchor_comparison": {
+    "cov": {
+      "old": 0.049607125636875415,
+      "new": 0.04957731208609388,
+      "old_hex": "0x1.9661aec849430p-5",
+      "new_hex": "0x1.962328c111466p-5",
+      "bitwise_equal": false,
+      "difference": -2.9813550781535025e-05
+    },
+    "ctrl": {
+      "old": 0.0026705753443465943,
+      "new": 0.0026793007557787906,
+      "old_hex": "0x1.5e09a387ec050p-9",
+      "new_hex": "0x1.5f2e6a3e935b3p-9",
+      "bitwise_equal": false,
+      "difference": 8.725411432196264e-06
+    },
+    "old_drop": {
+      "old": -0.015336274750000935,
+      "new": -0.015332180466989151,
+      "old_hex": "-0x1.f689ff3f325e1p-7",
+      "new_hex": "-0x1.f667a6d74eac5p-7",
+      "bitwise_equal": false,
+      "difference": 4.0942830117837725e-06
+    },
+    "cov_minus_ctrl": {
+      "old": 0.04693655029252882,
+      "new": 0.04689801133031509,
+      "old_hex": "0x1.8081148fca82bp-5",
+      "new_hex": "0x1.8030421d2810bp-5",
+      "bitwise_equal": false,
+      "difference": -3.853896221372999e-05
+    },
+    "n": {
+      "old": 4920,
+      "new": 4920,
+      "equal": true
+    }
+  },
+  "sanity_pass": false
+}

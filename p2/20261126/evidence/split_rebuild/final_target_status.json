@@ -1,0 +1,7 @@
+{
+  "checked_at_utc": "2026-11-25T18:43:48.444338+00:00",
+  "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/data/release22_split_8080.parquet",
+  "exists": false,
+  "valid_rebuild_created_by_this_task": false,
+  "note": "Previously audited concurrent rfamcap-derived file is no longer present; this task did not remove it."
+}

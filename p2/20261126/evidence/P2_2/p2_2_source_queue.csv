@@ -1,0 +1,7 @@
+source,test_n,eligible_queue_n_capped_40,retained_pre_pair,selected_common_n,label_scope
+CRW,99,40,True,20,coarse bpRNA source; not fine-grained Rfam ID
+RFAM,1130,40,True,20,coarse bpRNA source; not fine-grained Rfam ID
+RNP,17,17,True,17,coarse bpRNA source; not fine-grained Rfam ID
+SPR,24,24,True,20,coarse bpRNA source; not fine-grained Rfam ID
+SRP,12,12,True,12,coarse bpRNA source; not fine-grained Rfam ID
+tmRNA,23,23,True,20,coarse bpRNA source; not fine-grained Rfam ID

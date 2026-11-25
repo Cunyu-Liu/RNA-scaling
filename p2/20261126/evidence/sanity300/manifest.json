@@ -1,0 +1,172 @@
+{
+  "task": "X-sanity300",
+  "status": "COMPLETE_ANCHOR_MISMATCH_EXTERNAL_COV_UPGRADE_FROZEN",
+  "created_unix": 1795631785.8881333,
+  "inputs": {
+    "weight": {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/weights/RNA-Sc-300M_s17/ckpt_nt1900122218_step202784.pt",
+      "sha256": "465ca31b2c520c2aa5168a7d57f660c6191d4198ce5811489e7db7ee7edfc443",
+      "bytes": 1208467879
+    },
+    "bpRNA": {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/data/bpRNA_parsed.parquet",
+      "sha256": "20d4ed56fa4f1d6e485cb48fe7b0b4d11bfe0fda2049904622dcc35874d15c51",
+      "bytes": 1628162
+    },
+    "conditions": {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/results/P2_3/p2_3_cov_conditions.jsonl",
+      "sha256": "549db1834f6990beb437d22948cf1356ba15fa99c2bef6dbcfee8c84abc8f001",
+      "bytes": 830479
+    },
+    "freeze": {
+      "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/results/P2_3/p2_3_cov_freeze.json",
+      "sha256": "77c797ddc0b617d8dccd092bf470e2d85a6af3d372499af3c81009c1399eaa01",
+      "bytes": 35503
+    },
+    "original_script": {
+      "path": "/home/cunyuliu/rna-sc-p2/code_git/run_cov300.py",
+      "sha256": "c82ac6cf81ca7dd0943a458d500127d7608d9a138db97f1c6466c34b02dfad2f",
+      "bytes": 5577
+    },
+    "migrated_script": {
+      "path": "/home/cunyuliu/rna-sc-p2/p2_3/run_p2_3_cov.py",
+      "sha256": "693c5b8fd37fc76c057f24905ad544a03ccaad119bea069f0e6cc88fed8e007b",
+      "bytes": 32712
+    },
+    "wrapper": {
+      "path": "/home/cunyuliu/rna-sc-p2/run_sanity300.py",
+      "sha256": "6b9a548bfde6e77a717e9ea10623393b298cdcdd5a629addc66bf934d9cfc5df",
+      "bytes": 4457
+    },
+    "diagnostic_script": {
+      "path": "/home/cunyuliu/rna-sc-p2/diagnose_sanity300_protocol.py",
+      "sha256": "e7c93ab2ff72fb2bb81f4c8e9bc0c612f7706da02c7dcf901c282a5a1d244cc8",
+      "bytes": 8160
+    }
+  },
+  "source_original_checkpoint": {
+    "path": "/root/rna-sc/runs/RNA-Sc-300M_s17/ckpt_nt1900122218_step202784.pt",
+    "sha256": "4f761014594fd937e357170a089c37ce79e68e23220432d9b7a6cd5085f66166",
+    "matches_readonly_backup": true,
+    "readonly_backup_path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-300M_s17/ckpt_nt1900122218_step202784.pt"
+  },
+  "environment": {
+    "python": "3.10.22 | packaged by conda-forge | (main, Oct  6 2026, 23:02:24) [GCC 14.4.0]",
+    "platform": "Linux-5.15.0-161-generic-x86_64-with-glibc2.31",
+    "packages": {
+      "torch": "2.14.1+cu132",
+      "numpy": "2.2.6",
+      "pandas": "2.2.2",
+      "pyarrow": "25.0.1"
+    },
+    "cuda_available": true,
+    "cuda_device": "NVIDIA GeForce RTX 5090",
+    "torch_cuda": "13.2"
+  },
+  "logs": {
+    "P2_3_rnasc300m_smoke.json": {
+      "sha256": "41241cb763696a8efa51ef2ec8e2b899e4ba4a1f219d69233c10df0c96f65b0b",
+      "bytes": 218
+    },
+    "batch1_diagnostic.log": {
+      "sha256": "5813ed9ebef9e1b5625e672b1b63d58081aa912a80a2f09477458c3e565d2a9d",
+      "bytes": 8166
+    },
+    "gpu_smoke.log": {
+      "sha256": "c82941e8b21554a3f6a51775fd5b13402e34ed08f802b7aaf2c1e3e427299f09",
+      "bytes": 764
+    },
+    "original_diagnostic.log": {
+      "sha256": "7be5e9d6a11162a00a874be51dfbd7fa58f126597e6526027182ed01ff10be2b",
+      "bytes": 3113
+    },
+    "protocol_verification.log": {
+      "sha256": "ddcfd27c04ad0dc66435cdf6183248a5a0ff84b5637c4fcb1c58f971d14357ba",
+      "bytes": 1504
+    },
+    "randinit17.log": {
+      "sha256": "657f3c106a2bd92b36d56910ded9838cc76839747de0d8a49e2a6c944989d45d",
+      "bytes": 7652
+    },
+    "rnasc300m_randinit17_smoke.json": {
+      "sha256": "41241cb763696a8efa51ef2ec8e2b899e4ba4a1f219d69233c10df0c96f65b0b",
+      "bytes": 218
+    },
+    "trained.log": {
+      "sha256": "df385731d0dc44c9960c1ca02dcd23a1217e93d2350ced516e646d15349ab786",
+      "bytes": 7967
+    }
+  },
+  "anchor_bitwise_pass": false,
+  "external_cov_confidence_upgrade": "FROZEN_NO_UPGRADE",
+  "outputs": {
+    "gpu_smoke.json": {
+      "sha256": "c82941e8b21554a3f6a51775fd5b13402e34ed08f802b7aaf2c1e3e427299f09",
+      "bytes": 764
+    },
+    "nvidia_smi_before_cov.txt": {
+      "sha256": "30cfbb37c1fbdfa9d97dfefd22566439e66179c32404411244ae2e87e3ed2f88",
+      "bytes": 2149
+    },
+    "nvidia_smi_before_original_diagnostic.txt": {
+      "sha256": "e1ef3741cce7c69bc306683b3d2ba561f44ede5e6dfd0a264741bc0c5d93c035",
+      "bytes": 2149
+    },
+    "nvidia_smi_before_smoke.txt": {
+      "sha256": "4b66372ddb0d79f957f6926046ac129440787c537eb01d630f99bfcc0c2c07eb",
+      "bytes": 2149
+    },
+    "original_run_cov300_diagnostic.json": {
+      "sha256": "7be5e9d6a11162a00a874be51dfbd7fa58f126597e6526027182ed01ff10be2b",
+      "bytes": 3113
+    },
+    "p2_3_rnasc300m_sanity.json": {
+      "sha256": "7b10c69087d49a3ea16720875de803f2c157bbf870676336e02fe8ce64bb0660",
+      "bytes": 2662
+    },
+    "p2_3_rnasc300m_sanity_per_condition.jsonl": {
+      "sha256": "51b363c35f5818afc17303aac1a0eec2683dfe7ad8f8fe34fb1cbe090551be83",
+      "bytes": 1337983
+    },
+    "protocol_verification.json": {
+      "sha256": "ddcfd27c04ad0dc66435cdf6183248a5a0ff84b5637c4fcb1c58f971d14357ba",
+      "bytes": 1504
+    },
+    "report.md": {
+      "sha256": "bdb5aa3d1aad2c33abd4ec1b62907fe384b0081ad0489f0fd50406e03ccc62ff",
+      "bytes": 5234
+    },
+    "rnasc300m_main_batch1.json": {
+      "sha256": "d338d79253d55e3786f9414e130548b26a88e69bb8ea3872b4d4414a69f0896a",
+      "bytes": 1379
+    },
+    "rnasc300m_main_batch1_per_condition.jsonl": {
+      "sha256": "3e2f0c1561a74a04623277b83ff60a779925ffea5f1e92aeeeee50860b83d623",
+      "bytes": 1382364
+    },
+    "rnasc300m_randinit17.json": {
+      "sha256": "b0fc98e041df6e97be4116904a30f5d9c3d182b474d2de0dd1b4749d04339f20",
+      "bytes": 1637
+    },
+    "rnasc300m_randinit17_per_condition.jsonl": {
+      "sha256": "4f4699f6ea1bce6eb42d8ccd301a3e523aee3009f3d763bc8bb5a299aebd85a5",
+      "bytes": 1378055
+    },
+    "sanity300_summary.csv": {
+      "sha256": "73403594863bb6e5bdb74f00bec35e02d9a93dafcb92721466595f699d46ad1b",
+      "bytes": 559
+    },
+    "sanity300_summary.json": {
+      "sha256": "3500c95259ba675c3f2f35bf7574c149c13079e46e287f38b73e748078508fbb",
+      "bytes": 3036
+    },
+    "validation.json": {
+      "sha256": "d3377961d306f045329f6921ff2acb31ed7668f06c9882bc98e29f0524882521",
+      "bytes": 1034
+    },
+    "weight_strip_verification.json": {
+      "sha256": "7e437beb6d99d4aaa45ac5aea5f7c64dd57b33800a4bf3bbd405bfbd226894e2",
+      "bytes": 872
+    }
+  }
+}

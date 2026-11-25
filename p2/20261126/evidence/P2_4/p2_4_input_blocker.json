@@ -1,0 +1,54 @@
+{
+  "task": "X-P24 / P2.4",
+  "status": "BLOCKED_MISMATCHED_SOURCE",
+  "created_utc": "2026-11-25T18:41:22.460697+00:00",
+  "reasons": [
+    "rows 566077 != 29012227",
+    "split_counts differ from the legacy verified asset",
+    "missing columns: ['rna_type']"
+  ],
+  "actual": {
+    "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/data/release22_split_8080.parquet",
+    "sha256": "6d4f86a96946278ee769a2086329b8060e3ae91c087e7216b8ca39099110f879",
+    "rows": 566077,
+    "row_groups": 1,
+    "columns": [
+      "canonical_sequence",
+      "split_membership",
+      "cluster_id"
+    ],
+    "split_counts": {
+      "test": 63689,
+      "train": 449170,
+      "validation": 53218
+    }
+  },
+  "expected": {
+    "rows": 29012227,
+    "split_counts": {
+      "family_test": 7082895,
+      "family_validation": 7525752,
+      "test": 108979,
+      "train": 14130321,
+      "validation": 164280
+    },
+    "required_columns": [
+      "split_membership",
+      "canonical_sequence",
+      "rna_type"
+    ],
+    "legacy_verification": "results/upload_main/split8080_deep_verify_legacy.json"
+  },
+  "formal_run_started": false,
+  "coordinate_validation": {
+    "passed": true,
+    "cases": {
+      "one_based_1_4_marks_0_3": true,
+      "zero_is_invalid_one_based": true,
+      "out_of_cap_excluded": true,
+      "long_range_1_25_marks_0_24": true,
+      "short_range_1_24_excluded": true
+    },
+    "rule": "i0=i-1; j0=j-1"
+  }
+}

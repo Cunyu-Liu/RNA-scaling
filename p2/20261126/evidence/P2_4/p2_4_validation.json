@@ -1,0 +1,12 @@
+{
+  "status": "BLOCKED_INPUT_SOURCE_VERIFIED",
+  "checks": {
+    "coordinate_validation": true,
+    "cuda_bf16_head_seed_smoke": true,
+    "six_decision_rows": true,
+    "no_formal_rows_without_source": true,
+    "all_six_not_run": true,
+    "no_numeric_delta_claims": true
+  },
+  "formal_delta_or_ci_produced": false
+}

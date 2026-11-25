@@ -1,0 +1,83 @@
+{
+  "cov": {
+    "mean": 0.1401550056336744,
+    "n": 4920
+  },
+  "ctrl": {
+    "mean": 0.0017144528001375786,
+    "n": 4920
+  },
+  "old_drop": {
+    "mean": -0.05415871530547121,
+    "n": 4920
+  },
+  "cov_minus_ctrl": 0.13844055283353682,
+  "model_key": "rnasc300m_sanity",
+  "mode": "trained",
+  "seed": 17,
+  "n_conditions": 1640,
+  "condition_ids_sha256": "e1ce3102698eb5f4fc2b3b0560dd4d679351ebd99f77e9b7aa6e4d2f5de17ec6",
+  "conditions_sha256": "549db1834f6990beb437d22948cf1356ba15fa99c2bef6dbcfee8c84abc8f001",
+  "initial_condition_batch": 16,
+  "final_condition_batch": 16,
+  "oom_reductions": [],
+  "elapsed_seconds": 13.405247211456299,
+  "peak_allocated_mib": 2781.74365234375,
+  "peak_reserved_mib": 3438.0,
+  "cpu_fallback_count": 0,
+  "per_condition_file": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/results/P2_3/p2_3_rnasc300m_sanity_per_condition.jsonl",
+  "per_condition_sha256": "ee02dd74e8a54f83e3dc5a381c675a267e9c88e3e374dbf6ba04b206628c979e",
+  "model_info": {
+    "checkpoint_nt": 5800296014
+  },
+  "smoke": {
+    "status": "PASS",
+    "device": "cuda:0",
+    "model_device": "cuda:0",
+    "bf16_autocast": true,
+    "logits_vocab": 7,
+    "probabilities_finite": true,
+    "cpu_fallback_count": 0,
+    "peak_allocated_mib": 1761.888671875
+  },
+  "old_anchor_comparison": {
+    "cov": {
+      "old": 0.049607125636875415,
+      "new": 0.1401550056336744,
+      "old_hex": "0x1.9661aec849430p-5",
+      "new_hex": "0x1.1f09966c89e2ep-3",
+      "bitwise_equal": false,
+      "difference": 0.09054787999679897
+    },
+    "ctrl": {
+      "old": 0.0026705753443465943,
+      "new": 0.0017144528001375786,
+      "old_hex": "0x1.5e09a387ec050p-9",
+      "new_hex": "0x1.c16efad418f9cp-10",
+      "bitwise_equal": false,
+      "difference": -0.0009561225442090157
+    },
+    "old_drop": {
+      "old": -0.015336274750000935,
+      "new": -0.05415871530547121,
+      "old_hex": "-0x1.f689ff3f325e1p-7",
+      "new_hex": "-0x1.bbab0ee0f8d1dp-5",
+      "bitwise_equal": false,
+      "difference": -0.038822440555470274
+    },
+    "cov_minus_ctrl": {
+      "old": 0.04693655029252882,
+      "new": 0.13844055283353682,
+      "old_hex": "0x1.8081148fca82bp-5",
+      "new_hex": "0x1.1b86b876e1b0fp-3",
+      "bitwise_equal": false,
+      "difference": 0.09150400254100799
+    },
+    "n": {
+      "old": 4920,
+      "new": 4920,
+      "equal": true
+    }
+  },
+  "sanity_pass": false
+}

@@ -1,0 +1,94 @@
+{
+  "status": "PASS",
+  "models": {
+    "rinalmo_micro:trained": {
+      "bitwise_recompute": {
+        "cov": true,
+        "ctrl": true,
+        "old_drop": true,
+        "cov_minus_ctrl": true
+      },
+      "condition_ids_identical": true,
+      "n_cov": 4920,
+      "n_ctrl": 4920
+    },
+    "rinalmo_micro:randinit17": {
+      "bitwise_recompute": {
+        "cov": true,
+        "ctrl": true,
+        "old_drop": true,
+        "cov_minus_ctrl": true
+      },
+      "condition_ids_identical": true,
+      "n_cov": 4920,
+      "n_ctrl": 4920
+    },
+    "nucleicbert:trained": {
+      "bitwise_recompute": {
+        "cov": true,
+        "ctrl": true,
+        "old_drop": true,
+        "cov_minus_ctrl": true
+      },
+      "condition_ids_identical": true,
+      "n_cov": 4920,
+      "n_ctrl": 4920
+    },
+    "nucleicbert:randinit17": {
+      "bitwise_recompute": {
+        "cov": true,
+        "ctrl": true,
+        "old_drop": true,
+        "cov_minus_ctrl": true
+      },
+      "condition_ids_identical": true,
+      "n_cov": 4920,
+      "n_ctrl": 4920
+    },
+    "rinalmo_mega:trained": {
+      "bitwise_recompute": {
+        "cov": true,
+        "ctrl": true,
+        "old_drop": true,
+        "cov_minus_ctrl": true
+      },
+      "condition_ids_identical": true,
+      "n_cov": 4920,
+      "n_ctrl": 4920
+    },
+    "rinalmo_mega:randinit17": {
+      "bitwise_recompute": {
+        "cov": true,
+        "ctrl": true,
+        "old_drop": true,
+        "cov_minus_ctrl": true
+      },
+      "condition_ids_identical": true,
+      "n_cov": 4920,
+      "n_ctrl": 4920
+    },
+    "rinalmo_giga:trained": {
+      "bitwise_recompute": {
+        "cov": true,
+        "ctrl": true,
+        "old_drop": true,
+        "cov_minus_ctrl": true
+      },
+      "condition_ids_identical": true,
+      "n_cov": 4920,
+      "n_ctrl": 4920
+    },
+    "rinalmo_giga:randinit17": {
+      "bitwise_recompute": {
+        "cov": true,
+        "ctrl": true,
+        "old_drop": true,
+        "cov_minus_ctrl": true
+      },
+      "condition_ids_identical": true,
+      "n_cov": 4920,
+      "n_ctrl": 4920
+    }
+  },
+  "rna_fm": "NOT_RUN_WEIGHT_MISSING"
+}

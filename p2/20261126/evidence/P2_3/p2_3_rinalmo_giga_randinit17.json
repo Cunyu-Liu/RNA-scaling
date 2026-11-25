@@ -1,0 +1,72 @@
+{
+  "cov": {
+    "mean": -0.00036540406659563504,
+    "n": 4920
+  },
+  "ctrl": {
+    "mean": -0.00038225998121457614,
+    "n": 4920
+  },
+  "old_drop": {
+    "mean": 0.00021294396828738896,
+    "n": 4920
+  },
+  "cov_minus_ctrl": 1.6855914618941104e-05,
+  "model_key": "rinalmo_giga",
+  "mode": "randinit17",
+  "seed": 17,
+  "n_conditions": 1640,
+  "condition_ids_sha256": "e1ce3102698eb5f4fc2b3b0560dd4d679351ebd99f77e9b7aa6e4d2f5de17ec6",
+  "conditions_sha256": "549db1834f6990beb437d22948cf1356ba15fa99c2bef6dbcfee8c84abc8f001",
+  "initial_condition_batch": 16,
+  "final_condition_batch": 16,
+  "oom_reductions": [],
+  "elapsed_seconds": 57.074530363082886,
+  "peak_allocated_mib": 8824.9599609375,
+  "peak_reserved_mib": 10534.0,
+  "cpu_fallback_count": 0,
+  "per_condition_file": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/results/P2_3/p2_3_external_cov_per_condition_rinalmo_giga_randinit17.jsonl",
+  "per_condition_sha256": "64a708ac5c73d5fed8f58ce59d07fc7e6a3c6b65acf560c61d8a29b6ec99b9f3",
+  "model_info": {
+    "model": "RiNALMo-giga",
+    "mode": "randinit17",
+    "weight_source": null,
+    "tokenizer": {
+      "ACGU": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "CLS": 1,
+      "EOS": 2,
+      "MASK": 4,
+      "PAD": 0,
+      "logits_vocab": 28
+    },
+    "loading_report": null
+  },
+  "smoke": {
+    "status": "PASS",
+    "device": "cuda:0",
+    "model_device": "cuda:0",
+    "bf16_autocast": true,
+    "logits_vocab": 28,
+    "probabilities_finite": true,
+    "cpu_fallback_count": 0,
+    "peak_allocated_mib": 6341.24462890625,
+    "tokenizer_assertions": {
+      "ACGU": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "CLS": 1,
+      "EOS": 2,
+      "MASK": 4,
+      "PAD": 0,
+      "logits_vocab": 28
+    }
+  }
+}

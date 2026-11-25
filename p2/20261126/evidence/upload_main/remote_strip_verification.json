@@ -1,0 +1,44 @@
+[
+  {
+    "status": "PASS",
+    "run": "RNA-Sc-30M_s17",
+    "source_path": "/root/rna-sc/runs/RNA-Sc-30M_s17/ckpt_nt1900121822_step202784.pt",
+    "source_sha256": "333205e3977a27aa4ffe403f2367ee024c9f867aac34599c82ad89fc6c39aab7",
+    "source_matches_local_backup": true,
+    "target_path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/weights/RNA-Sc-30M_s17/ckpt_nt1900121822_step202784.pt",
+    "target_sha256": "21b9e8594c46648610a9221019e3f0b1b846b7c652966111cb3e09100e8f7037",
+    "target_matches_local_stripped": false,
+    "serialization_note": "Remote torch 2.14.1 and local torch 2.8.0 may produce different container bytes; tensor equality is checked separately.",
+    "model_keys_exact_order": true,
+    "model_tensors_bitwise_equal": true,
+    "optimizer_present": false
+  },
+  {
+    "status": "PASS",
+    "run": "RNA-Sc-100M_s17",
+    "source_path": "/root/rna-sc/runs/RNA-Sc-100M_s17/ckpt_nt1900122218_step202784.pt",
+    "source_sha256": "d5973fcda99688e09f48127cac96b74f478f3362c7b05137a2841e42622ef2cc",
+    "source_matches_local_backup": true,
+    "target_path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/weights/RNA-Sc-100M_s17/ckpt_nt1900122218_step202784.pt",
+    "target_sha256": "7e73e31317b7a4eac601356942bff4dd885729556f5255b9c079b61749d3bb45",
+    "target_matches_local_stripped": false,
+    "serialization_note": "Remote torch 2.14.1 and local torch 2.8.0 may produce different container bytes; tensor equality is checked separately.",
+    "model_keys_exact_order": true,
+    "model_tensors_bitwise_equal": true,
+    "optimizer_present": false
+  },
+  {
+    "status": "PASS",
+    "run": "RNA-Sc-650M_s17",
+    "source_path": "/root/rna-sc/runs/RNA-Sc-650M_s17/ckpt_nt1900122218_step202784.pt",
+    "source_sha256": "78115ff1f93b657ceed9323f6b5a04316864f31bf793be0ba35cb5e9682aa037",
+    "source_matches_local_backup": true,
+    "target_path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/weights/RNA-Sc-650M_s17/ckpt_nt1900122218_step202784.pt",
+    "target_sha256": "0631ccb128900f84eb02fb0c4396ae1de5b2330d1ea003465f4134098e63512d",
+    "target_matches_local_stripped": false,
+    "serialization_note": "Remote torch 2.14.1 and local torch 2.8.0 may produce different container bytes; tensor equality is checked separately.",
+    "model_keys_exact_order": true,
+    "model_tensors_bitwise_equal": true,
+    "optimizer_present": false
+  }
+]

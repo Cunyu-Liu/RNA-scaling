@@ -1,0 +1,44 @@
+{
+  "status": "PASS_PROTOCOL_IDENTITY",
+  "n_test": 1305,
+  "n_sampled": 100,
+  "n_conditions": 1640,
+  "n_cov_mutations": 4920,
+  "n_ctrl_mutations": 4920,
+  "bpRNA_sha256": "20d4ed56fa4f1d6e485cb48fe7b0b4d11bfe0fda2049904622dcc35874d15c51",
+  "conditions_sha256": "549db1834f6990beb437d22948cf1356ba15fa99c2bef6dbcfee8c84abc8f001",
+  "original_script_sha256": "c82ac6cf81ca7dd0943a458d500127d7608d9a138db97f1c6466c34b02dfad2f",
+  "migrated_script_sha256": "693c5b8fd37fc76c057f24905ad544a03ccaad119bea069f0e6cc88fed8e007b",
+  "sequence_sampling_identical": true,
+  "pair_sampling_identical": true,
+  "ctrl_positions_identical": true,
+  "condition_payloads_identical": true,
+  "mask_and_complement_definitions_identical": true,
+  "batch16_vs_batch1_condition_order_identical": true,
+  "batch16_vs_batch1_numeric": {
+    "cov": {
+      "max_abs_difference": 0.015255123376846313,
+      "mean_abs_difference": 0.0006054580887416151,
+      "n_bitwise_equal": 985,
+      "n": 4920
+    },
+    "ctrl": {
+      "max_abs_difference": 0.009454846382141113,
+      "mean_abs_difference": 0.0005600383653169653,
+      "n_bitwise_equal": 995,
+      "n": 4920
+    },
+    "old_drop": {
+      "max_abs_difference": 0.012456715106964111,
+      "mean_abs_difference": 0.0005714082001811139,
+      "n_bitwise_equal": 982,
+      "n": 4920
+    }
+  },
+  "old_anchor": {
+    "cov": 0.049607125636875415,
+    "ctrl": 0.0026705753443465943,
+    "old_drop": -0.015336274750000935,
+    "cov_minus_ctrl": 0.04693655029252882
+  }
+}

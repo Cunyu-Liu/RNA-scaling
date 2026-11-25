@@ -1,0 +1,163 @@
+{
+  "model_key": "rinalmo_mega",
+  "model": "RiNALMo-mega",
+  "scope": "observational_anchor",
+  "seed": 17,
+  "arms": {
+    "trained": {
+      "cov": {
+        "mean": 0.20037126857141407,
+        "n": 4920
+      },
+      "ctrl": {
+        "mean": 0.0005981922410343046,
+        "n": 4920
+      },
+      "old_drop": {
+        "mean": -0.0790379559575755,
+        "n": 4920
+      },
+      "cov_minus_ctrl": 0.19977307633037977,
+      "model_key": "rinalmo_mega",
+      "mode": "trained",
+      "seed": 17,
+      "n_conditions": 1640,
+      "condition_ids_sha256": "e1ce3102698eb5f4fc2b3b0560dd4d679351ebd99f77e9b7aa6e4d2f5de17ec6",
+      "conditions_sha256": "549db1834f6990beb437d22948cf1356ba15fa99c2bef6dbcfee8c84abc8f001",
+      "initial_condition_batch": 16,
+      "final_condition_batch": 16,
+      "oom_reductions": [],
+      "elapsed_seconds": 23.477314472198486,
+      "peak_allocated_mib": 2900.9638671875,
+      "peak_reserved_mib": 4324.0,
+      "cpu_fallback_count": 0,
+      "per_condition_file": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/results/P2_3/p2_3_external_cov_per_condition_rinalmo_mega_trained.jsonl",
+      "per_condition_sha256": "05b1f0ebb122963945cf5c182bbcf9758bbef2e01fb7af88cfa1a7ba63621c5b",
+      "model_info": {
+        "model": "RiNALMo-mega",
+        "mode": "trained",
+        "weight_source": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/ext/rinalmo-mega/model.safetensors",
+        "tokenizer": {
+          "ACGU": [
+            6,
+            7,
+            8,
+            9
+          ],
+          "CLS": 1,
+          "EOS": 2,
+          "MASK": 4,
+          "PAD": 0,
+          "logits_vocab": 28
+        },
+        "loading_report": {
+          "missing_keys": [
+            "lm_head.decoder.bias"
+          ],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": [],
+          "missing_decoder_bias_is_zero": true
+        }
+      },
+      "smoke": {
+        "status": "PASS",
+        "device": "cuda:0",
+        "model_device": "cuda:0",
+        "bf16_autocast": true,
+        "logits_vocab": 28,
+        "probabilities_finite": true,
+        "cpu_fallback_count": 0,
+        "peak_allocated_mib": 880.3671875,
+        "tokenizer_assertions": {
+          "ACGU": [
+            6,
+            7,
+            8,
+            9
+          ],
+          "CLS": 1,
+          "EOS": 2,
+          "MASK": 4,
+          "PAD": 0,
+          "logits_vocab": 28
+        }
+      }
+    },
+    "randinit17": {
+      "cov": {
+        "mean": -0.00025286592308401576,
+        "n": 4920
+      },
+      "ctrl": {
+        "mean": -0.00023410581714829537,
+        "n": 4920
+      },
+      "old_drop": {
+        "mean": 0.00025645633932293917,
+        "n": 4920
+      },
+      "cov_minus_ctrl": -1.876010593572039e-05,
+      "model_key": "rinalmo_mega",
+      "mode": "randinit17",
+      "seed": 17,
+      "n_conditions": 1640,
+      "condition_ids_sha256": "e1ce3102698eb5f4fc2b3b0560dd4d679351ebd99f77e9b7aa6e4d2f5de17ec6",
+      "conditions_sha256": "549db1834f6990beb437d22948cf1356ba15fa99c2bef6dbcfee8c84abc8f001",
+      "initial_condition_batch": 16,
+      "final_condition_batch": 16,
+      "oom_reductions": [],
+      "elapsed_seconds": 23.086951732635498,
+      "peak_allocated_mib": 3467.0830078125,
+      "peak_reserved_mib": 4924.0,
+      "cpu_fallback_count": 0,
+      "per_condition_file": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/results/P2_3/p2_3_external_cov_per_condition_rinalmo_mega_randinit17.jsonl",
+      "per_condition_sha256": "b2b0a685f1bc920fad462295c273aa50a05fa8f1f9d6000e3698ba17124a763c",
+      "model_info": {
+        "model": "RiNALMo-mega",
+        "mode": "randinit17",
+        "weight_source": null,
+        "tokenizer": {
+          "ACGU": [
+            6,
+            7,
+            8,
+            9
+          ],
+          "CLS": 1,
+          "EOS": 2,
+          "MASK": 4,
+          "PAD": 0,
+          "logits_vocab": 28
+        },
+        "loading_report": null
+      },
+      "smoke": {
+        "status": "PASS",
+        "device": "cuda:0",
+        "model_device": "cuda:0",
+        "bf16_autocast": true,
+        "logits_vocab": 28,
+        "probabilities_finite": true,
+        "cpu_fallback_count": 0,
+        "peak_allocated_mib": 2900.9638671875,
+        "tokenizer_assertions": {
+          "ACGU": [
+            6,
+            7,
+            8,
+            9
+          ],
+          "CLS": 1,
+          "EOS": 2,
+          "MASK": 4,
+          "PAD": 0,
+          "logits_vocab": 28
+        }
+      }
+    }
+  },
+  "trained_minus_randinit": 0.19979183643631548,
+  "condition_ids_identical": true,
+  "status": "COMPLETE"
+}

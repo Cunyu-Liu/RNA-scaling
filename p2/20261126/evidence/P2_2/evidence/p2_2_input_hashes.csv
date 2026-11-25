@@ -1,0 +1,11 @@
+input,path,sha256,bytes
+bpRNA_split_parquet,/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/data/bpRNA_parsed.parquet,20d4ed56fa4f1d6e485cb48fe7b0b4d11bfe0fda2049904622dcc35874d15c51,1628162
+checkpoint,/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/weights/RNA-Sc-30M_s17/ckpt_nt1900121822_step202784.pt,21b9e8594c46648610a9221019e3f0b1b846b7c652966111cb3e09100e8f7037,132860263
+checkpoint_manifest,/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/weights/RNA-Sc-30M_s17/manifest.json,3ad9c33665376f977db84fe6304c1abb05d1272e44decba221e2ea60b06723a4,8655
+execution_script,/home/cunyuliu/rna-sc-p2/p2_2/run_p2_2.py,0e9cfa6247b9f6eade30ddbd034edf9bb4d2f2f6e54064dea0c2fee43e692bd2,46406
+run_cov300,/home/cunyuliu/rna-sc-p2/code_git/run_cov300.py,c82ac6cf81ca7dd0943a458d500127d7608d9a138db97f1c6466c34b02dfad2f,5577
+s14_rns,/home/cunyuliu/rna-sc-p2/code_git/rna_sc/s14_rns.py,4d5dac6c92d28c1afdfa9a09b78acdd25c84fab99ea5b96fd1315c01e8363063,9748
+s14_rns_ext,/home/cunyuliu/rna-sc-p2/code_git/rna_sc/s14_rns_ext.py,eb7d05facdfe0c39c6d8cbda228be65727aa11d7a9727a87018d0d496bb9fa5d,12209
+s14_rns_cov,/home/cunyuliu/rna-sc-p2/code_git/rna_sc/s14_rns_cov.py,f115f30af72e5c75abcd8e52cea0814b025511209d75b2dc86f5e8bff5fc7457,5119
+model_and_tokenizer,/home/cunyuliu/rna-sc-p2/code_git/rna_sc/model.py,a89bb0242213f173650fab33790c84c7bd4d1a1566c9ad5774ae6f79b221f06d,7560
+load_encoder,/home/cunyuliu/rna-sc-p2/code_git/rna_sc/probe.py,b64dc55c4bff7bd1105635dd2a3a097d7d00aeed689d4f379a2f9273ccde1857,14553

@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "run": "RNA-Sc-300M_s17",
+  "source_path": "/root/rna-sc/runs/RNA-Sc-300M_s17/ckpt_nt1900122218_step202784.pt",
+  "local_readonly_backup_path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-300M_s17/ckpt_nt1900122218_step202784.pt",
+  "source_sha256": "4f761014594fd937e357170a089c37ce79e68e23220432d9b7a6cd5085f66166",
+  "source_matches_local_backup": true,
+  "target_path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/weights/RNA-Sc-300M_s17/ckpt_nt1900122218_step202784.pt",
+  "target_bytes": 1208467879,
+  "target_sha256": "465ca31b2c520c2aa5168a7d57f660c6191d4198ce5811489e7db7ee7edfc443",
+  "checkpoint_nt": 1900122218,
+  "checkpoint_step": 202784,
+  "model_tensors": 197,
+  "model_keys_exact_order": true,
+  "model_tensors_bitwise_equal": true,
+  "optimizer_present": false
+}

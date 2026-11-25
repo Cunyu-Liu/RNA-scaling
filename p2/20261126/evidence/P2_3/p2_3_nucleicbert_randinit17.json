@@ -1,0 +1,71 @@
+{
+  "cov": {
+    "mean": -3.7117399335876713e-06,
+    "n": 4920
+  },
+  "ctrl": {
+    "mean": -3.92498403060727e-06,
+    "n": 4920
+  },
+  "old_drop": {
+    "mean": -7.538936986792378e-07,
+    "n": 4920
+  },
+  "cov_minus_ctrl": 2.1324409701959834e-07,
+  "model_key": "nucleicbert",
+  "mode": "randinit17",
+  "seed": 17,
+  "n_conditions": 1640,
+  "condition_ids_sha256": "e1ce3102698eb5f4fc2b3b0560dd4d679351ebd99f77e9b7aa6e4d2f5de17ec6",
+  "conditions_sha256": "549db1834f6990beb437d22948cf1356ba15fa99c2bef6dbcfee8c84abc8f001",
+  "initial_condition_batch": 16,
+  "final_condition_batch": 16,
+  "oom_reductions": [],
+  "elapsed_seconds": 22.301772832870483,
+  "peak_allocated_mib": 6984.07177734375,
+  "peak_reserved_mib": 8540.0,
+  "cpu_fallback_count": 0,
+  "per_condition_file": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/results/P2_3/p2_3_external_cov_per_condition_nucleicbert_randinit17.jsonl",
+  "per_condition_sha256": "4e3b0d6ebe7dc137a2158d4bef3461ce7f72ea11e9c22ed5c36576ab6a8d22a4",
+  "model_info": {
+    "model": "NucleicBERT-404M",
+    "mode": "randinit17",
+    "weight_source": null,
+    "tokenizer": {
+      "acgu": [
+        6,
+        8,
+        11,
+        20
+      ],
+      "CLS": 3,
+      "SEP": 4,
+      "MASK": 2,
+      "PAD": 0,
+      "logits_vocab": 25
+    }
+  },
+  "smoke": {
+    "status": "PASS",
+    "device": "cuda:0",
+    "model_device": "cuda:0",
+    "bf16_autocast": true,
+    "logits_vocab": 25,
+    "probabilities_finite": true,
+    "cpu_fallback_count": 0,
+    "peak_allocated_mib": 6984.07177734375,
+    "tokenizer_assertions": {
+      "acgu": [
+        6,
+        8,
+        11,
+        20
+      ],
+      "CLS": 3,
+      "SEP": 4,
+      "MASK": 2,
+      "PAD": 0,
+      "logits_vocab": 25
+    }
+  }
+}

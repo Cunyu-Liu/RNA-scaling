@@ -1,0 +1,72 @@
+{
+  "server": "server2",
+  "host": "PlmGGO",
+  "generated_at_utc": "2026-11-25T18:38:43.326479+00:00",
+  "target": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/data/release22_split_8080.parquet",
+  "roots": [
+    {
+      "root": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/data",
+      "exists": true,
+      "parquet": [
+        {
+          "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/data/archiveii.parquet",
+          "bytes": 280734,
+          "status": "READABLE",
+          "rows": 3975,
+          "schema": "id: string\nsequence: string\nsecondary_structure: string\nfamily: string"
+        },
+        {
+          "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/data/bpRNA_parsed.parquet",
+          "bytes": 1628162,
+          "status": "READABLE",
+          "rows": 12317,
+          "schema": "name: string\nsource: string\nsplit: string\nseq: string\npairs: list<element: list<element: int32>>\n  child 0, element: list<element: int32>\n      child 0, element: int32"
+        },
+        {
+          "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/data/release22_cluster_split.parquet",
+          "bytes": 18534325,
+          "status": "READABLE",
+          "rows": 3357201,
+          "schema": "cluster_id: string\nsplit: string"
+        },
+        {
+          "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/data/release22_split_8080.parquet",
+          "bytes": 132848637,
+          "status": "READABLE",
+          "rows": 566077,
+          "schema": "canonical_sequence: string\nsplit_membership: string\ncluster_id: string"
+        },
+        {
+          "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/data/subsamples/c1Mcs.parquet",
+          "bytes": 1607348,
+          "status": "READABLE",
+          "rows": 190917,
+          "schema": "cluster_id: string"
+        },
+        {
+          "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/data/subsamples/c5Mcs.parquet",
+          "bytes": 7463666,
+          "status": "READABLE",
+          "rows": 975339,
+          "schema": "cluster_id: string"
+        }
+      ]
+    },
+    {
+      "root": "/home/cunyuliu/rna-sc",
+      "exists": true,
+      "parquet": []
+    },
+    {
+      "root": "/mnt/cunyuliu/tokenizer-benchmark",
+      "exists": false,
+      "parquet": []
+    },
+    {
+      "root": "/mnt/cunyuliu/rna-sc/data",
+      "exists": false,
+      "parquet": []
+    }
+  ],
+  "target_exists": true
+}

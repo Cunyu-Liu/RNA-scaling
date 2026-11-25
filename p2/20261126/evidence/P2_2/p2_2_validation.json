@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "n_selected_rows": 109,
+  "n_main_sequence_rows": 108,
+  "excluded_rows_with_reason": 1,
+  "sequence_ids_complete_and_unique": true,
+  "rns_cov_exact_same_main_sequence_set": true,
+  "average_rank_spearman_recomputed_bitwise": true,
+  "sequence_bootstrap_recomputed_bitwise": true,
+  "family_statistics_recomputed_bitwise": true,
+  "mutation_counts_recomputed": {
+    "cov": 6039,
+    "ctrl": 6039
+  },
+  "pooled_statistics_recomputed_bitwise": true,
+  "random_pool_qc_pass": true,
+  "legacy_threshold_rns_matches_exact_topk": true,
+  "two_png_scatters_valid": true
+}
