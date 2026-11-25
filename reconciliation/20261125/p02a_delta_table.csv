@@ -1,0 +1,8 @@
+scale,model_or_baseline,protocol,family_f1,random_f1,delta_random_minus_family,family_best_layer,random_best_layer,evidence_delta,evidence_minus_regenerated,eval_matrix_family_random_lines
+1M,RNA-Sc-1M_s17,probe-balanced,0.0982,0.1534,0.0552,4,13,0.0552,+0.0000,5;6
+10M,RNA-Sc-10M_s17,probe-balanced,0.1555,0.4928,0.3373,19,12,0.3373,+0.0000,1;2
+30M,RNA-Sc-30M_s17,probe-balanced,0.1675,0.6053,0.4378,8,9,0.4378,+0.0000,9;10
+100M,RNA-Sc-100M_s17,probe-balanced,0.1696,0.6040,0.4344,2,10,0.4344,+0.0000,13;14
+300M,RNA-Sc-300M_s17,probe-balanced,0.1715,0.5870,0.4155,23,20,0.4155,+0.0000,29;30
+650M,RNA-Sc-650M_s17,probe-balanced,0.1888,0.6252,0.4364,24,27,0.4364,+0.0000,33;34
+k-mer baseline,kmer1-6+logistic(balanced),classical-baseline,0.1630,0.5180,0.3550,NA,NA,0.3549,-0.0001,NA;classical_baselines.json

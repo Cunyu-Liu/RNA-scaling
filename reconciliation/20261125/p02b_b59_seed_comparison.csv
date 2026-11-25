@@ -1,0 +1,7 @@
+probe_seed,scale,training_seed,run,best_layer_in_retest_window,best_f1,paired_650_minus_300_pp,paired_650_above_300
+29,300M,17,RNA-Sc-300M_s17_b59,23,0.4004,6.44000000,true
+29,650M,17,RNA-Sc-650M_s17_b59,27,0.4648,6.44000000,true
+43,300M,17,RNA-Sc-300M_s17_b59,23,0.3778,6.90000000,true
+43,650M,17,RNA-Sc-650M_s17_b59,24,0.4468,6.90000000,true
+61,300M,17,RNA-Sc-300M_s17_b59,22,0.3697,6.60000000,true
+61,650M,17,RNA-Sc-650M_s17_b59,26,0.4357,6.60000000,true

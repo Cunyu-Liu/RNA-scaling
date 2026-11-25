@@ -1,0 +1,21 @@
+item,value,source,caliber_note
+original main-line budget,2.0B nt,backup:eval_evidence_logs/evidence/factorial_verdict.json,Nominal controlled exposure; terminal logged checkpoints approximately 1.9B
+family budget effects at 30M/100M/300M/650M,-5.24;-2.74;+3.76;+1.15 pp,P0:p00_adjudication_summary.md:14-22,Original terminal protocol; 5.9B minus 2.0B; single-seed arms
+random-channel completed endpoints,30M;100M;300M,P0:p00_adjudication_summary.md:45-47,650M remains a 5B midpoint and is excluded from completed-endpoint claim
+structure budget effects at 30M/100M/300M,+0.09;+0.85;+1.87 pp,P0:p00_adjudication_summary.md:41-43,Monotone over three scales
+650M structure budget effect,+0.84 pp,P0:p00_adjudication_summary.md:41-43,Positive but lower than 300M; not four-scale monotone
+10M versus 1M attrition coverage,three-training-seed means; negative in 2 of 3 paired seeds,P0:p02b_caliber_adjudication.md:17-43,Mean-level phenomenon rather than per-seed universal
+10M family-F1 maximum exposure,0.5B nt,backup:eval_evidence_logs/evidence/s6_timeline.json:timeline.ckpt_nt=500038563,Single-run time axis
+650M best relative layer depth,0.296,project:交接文档/spec.md:30; backup:eval_evidence_logs/evidence/s1_final_verdict.json,Single-seed original endpoint
+650M de-rRNA best layer,L27,backup:eval_evidence_logs/evidence/p1_derna_discriminator.json:650M.best.layer,Relative depth 1.00; 18-class de-rRNA evaluation
+650M de-rRNA relative depth,1.00,backup:eval_evidence_logs/evidence/p1_derna_discriminator.json:650M.best.rel,Intervention removes shallow endpoint
+650M de-rRNA family F1,0.4585,backup:eval_evidence_logs/evidence/p1_derna_discriminator.json:650M.best.f1,Single-seed de-rRNA intervention
+650M COV minus CTRL,+0.0957,project:交接文档/spec.md:64-70; backup:eval_evidence_logs/evidence/covariation_test_650M.json:cov_minus_ctrl,Forward mutation intervention; pretraining-derived pairing signal
+partner-dependent readout wall,approximately 0.64,project:交接文档/spec.md:64-70,Multiple partner-seeking readouts; not an absolute knowledge ceiling
+Partner-Oracle at 650M,0.998,project:交接文档/spec.md:64-70; backup:eval_evidence_logs/evidence/readout_heads_v3.json:models.650M.partner_oracle,Oracle upper-bound readout
+650M matched-prior pair-probe increment,+0.030,project:交接文档/spec.md:64-70; backup:eval_evidence_logs/evidence/pair_probe_v4.json; pair_probe_baseline.json,Pair AUC 0.9524 minus model-free distance-identity prior 0.922
+recipe-replica family effects at 30M/100M/300M,+7.93;+2.33;+0.63 pp,P0:p02c_corpus_arm_table.md:5-11,Same architecture and nominal budget; recipe replica rather than exact sequence manifest
+rfamcap terminal family effects at 30M/100M,+4.14;+0.34 pp,P0:p00_adjudication_summary.md:33-39,Iso-budget 1.9B terminal s17-to-s17 contrast
+rw1 family effects at 10M/30M/100M,+0.15;-0.58;-4.29 pp,P0:p02c_corpus_arm_table.md:13-19,Capacity-gated sign change; 10M effect below seed variation
+S13b decision,NOT-BELL,backup:eval_evidence_logs/evidence/s13b_bell.json:bell_test.verdict,Vertex outside sampled NLL domain; no universal absence claim
+rna-ft-eval adaptation strategies,fine-tuning; freezing; LoRA,project:交接文档/spec.md:13,Independent companion evaluation; no evidence-level transfer between studies

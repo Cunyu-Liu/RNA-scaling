@@ -1,0 +1,23 @@
+item,value,source,caliber_note
+initialization controls,randinit;moment-matched,project:交接文档/spec.md:36-43,Controls do not read sequence composition and cannot isolate B3
+primary classical baseline coverage,LightGBM s17 only,P0:p00_adjudication_summary.md:24-29,Not a three-seed-versus-three-seed contrast
+external-model status,observational anchors,project:交接文档/spec.md:118-124,Bidirectional unauditable corpus exposure; no controlled attribution
+rfamcap 100M structure effect,+0.34 pp,P0:p00_adjudication_summary.md:39; P0:p02c_corpus_arm_table.md:28-32,0.5924@L20 minus 0.5890@L22; checkpoint unresolved
+external structure gap under discussion,approximately +0.10 F1,project:交接文档/spec.md:82-85,Cannot be attributed to corpus from the +0.34 pp rfamcap result
+rfamcap candidate checkpoints,0.2B;1.9B nt,P0:p00_adjudication_summary.md:33-39,Structure rows lack ckpt_nt; family terminal contrast resolved at 1.9B
+rfamcap 30M structure probe rows,0,P0:p04_unfinished_registry.md:18-25,Probe gap rather than completed negative result
+MARS/RNAcentral probe rows,0,P0:p04_unfinished_registry.md:3-17,No three-corpus spectrum claim
+single-training-seed scales,300M;650M,P0:p00_adjudication_summary.md:24-29; project:交接文档/spec.md:28-34,Training seed s17 only; no fabricated error bars
+multi-training-seed scales,1M;10M;30M;100M,P0:p02b_caliber_adjudication.md:17-43,Three training seeds s17/s29/s43
+10M attrition seed direction,negative in 2 of 3 paired seeds,project:交接文档/spec.md:28-34,Three-seed mean-level effect only
+10M family-F1 maximum exposure,0.5B nt,backup:eval_evidence_logs/evidence/s6_timeline.json:timeline.ckpt_nt=500038563,Single-run time-axis control
+c1Mcs exposure,2.2 epochs,project:交接文档/spec.md:55-60,Repeated-exposure control for duration account
+650M de-rRNA best layer,L27,backup:eval_evidence_logs/evidence/p1_derna_discriminator.json:650M.best.layer,Relative depth 1.00; intervention control
+650M de-rRNA F1,0.4585,backup:eval_evidence_logs/evidence/p1_derna_discriminator.json:650M.best.f1,18-class de-rRNA result
+balanced 100M LM s17,0.1696,P0:p00_adjudication_summary.md:24-29,Balanced-probe single-seed sensitivity
+balanced 100M LightGBM s17,0.1760,P0:p00_adjudication_summary.md:24-29,LM minus baseline equals -0.0064
+650M original-terminal budget effect,+1.15 pp,P0:p00_adjudication_summary.md:14-22,0.3747 minus 0.3632; factorial headline
+650M over 300M retest difference,+6.65 pp,P0:p00_adjudication_summary.md:14-22,Probe-seed readout stability; pending raw-ledger consolidation
+retest values missing from raw JSONL,30 of 30,P0:p02b_caliber_adjudication.md:101-107,Evidence JSON exists; designated raw ledger rows absent
+650M original-terminal F1,0.3747@L25,P0:p00_adjudication_summary.md:14-16,20k/4k; full layer scan; probe seed 17
+300M original-terminal F1,0.3821@L22,P0:p00_adjudication_summary.md:14-16,20k/4k; full layer scan; probe seed 17

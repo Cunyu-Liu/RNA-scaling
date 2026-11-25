@@ -1,0 +1,114 @@
+{
+  "task": "P0.2a",
+  "backup_root_read_only": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc",
+  "generation_script": {
+    "path": "/Users/liucunyu/Documents/课题idea 数据 结论/浙江大学/RNA 相关模型/RNA_LM_迁移学习机理研究/对账_P0_20261125/p02a_regen.py",
+    "sha256": "90510df6c0a53c2e5d95e0d6597bb0b0f9308f1ae3deae1029033bc6d264484d"
+  },
+  "selection": {
+    "main": "exact run names; maximum ckpt_nt per run; complete layer scan; maximum f1_macro; ties prefer lower layer",
+    "main_seeds": {
+      "1M": [
+        "s17",
+        "s29",
+        "s43"
+      ],
+      "10M": [
+        "s17",
+        "s29",
+        "s43"
+      ],
+      "30M": [
+        "s17",
+        "s29",
+        "s43"
+      ],
+      "100M": [
+        "s17",
+        "s29",
+        "s43"
+      ],
+      "300M": [
+        "s17"
+      ],
+      "650M": [
+        "s17"
+      ]
+    },
+    "delta": "RNA-Sc-{scale}_s17, probe-balanced, random minus family",
+    "std": "population ddof=0 for s1_final_verdict; sample ddof=1 for s1_seed_table"
+  },
+  "inputs": [
+    {
+      "role": "probe",
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/eval/probe_results.jsonl",
+      "size_bytes": 2327316,
+      "sha256": "a9bc5f93232ed51d094e66634e2609794e1221af6667d20beafc5a778e0e0315",
+      "jsonl_rows": 3430
+    },
+    {
+      "role": "matrix",
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/eval/eval_matrix_results.jsonl",
+      "size_bytes": 10048,
+      "sha256": "2d79278ff98d36a5f318e77dc96b2eb3008615fc86a047ef81aee1d4c9e918e7",
+      "jsonl_rows": 52
+    },
+    {
+      "role": "verdict",
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/evidence/s1_final_verdict.json",
+      "size_bytes": 3126,
+      "sha256": "757b78ab77f2609ac294826b287d3bb6885fcb2a82e64de6d4a622800e460018"
+    },
+    {
+      "role": "seed_table",
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/evidence/s1_seed_table.json",
+      "size_bytes": 2465,
+      "sha256": "95585dfe402375ef4ca725bf4e64071e21b8b741132e423b95d735db15963cd9"
+    },
+    {
+      "role": "slope",
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/evidence/s1_slope_decision.json",
+      "size_bytes": 404,
+      "sha256": "6435c17e3277ae6217cc92e49d245dbcea406d46b56b958a3ba649f8c82a4f7f"
+    },
+    {
+      "role": "delta",
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/evidence/eval_matrix_v1_delta.json",
+      "size_bytes": 1547,
+      "sha256": "8765ce0429d316e20e3b02d266176b65ed7e2bd5810977aeaca3f455d1801e9f"
+    },
+    {
+      "role": "classical",
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/evidence/classical_baselines.json",
+      "size_bytes": 352,
+      "sha256": "9206f1913f7916eb8eebd5415b8e5c26ed66a96ac0d53ceb8436238d1e9469ce"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "/Users/liucunyu/Documents/课题idea 数据 结论/浙江大学/RNA 相关模型/RNA_LM_迁移学习机理研究/对账_P0_20261125/p02a_main_table.md",
+      "size_bytes": 1403,
+      "sha256": "a3a0224c2179c1fe09477085581f239d5991195c8f5e74fd520913cc499d0207"
+    },
+    {
+      "path": "/Users/liucunyu/Documents/课题idea 数据 结论/浙江大学/RNA 相关模型/RNA_LM_迁移学习机理研究/对账_P0_20261125/p02a_main_table.csv",
+      "size_bytes": 825,
+      "sha256": "e9a8da1753b88de74dab6cc9402a904c5e47c2abf34c12801b55f2d10dfb0b3d"
+    },
+    {
+      "path": "/Users/liucunyu/Documents/课题idea 数据 结论/浙江大学/RNA 相关模型/RNA_LM_迁移学习机理研究/对账_P0_20261125/p02a_delta_table.md",
+      "size_bytes": 1177,
+      "sha256": "70dedcdc39b51e1f04d43a62f2088fb7a37bf8780d7f69b967ea855c7f308a0a"
+    },
+    {
+      "path": "/Users/liucunyu/Documents/课题idea 数据 结论/浙江大学/RNA 相关模型/RNA_LM_迁移学习机理研究/对账_P0_20261125/p02a_delta_table.csv",
+      "size_bytes": 815,
+      "sha256": "0f4b013c6d8250ec926b3f0e433cfb94dcba0635a2176ff20a10f12c40452554"
+    },
+    {
+      "path": "/Users/liucunyu/Documents/课题idea 数据 结论/浙江大学/RNA 相关模型/RNA_LM_迁移学习机理研究/对账_P0_20261125/p02a_report.md",
+      "size_bytes": 4432,
+      "sha256": "7931eccbbbf9aca1b304ee257c9ca2d316e5b850b16cadfc40adb34036379a4b"
+    }
+  ]
+}

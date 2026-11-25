@@ -1,0 +1,44 @@
+item,value,source,caliber
+S6 frozen checkpoint count,37,交接文档/spec.md:Q4; eval_evidence_logs/evidence/s6_timeline.json; s6_cross_scale.json,Frozen S6 analysis; trajectories are descriptive and not training-seed replication
+10M full-corpus peak family macro-F1,0.2549,eval_evidence_logs/evidence/s6_timeline.json:timeline[ckpt_nt=500038563].best_f1,Single s17 run; best layer L11 at 0.5B nt; family-held-out mean-pool probe
+10M full-corpus peak exposure,0.5B nt,eval_evidence_logs/evidence/s6_timeline.json:timeline[ckpt_nt=500038563].ckpt_nt,Mid-training checkpoint
+10M full-corpus first best layer,L16,eval_evidence_logs/evidence/s6_timeline.json:timeline[ckpt_nt=100000373].best_layer,Single s17 run at 0.1B nt; relative depth 0.842
+10M full-corpus peak best layer,L11,eval_evidence_logs/evidence/s6_timeline.json:timeline[ckpt_nt=500038563].best_layer,Best layer at the F1 maximum; distinct from L16 at the first checkpoint
+10M full-corpus terminal family macro-F1,0.1731,eval_evidence_logs/evidence/s6_timeline.json:final_best_f1; timeline[ckpt_nt=1900171155],Single s17 run at 1.9B logged nt; approximately 0.173 plateau
+10M full-corpus terminal exposure,1.9B nt,eval_evidence_logs/evidence/s6_timeline.json:timeline[-1].ckpt_nt,Terminal logged checkpoint in the 2.0B valid-nt-budget run
+10M full-corpus terminal best layer,L1,eval_evidence_logs/evidence/s6_timeline.json:timeline[-1].best_layer,Single s17 run; relative depth 0.053
+10M c1Mcs epochs,2.22,eval_evidence_logs/evidence/corpus3.json:10M-c1Mcs.epochs,Approximately 0.9B unique nt; contrasts duration with repetition count
+10M full-corpus epochs,0.14,eval_evidence_logs/evidence/corpus3.json:10M-full.epochs,Same iso-exposure design; full unique corpus
+10M c1Mcs peak family macro-F1,0.2437,eval_evidence_logs/eval/probe_results.jsonl:L1113,Single s17 c1Mcs run; 0.5B nt; best layer L9
+10M c1Mcs 0.7B family macro-F1,0.2042,eval_evidence_logs/eval/probe_results.jsonl:L1130,Single s17 c1Mcs run; best layer L6
+10M c1Mcs terminal family macro-F1,0.1862,eval_evidence_logs/evidence/corpus3.json:10M-c1Mcs.best_f1; eval/probe_results.jsonl:L242,Single s17 c1Mcs run at 0.9B nt; best layer L9
+10M c1Mcs 0.3B best layer,L16,eval_evidence_logs/eval/probe_results.jsonl:L1100,Single s17 c1Mcs run; relative depth 0.842
+10M c1Mcs 0.7B best layer,L6,eval_evidence_logs/eval/probe_results.jsonl:L1130,Single s17 c1Mcs run; relative depth 0.316
+10M c1Mcs terminal best layer,L9,eval_evidence_logs/evidence/corpus3.json:10M-c1Mcs.best_layer,Single s17 c1Mcs run at 0.9B nt; relative depth 0.474
+S12 class count,10,eval_evidence_logs/evidence/s12_linkage_*.json:n_families,Class-level descriptive E1 correlations; no family-level inferential estimate
+S12 rho 30M-c1Mcs,-0.478,eval_evidence_logs/evidence/s12_linkage_RNA-Sc-30M_s17_c1Mcs.json:spearman_DI_vs_bestlayer,Stored -0.4784085 rounded to three decimals; DI versus best-layer relative depth
+S12 rho 100M,-0.384,eval_evidence_logs/evidence/s12_linkage_RNA-Sc-100M_s17.json:spearman_DI_vs_bestlayer,Stored -0.3839212 rounded to three decimals; single s17 run
+S12 rho 300M,-0.339,eval_evidence_logs/evidence/s12_linkage_RNA-Sc-300M_s17.json:spearman_DI_vs_bestlayer,Stored -0.3385016 rounded to three decimals; single s17 run
+S12 rho 650M,-0.222,eval_evidence_logs/evidence/s12_linkage_RNA-Sc-650M_s17.json:spearman_DI_vs_bestlayer,Stored -0.2222603 rounded to three decimals; single s17 run
+P1 de-rRNA class count,18,eval_evidence_logs/evidence/p1_derna_discriminator.json:*.n_classes,rRNA removed from probe train/eval; pretrained encoder unchanged; not comparable with 19-class F1
+100M full-class best layer,L21 (rel 0.955),对账_P0_20261125/p02a_main_table.csv:100M; eval_evidence_logs/evidence/s1_final_verdict.json:five_scale_table.100M.runs[s17],Single s17 terminal full-class mean-pool probe
+100M de-rRNA best layer,L16 (rel 0.727),eval_evidence_logs/evidence/p1_derna_discriminator.json:100M.best,Pre-registered P1 class-removal intervention; E2 within probe task
+100M de-rRNA macro-F1,0.3192,eval_evidence_logs/evidence/p1_derna_discriminator.json:100M.best.f1,18-class de-rRNA task; not directly comparable with 19-class score
+300M full-class best layer,L22 (rel 0.957),对账_P0_20261125/p02a_main_table.csv:300M; 交接文档/spec.md:Q1,Single s17 terminal full-class mean-pool probe
+300M de-rRNA best layer,L18 (rel 0.783),eval_evidence_logs/evidence/p1_derna_discriminator.json:300M.best,Pre-registered P1 class-removal intervention; E2 within probe task
+300M de-rRNA macro-F1,0.4026,eval_evidence_logs/evidence/p1_derna_discriminator.json:300M.best.f1,18-class de-rRNA task; not directly comparable with 19-class score
+650M full-class best layer,L8 (rel 0.296),对账_P0_20261125/p02a_main_table.csv:650M; eval_evidence_logs/evidence/s1_final_verdict.json:five_scale_table.650M,Single s17 terminal full-class mean-pool probe
+650M de-rRNA best layer,L27 (rel 1.000),eval_evidence_logs/evidence/p1_derna_discriminator.json:650M.best,Pre-registered P1 class-removal intervention; shallow reversal abolished
+650M de-rRNA macro-F1,0.4585,eval_evidence_logs/evidence/p1_derna_discriminator.json:650M.best.f1,Highest among the 100M/300M/650M 18-class P1 arms; not a 19-class improvement
+P5 rRNA separation 30M,1.0668 nats/token,eval_evidence_logs/evidence/p5_shuffle_threshold.json:scales.30M.rRNA_sep,Native minus position-shuffled MLM likelihood; same mask positions; n=150 rRNA sequences
+P5 rRNA separation 650M,1.1184 nats/token,eval_evidence_logs/evidence/p5_shuffle_threshold.json:scales.650M.rRNA_sep,Native minus position-shuffled MLM likelihood; same mask positions; n=150 rRNA sequences
+P5 non-rRNA separation 30M,0.1267 nats/token,eval_evidence_logs/evidence/p5_shuffle_threshold.json:scales.30M.nonrRNA_sep,Native minus position-shuffled MLM likelihood; n=150 non-rRNA sequences
+P5 non-rRNA separation 650M,0.3098 nats/token,eval_evidence_logs/evidence/p5_shuffle_threshold.json:scales.650M.nonrRNA_sep,Native minus position-shuffled MLM likelihood; n=150 non-rRNA sequences
+P5 rRNA-minus-non-rRNA gap 30M,0.9401 nats/token,eval_evidence_logs/evidence/p5_shuffle_threshold.json:scales.30M.gap,Gap narrows rather than widens; P5b refuted
+P5 rRNA-minus-non-rRNA gap 650M,0.8086 nats/token,eval_evidence_logs/evidence/p5_shuffle_threshold.json:scales.650M.gap,Gap narrows rather than widens; P5b refuted
+P5 randinit rRNA separation,0.0018 nats/token,eval_evidence_logs/evidence/p5_shuffle_threshold.json:randinit_30M_control.rRNA_sep,30M random-initialization control
+P5 randinit non-rRNA separation,0.0004 nats/token,eval_evidence_logs/evidence/p5_shuffle_threshold.json:randinit_30M_control.nonrRNA_sep,30M random-initialization control
+P4 linear-map LOO mean error,0.3046,eval_evidence_logs/evidence/p4_loo_test.json:mean_err_1,Leave-one-out error in relative-layer units; simple quantitative extrapolation refuted
+P4 capacity-shift LOO mean error,0.7447,eval_evidence_logs/evidence/p4_loo_test.json:mean_err_2,Leave-one-out error in relative-layer units; capacity-shift form refuted
+P4 capacity-shift error 10M,1.1013,eval_evidence_logs/evidence/p4_loo_test.json:loo_shift_capacity.10M,Exceeds 1.0; descriptive LOO diagnostic
+P4 capacity-shift error 650M,1.2560,eval_evidence_logs/evidence/p4_loo_test.json:loo_shift_capacity.650M,Exceeds 1.0; descriptive LOO diagnostic

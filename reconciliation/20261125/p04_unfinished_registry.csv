@@ -1,0 +1,8 @@
+未完成臂/证据缺口,权重位置,可复测性
+MARS 30M（训练与探针均未完成；status.md 无此行）,/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-30M_s17_marscorpus：目录为空，无 ckpt,不可从备份复测；须先训练并产生权重。全量 eval/*.jsonl 的 marscorpus 原始字节检索为 0 行。
+MARS 100M（状态快照 400M/2000M，20.0%；无探针）,/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-100M_s17_marscorpus：4 个 ckpt，最新 ckpt_nt400023183_step041442.pt,"可复测现有 400,023,183 nt 中间权重；不能冒充完整 2B 臂。全量探针检索为 0 行。"
+MARS 300M（状态快照 200M/2000M，10.0%；无探针）,/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-300M_s17_marscorpus：2 个 ckpt，最新 ckpt_nt200010618_step020735.pt,"可复测现有 200,010,618 nt 中间权重；不能冒充完整 2B 臂。全量探针检索为 0 行。"
+RNAcentral 30M（训练与探针均未完成；status.md 无此行）,/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-30M_s17_rnacentral：目录为空，无 ckpt,不可从备份复测；须先训练并产生权重。全量 eval/*.jsonl 的 rnacentral 原始字节检索为 0 行。
+RNAcentral 100M（状态快照 300M/2000M，15.0%，但备份无权重；无探针）,/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-100M_s17_rnacentral：目录为空，无 ckpt,不可从备份复测。状态快照称 ckpts=3，与本地空目录不符；须找回权重或重训，不能登记为可复测。
+RNAcentral 300M（状态快照 200M/2000M，10.0%，但备份无权重；无探针）,/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-300M_s17_rnacentral：目录为空，无 ckpt,不可从备份复测。状态快照称 ckpts=2，与本地空目录不符；须找回权重或重训，不能登记为可复测。
+RFamCap 30M：bpRNA 结构探针缺口（训练 DONE；分类探针已在位）,/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-30M_s17_rfamcap：2 个留存 ckpt，最新 ckpt_nt1900086380_step250287.pt,"可用 1,900,086,380 nt 权重补测 bpRNA；现有 rna_type 为 24 行，bpRNA 为 0 行。此项是探针缺口，不是训练未完成。"

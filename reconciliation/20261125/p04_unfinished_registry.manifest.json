@@ -1,0 +1,544 @@
+{
+  "task": "P0.4",
+  "generated_at": "2026-11-25T17:03:47+08:00",
+  "generator_script": "/Users/liucunyu/Documents/课题idea 数据 结论/浙江大学/RNA 相关模型/RNA_LM_迁移学习机理研究/对账_P0_20261125/p04_unfinished_registry.py",
+  "generator_script_sha256": "c6811378f021f9bf152da19bfd76ae785e5dee0075f985c9745249d95db28bad",
+  "backup_root_read_only": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc",
+  "search": {
+    "glob": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/eval/*.jsonl",
+    "terms_case_insensitive": [
+      "marscorpus",
+      "rnacentral"
+    ],
+    "method": "raw byte search over every matched file; JSON parsing excludes AppleDouble ._* files",
+    "eval_file_count": 11,
+    "appledouble_file_count": 2,
+    "match_count": 0,
+    "matches": [],
+    "json_parse_errors": []
+  },
+  "input_files": [
+    {
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/eval/._probe_results_b59_family.jsonl",
+      "size_bytes": 4096,
+      "sha256": "1904b72ab1e12d878c2a3aab158b811359bb4e598ac6e2631cde2248789147cf"
+    },
+    {
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/eval/._random_midpoints_results.jsonl",
+      "size_bytes": 4096,
+      "sha256": "1904b72ab1e12d878c2a3aab158b811359bb4e598ac6e2631cde2248789147cf"
+    },
+    {
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/eval/eval_matrix_results.jsonl",
+      "size_bytes": 10048,
+      "sha256": "2d79278ff98d36a5f318e77dc96b2eb3008615fc86a047ef81aee1d4c9e918e7"
+    },
+    {
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/eval/probe_results.jsonl",
+      "size_bytes": 2327316,
+      "sha256": "a9bc5f93232ed51d094e66634e2609794e1221af6667d20beafc5a778e0e0315"
+    },
+    {
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/eval/probe_results.pre_v04randinit_20260919.jsonl",
+      "size_bytes": 701111,
+      "sha256": "a28f6d1cff4f826d3c97610b827a6b7eac648d2b5682188970235146da174032"
+    },
+    {
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/eval/probe_results_b59_family.jsonl",
+      "size_bytes": 984738,
+      "sha256": "0373b139c4466e8af0cfa40d842a69b507fbe1d356fe8b1eab47e443d69f383f"
+    },
+    {
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/eval/probe_results_ext.jsonl",
+      "size_bytes": 7930413,
+      "sha256": "c0e5188cd04e1bab7700d11dc9b74a710bdc29d981fbb61590d26f94aa5a1a14"
+    },
+    {
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/eval/probe_structure_ext.jsonl",
+      "size_bytes": 57463,
+      "sha256": "0b612ab68f5eb33f7eba29c0f07f234a30b64fc09edc31d0c9c872d9df722d85"
+    },
+    {
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/eval/probe_structure_results.jsonl",
+      "size_bytes": 91416,
+      "sha256": "f5c4b033b317e79ff7b99330e0313af48b13e8ab8c7031eef8162d5e18cf2e72"
+    },
+    {
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/eval/probe_structure_results.pre_ri_fix_20260920.jsonl",
+      "size_bytes": 23343,
+      "sha256": "8bf34af0117379ceea78d38a993af82dc24b8a34986058e633583ac54a1ef258"
+    },
+    {
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/eval/random_midpoints_results.jsonl",
+      "size_bytes": 2924,
+      "sha256": "e8de196c010f49780f9296cb6c3fe19cc2e6ae015dd62649429f352d99795495"
+    },
+    {
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/status.md",
+      "size_bytes": 5718,
+      "sha256": "ac32e530b8f1adc871184c13624f541cf739f18596ccc49a1df269c53655630a"
+    },
+    {
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/ledger.jsonl",
+      "size_bytes": 11572,
+      "sha256": "ad51180cecf806f3fff1750f85cd21607ac78617dc1d2c8dc2cc2489b3b43244"
+    },
+    {
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-100M_s17_marscorpus/manifest.json",
+      "size_bytes": 2713,
+      "sha256": "21666ce0a9cff4a2146c02ba2c3c227c8a31725a882da9ed6373f2d62b88c81f"
+    },
+    {
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-300M_s17_marscorpus/manifest.json",
+      "size_bytes": 1895,
+      "sha256": "e1c50ced0944e036f184b336fa738a15c7a76387d341e1d82709127528bd3218"
+    },
+    {
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-30M_s17_rfamcap/manifest.json",
+      "size_bytes": 8443,
+      "sha256": "e686a2aadb154ee6db1a7712c985f8f5a29b0eb5f7b13d3d7946e4b48e278b7a"
+    },
+    {
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-100M_s17_rfamcap/manifest.json",
+      "size_bytes": 8463,
+      "sha256": "51583b3e73fcbb05b14020959dfe8c2adff2dd0ae253cdf9e8af5f2248c6eaa4"
+    }
+  ],
+  "run_inventory": {
+    "RNA-Sc-30M_s17_marscorpus": {
+      "directory": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-30M_s17_marscorpus",
+      "directory_exists": true,
+      "checkpoint_count": 0,
+      "checkpoints": [],
+      "directory_entries": []
+    },
+    "RNA-Sc-100M_s17_marscorpus": {
+      "directory": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-100M_s17_marscorpus",
+      "directory_exists": true,
+      "checkpoint_count": 4,
+      "checkpoints": [
+        {
+          "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-100M_s17_marscorpus/ckpt_nt100003791_step010351.pt",
+          "size_bytes": 1099789666
+        },
+        {
+          "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-100M_s17_marscorpus/ckpt_nt200010618_step020735.pt",
+          "size_bytes": 1099789666
+        },
+        {
+          "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-100M_s17_marscorpus/ckpt_nt300016813_step031115.pt",
+          "size_bytes": 1099789666
+        },
+        {
+          "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-100M_s17_marscorpus/ckpt_nt400023183_step041442.pt",
+          "size_bytes": 1099789666
+        }
+      ],
+      "directory_entries": [
+        ".launch",
+        "ckpt_nt100003791_step010351.pt",
+        "ckpt_nt200010618_step020735.pt",
+        "ckpt_nt300016813_step031115.pt",
+        "ckpt_nt400023183_step041442.pt",
+        "manifest.json"
+      ]
+    },
+    "RNA-Sc-300M_s17_marscorpus": {
+      "directory": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-300M_s17_marscorpus",
+      "directory_exists": true,
+      "checkpoint_count": 2,
+      "checkpoints": [
+        {
+          "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-300M_s17_marscorpus/ckpt_nt100003791_step010351.pt",
+          "size_bytes": 3625434018
+        },
+        {
+          "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-300M_s17_marscorpus/ckpt_nt200010618_step020735.pt",
+          "size_bytes": 3625434018
+        }
+      ],
+      "directory_entries": [
+        ".launch",
+        "ckpt_nt100003791_step010351.pt",
+        "ckpt_nt200010618_step020735.pt",
+        "manifest.json"
+      ]
+    },
+    "RNA-Sc-30M_s17_rnacentral": {
+      "directory": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-30M_s17_rnacentral",
+      "directory_exists": true,
+      "checkpoint_count": 0,
+      "checkpoints": [],
+      "directory_entries": []
+    },
+    "RNA-Sc-100M_s17_rnacentral": {
+      "directory": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-100M_s17_rnacentral",
+      "directory_exists": true,
+      "checkpoint_count": 0,
+      "checkpoints": [],
+      "directory_entries": []
+    },
+    "RNA-Sc-300M_s17_rnacentral": {
+      "directory": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-300M_s17_rnacentral",
+      "directory_exists": true,
+      "checkpoint_count": 0,
+      "checkpoints": [],
+      "directory_entries": []
+    },
+    "RNA-Sc-30M_s17_rfamcap": {
+      "directory": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-30M_s17_rfamcap",
+      "directory_exists": true,
+      "checkpoint_count": 2,
+      "checkpoints": [
+        {
+          "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-30M_s17_rfamcap/ckpt_nt1800083135_step238007.pt",
+          "size_bytes": 398596406
+        },
+        {
+          "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-30M_s17_rfamcap/ckpt_nt1900086380_step250287.pt",
+          "size_bytes": 398596406
+        }
+      ],
+      "directory_entries": [
+        "ckpt_nt1800083135_step238007.pt",
+        "ckpt_nt1900086380_step250287.pt",
+        "manifest.json"
+      ]
+    },
+    "RNA-Sc-100M_s17_rfamcap": {
+      "directory": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-100M_s17_rfamcap",
+      "directory_exists": true,
+      "checkpoint_count": 2,
+      "checkpoints": [
+        {
+          "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-100M_s17_rfamcap/ckpt_nt1800083135_step238007.pt",
+          "size_bytes": 1099792534
+        },
+        {
+          "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-100M_s17_rfamcap/ckpt_nt1900086380_step250287.pt",
+          "size_bytes": 1099792534
+        }
+      ],
+      "directory_entries": [
+        "ckpt_nt1800083135_step238007.pt",
+        "ckpt_nt1900086380_step250287.pt",
+        "manifest.json"
+      ]
+    }
+  },
+  "status_refs": {
+    "RNA-Sc-100M_s17_marscorpus": {
+      "line": 7,
+      "text": "- **RNA-Sc-100M_s17_marscorpus** [RUNNING] RNA-Sc-100M seed=17 corpus=full gpu=GPU3 | nt 400M/2000M (20.0%) | best_val=- | ckpts=4 | thr=0 nt/s | fallback=None"
+    },
+    "RNA-Sc-300M_s17_marscorpus": {
+      "line": 25,
+      "text": "- **RNA-Sc-300M_s17_marscorpus** [RUNNING] RNA-Sc-300M seed=17 corpus=full gpu=GPU5 | nt 200M/2000M (10.0%) | best_val=- | ckpts=2 | thr=0 nt/s | fallback=None"
+    },
+    "RNA-Sc-100M_s17_rnacentral": {
+      "line": 10,
+      "text": "- **RNA-Sc-100M_s17_rnacentral** [RUNNING] RNA-Sc-100M seed=17 corpus=full gpu=GPU3 | nt 300M/2000M (15.0%) | best_val=- | ckpts=3 | thr=0 nt/s | fallback=None"
+    },
+    "RNA-Sc-300M_s17_rnacentral": {
+      "line": 27,
+      "text": "- **RNA-Sc-300M_s17_rnacentral** [RUNNING] RNA-Sc-300M seed=17 corpus=full gpu=GPU5 | nt 200M/2000M (10.0%) | best_val=- | ckpts=2 | thr=0 nt/s | fallback=None"
+    },
+    "RNA-Sc-30M_s17_rfamcap": {
+      "line": 33,
+      "text": "- **RNA-Sc-30M_s17_rfamcap** [DONE] RNA-Sc-30M seed=17 corpus=full gpu=GPU4 | nt 2000M/2000M (100.0%) | best_val=1.0685 | ckpts=17 | thr=12382 nt/s | fallback=0"
+    },
+    "RNA-Sc-100M_s17_rfamcap": {
+      "line": 8,
+      "text": "- **RNA-Sc-100M_s17_rfamcap** [DONE] RNA-Sc-100M seed=17 corpus=full gpu=GPU3 | nt 2000M/2000M (100.0%) | best_val=1.0370 | ckpts=17 | thr=18553 nt/s | fallback=0"
+    }
+  },
+  "ledger": {
+    "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/ledger.jsonl",
+    "line_count": 26,
+    "tail": [
+      {
+        "line": 22,
+        "record": {
+          "run_id": "rnasc_100M_s17b59",
+          "model_id": "RNA-Sc-100M",
+          "seed": 17,
+          "corpus_tag": "b59",
+          "device": 4,
+          "out_dir": "/mnt/cunyuliu/rna-sc/runs/RNA-Sc-100M_s17_b59",
+          "status": "done",
+          "pid": 3978253,
+          "manifest_path": "/mnt/cunyuliu/rna-sc/runs/RNA-Sc-100M_s17_b59/manifest.json",
+          "note": "supervisor launch (inc10: upsert so DONE rows persist)",
+          "updated_utc": "2026-10-02T12:27:16.893008Z",
+          "final_nt": 5900000359,
+          "best_val_loss": 0.762572692537581
+        }
+      },
+      {
+        "line": 23,
+        "record": {
+          "run_id": "rnasc_650M_s17b59",
+          "model_id": "RNA-Sc-650M",
+          "seed": 17,
+          "corpus_tag": "b59",
+          "device": 0,
+          "out_dir": "/mnt/cunyuliu/rna-sc/runs/RNA-Sc-650M_s17_b59",
+          "status": "done",
+          "pid": 2283588,
+          "manifest_path": "/mnt/cunyuliu/rna-sc/runs/RNA-Sc-650M_s17_b59/manifest.json",
+          "note": "supervisor launch (inc10: upsert so DONE rows persist)",
+          "updated_utc": "2026-10-10T02:13:41.808386Z",
+          "final_nt": 5900000359,
+          "best_val_loss": 0.7490547457577343
+        }
+      },
+      {
+        "line": 24,
+        "record": {
+          "run_id": "rnasc_100M_s17rw1",
+          "model_id": "RNA-Sc-100M",
+          "seed": 17,
+          "corpus_tag": "rw1",
+          "device": 1,
+          "out_dir": "/mnt/cunyuliu/rna-sc/runs/RNA-Sc-100M_s17_rw1",
+          "status": "done",
+          "pid": 2283597,
+          "manifest_path": "/mnt/cunyuliu/rna-sc/runs/RNA-Sc-100M_s17_rw1/manifest.json",
+          "note": "rc=-9 last_ck=None",
+          "updated_utc": "2026-09-27T06:58:17.779981Z",
+          "attempts": 1,
+          "final_nt": 2000006712,
+          "best_val_loss": 0.0
+        }
+      },
+      {
+        "line": 25,
+        "record": {
+          "run_id": "rnasc_10M_s17rw1",
+          "model_id": "RNA-Sc-10M",
+          "seed": 17,
+          "corpus_tag": "rw1",
+          "device": 5,
+          "out_dir": "/mnt/cunyuliu/rna-sc/runs/RNA-Sc-10M_s17_rw1",
+          "status": "done",
+          "pid": 2283665,
+          "manifest_path": "/mnt/cunyuliu/rna-sc/runs/RNA-Sc-10M_s17_rw1/manifest.json",
+          "note": "rc=-9 last_ck=None",
+          "updated_utc": "2026-09-27T06:58:48.153032Z",
+          "attempts": 1,
+          "final_nt": 2000006712,
+          "best_val_loss": 0.0
+        }
+      },
+      {
+        "line": 26,
+        "record": {
+          "run_id": "rnasc_30M_s17b59",
+          "model_id": "RNA-Sc-30M",
+          "seed": 17,
+          "corpus_tag": "b59",
+          "device": 1,
+          "out_dir": "/mnt/cunyuliu/rna-sc/runs/RNA-Sc-30M_s17_b59",
+          "status": "done",
+          "pid": 3151402,
+          "manifest_path": "/mnt/cunyuliu/rna-sc/runs/RNA-Sc-30M_s17_b59/manifest.json",
+          "note": "supervisor launch (inc10: upsert so DONE rows persist)",
+          "updated_utc": "2026-10-04T19:30:22.447398Z",
+          "final_nt": 5900000359,
+          "best_val_loss": 0.7927879338136268
+        }
+      }
+    ],
+    "marscorpus_rnacentral_mentions": []
+  },
+  "rfamcap_probe_counts": {
+    "RNA-Sc-100M_s17_rfamcap": {
+      "total": 69,
+      "by_task": {
+        "rna_type classification (S11 global property)": 46,
+        "bpRNA paired-position": 23
+      },
+      "ckpt_nt": [
+        200006790,
+        1900086380
+      ]
+    },
+    "RNA-Sc-30M_s17_rfamcap": {
+      "total": 24,
+      "by_task": {
+        "rna_type classification (S11 global property)": 24
+      },
+      "ckpt_nt": [
+        200006790,
+        1900086380
+      ]
+    }
+  },
+  "rfamcap_evidence_lines": [
+    {
+      "run": "RNA-Sc-100M_s17_rfamcap",
+      "task": "bpRNA paired-position",
+      "file": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/eval/probe_structure_results.jsonl",
+      "count": 23,
+      "line_numbers": [
+        369,
+        370,
+        371,
+        372,
+        373,
+        374,
+        375,
+        376,
+        377,
+        378,
+        379,
+        380,
+        381,
+        382,
+        383,
+        384,
+        385,
+        386,
+        387,
+        388,
+        389,
+        390,
+        391
+      ],
+      "ckpt_nt": [
+        200006790,
+        1900086380
+      ]
+    },
+    {
+      "run": "RNA-Sc-100M_s17_rfamcap",
+      "task": "rna_type classification (S11 global property)",
+      "file": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/eval/probe_results.jsonl",
+      "count": 46,
+      "line_numbers": [
+        1862,
+        1863,
+        1864,
+        1865,
+        1866,
+        1867,
+        1868,
+        1869,
+        1870,
+        1871,
+        1872,
+        1873,
+        1874,
+        1875,
+        1876,
+        1877,
+        1878,
+        1879,
+        1880,
+        1881,
+        1882,
+        1883,
+        1884,
+        2102,
+        2103,
+        2104,
+        2105,
+        2106,
+        2107,
+        2108,
+        2109,
+        2110,
+        2111,
+        2112,
+        2113,
+        2114,
+        2115,
+        2116,
+        2117,
+        2118,
+        2119,
+        2120,
+        2121,
+        2122,
+        2123,
+        2124
+      ],
+      "ckpt_nt": [
+        200006790,
+        1900086380
+      ]
+    },
+    {
+      "run": "RNA-Sc-30M_s17_rfamcap",
+      "task": "rna_type classification (S11 global property)",
+      "file": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/eval/probe_results.jsonl",
+      "count": 24,
+      "line_numbers": [
+        1885,
+        1886,
+        1887,
+        1888,
+        1889,
+        1890,
+        1891,
+        1892,
+        1893,
+        1894,
+        1895,
+        1896,
+        2125,
+        2126,
+        2127,
+        2128,
+        2129,
+        2130,
+        2131,
+        2132,
+        2133,
+        2134,
+        2135,
+        2136
+      ],
+      "ckpt_nt": [
+        200006790,
+        1900086380
+      ]
+    }
+  ],
+  "run_manifest_final_fields": {
+    "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-100M_s17_marscorpus/manifest.json": {
+      "status": null,
+      "final_nt": null,
+      "final_step": null,
+      "best_checkpoint": null,
+      "end_utc": null
+    },
+    "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-300M_s17_marscorpus/manifest.json": {
+      "status": null,
+      "final_nt": null,
+      "final_step": null,
+      "best_checkpoint": null,
+      "end_utc": null
+    },
+    "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-30M_s17_rfamcap/manifest.json": {
+      "status": "DONE",
+      "final_nt": 2000003378,
+      "final_step": 264156,
+      "best_checkpoint": "/mnt/cunyuliu/rna-sc/runs/RNA-Sc-30M_s17_rfamcap/ckpt_nt1300054681_step171705.pt",
+      "end_utc": "2026-10-08T09:07:39Z"
+    },
+    "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/runs_final2_ckpt/runs/RNA-Sc-100M_s17_rfamcap/manifest.json": {
+      "status": "DONE",
+      "final_nt": 2000003378,
+      "final_step": 264156,
+      "best_checkpoint": "/mnt/cunyuliu/rna-sc/runs/RNA-Sc-100M_s17_rfamcap/ckpt_nt1300054681_step171705.pt",
+      "end_utc": "2026-10-07T19:35:18Z"
+    }
+  },
+  "note": "Checkpoint contents were not hashed because only filenames, sizes and manifest metadata were used. No model evaluation or training was run.",
+  "manifest_role": "Inputs and evidence for p04_unfinished_registry.md/.csv",
+  "outputs": [
+    "/Users/liucunyu/Documents/课题idea 数据 结论/浙江大学/RNA 相关模型/RNA_LM_迁移学习机理研究/对账_P0_20261125/p04_unfinished_registry.md",
+    "/Users/liucunyu/Documents/课题idea 数据 结论/浙江大学/RNA 相关模型/RNA_LM_迁移学习机理研究/对账_P0_20261125/p04_unfinished_registry.csv"
+  ]
+}

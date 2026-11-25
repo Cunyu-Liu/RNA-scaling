@@ -1,0 +1,107 @@
+{
+  "task": "P0.3 LM−strongest-baseline caliber unification",
+  "generated_at": "2026-11-25T17:09:49.755942+08:00",
+  "backup_root_read_only": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc",
+  "generator": {
+    "path": "/Users/liucunyu/Documents/课题idea 数据 结论/浙江大学/RNA 相关模型/RNA_LM_迁移学习机理研究/对账_P0_20261125/p03_regen.py",
+    "sha256": "1156f8b4d479822946429421c20abb3950fad0efca0fad32ba28fced5f38d518"
+  },
+  "inputs": [
+    {
+      "key": "kmer",
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/evidence/classical_baselines.json",
+      "bytes": 352,
+      "sha256": "9206f1913f7916eb8eebd5415b8e5c26ed66a96ac0d53ceb8436238d1e9469ce"
+    },
+    {
+      "key": "extra17",
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/evidence/classical_baselines_extra.json",
+      "bytes": 969,
+      "sha256": "5cd78151a95336edf6ab449ea999eb8ec253239e5ba78f49b1d0cbaf3428e941"
+    },
+    {
+      "key": "extra29",
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/evidence/classical_baselines_extra_s29.json",
+      "bytes": 712,
+      "sha256": "fae90a7f4810ba9d6221c6131a8f559a4f38a7aab457af7df14faef582b986ee"
+    },
+    {
+      "key": "extra43",
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/evidence/classical_baselines_extra_s43.json",
+      "bytes": 713,
+      "sha256": "acd23d17fb724d3405d2bcb13afa6fe720f502229df857bfc287058dea5247b7"
+    },
+    {
+      "key": "matrix",
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/eval/eval_matrix_results.jsonl",
+      "bytes": 10048,
+      "sha256": "2d79278ff98d36a5f318e77dc96b2eb3008615fc86a047ef81aee1d4c9e918e7"
+    },
+    {
+      "key": "probe",
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/eval/probe_results.jsonl",
+      "bytes": 2327316,
+      "sha256": "a9bc5f93232ed51d094e66634e2609794e1221af6667d20beafc5a778e0e0315"
+    },
+    {
+      "key": "seed_summary",
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/evidence/s1_seed_table.json",
+      "bytes": 2465,
+      "sha256": "95585dfe402375ef4ca725bf4e64071e21b8b741132e423b95d735db15963cd9"
+    },
+    {
+      "key": "draft",
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/delta_20261014/DRAFT_v1_final_20261014.md",
+      "bytes": 63129,
+      "sha256": "ea5c782982b65084474f739cdc0eabe39e04854755cd3de5f2c6d464c05c5224"
+    },
+    {
+      "key": "old_generator",
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/code_git/rna_sc/table1_baselines.py",
+      "bytes": 5313,
+      "sha256": "0bb1678fb86661986fab2a1c49a264aa5cf9ed76ab8d8423a9d9f1e7f520440e"
+    },
+    {
+      "key": "old_table",
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/code_git/preprint/TABLE1_baselines.md",
+      "bytes": 1256,
+      "sha256": "29554bf370afaef7c55183a1f3054ff812f4634669ca14431ff6aabc21ce3f73"
+    },
+    {
+      "key": "kmer_code",
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/code_git/rna_sc/baselines_kmer.py",
+      "bytes": 5745,
+      "sha256": "87a7f63c6bd6904c7da38b1d30bc044808253a5599ed74075d619688d7b2beeb"
+    },
+    {
+      "key": "extra_code",
+      "path": "/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/code_git/rna_sc/baselines_extra.py",
+      "bytes": 12516,
+      "sha256": "9cde867aad89f8725a18732c8dcc8626155c084e136fa5e469bd3e8169b6eb96"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "/Users/liucunyu/Documents/课题idea 数据 结论/浙江大学/RNA 相关模型/RNA_LM_迁移学习机理研究/对账_P0_20261125/p03_baseline_table.md",
+      "bytes": 2874,
+      "sha256": "bb521e62982e0b1bb3f4ee8e0588775ec7809b439adc9fa85341c914bdf28aa4"
+    },
+    {
+      "path": "/Users/liucunyu/Documents/课题idea 数据 结论/浙江大学/RNA 相关模型/RNA_LM_迁移学习机理研究/对账_P0_20261125/p03_baseline_table.csv",
+      "bytes": 3021,
+      "sha256": "29a2fceaa9bc3eb0b367f7bb1a6d468ccb7f9351e10ee1246a252b51a403bc0a"
+    },
+    {
+      "path": "/Users/liucunyu/Documents/课题idea 数据 结论/浙江大学/RNA 相关模型/RNA_LM_迁移学习机理研究/对账_P0_20261125/p03_caliber_adjudication.md",
+      "bytes": 4760,
+      "sha256": "eff8bf53cbaf58f57cf1a75ccf31ce26d68e062d0f4d416c4c904861efbc97f9"
+    }
+  ],
+  "calculation": {
+    "lm_checkpoint_rule": "maximum ckpt_nt per run, then maximum family macro-F1 across layers",
+    "lm_seed_aggregation": "arithmetic mean and sample standard deviation (ddof=1) for s17/s29/s43; 300M/650M s17 only",
+    "strongest_observed": "s17 LightGBM 0.1760 for all scales; explicitly not three-seed at 1M/10M/30M/100M",
+    "strict_seed_coverage": "three-seed CNN mean at 1M/10M/30M/100M; s17 LightGBM at 300M/650M",
+    "bootstrap_used": false
+  }
+}

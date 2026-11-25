@@ -1,0 +1,13 @@
+item,value,source,caliber
+1M trained minus random-init,+0.059,eval_evidence_logs/evidence/s4_randinit_table.json:1M.delta,Best-layer family macro-F1 difference; s17 trained run; stored value 0.0593 rounded to three decimals
+1M trained minus moment-matched,+0.029,eval_evidence_logs/evidence/s5_mommatch_table.json:1M.delta,Best-layer family macro-F1 difference; s17 trained run; stored value 0.0286 rounded to three decimals
+10M trained minus random-init,+0.043,eval_evidence_logs/evidence/s4_randinit_table.json:10M.delta,Best-layer family macro-F1 difference; s17 trained run; stored value 0.0430 rounded to three decimals
+10M trained minus moment-matched,+0.048,eval_evidence_logs/evidence/s5_mommatch_table.json:10M.delta,Best-layer family macro-F1 difference; s17 trained run; stored value 0.0478 rounded to three decimals
+30M trained minus random-init,+0.122,eval_evidence_logs/evidence/s4_randinit_table.json:30M.delta,Best-layer family macro-F1 difference; s17 trained run; stored value 0.1221 rounded to three decimals
+30M trained minus moment-matched,+0.123,eval_evidence_logs/evidence/s5_mommatch_table.json:30M.delta,Best-layer family macro-F1 difference; s17 trained run; stored value 0.1233 rounded to three decimals
+100M trained minus random-init,+0.169,eval_evidence_logs/evidence/s4_randinit_table.json:100M.delta,Best-layer family macro-F1 difference; s17 trained run; stored value 0.1686 rounded to three decimals
+100M trained minus moment-matched,+0.167,eval_evidence_logs/evidence/s5_mommatch_table.json:100M.delta,Best-layer family macro-F1 difference; s17 trained run; stored value 0.1668 rounded to three decimals
+300M trained minus random-init,+0.133,eval_evidence_logs/evidence/s4_randinit_table.json:300M.delta,Best-layer family macro-F1 difference; s17 trained run; stored value 0.1334 rounded to three decimals
+300M trained minus moment-matched,+0.146,eval_evidence_logs/evidence/s5_mommatch_table.json:300M.delta,Best-layer family macro-F1 difference; s17 trained run; stored value 0.1460 rounded to three decimals
+650M trained minus random-init,+0.151,eval_evidence_logs/evidence/s4_randinit_table.json:650M.delta,Best-layer family macro-F1 difference; s17 trained run; stored value 0.1514 rounded to three decimals
+650M trained minus moment-matched,+0.147,eval_evidence_logs/evidence/s5_mommatch_table.json:650M.delta,Best-layer family macro-F1 difference; s17 trained run; stored value 0.1466 rounded to three decimals

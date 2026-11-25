@@ -1,0 +1,39 @@
+item,value,source,caliber_note
+superseded old structure scale vector,1M -0.047;10M -0.010;30M -0.000;100M +0.013;650M +0.021,old_draft:delta_20261014/DRAFT_v1_final_20261014.md:606-608; P0:p05_draft_contradictions.md:39-74,Superseded by protocol and comparator corrections
+old 1M weak training subset,35k tokens,old_draft:delta_20261014/DRAFT_v1_final_20261014.md:345-352,Other scales used 1.0M; reason for supersession
+other-scale structure training subset,1.0M tokens,old_draft:delta_20261014/DRAFT_v1_final_20261014.md:345-352,Comparator for old 1M protocol correction
+corrected own-best trained-minus-randinit vector,1M +0.007;10M -0.001;30M -0.003;100M +0.004,old_draft:delta_20261014/DRAFT_v1_final_20261014.md:384-393; P0:p05_draft_contradictions.md:69-74,Linear-readout comparator; distinct from family baseline +0.007
+old family 100M baseline increment,+0.007,old_draft:delta_20261014/DRAFT_v1_final_20261014.md:803-812; P0:p00_adjudication_summary.md:24-29,Demoted balanced s17 LM versus k-mer logistic comparator
+old family 100M k-mer logistic F1,0.1630,P0:p00_adjudication_summary.md:24-29; P0:p03_caliber_adjudication.md,Historical comparator rather than strongest observed baseline
+balanced 100M LM s17,0.1696,P0:p00_adjudication_summary.md:24-29,Same-seed balanced sensitivity
+balanced 100M LightGBM s17,0.1760,P0:p00_adjudication_summary.md:24-29,Strongest observed classical baseline; only s17
+balanced 100M LM minus LightGBM,-0.0064,P0:p00_adjudication_summary.md:24-29,0.1696 minus 0.1760
+primary mean-pool 100M LM minus LightGBM,+0.1634,P0:p00_adjudication_summary.md:24-29,Three-training-seed LM mean versus LightGBM s17 only
+rfamcap 100M midpoint exposure,0.2B nt,P0:p00_adjudication_summary.md:33-39,Trajectory only; no matched main midpoint
+rfamcap 100M midpoint F1,0.3448@L18,P0:p00_adjudication_summary.md:33-39,Demoted from primary corpus effect
+rfamcap 100M cross-budget midpoint contrast,+1.85 pp,P0:p00_adjudication_summary.md:33-39,Withdrawn as controlled effect because main comparator is 1.9B terminal
+main 100M terminal F1,0.3263@L21,P0:p00_adjudication_summary.md:33-39,1.9B terminal; s17
+rfamcap 100M terminal F1,0.3297@L13,P0:p00_adjudication_summary.md:33-39,Iso-budget terminal; s17
+rfamcap 100M terminal family effect,+0.34 pp,P0:p00_adjudication_summary.md:33-39,Current iso-budget terminal contrast
+rfamcap 30M terminal F1,0.2880@L8,P0:p00_adjudication_summary.md:33-39,Iso-budget terminal; s17
+main 30M terminal F1,0.2466@L8,P0:p00_adjudication_summary.md:33-39,Iso-budget terminal; s17
+rfamcap 30M terminal family effect,+4.14 pp,P0:p00_adjudication_summary.md:33-39,Current iso-budget terminal contrast
+rfamcap 100M structure F1,0.5924@L20,P0:p00_adjudication_summary.md:39; P0:p02c_corpus_arm_table.md:28-32,Checkpoint unresolved
+main 100M structure F1,0.5890@L22,P0:p02c_corpus_arm_table.md:28-32,Comparator for descriptive +0.34 pp
+rfamcap 100M structure effect,+0.34 pp,P0:p00_adjudication_summary.md:39,Not assignable to 0.2B or 1.9B until checkpoint consolidation
+population SD at 1M/10M/30M/100M,0.0107;0.0141;0.0132;0.0120,P0:p02b_caliber_adjudication.md:34-51,ddof=0; replaced in main summaries
+sample SD at 1M/10M/30M/100M,0.0131;0.0173;0.0162;0.0147,P0:p00_adjudication_summary.md:9-12,ddof=1; n=3 training seeds; current convention
+sample-to-population SD ratio,sqrt(3/2),P0:p02b_caliber_adjudication.md:34-51,Same 12 seed-level F1 values and final checkpoints
+650M 5.9B original-terminal F1,0.3747@L25,P0:p00_adjudication_summary.md:14-22,20k/4k; full layers; probe seed 17
+300M 5.9B original-terminal F1,0.3821@L22,P0:p00_adjudication_summary.md:14-22,20k/4k; full layers; probe seed 17
+650M minus 300M original-terminal difference,-0.74 pp,P0:p00_adjudication_summary.md:14-16,Protocol-specific inversion retained
+650M original-protocol budget effect,+1.15 pp,P0:p00_adjudication_summary.md:17-19,0.3747 minus 0.3632; current factorial input
+650M 2B original-terminal F1,0.3632,P0:p00_adjudication_summary.md:17-20,Same original protocol for factorial subtraction
+retest probe sequences,8000 train;4000 evaluation,P0:p02b_caliber_adjudication.md:64-93,Different from original 20k/4k protocol
+retest probe seeds,29;43;61,P0:p02b_caliber_adjudication.md:64-79,Same s17 weights; not training seeds
+650M retest F1,0.4491 +/- 0.0147,P0:p02b_caliber_adjudication.md:74-79,Mean +/- sample SD across three probe seeds
+300M retest F1,0.3826 +/- 0.0159,P0:p02b_caliber_adjudication.md:74-79,Mean +/- sample SD across three probe seeds
+650M minus 300M retest difference,+6.65 pp,P0:p02b_caliber_adjudication.md:74-79,Unrounded +6.64666667 pp; supersedes old +6.5 rendering
+positive paired retest comparisons,3 of 3,P0:p02b_caliber_adjudication.md:66-79,Probe-seed pairs only
+retest raw-ledger gap,30 of 30 values missing,P0:p00_adjudication_summary.md:20-22,Pending P2.5 ledger consolidation
+cross-protocol descriptive difference,+8.59 pp,P0:p00_adjudication_summary.md:20; P0:p02b_caliber_adjudication.md:95-99,0.4491 minus 0.3632; invalid as budget-effect headline
