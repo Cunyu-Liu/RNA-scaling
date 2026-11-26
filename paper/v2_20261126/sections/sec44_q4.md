@@ -18,7 +18,7 @@ P5 supplies a zero-supervision boundary on that interpretation. Native-minus-shu
 
 P4 further rejects a simple quantitative completion of hypothesis M. Leave-one-out extrapolation from de-rRNA to full-class best-layer position has mean error 0.3046 for a linear map and 0.7447 for a capacity-shift map, with the latter exceeding 1.0 at both 10M and 650M. The resulting verdict is deliberately limited: chain (b) has intervention support, chains (a) and (c) remain descriptive, P5b refutes the widening-gap prediction, and the tested quantitative forms fail; no general capacity-to-layer law is established.
 
-![Figure 3: Attrition, layer migration, P1 intervention, and DI stratification](../../figs_v6/fig3_q4.png)
+![Figure 3: Attrition, layer migration, P1 intervention, and DI stratification](../figs_v6/fig3_q4.png)
 
 **Figure 3 caption.** Figure 3 answers where family signal becomes readable and how rRNA changes its optimal depth. (a) The 10M s17 family macro-F1 trajectory rises to 0.2549 at 0.5B nt before eroding to 0.1731 at 1.9B nt. (b) Its best-layer relative depth moves from 0.842 (L16) at 0.1B to 0.053 (L1) at the terminal checkpoint. (c) P1 rRNA-class removal changes the full-class versus 18-class de-rRNA optima at 100M, 300M, and 650M; class-removal F1 values are not compared across class sets. (d) The DI–best-layer Spearman correlation attenuates from −0.478 to −0.222 across the four evaluated arms (class-level \(n=10\), E1). Points denote single s17 runs without training-seed intervals. Hypothesis M is post-hoc grade-B: chain (b) receives intervention support, chains (a) and (c) remain descriptive, and its tested quantitative forms are refuted.
 

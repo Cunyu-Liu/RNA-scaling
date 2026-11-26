@@ -39,7 +39,7 @@ The attribution triangle then identifies what the balanced random dividend is ma
 
 **Strongest alternative explanation (B3).** The initialization controls and composition baselines do not establish that the remaining family-world LM signal is distinct from composition reading: both may exploit the same underlying sequence statistics. The controlled triangle supports attribution of the random-split dividend, but it cannot decompose the learned family-world representation into composition and non-composition components.
 
-![Figure 2](../../figs_v6/fig2_q3_dualworld.png)
+![Figure 2](../figs_v6/fig2_q3_dualworld.png)
 
 **Figure 2 | What is pretrained transfer worth under family-held-out generalization?** (a) Random-minus-family macro-F1 under balanced and mean-pool readouts, with the k-mer logistic dividend as a reference band. (b) Balanced family-world scores for the controlled s17 ladder and classical baselines; external RiNALMo micro/mega/giga (0.2407/0.2532/0.2667) and RNA-FM (0.1335) points are observational anchors only because their pretraining exposure to the evaluation families cannot be audited. (c) Mean-pool LM margins over LightGBM s17, strict seed-coverage contrasts, and the 100M balanced sensitivity point; the LightGBM baseline is single-seed and no uncertainty is imputed. (d) Percentage of the trained balanced random-split dividend recovered by initialization controls and k-mer logistic. Together, the panels distinguish a composition-reproducible protocol dividend from the smaller, readout-dependent family-world margin.
 

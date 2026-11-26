@@ -57,4 +57,4 @@ An independent long-range contact probe gives the same qualified conclusion unde
 
 Having established that structural knowledge can be present yet hidden by partner finding, the next question is what controls its supply: does family-channel saturation also bound structure, or do corpus composition and budget affect the two channels differently? This section does not show that current representations suffice for accurate structure prediction, that adding a pairing solver will close the gap, or that the readout wall generalizes across architectures and external pretraining corpora.
 
-![Figure 4](../../figs_v6/fig4_q5_readout_chain.png)
+![Figure 4](../figs_v6/fig4_q5_readout_chain.png)

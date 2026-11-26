@@ -19,4 +19,4 @@ Together, these interventions support a causal attribution within the evaluated 
 
 The reality of this learned-weight advantage, rather than its size, forces the next question: under family-held-out evaluation, how much does it add beyond simple sequence-composition baselines? These interventions cannot make that separation because neither control isolates the contribution of sequence-composition reading, and they cannot identify which learned features carry the gain.
 
-![Figure 1](../../figs_v6/fig1_q1q2_transfer_controls.png)
+![Figure 1](../figs_v6/fig1_q1q2_transfer_controls.png)

@@ -20,7 +20,7 @@ S13b tests whether structure F1 first rises and then falls as masked NLL increas
 
 The negative result has a specific mechanistic interpretation: within this corpus and budget, the models do not sample the high-NLL, over-confident regime required for a descending right-hand limb, so the precondition for transferring Hou et al.'s protein account is unmet. It does not imply that RNA representations lack pairing knowledge, nor does it prove that no bell could appear under a different corpus, budget, task, or confidence measure; this boundary is consistent with the direct forward and paired-readout evidence in Q5. Likewise, family-level RNS is nearly unrelated to masked-marginal NLL (Spearman \(\rho=0.1429\), Pearson \(r=-0.0186\)), reinforcing that geometry, likelihood confidence, and downstream utility are distinct measurement axes.
 
-![Figure 6](../../figs_v6/fig6_crosscut.png)
+![Figure 6](../figs_v6/fig6_crosscut.png)
 
 **Figure 6 | Can representation geometry or likelihood confidence substitute for downstream evaluation?** Panels show the RNS scale axis, training-time axis, cross-model and family associations, the withdrawn sequence-binning analysis, and the S13b confidence–structure fit. Lower RNS denotes tighter real-sequence organization; the 30M–100M shoulder is channel-specific. The binning panel retains no effect values or directional claim because pair-index misalignment and unseeded heads invalidate the historical analysis, leaving the axis-dependent mechanism unresolved. Both v1 and v2 retain the pre-registered NOT-BELL outcome because their fitted vertices lie outside the observed NLL ranges.
 
