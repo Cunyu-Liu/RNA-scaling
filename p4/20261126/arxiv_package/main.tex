@@ -1,0 +1,37 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs,longtable,array}
+\usepackage{calc}
+\usepackage{etoolbox}
+\usepackage[numbers,square,sort&compress]{natbib}
+\usepackage{url}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\providecommand{\real}[1]{#1}
+\AtBeginEnvironment{longtable}{\small}
+\setlength{\tabcolsep}{3pt}
+\setlength{\emergencystretch}{2em}
+\graphicspath{{figs/}}
+
+\title{What scale buys in RNA language models: protocol-gated transfer, corpus-gated supply, and the readout gap of structural knowledge}
+\author{Author Name(s)\\\normalsize Affiliation(s)\\\normalsize \texttt{contact@example.com}}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Across a controlled six-scale family of RNA masked-language models and a two-world evaluation contrasting cluster-isolated family splits with random splits, we ask what scale buys, what pretraining supplies, and what downstream readouts can access. Most of the apparent scale dividend is protocol-realized, composition-level memory: a k-mer baseline reproduces a random-minus-family gain of \(\Delta=+0.355\), initialization controls recover only 11--18\% of that dividend, and additional training budget leaves the random-split channel largely unchanged at the three completed terminal comparisons. Nevertheless, learned knowledge is real: controlled initialization and mutation tests, forward covariation (\(+0.096\)), and a matched-prior pair probe (\(+0.030\)) establish pretraining-derived structural signal, while budget-by-scale interventions reverse the sign of family-transfer gains but monotonically improve structure transfer over three scales, and partner-dependent readouts stall near \(0.64\) despite a Partner-Oracle of \(0.998\). For model development within this setting, corpus composition and budget placement should precede parameter count, while evaluation protocols and readout heads should precede absolute scores.
+\end{abstract}
+
+\input{body}
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\end{document}

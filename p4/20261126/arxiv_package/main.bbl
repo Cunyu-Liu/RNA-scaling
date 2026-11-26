@@ -1,0 +1,173 @@
+\begin{thebibliography}{19}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Arora et~al.(2025)]{rnagym}
+Rohit Arora et~al.
+\newblock Rnagym: Large-scale benchmarks for rna fitness and structure
+  prediction, 2025.
+\newblock URL \url{https://doi.org/10.1101/2025.06.16.660049}.
+\newblock bioRxiv preprint.
+
+\bibitem[Hoffmann et~al.(2022)]{hoffmann_chinchilla}
+Jordan Hoffmann et~al.
+\newblock Training compute-optimal large language models, 2022.
+\newblock URL \url{https://arxiv.org/abs/2203.15556}.
+
+\bibitem[Hou et~al.(2026)Hou, Liu, Zafar, and Shen]{hou_scaling}
+Chao Hou, Di~Liu, Aziz Zafar, and Yufeng Shen.
+\newblock Understanding language model scaling for protein fitness prediction.
+\newblock \emph{Nature Computational Science}, 6\penalty0 (7):\penalty0
+  778--788, 2026.
+\newblock \doi{10.1038/s43588-026-01010-z}.
+\newblock PMID 42443524.
+
+\bibitem[Li et~al.(2024)Li, Amini, Yue, Yang, and Lu]{li_feature}
+Francesca-Zhoufan Li, Ava~P. Amini, Yisong Yue, Kevin~K. Yang, and Alex~Xijie
+  Lu.
+\newblock Feature reuse and scaling: Understanding transfer learning with
+  protein language models.
+\newblock In \emph{Proceedings of the 41st International Conference on Machine
+  Learning}, volume 235 of \emph{Proceedings of Machine Learning Research},
+  pages 27351--27375. PMLR, 2024.
+\newblock URL \url{https://proceedings.mlr.press/v235/li24a.html}.
+
+\bibitem[Li et~al.(2025)Li, Ma, Tan, Tan, and Zheng]{nabench}
+Zhongmin Li, Runze Ma, Jiahao Tan, Chengzi Tan, and Shuangjia Zheng.
+\newblock Nabench: Large-scale benchmarks of nucleotide foundation models for
+  fitness prediction, 2025.
+\newblock URL \url{https://arxiv.org/abs/2511.02888}.
+\newblock ICLR 2026 submission \#9519, rejected; TODO: OpenReview status
+  pending user confirmation.
+
+\bibitem[Muennighoff et~al.(2023)Muennighoff, Rush, Barak, Le~Scao, Tazi,
+  Piktus, Pyysalo, Wolf, and Raffel]{muennighoff_data}
+Niklas Muennighoff, Alexander Rush, Boaz Barak, Teven Le~Scao, Nouamane Tazi,
+  Aleksandra Piktus, Sampo Pyysalo, Thomas Wolf, and Colin Raffel.
+\newblock Scaling data-constrained language models.
+\newblock In \emph{Advances in Neural Information Processing Systems 36}, pages
+  50358--50376, 2023.
+\newblock \doi{10.52202/075280-2191}.
+\newblock URL
+  \url{https://papers.nips.cc/paper_files/paper/2023/hash/9d89448b63ce1e2e8dc7af72c984c196-Abstract-Conference.html}.
+
+\bibitem[Papazoglou et~al.(2025)Papazoglou, Chatzigoulas, Tsekenis, and
+  Cournia]{papazoglou_attention}
+Ioannis Papazoglou, Alexios Chatzigoulas, George Tsekenis, and Zoe Cournia.
+\newblock Predicting rna structure utilizing attention from pretrained language
+  models.
+\newblock \emph{Journal of Chemical Information and Modeling}, 65\penalty0
+  (13):\penalty0 6483--6498, 2025.
+\newblock \doi{10.1021/acs.jcim.4c02094}.
+
+\bibitem[Prabakaran and Bromberg(2026)]{prabakaran_uncertainty}
+R.~Prabakaran and Yana Bromberg.
+\newblock Quantifying uncertainty in protein representations across models and
+  tasks.
+\newblock \emph{Nature Methods}, 23\penalty0 (4):\penalty0 796--804, 2026.
+\newblock \doi{10.1038/s41592-026-03028-7}.
+
+\bibitem[Ren et~al.(2024)Ren, Chen, Qiao, Jing, Cai, Xu, Ye, Ma, Sun, Yan,
+  Yuan, Ouyang, and Liu]{beacon}
+Yuchen Ren, Zhiyuan Chen, Lifeng Qiao, Hongtai Jing, Yuchen Cai, Sheng Xu, Peng
+  Ye, Xinzhu Ma, Siqi Sun, Hongliang Yan, Dong Yuan, Wanli Ouyang, and Xihui
+  Liu.
+\newblock Beacon: Benchmark for comprehensive rna tasks and language models.
+\newblock In \emph{Advances in Neural Information Processing Systems 37}, pages
+  92891--92921, 2024.
+\newblock \doi{10.52202/079017-2949}.
+\newblock URL \url{https://arxiv.org/abs/2406.10391}.
+
+\bibitem[Rives et~al.(2021)]{rives_biological}
+A.~Rives et~al.
+\newblock Biological structure and function emerge from scaling unsupervised
+  learning to 250 million protein sequences.
+\newblock \emph{Proceedings of the National Academy of Sciences}, 118\penalty0
+  (15):\penalty0 e2016239118, 2021.
+\newblock \doi{10.1073/pnas.2016239118}.
+\newblock PMC8053943.
+
+\bibitem[Shi et~al.(2025)Shi, Dalal, Fradkin, Koyyalagunta, Chhabria, Jung,
+  Tam, Ceyhan, Lin, Laverty, Baali, Wang, and Morris]{mrnabench}
+Ruian~(Ian) Shi, Taykhoom Dalal, Philip Fradkin, Divya Koyyalagunta, Simran
+  Chhabria, Andrew Jung, Cyrus Tam, Defne Ceyhan, Jessica Lin, Kaitlin~U.
+  Laverty, Ilyes Baali, Bo~Wang, and Quaid Morris.
+\newblock mrnabench: A curated benchmark for mature mrna property and function
+  prediction, 2025.
+\newblock URL
+  \url{https://www.biorxiv.org/content/10.1101/2025.07.05.662870v1.full}.
+\newblock bioRxiv preprint.
+
+\bibitem[Shulgina et~al.(2024)]{garnet}
+Y.~Shulgina et~al.
+\newblock Rna language models predict mutations that improve rna function.
+\newblock \emph{Nature Communications}, 15\penalty0 (1):\penalty0 10627, 2024.
+\newblock \doi{10.1038/s41467-024-54812-y}.
+
+\bibitem[Simon and Zou(2025)]{simon_interplm}
+Elana Simon and James Zou.
+\newblock Interplm: discovering interpretable features in protein language
+  models via sparse autoencoders.
+\newblock \emph{Nature Methods}, 22\penalty0 (10):\penalty0 2107--2117, 2025.
+\newblock \doi{10.1038/s41592-025-02836-7}.
+
+\bibitem[Teng et~al.(2026)Teng, Qiu, Sakthivel, Aranganathan, Herron, and
+  Tiwary]{redial}
+Da~Teng, Yunrui Qiu, Gokulakannan Sakthivel, Akashnathan Aranganathan, Lukas
+  Herron, and Pratyush Tiwary.
+\newblock Detecting and quantifying overparametrization in rna language models
+  with redial, 2026.
+\newblock URL
+  \url{https://www.biorxiv.org/content/10.64898/2026.05.11.724344v1.full}.
+\newblock bioRxiv preprint, posted 2026-05-12.
+
+\bibitem[{TODO: authors unavailable; pending user
+  confirmation}(2025)]{rnascope}
+{TODO: authors unavailable; pending user confirmation}.
+\newblock Rnascope: a multi-task rna lm evaluation, 2025.
+\newblock ICML 2025 submission \#2439, rejected; OpenReview record. TODO:
+  author list and OpenReview URL pending user confirmation.
+
+\bibitem[Vishniakov et~al.(2026)Vishniakov, Viswanathan, Medvedev, Kanithi,
+  Pimentel, Rajan, and Khan]{vishniakov_tokenization}
+Kirill Vishniakov, Karthik Viswanathan, Aleksandr Medvedev, Praveenkumar
+  Kanithi, Marco A.~F. Pimentel, Ronnie Rajan, and Shadab Khan.
+\newblock Tokenization to transfer: Do genomic foundation models learn good
+  representations?
+\newblock In \emph{ICLR 2026}, 2026.
+\newblock \doi{10.1101/2024.12.18.628606}.
+\newblock URL
+  \url{https://www.biorxiv.org/content/10.1101/2024.12.18.628606v2.full}.
+\newblock Poster; no proceedings pages; TODO: ICLR 2026 OpenReview
+  identifier/status pending user confirmation.
+
+\bibitem[Wang et~al.(2026)Wang, Zhang, Chen, Zhan, and Zhou]{zero_shot_rna}
+He~Wang, Yikun Zhang, Jie Chen, Jian Zhan, and Yaoqi Zhou.
+\newblock Zero-shot benchmarking of rna language models in structural,
+  functional, and evolutionary learning.
+\newblock \emph{Briefings in Bioinformatics}, 27\penalty0 (2):\penalty0
+  bbag098, 2026.
+\newblock \doi{10.1093/bib/bbag098}.
+
+\bibitem[You et~al.(2025)You, Liu, Lin, Wu, Chen, and Shen]{genomic_finetuning}
+Ningyuan You, Chang Liu, Hai Lin, Sai Wu, Gang Chen, and Ning Shen.
+\newblock Benchmarking pre-trained genomic language models for rna
+  sequence-related predictive applications.
+\newblock \emph{Nature Communications}, 17\penalty0 (1):\penalty0 223, 2025.
+\newblock \doi{10.1038/s41467-025-66899-y}.
+
+\bibitem[Zablocki et~al.(2025)Zablocki, Bugnon, Gerard, Di~Persia, Stegmayer,
+  and Milone]{zablocki_structure}
+Luciano~I. Zablocki, Leandro~A. Bugnon, Matias Gerard, Leandro Di~Persia,
+  Georgina Stegmayer, and Diego~H. Milone.
+\newblock Comprehensive benchmarking of large language models for rna secondary
+  structure prediction.
+\newblock \emph{Briefings in Bioinformatics}, 26\penalty0 (2):\penalty0
+  bbaf137, 2025.
+\newblock \doi{10.1093/bib/bbaf137}.
+\newblock PMC11982019.
+
+\end{thebibliography}
