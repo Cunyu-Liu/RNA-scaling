@@ -8,8 +8,6 @@
 # s14_timeaxis_v2.json: 2ae3673ff47a50ea5121c75271425facf7f291939a2aa7ac882337518cdd6021
 # s14_rns_ext.json: f24bdefc3310677422f19242f4d647681b7b086d1b1c19f654cde313587703f7
 # s14_family_crossval.json: 24fe20837edb76a837dc650bcbb820132c1d278403530eb00ae05b218e5bd1f1
-# s14_bin_eval.json: 4491cd26fae73a939459f95918c58a92b553dafcfb8227e9f69d6e6f80214573
-# s14_bin_diag.json: 840cd896c3b47d778976d1da3f2fb749a9d37ba8c2134d73dfebd93d86fc236b
 
 import json
 from pathlib import Path
@@ -59,8 +57,6 @@ def main():
     time_large = load("s14_timeaxis_v2.json")
     ext = load("s14_rns_ext.json")
     family = load("s14_family_crossval.json")
-    bins = load("s14_bin_eval.json")
-    diag = load("s14_bin_diag.json")
     bell = load("s13b_bell.json")
 
     plt.rcParams.update({
@@ -163,28 +159,17 @@ def main():
     style_axis(ax)
 
     ax = axes[1, 1]
-    x = np.arange(3)
-    pair = [bins["pair_f1_by_bin"][key]["mean"] for key in ["low", "mid", "high"]]
-    longrange = [bins["longrange_f1_by_bin"][key]["mean"] for key in ["low", "mid", "high"]]
-    width = 0.34
-    bars1 = ax.bar(x - width / 2, pair, width, color=BLUE_2, edgecolor=DARK,
-                   linewidth=0.7, label="Paired-position F1")
-    bars2 = ax.bar(x + width / 2, longrange, width, color=GREEN, edgecolor=DARK,
-                   linewidth=0.7, hatch="//", label="Long-range F1")
-    for bars in [bars1, bars2]:
-        for bar in bars:
-            ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 0.018,
-                    f"{bar.get_height():.3f}", ha="center", va="bottom", fontsize=7)
-    ax.text(2, 0.82, "+18.0% / +29.3%\nhigh vs low", ha="center", va="top",
-            fontsize=8, color=RED, fontweight="bold")
-    ax.set_xticks(x)
-    ax.set_xticklabels(["Low RNS", "Mid RNS", "High RNS"])
-    ax.set_ylim(0, 0.88)
-    ax.set_ylabel("Structure F1")
-    ax.legend(loc="upper left", fontsize=8)
-    ax.text(0.02, 0.70, f"Length–RNS ρ = +{diag['spearman_len_rns']:.3f}\nAxis-dependent; not an uncertainty proxy",
-            transform=ax.transAxes, fontsize=7.5, color=GRAY, va="top")
-    panel_label(ax, "e", "Sequence bins: direction reverses")
+    ax.text(0.5, 0.62, "WITHDRAWN", transform=ax.transAxes,
+            ha="center", va="center", fontsize=14, fontweight="bold", color=RED)
+    ax.text(0.5, 0.43,
+            "Pair-index misalignment + unseeded heads\n"
+            "No bin-direction or axis-dependent claim\n"
+            "Historical values: Appendix A only",
+            transform=ax.transAxes, ha="center", va="center",
+            fontsize=9, color=DARK, linespacing=1.6)
+    ax.set_xticks([])
+    ax.set_yticks([])
+    panel_label(ax, "e", "Sequence bins: historical analysis withdrawn")
     style_axis(ax)
 
     ax = axes[1, 2]
@@ -222,7 +207,7 @@ def main():
     fig.suptitle("Representation organization and confidence do not substitute for downstream evaluation",
                  fontsize=14, fontweight="bold", y=0.995)
     fig.text(0.5, 0.005,
-             "RNS: lower = tighter real-pool organization  |  Sequence-bin direction is axis-dependent  |  Both S13b versions: NOT-BELL",
+             "RNS: lower = tighter real-pool organization  |  Sequence-bin result withdrawn; mechanism unresolved  |  Both S13b versions: NOT-BELL",
              ha="center", fontsize=9, color=DARK)
     fig.tight_layout(rect=[0.015, 0.03, 0.995, 0.97], h_pad=3.0, w_pad=2.5)
     OUTPUT.mkdir(parents=True, exist_ok=True)

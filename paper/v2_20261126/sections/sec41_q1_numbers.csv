@@ -1,0 +1,22 @@
+item,value,source,caliber
+controlled training budget,2.0B nt,交接文档/spec.md:28-34,Iso-token main-line design; common recipe across the six scales
+1M family macro-F1 mean,0.1650,对账_P0_20261125/p02a_main_table.csv; eval_evidence_logs/eval/probe_results.jsonl:L86;L1243;L1225,Mean over training seeds s17/s29/s43; final-checkpoint best layer; mean-pool
+1M family macro-F1 sample SD,0.0131,对账_P0_20261125/p00_adjudication_summary.md:A1; eval_evidence_logs/evidence/s1_seed_table.json:1M.probe_best_f1,Sample SD ddof=1 over three training seeds; not SE
+10M family macro-F1 mean,0.1535,对账_P0_20261125/p02a_main_table.csv; eval_evidence_logs/eval/probe_results.jsonl:L97;L1279;L1254,Mean over training seeds s17/s29/s43; final-checkpoint best layer; mean-pool
+10M family macro-F1 sample SD,0.0173,对账_P0_20261125/p00_adjudication_summary.md:A1; eval_evidence_logs/evidence/s1_seed_table.json:10M.probe_best_f1,Sample SD ddof=1 over three training seeds; not SE
+30M family macro-F1 mean,0.2651,对账_P0_20261125/p02a_main_table.csv; eval_evidence_logs/eval/probe_results.jsonl:L124;L990;L974,Mean over training seeds s17/s29/s43; final-checkpoint best layer; mean-pool
+30M family macro-F1 sample SD,0.0162,对账_P0_20261125/p00_adjudication_summary.md:A1; eval_evidence_logs/evidence/s1_seed_table.json:30M.probe_best_f1,Sample SD ddof=1 over three training seeds; not SE
+100M family macro-F1 mean,0.3394,对账_P0_20261125/p02a_main_table.csv; eval_evidence_logs/eval/probe_results.jsonl:L185;L204;L229,Mean over training seeds s17/s29/s43; final-checkpoint best layer; mean-pool
+100M family macro-F1 sample SD,0.0147,对账_P0_20261125/p00_adjudication_summary.md:A1; eval_evidence_logs/evidence/s1_seed_table.json:100M.probe_best_f1,Sample SD ddof=1 over three training seeds; not SE
+300M family macro-F1,0.3445,对账_P0_20261125/p02a_main_table.csv; eval_evidence_logs/eval/probe_results.jsonl:L1355,Single training seed s17; final-checkpoint best layer L22; mean-pool; no sample SD
+650M family macro-F1,0.3632,对账_P0_20261125/p02a_main_table.csv; eval_evidence_logs/eval/probe_results.jsonl:L1301,Single training seed s17; final-checkpoint best layer L8; mean-pool; no sample SD
+10M minus 1M mean macro-F1,-0.0115,对账_P0_20261125/p02a_main_table.csv,Difference of three-training-seed means 0.1535-0.1650; negative in two of three paired seeds; not per-seed universal
+30M-to-100M trigger slope,0.142 macro-F1/decade,eval_evidence_logs/evidence/s1_slope_decision.json:slope_per_decade,Pre-registered segment slope computed from three-seed means
+trigger slope confidence level,95%,eval_evidence_logs/evidence/s1_slope_decision.json:bootstrap_ci95,Sequence bootstrap interval; not training-seed replication
+trigger slope CI lower,0.104,eval_evidence_logs/evidence/s1_slope_decision.json:bootstrap_ci95,Stored value 0.1044 rounded to three decimals
+trigger slope CI upper,0.180,eval_evidence_logs/evidence/s1_slope_decision.json:bootstrap_ci95,Stored value 0.1797 rounded to three decimals
+saturation threshold epsilon,0.03 macro-F1/decade,eval_evidence_logs/evidence/s1_slope_decision.json:rule,Pre-registered slope threshold
+100M-to-650M slope,0.0293 macro-F1/decade,对账_P0_20261125/p02a_main_table.md:16; eval_evidence_logs/evidence/s1_final_verdict.json:checks.slope_100M_650M,(0.3632-0.3394)/log10(650/100); below epsilon; 650M is single-seed
+300M best-layer relative depth,0.957,eval_evidence_logs/eval/probe_results.jsonl:L1355,Single seed s17; L22/(24-1)=0.9565 rounded to three decimals
+650M best-layer relative depth,0.296,eval_evidence_logs/evidence/s1_final_verdict.json:checks.layer_migration_endpoint.650M,Single seed s17; L8/(28-1)=0.2963 rounded to three decimals
+P3.1 multi-seed supplementation,P3.1 not triggered,project:补证_P2_20261125/split_final_adjudication.md:20,Saturation observed in single-seed 300M/650M tier; three-seed 1M-100M tier supports trend; reconstructed split leaks and is incomparable

@@ -1,0 +1,67 @@
+item,value,source,caliber_note
+nominal parameter tiers,1M;10M;30M;100M;300M;650M,backup:code_git/rna_sc/specs.py:25-56,Nominal family labels rather than exact parameter counts
+1M hidden width,64,backup:code_git/rna_sc/specs.py:26-29,Frozen architecture
+1M Transformer layers,18,backup:code_git/rna_sc/specs.py:26-29,Frozen architecture
+10M hidden width,192,backup:code_git/rna_sc/specs.py:30-33,Frozen architecture
+10M Transformer layers,20,backup:code_git/rna_sc/specs.py:30-33,Frozen architecture
+30M hidden width,480,backup:code_git/rna_sc/specs.py:34-38,Frozen architecture
+30M Transformer layers,12,backup:code_git/rna_sc/specs.py:34-38,Frozen architecture
+100M hidden width,576,backup:code_git/rna_sc/specs.py:39-43,Frozen architecture
+100M Transformer layers,23,backup:code_git/rna_sc/specs.py:39-43,Frozen architecture
+300M hidden width,1024,backup:code_git/rna_sc/specs.py:44-50,Frozen architecture
+300M Transformer layers,24,backup:code_git/rna_sc/specs.py:44-50,Frozen architecture
+650M hidden width,1408,backup:code_git/rna_sc/specs.py:51-56,Frozen architecture
+650M Transformer layers,28,backup:code_git/rna_sc/specs.py:51-56,Frozen architecture
+pretraining context,1024 nt,backup:code_git/rna_sc/config.py:10,Frozen context length
+MLM selected positions,15%,backup:code_git/rna_sc/config.py:20; backup:code_git/rna_sc/model.py:3-6,Frozen masking probability
+MLM masked-token replacement,80%,backup:code_git/rna_sc/config.py:72; backup:code_git/rna_sc/model.py:3-6,Standard 80/10/10 rule
+MLM random-token replacement,10%,backup:code_git/rna_sc/config.py:72; backup:code_git/rna_sc/model.py:3-6,Standard 80/10/10 rule
+MLM unchanged-token fraction,10%,backup:code_git/rna_sc/config.py:72; backup:code_git/rna_sc/model.py:3-6,Standard 80/10/10 rule
+main iso-token budget,2.0B valid nt,backup:code_git/rna_sc/config.py:12,Nominal exposure budget; terminal logged checkpoints are approximately 1.9B nt
+RNAcentral release,22,backup:eval_evidence_logs/evidence/split8080_deep_verify.json:10; backup:code_git/rna_sc/specs.py:3-5,Main non-coding RNA corpus
+main corpus sequences,29012227,backup:eval_evidence_logs/evidence/split8080_deep_verify.json:20,Deep-verified row count
+main corpus clusters,3357201,backup:eval_evidence_logs/evidence/split8080_deep_verify.json:9,Deep-verified cluster count
+MMseqs2 sequence identity,80%,old_draft:delta_20261014/DRAFT_v1_final_20261014.md:203-207,80-80 clustering shorthand
+MMseqs2 coverage,80%,old_draft:delta_20261014/DRAFT_v1_final_20261014.md:203-207,80-80 clustering shorthand
+rinalmocorpus scales,30M;100M;300M,backup:eval_evidence_logs/evidence/corpus_arm_verdict.json:4-38,Same architecture and nominal 2B budget; recipe replica
+rfamcap cap,4000 sequences per Rfam family,backup:code_git/rna_sc/s3_rfamcap_corpus.py:46-50,Training rows with nonempty Rfam annotation only
+rfamcap scales,30M;100M,backup:code_git/write_prereg.py:75-79,Single-seed s17 arms
+rw1 scales,10M;30M;100M,backup:eval_evidence_logs/evidence/h5_rw_multiscale.json:3-25,Same architecture and terminal family-probe protocol
+extended budget,5.9B nt,backup:eval_evidence_logs/evidence/factorial_verdict.json:2-64,Nominal extended-budget arm; terminal logged checkpoints are approximately 5.8B nt
+extended-budget scales,30M;100M;300M;650M,backup:eval_evidence_logs/evidence/factorial_verdict.json:4-64,Same architecture and probe task
+clusters spanning S0 partitions,0,backup:eval_evidence_logs/evidence/split8080_deep_verify.json:11,Deep verification passed
+exact sequences spanning S0 partitions,0,backup:eval_evidence_logs/evidence/split8080_deep_verify.json:12,Deep verification passed
+random-world row modulus,5,backup:code_git/rna_sc/eval_matrix.py:259-286,Every fifth held-out-pool row assigned to evaluation
+random-world evaluation residue,0,backup:code_git/rna_sc/eval_matrix.py:279,i modulo 5 equals zero selects evaluation
+classification probe training sequences,20000,backup:code_git/rna_sc/probe.py:218-224; backup:code_git/rna_sc/eval_matrix.py:323-331,Original family protocol
+classification probe evaluation sequences,4000,backup:code_git/rna_sc/probe.py:218-224; backup:code_git/rna_sc/eval_matrix.py:323-331,Original family protocol
+RNA-type classes,19,backup:eval_evidence_logs/evidence/eval_matrix_v1_delta.json:1-3; backup:eval_evidence_logs/eval/probe_results.jsonl:1321,Macro-F1 over observed RNA-type classes
+contact minimum sequence separation,24 nt,backup:eval_evidence_logs/evidence/s8_contact.json:2,Long-range APC-corrected top-L precision; distinct from paired-position F1
+k-mer orders,1-6,old_draft:delta_20261014/DRAFT_v1_final_20261014.md:230-233; backup:code_git/rna_sc/baselines_kmer.py,Classical composition baseline
+pre-registered slope threshold,0.03 F1 per log10 parameter decade,backup:eval_evidence_logs/evidence/s1_slope_decision.json:2,Frozen continuation threshold epsilon
+slope interval confidence,95%,backup:eval_evidence_logs/evidence/s1_slope_decision.json:13-17,Bootstrap interval for slope decision
+three-seed scales,1M;10M;30M;100M,P0:p02b_caliber_adjudication.md:17-43; P0:p03_baseline_table.md:9-12,Training seeds s17/s29/s43
+training seeds,s17;s29;s43,P0:p02b_caliber_adjudication.md:17-43,Independent pretraining runs
+single-seed scales,300M;650M,P0:p03_baseline_table.md:13-16,Training seed s17 only; no error bars
+single-seed identifier,s17,P0:p03_baseline_table.md:13-16,300M and 650M training seed
+sample SD degrees of freedom,ddof=1,P0:p00_adjudication_summary.md:9-12,Unified mean plus/minus sample SD convention
+training seeds per multi-seed scale summary,3,P0:p00_adjudication_summary.md:9-12,Not sequence bootstrap
+650M original factorial training sequences,20000,P0:p02b_caliber_adjudication.md:55-62,Original terminal protocol
+650M original factorial evaluation sequences,4000,P0:p02b_caliber_adjudication.md:55-62,Original terminal protocol
+650M original factorial probe seed,17,P0:p02b_caliber_adjudication.md:55-62,Full-layer scan
+650M 5.9B original terminal F1,0.3747,P0:p02b_caliber_adjudication.md:55-62,Best layer L25 under original terminal protocol
+650M 2B original terminal F1,0.3632,P0:p00_adjudication_summary.md:17-19,Original 20k/4k protocol; same-protocol budget comparator
+650M original-protocol budget effect,+1.15 pp,P0:p00_adjudication_summary.md:17-19,0.3747 minus 0.3632; single-seed E1 factorial main-table caliber
+650M/300M retest training sequences,8000,P0:p02b_caliber_adjudication.md:64-91,Unreviewed handover-record protocol; demoted to appendix
+650M/300M retest evaluation sequences,4000,P0:p02b_caliber_adjudication.md:64-91,Unreviewed handover-record protocol; not current evidence
+650M/300M retest probe seeds,29;43;61,P0:p02b_caliber_adjudication.md:64-79,Same s17 trained weights; unreviewed and not training seeds
+LightGBM baseline seed,s17,P0:p03_caliber_adjudication.md:12-21,Only s17 evidence; no imputed s29/s43
+strict-coverage CNN seeds,s17;s29;s43,P0:p03_caliber_adjudication.md:18-21,Three-seed mean for strict seed-coverage column
+balanced-probe sensitivity seed,s17,P0:p03_caliber_adjudication.md:1-10,Reported separately from mean-pool baseline contrast
+rfamcap terminal logged exposure,1.9B nt,P0:p00_adjudication_summary.md:33-39,Both main and rfamcap arms; iso-budget final checkpoints
+rfamcap terminal training seed,s17,P0:p00_adjudication_summary.md:33-39,s17-to-s17 family contrast
+rfamcap 30M terminal family effect,+4.14 pp,P0:p00_adjudication_summary.md:33-39,Iso-budget final checkpoint effect
+rfamcap 100M terminal family effect,+0.34 pp,P0:p00_adjudication_summary.md:33-39,Iso-budget final checkpoint effect
+rfamcap appendix midpoint,0.2B nt,P0:p00_adjudication_summary.md:33-39,Trajectory only; forbidden as terminal-budget effect
+structure repeat-noise reference,approximately 1 pp,P0:p02c_structure_budget_matrix.md:1-14,Only trained-minus-randinit learning increments; not a universal threshold or budget-difference threshold
+rfamcap structure metric split,paired-F1 and true macro-F1 reported separately,project:补证_P2_20261125/results/P2_1/p2_1_report.md:6,Legacy f1 is paired-positive-class F1; f1_macro is the unweighted mean of paired and unpaired class F1

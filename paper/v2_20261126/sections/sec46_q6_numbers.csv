@@ -1,0 +1,73 @@
+item,value,source,caliber
+main-line exposure,2.0B nt,交接文档/spec.md:73-86,Iso-token main-line and controlled corpus-replica exposure
+extended exposure,5.9B nt,eval_evidence_logs/evidence/factorial_verdict.json:table.650M.f1_5.9B,Nominal budget label from f1_5.9B field; logged best checkpoints approximately 5.8B nt
+30M c1M family macro-F1,0.3160,eval_evidence_logs/evidence/corpus3.json:30M-c1M; 对账_P0_20261125/p02c_corpus_arm_table.csv:corpus3_arm.30M-c1M,Single s17 corpus arm; final-checkpoint best layer L8
+30M c1M unique corpus,0.85B nt,eval_evidence_logs/evidence/corpus3.json:30M-c1M.nt_unique_B,Unique nucleotide count
+30M c1M exposure,2.35 epochs,eval_evidence_logs/evidence/corpus3.json:30M-c1M.epochs,Fixed total exposure with repeated smaller corpus
+30M full-corpus three-seed mean,0.2651,对账_P0_20261125/p02a_main_table.csv:30M,Mean over training seeds s17/s29/s43; context rather than matched-s17 arm contrast
+30M full-corpus s17 family macro-F1,0.2466,eval_evidence_logs/evidence/factorial_verdict.json:table.30M.f1_2B,Matched s17 control for corpus and budget arms; final-checkpoint best layer L8
+rw1 10M delta,+0.15 pp,eval_evidence_logs/evidence/h5_rw_multiscale.json:table.10M,0.1746 minus 0.1731; neutral because below training-seed SD
+rw1 30M delta,-0.58 pp,eval_evidence_logs/evidence/h5_rw_multiscale.json:table.30M,0.2408 minus 0.2466; matched s17 final-checkpoint best-layer F1
+rw1 100M delta,-4.29 pp,eval_evidence_logs/evidence/h5_rw_multiscale.json:table.100M,0.2834 minus 0.3263; matched s17 final-checkpoint best-layer F1
+10M training-seed sample SD,0.0173,对账_P0_20261125/p00_adjudication_summary.md:A1,Sample SD ddof=1 over three training seeds; rw1 10M is not a positive-effect claim
+recipe replica 30M delta,+7.93 pp,eval_evidence_logs/evidence/corpus_arm_verdict.json:table.30M,0.3259 minus 0.2466; same architecture and 2B exposure; recipe replica not exact sequence manifest
+recipe replica 100M delta,+2.33 pp,eval_evidence_logs/evidence/corpus_arm_verdict.json:table.100M,0.3496 minus 0.3263; matched s17 final-checkpoint best-layer F1
+recipe replica 300M delta,+0.63 pp,eval_evidence_logs/evidence/corpus_arm_verdict.json:table.300M,0.3508 minus 0.3445; matched s17 final-checkpoint best-layer F1
+100M contact fold over chance control,1.28x,eval_evidence_logs/evidence/s8_contact.json:fold_over_chance.100M,Long-range top-L precision over chance; not paired-position macro-F1
+100M contact fold over chance recipe replica,1.40x,eval_evidence_logs/evidence/s8_contact.json:fold_over_chance.100M-rinalmo语料,Directional secondary evidence near chance
+contact fold relative increase,+9%,eval_evidence_logs/evidence/corpus_arm_verdict.json:s8_contact_secondary,Rounded relative change from 1.28x to 1.40x
+family budget delta 30M,-5.24 pp,对账_P0_20261125/p02c_factorial_table.csv:family.30M,0.1942 minus 0.2466; original terminal protocol; s17
+family budget delta 100M,-2.74 pp,对账_P0_20261125/p02c_factorial_table.csv:family.100M,0.2989 minus 0.3263; original terminal protocol; s17
+family budget delta 300M,+3.76 pp,对账_P0_20261125/p02c_factorial_table.csv:family.300M,0.3821 minus 0.3445; original terminal protocol; s17
+family budget delta 650M,+1.15 pp,对账_P0_20261125/p02c_factorial_table.csv:family.650M,0.3747 minus 0.3632; original terminal protocol; single-seed E1; no retest mixing
+Claim-14 upper boundary,1.0 pp,eval_evidence_logs/evidence/factorial_verdict.json:claim14_300M.bar_pp,Pre-registered boundary; observed +3.76 pp gives boundary_holds=false
+structure budget delta 30M,+0.09 pp,对账_P0_20261125/p02c_structure_budget_matrix.csv:30M,0.5765 minus 0.5756; bpRNA paired-position macro-F1; not a learning increment
+structure budget delta 100M,+0.85 pp,对账_P0_20261125/p02c_structure_budget_matrix.csv:100M,0.5975 minus 0.5890; bpRNA paired-position macro-F1
+structure budget delta 300M,+1.87 pp,对账_P0_20261125/p02c_structure_budget_matrix.csv:300M,0.6165 minus 0.5978; bpRNA paired-position macro-F1
+structure budget delta 650M,+0.84 pp,对账_P0_20261125/p02c_structure_budget_matrix.csv:650M,0.6057 minus 0.5973; positive but lower than 300M so four-scale sequence is not monotone
+structure learning increment 100M at 5.9B,+1.07 pp,对账_P0_20261125/p02c_structure_budget_matrix.csv:100M.learning_gain_59b_pp,Trained 0.5975 minus randinit 0.5868; exceeds approximately 1 pp repeat-noise reference
+structure learning increment 300M at 5.9B,+2.66 pp,对账_P0_20261125/p02c_structure_budget_matrix.csv:300M.learning_gain_59b_pp,Trained 0.6165 minus randinit 0.5899; exceeds approximately 1 pp repeat-noise reference
+structure repeat-noise reference,approximately 1 pp,对账_P0_20261125/p00_adjudication_summary.md:B2,Only for trained-minus-randinit learning increments; not a threshold for budget differences
+random budget delta 30M,+0.65 pp,eval_evidence_logs/evidence/b59_random_delta.json:table.30M,0.6118 minus 0.6053; completed terminal balanced-probe comparison
+random budget delta 100M,-0.60 pp,eval_evidence_logs/evidence/b59_random_delta.json:table.100M,0.5980 minus 0.6040; completed terminal balanced-probe comparison
+random budget delta 300M,+4.10 pp,eval_evidence_logs/evidence/b59_random_delta.json:table.300M,0.6280 minus 0.5870; completed terminal comparison; not within a 2 pp flatness band
+650M original-protocol family F1,0.3747,eval_evidence_logs/evidence/factorial_verdict.json:table.650M.f1_5.9B,Full-layer 20k/4k probe seed 17; L25
+300M original-protocol family F1,0.3821,eval_evidence_logs/evidence/factorial_verdict.json:table.300M.f1_5.9B,Full-layer 20k/4k probe seed 17; L22
+RNS budget delta 30M,-0.0105,eval_evidence_logs/evidence/p5rns_b59_verdict.json:matrix.30M.RNS_budget_delta,RNS@10; lower indicates tighter real-cluster organization
+RNS budget delta 100M,-0.0313,eval_evidence_logs/evidence/p5rns_b59_verdict.json:matrix.100M.RNS_budget_delta,RNS@10; zero-supervision channel
+RNS budget delta 300M,-0.0243,eval_evidence_logs/evidence/p5rns_b59_verdict.json:matrix.300M.RNS_budget_delta,RNS@10; zero-supervision channel
+P5 non-rRNA budget delta 30M,+0.109 nats/token,eval_evidence_logs/evidence/p5rns_b59_verdict.json:matrix.30M.nonrRNA_budget_delta,Stored 0.1093 rounded to three decimals; native-minus-shuffled same-mask MLM separation
+P5 non-rRNA budget delta 100M,+0.291 nats/token,eval_evidence_logs/evidence/p5rns_b59_verdict.json:matrix.100M.nonrRNA_budget_delta,Stored 0.2908 rounded to three decimals
+P5 non-rRNA budget delta 300M,+0.363 nats/token,eval_evidence_logs/evidence/p5rns_b59_verdict.json:matrix.300M.nonrRNA_budget_delta,Stored 0.3629 rounded to three decimals; scale-amplified
+P5 rRNA budget delta 30M,+0.067 nats/token,eval_evidence_logs/evidence/p5rns_b59_verdict.json:matrix.30M.rRNA_budget_delta,Stored 0.0669 rounded to three decimals; smaller than non-rRNA response
+P5 rRNA budget delta 100M,+0.063 nats/token,eval_evidence_logs/evidence/p5rns_b59_verdict.json:matrix.100M.rRNA_budget_delta,Stored 0.0626 rounded to three decimals
+P5 rRNA budget delta 300M,+0.084 nats/token,eval_evidence_logs/evidence/p5rns_b59_verdict.json:matrix.300M.rRNA_budget_delta,Stored 0.0842 rounded to three decimals
+30M random F1 at 1B,0.5721,eval_evidence_logs/eval/random_midpoints_results.jsonl:L1,Best-layer balanced probe at 1B midpoint
+30M random F1 at 5B,0.6136,eval_evidence_logs/eval/random_midpoints_results.jsonl:L3,Best-layer balanced probe at 5B midpoint; not the 5.8B terminal value
+30M family F1 at 0.8B,0.3409,eval_evidence_logs/eval/probe_results_b59_family.jsonl:L670,Best-layer family probe at nearest early family checkpoint L6
+30M family F1 at 5.8B,0.1942,eval_evidence_logs/eval/probe_results_b59_family.jsonl:L175,Original terminal-checkpoint best layer L10
+rfamcap terminal exposure,1.9B nt,对账_P0_20261125/p00_adjudication_summary.md:B1,Both arms at logged terminal checkpoint 1900086380; s17 against s17
+rfamcap 30M control F1,0.2466,对账_P0_20261125/p02c_corpus_arm_table.csv:rfamcap_family_final_supplement.30M,Matched main-line s17 terminal value
+rfamcap 30M arm F1,0.2880,对账_P0_20261125/p02c_corpus_arm_table.csv:rfamcap_family_final_supplement.30M,Terminal checkpoint L8
+rfamcap 30M family delta,+4.14 pp,对账_P0_20261125/p00_adjudication_summary.md:B1,Iso-budget terminal contrast; single-seed E1
+rfamcap 100M control F1,0.3263,对账_P0_20261125/p02c_corpus_arm_table.csv:rfamcap_family_final_supplement.100M,Matched main-line s17 terminal value
+rfamcap 100M arm F1,0.3297,对账_P0_20261125/p02c_corpus_arm_table.csv:rfamcap_family_final_supplement.100M,Terminal checkpoint L13
+rfamcap 100M family delta,+0.34 pp,对账_P0_20261125/p00_adjudication_summary.md:B1,Iso-budget terminal contrast; supersedes cross-budget interim value
+rfamcap withdrawn interim delta,+1.85 pp,对账_P0_20261125/p00_adjudication_summary.md:B1,0.2B arm versus 1.9B control; excluded from controlled comparison and reserved for appendix trajectory
+rfamcap interim exposure,0.2B nt,对账_P0_20261125/p00_adjudication_summary.md:B1,Checkpoint 200006790; not terminal iso-budget evidence
+rfamcap 30M structure arm paired-F1,0.5933@L11,project:补证_P2_20261125/results/P2_1/p2_1_channel_specificity.csv:30M,Terminal 1.9B checkpoint; paired-positive-class F1 rather than true macro-F1
+rfamcap 30M structure control paired-F1,0.5756@L3,project:补证_P2_20261125/results/P2_1/p2_1_channel_specificity.csv:30M,Matched main terminal comparator
+rfamcap 30M structure delta,+1.77 pp,project:补证_P2_20261125/results/P2_1/p2_1_channel_specificity.csv:30M,Stored +1.7681 pp rounded to two decimals; single-seed E1
+rfamcap 100M structure arm paired-F1,0.5904@L22,project:补证_P2_20261125/results/P2_1/p2_1_channel_specificity.csv:100M,Terminal 1.9B checkpoint; paired-positive-class F1
+rfamcap 100M structure control paired-F1,0.5890@L22,project:补证_P2_20261125/results/P2_1/p2_1_channel_specificity.csv:100M,Matched main terminal comparator
+rfamcap 100M structure delta,+0.14 pp,project:补证_P2_20261125/results/P2_1/p2_1_channel_specificity.csv:100M,Stored +0.1393 pp rounded to two decimals; supersedes withdrawn historical value
+rfamcap 30M structure randinit floor,0.5794@L9,project:补证_P2_20261125/results/P2_1/p2_1_channel_specificity.csv:30M,Same-architecture randinit control
+rfamcap 100M structure randinit floor,0.5875@L21,project:补证_P2_20261125/results/P2_1/p2_1_channel_specificity.csv:100M,Same-architecture randinit control
+rfamcap de-rRNA family deltas,+4.49 pp at 30M;+0.32 pp at 100M,project:补证_P2_20261125/results/P2_6/p2_6_derna_headlines.csv:rfamcap,Stored +4.492222/+0.316667 pp; independent non-rRNA support
+external cross-model structure difference,approximately +0.10 F1,交接文档/spec.md:82-84,Observational external-model gap; architecture recipe exposure and corpus confounded; no corpus attribution
+original family-probe sample sizes,20000 train / 4000 evaluation,对账_P0_20261125/p02b_caliber_adjudication.md:55-62,Original full-layer protocol with probe seed 17
+nominal extended-budget logged terminal,5.8B nt,eval_evidence_logs/evidence/factorial_verdict.json:table.650M.f1_5.9B.ckpt_nt,Logged ckpt_nt=5800296014 under the nominal 5.9B arm
+30M random trajectory start,1B nt,eval_evidence_logs/eval/random_midpoints_results.jsonl:L1,Start for 0.5721 random-split F1
+30M random trajectory endpoint,5B nt,eval_evidence_logs/eval/random_midpoints_results.jsonl:L3,Endpoint for 0.6136 random-split F1; midpoint rather than terminal
+30M family trajectory early checkpoint,0.8B nt,eval_evidence_logs/eval/probe_results_b59_family.jsonl:L670,Nearest early family checkpoint for 0.3409 F1
+30M family trajectory terminal checkpoint,5.8B nt,eval_evidence_logs/eval/probe_results_b59_family.jsonl:L175,Terminal checkpoint for 0.1942 F1

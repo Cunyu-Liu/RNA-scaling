@@ -1,0 +1,7 @@
+论文中出现的数字,数值,来源 evidence/账本路径,口径备注
+Δ=+0.355,0.3550,/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/evidence/classical_baselines.json,k-mer logistic 的 random−family macro-F1；展示值 0.5180−0.1630=0.3550；evidence 存储差值 0.3549；P0 口径见 p02a_delta_table.csv
+11–18%,0.11–0.18,/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/evidence/s4x9_leakage_attribution.json,randinit/mommatch 的 random−family Δ 占对应 trained Δ 的比例范围；probe-balanced；不是训练种子区间
++0.096,0.09572,/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/evidence/covariation_test_650M.json,650M COV−CTRL=0.09855−0.00283=0.09572；三位小数显示为 +0.096
++0.030,0.0304,/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/evidence/pair_probe_v4.json；/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/evidence/pair_probe_baseline.json,650M pair AUC 0.9524−匹配 distance/composition/identity 先验 dist_ident 0.9220=0.0304；三位小数显示为 +0.030
+0.64,0.6405,/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/evidence/readout_heads_v3.json,650M finetune_top2=0.6405；概括需寻找 partner 的读出墙；不是 Oracle 指标
+0.998,0.9983,/Volumes/orico-disc/A100 大量项目文件备份/03_RNA迁移学习_rna-sc/eval_evidence_logs/evidence/readout_heads_v3.json,650M partner_oracle=0.9983；三位小数显示为 0.998；Oracle 上界而非实际结构预测分数

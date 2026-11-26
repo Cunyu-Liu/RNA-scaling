@@ -1,0 +1,36 @@
+item,value,source,caliber_note
+RNS definition,k=10 nearest neighbors,backup:eval_evidence_logs/evidence/s14_rns.json:10-14,Lower RNS means tighter real-sequence organization
+1M RNS@10,0.1721,backup:eval_evidence_logs/evidence/s14_rns.json:results.RNA-Sc-1M_s17.RNS.10,Single-run descriptive endpoint
+10M RNS@10,0.1041,backup:eval_evidence_logs/evidence/s14_rns.json:results.RNA-Sc-10M_s17.RNS.10,Single-run descriptive endpoint
+30M RNS@10,0.0776,backup:eval_evidence_logs/evidence/s14_rns.json:results.RNA-Sc-30M_s17.RNS.10,Single-run descriptive endpoint; local shoulder with 100M
+100M RNS@10,0.0773,backup:eval_evidence_logs/evidence/s14_rns.json:results.RNA-Sc-100M_s17.RNS.10,Single-run descriptive endpoint; local shoulder with 30M
+300M RNS@10,0.0667,backup:eval_evidence_logs/evidence/s14_rns_300m.json:RNS.10,One-by-one bf16 add-on; length cap 192
+650M RNS@10,0.0620,backup:eval_evidence_logs/evidence/s14_rns_650m.json:RNS.10,One-by-one fp32 add-on; length cap 192
+random-init RNS@10 range,0.5442-0.5803,backup:eval_evidence_logs/evidence/s14_rns.json:results.RNA-Sc-100M_s17_randinit17; results.RNA-Sc-10M_s17_randinit17,Geometry control rather than training-seed interval
+random-pool regeneration count,10,backup:eval_evidence_logs/evidence/s14_rns_bootstrap.json:n_boot,Random-pool regeneration rather than training-seed replication
+random-pool regeneration SD range,0.0037-0.0049,backup:eval_evidence_logs/evidence/s14_rns_bootstrap.json:results,Three tested scales under the regeneration protocol
+10M RNS maximum exposure,1.0B nt,backup:eval_evidence_logs/evidence/s14_timeaxis.json:results.nt_1.0B,Maximum RNS means worst organization on this trajectory
+10M RNS at 1.0B,0.1283,backup:eval_evidence_logs/evidence/s14_timeaxis.json:results.nt_1.0B.RNS.10,Single-run time point
+10M family-F1 maximum exposure,0.5B nt,backup:eval_evidence_logs/evidence/s6_timeline.json:timeline.ckpt_nt=500038563,Best family macro-F1 on time axis
+10M family-F1 maximum,0.2549,backup:eval_evidence_logs/evidence/s6_timeline.json:timeline.best_f1@500038563,Single-run time point
+10M RNS at 1.9B,0.1041,backup:eval_evidence_logs/evidence/s14_timeaxis.json:results.nt_1.9B.RNS.10,Terminal retained checkpoint
+300M RNS time endpoints,0.1201 to 0.0814,backup:eval_evidence_logs/evidence/s14_timeaxis_v2.json:results.RNA-Sc-300M_s17,0.5B to 1.9B; monotone over four sampled checkpoints
+650M RNS time endpoints,0.1373 to 0.0662,backup:eval_evidence_logs/evidence/s14_timeaxis_v2.json:results.RNA-Sc-650M_s17,0.5B to 1.9B; monotone over four sampled checkpoints
+cross-model count,8,backup:eval_evidence_logs/evidence/s14_rns_ext.json:n_models,Four controlled-family and four external observational anchors
+Spearman RNS versus random-split F1,-0.5952,backup:eval_evidence_logs/evidence/s14_rns_ext.json:spearman_rns_randomF1,Model-level association; rounded to -0.60 in prose
+Spearman excluding RNA-FM,-0.3929,backup:eval_evidence_logs/evidence/s14_rns_ext.json:spearman_excl_rnafm,Observational sensitivity analysis
+family-axis Spearman,-0.1916,backup:eval_evidence_logs/evidence/s14_family_crossval.json:spearman_rns_vs_probef1,Eight families within RNA-Sc-30M_s17; weak descriptive relation
+S13b v1 trained family points,30,derived:s13b_bell.json n_points=36 (v2, 6 sources x 6 scales) minus 6 source-points of 650M added in v2; old_draft L893-895 confirms v2=36,v1=30 derived as 36-6; pre-registered v1 decision; no training-seed replication
+S13b v1 quadratic vertex NLL,1.745,old_draft:delta_20261014/DRAFT_v1_final_20261014.md:890-892,Outside observed NLL range; historical v1 fit
+S13b v1 observed NLL range,1.34-1.38,old_draft:delta_20261014/DRAFT_v1_final_20261014.md:890-892,Approximate reported range
+S13b v2 trained family points,36,backup:eval_evidence_logs/evidence/s13b_bell.json:n_points,Six trained models times six sources; randinit points excluded from fit count
+S13b v2 quadratic vertex NLL,1.7201,backup:eval_evidence_logs/evidence/s13b_bell.json:bell_test.peak_x_nll,Outside trained-point NLL range
+S13b v2 trained-point NLL range,1.025-1.3872,backup:eval_evidence_logs/evidence/s13b_bell.json:points,Computed from 36 non-randinit rows; minimum 300M RNP and maximum 1M SPR
+S13b v1 verdict,NOT-BELL,old_draft:delta_20261014/DRAFT_v1_final_20261014.md:890-896,Pre-registered criterion; vertex outside data
+S13b v2 verdict,NOT-BELL,backup:eval_evidence_logs/evidence/s13b_bell.json:bell_test.verdict,Pre-registered criterion retained after wider NLL coverage
+family RNS-NLL Spearman,+0.1429,backup:eval_evidence_logs/evidence/s14_rns_cov.json:spearman_rns_nll,Six structural families in RNA-Sc-30M_s17; descriptive
+family RNS-NLL Pearson,-0.0186,backup:eval_evidence_logs/evidence/s14_rns_cov.json:pearson,Masked-marginal NLL proxy; descriptive
+sequence-level RNS-COV Spearman,-0.2966,project:补证_P2_20261125/results/P2_2/evidence/p2_2_rns_cov.json:sequence_level.rho,Actual mutation COV minus CTRL; weak-to-moderate negative association
+sequence-level RNS-COV sample size,108,project:补证_P2_20261125/results/P2_2/evidence/p2_2_rns_cov.json:sequence_level.n,Per-sequence analysis within the 30M protocol
+sequence-level RNS-COV bootstrap interval,95% CI [-0.4732;-0.1128],project:补证_P2_20261125/results/P2_2/evidence/p2_2_rns_cov.json:sequence_level.bootstrap.ci95_low and sequence_level.bootstrap.ci95_high,Sequence resampling rather than training-seed replication
+historical s14_rns_cov metric,masked NLL rather than COV,project:补证_P2_20261125/results/P2_2/evidence/p2_2_rns_cov.json:old_s14_nll,Historical file must not be used as COV evidence

@@ -1,0 +1,75 @@
+item,value,source,caliber
+1M balanced family F1,0.0982,eval_evidence_logs/evidence/eval_matrix_v1_delta.json:deltas.RNA-Sc-1M_s17|probe-balanced.family,s17; final-checkpoint best layer; 19-class macro-F1
+1M balanced random F1,0.1534,eval_evidence_logs/evidence/eval_matrix_v1_delta.json:deltas.RNA-Sc-1M_s17|probe-balanced.random,s17; random split permits family overlap; not seen in MLM pretraining
+1M balanced random minus family,+0.0552,eval_evidence_logs/evidence/eval_matrix_v1_delta.json:deltas.RNA-Sc-1M_s17|probe-balanced.delta,Within-model within-protocol difference
+1M mean-pool random minus family,-0.0372,eval_evidence_logs/evidence/eval_matrix_v1_delta.json:deltas.RNA-Sc-1M_s17|probe-meanpool.delta,s17; do not generalize near-zero gap to larger scales
+10M balanced family F1,0.1555,eval_evidence_logs/evidence/eval_matrix_v1_delta.json:deltas.RNA-Sc-10M_s17|probe-balanced.family,s17; final-checkpoint best layer
+10M balanced random F1,0.4928,eval_evidence_logs/evidence/eval_matrix_v1_delta.json:deltas.RNA-Sc-10M_s17|probe-balanced.random,s17; family overlap allowed
+10M balanced random minus family,+0.3373,eval_evidence_logs/evidence/eval_matrix_v1_delta.json:deltas.RNA-Sc-10M_s17|probe-balanced.delta,Denominator for 10M attribution percentages
+10M mean-pool random minus family,+0.0006,eval_evidence_logs/evidence/eval_matrix_v1_delta.json:deltas.RNA-Sc-10M_s17|probe-meanpool.delta,s17; near-zero small-scale gap
+30M balanced family F1,0.1675,eval_evidence_logs/evidence/eval_matrix_v1_delta.json:deltas.RNA-Sc-30M_s17|probe-balanced.family,s17; final-checkpoint best layer
+30M balanced random F1,0.6053,eval_evidence_logs/evidence/eval_matrix_v1_delta.json:deltas.RNA-Sc-30M_s17|probe-balanced.random,s17; family overlap allowed
+30M balanced random minus family,+0.4378,eval_evidence_logs/evidence/eval_matrix_v1_delta.json:deltas.RNA-Sc-30M_s17|probe-balanced.delta,s17; post-30M plateau range 0.4155-0.4378
+30M mean-pool random minus family,+0.1865,eval_evidence_logs/evidence/eval_matrix_v1_delta.json:deltas.RNA-Sc-30M_s17|probe-meanpool.delta,s17; positive rather than approximately zero
+100M balanced family F1,0.1696,eval_evidence_logs/evidence/eval_matrix_v1_delta.json:deltas.RNA-Sc-100M_s17|probe-balanced.family,s17; used in protocol sensitivity analysis
+100M balanced random F1,0.6040,eval_evidence_logs/evidence/eval_matrix_v1_delta.json:deltas.RNA-Sc-100M_s17|probe-balanced.random,s17; family overlap allowed
+100M balanced random minus family,+0.4344,eval_evidence_logs/evidence/eval_matrix_v1_delta.json:deltas.RNA-Sc-100M_s17|probe-balanced.delta,Denominator for 100M attribution percentages
+100M mean-pool random minus family,+0.2283,eval_evidence_logs/evidence/eval_matrix_v1_delta.json:deltas.RNA-Sc-100M_s17|probe-meanpool.delta,s17; positive rather than approximately zero
+300M balanced family F1,0.1715,eval_evidence_logs/evidence/eval_matrix_v1_delta.json:deltas.RNA-Sc-300M_s17|probe-balanced.family,Single training seed s17
+300M balanced random F1,0.5870,eval_evidence_logs/evidence/eval_matrix_v1_delta.json:deltas.RNA-Sc-300M_s17|probe-balanced.random,Single training seed s17
+300M balanced random minus family,+0.4155,eval_evidence_logs/evidence/eval_matrix_v1_delta.json:deltas.RNA-Sc-300M_s17|probe-balanced.delta,Single training seed s17
+300M mean-pool random minus family,+0.3805,eval_evidence_logs/evidence/eval_matrix_v1_delta.json:deltas.RNA-Sc-300M_s17|probe-meanpool.delta,Single training seed s17
+650M balanced family F1,0.1888,eval_evidence_logs/evidence/eval_matrix_v1_delta.json:deltas.RNA-Sc-650M_s17|probe-balanced.family,Single training seed s17
+650M balanced random F1,0.6252,eval_evidence_logs/evidence/eval_matrix_v1_delta.json:deltas.RNA-Sc-650M_s17|probe-balanced.random,Single training seed s17
+650M balanced random minus family,+0.4364,eval_evidence_logs/evidence/eval_matrix_v1_delta.json:deltas.RNA-Sc-650M_s17|probe-balanced.delta,Single training seed s17
+650M mean-pool random minus family,+0.3950,eval_evidence_logs/evidence/eval_matrix_v1_delta.json:deltas.RNA-Sc-650M_s17|probe-meanpool.delta,Single training seed s17
+k-mer logistic family F1,0.1630,eval_evidence_logs/evidence/classical_baselines.json:family.f1_macro,k=1-6; one fixed run with code random_state=17; evidence has no seed field
+k-mer logistic random F1,0.5180,eval_evidence_logs/evidence/classical_baselines.json:random.f1_macro,One fixed run; random split 19200/4800
+k-mer logistic random minus family,+0.3549,eval_evidence_logs/evidence/classical_baselines.json:delta_random_family,Composition-only split dividend
+k-mer LightGBM family F1,0.1760,eval_evidence_logs/evidence/classical_baselines_extra.json:family.kmer_lgbm.f1_macro,s17 only; strongest observed baseline; no s29/s43
+k-mer LightGBM random F1,0.5485,eval_evidence_logs/evidence/classical_baselines_extra.json:random.kmer_lgbm.f1_macro,s17 only
+k-mer LightGBM random minus family,+0.3725,eval_evidence_logs/evidence/classical_baselines_extra.json:family.kmer_lgbm.f1_macro;random.kmer_lgbm.f1_macro,0.5485-0.1760; s17 only
+one-hot CNN family F1 mean,0.1589,对账_P0_20261125/p03_baseline_table.csv; eval_evidence_logs/evidence/classical_baselines_extra{,_s29,_s43}.json:family.onehot_cnn.f1_macro,Mean over s17/s29/s43 values 0.1725/0.1502/0.1541
+one-hot CNN family sample SD,0.0119,对账_P0_20261125/p03_caliber_adjudication.md:18,Sample SD ddof=1 over three training seeds
+one-hot CNN random F1 mean,0.5343,eval_evidence_logs/evidence/classical_baselines_extra{,_s29,_s43}.json:random.onehot_cnn.f1_macro,Mean over s17/s29/s43 values 0.5617/0.5295/0.5117
+one-hot CNN random sample SD,0.0253,eval_evidence_logs/evidence/classical_baselines_extra{,_s29,_s43}.json:random.onehot_cnn.f1_macro,Sample SD ddof=1; not population SD
+one-hot CNN random minus family,+0.3754,eval_evidence_logs/evidence/classical_baselines_extra{,_s29,_s43}.json:family.onehot_cnn;random.onehot_cnn,Difference of three-seed means 0.5343-0.15893333
+random-embedding family F1 mean,0.0551,对账_P0_20261125/p03_caliber_adjudication.md:19; eval_evidence_logs/evidence/classical_baselines_extra{,_s29,_s43}.json:family.randemb_head.f1_macro,Mean over s17/s29/s43 values 0.0702/0.0692/0.0259
+random-embedding family sample SD,0.0253,eval_evidence_logs/evidence/classical_baselines_extra{,_s29,_s43}.json:family.randemb_head.f1_macro,Sample SD ddof=1 over three seeds
+random-embedding random F1 mean,0.0587,eval_evidence_logs/evidence/classical_baselines_extra{,_s29,_s43}.json:random.randemb_head.f1_macro,Mean over s17/s29/s43 values 0.0557/0.0702/0.0503
+random-embedding random sample SD,0.0103,eval_evidence_logs/evidence/classical_baselines_extra{,_s29,_s43}.json:random.randemb_head.f1_macro,Sample SD ddof=1 over three seeds
+random-embedding random minus family,+0.0036,eval_evidence_logs/evidence/classical_baselines_extra{,_s29,_s43}.json:family.randemb_head;random.randemb_head,Difference of three-seed means
+1M mean-pool LM family F1,0.1650 ± 0.0131,对账_P0_20261125/p03_baseline_table.csv:1M,Three-training-seed mean ± sample SD; final-checkpoint best layer
+1M LM minus LightGBM observed,-0.0110,对账_P0_20261125/p03_baseline_table.csv:1M.delta_lm_minus_strongest_observed,Three-seed LM mean minus LightGBM s17; not complete three-seed baseline comparison
+1M strict seed-coverage margin,+0.0061,对账_P0_20261125/p03_baseline_table.csv:1M.delta_lm_minus_strict_seed_coverage,Three-seed LM mean minus three-seed CNN mean; coverage matched not paired models
+10M mean-pool LM family F1,0.1535 ± 0.0173,对账_P0_20261125/p03_baseline_table.csv:10M,Three-training-seed mean ± sample SD
+10M LM minus LightGBM observed,-0.0225,对账_P0_20261125/p03_baseline_table.csv:10M.delta_lm_minus_strongest_observed,Three-seed LM mean minus LightGBM s17
+10M strict seed-coverage margin,-0.0054,对账_P0_20261125/p03_baseline_table.csv:10M.delta_lm_minus_strict_seed_coverage,Three-seed LM mean minus three-seed CNN mean
+30M mean-pool LM family F1,0.2651 ± 0.0162,对账_P0_20261125/p03_baseline_table.csv:30M,Three-training-seed mean ± sample SD
+30M LM minus LightGBM observed,+0.0891,对账_P0_20261125/p03_baseline_table.csv:30M.delta_lm_minus_strongest_observed,Three-seed LM mean 0.2651 minus LightGBM s17 0.1760
+30M strict seed-coverage margin,+0.1062,对账_P0_20261125/p03_baseline_table.csv:30M.delta_lm_minus_strict_seed_coverage,Three-seed LM mean minus three-seed CNN mean
+100M mean-pool LM family F1,0.3394 ± 0.0147,对账_P0_20261125/p03_baseline_table.csv:100M,Three-training-seed mean ± sample SD; unrounded mean 0.33936667
+100M LM minus LightGBM observed,+0.1634,对账_P0_20261125/p03_baseline_table.csv:100M.delta_lm_minus_strongest_observed,Computed from unrounded LM mean minus LightGBM s17
+100M strict seed-coverage margin,+0.1804,对账_P0_20261125/p03_baseline_table.csv:100M.delta_lm_minus_strict_seed_coverage,Three-seed LM mean minus three-seed CNN mean
+300M mean-pool LM family F1,0.3445,对账_P0_20261125/p03_baseline_table.csv:300M,Single training seed s17; no SD
+300M LM minus LightGBM observed,+0.1685,对账_P0_20261125/p03_baseline_table.csv:300M.delta_lm_minus_strongest_observed,Single-seed LM and baseline
+300M strict seed-coverage margin,+0.1685,对账_P0_20261125/p03_baseline_table.csv:300M.delta_lm_minus_strict_seed_coverage,s17 LM versus s17 LightGBM
+650M mean-pool LM family F1,0.3632,对账_P0_20261125/p03_baseline_table.csv:650M,Single training seed s17; no SD
+650M LM minus LightGBM observed,+0.1872,对账_P0_20261125/p03_baseline_table.csv:650M.delta_lm_minus_strongest_observed,Single-seed LM and baseline
+650M strict seed-coverage margin,+0.1872,对账_P0_20261125/p03_baseline_table.csv:650M.delta_lm_minus_strict_seed_coverage,s17 LM versus s17 LightGBM
+100M balanced LM minus k-mer logistic,+0.0066,对账_P0_20261125/p03_caliber_adjudication.md:6,0.1696-0.1630; s17 balanced sensitivity; not strongest-baseline contrast
+100M balanced LM minus LightGBM,-0.0064,对账_P0_20261125/p03_caliber_adjudication.md:5,0.1696-0.1760; s17 balanced protocol sensitivity
+100M mean-pool s17 F1,0.3263,对账_P0_20261125/p03_caliber_adjudication.md:5,Single s17 mean-pool value; distinct from three-seed mean
+100M mean-pool s17 minus LightGBM,+0.1503,对账_P0_20261125/p03_caliber_adjudication.md:5,0.3263-0.1760; single-seed protocol contrast
+10M randinit balanced split dividend,+0.0380,eval_evidence_logs/evidence/s4x9_leakage_attribution.json:table.RNA-Sc-10M_s17_randinit17.delta,Controlled initialization arm
+10M randinit share of trained dividend,11.3%,eval_evidence_logs/evidence/s4x9_leakage_attribution.json:table,100*0.0380/0.3373=11.2659%; displayed to one decimal
+10M mommatch balanced split dividend,+0.0412,eval_evidence_logs/evidence/s4x9_leakage_attribution.json:table.RNA-Sc-10M_s17_mommatch17.delta,Controlled moment-matched arm
+10M mommatch share of trained dividend,12.2%,eval_evidence_logs/evidence/s4x9_leakage_attribution.json:table,100*0.0412/0.3373=12.2146%; displayed to one decimal
+100M randinit balanced split dividend,+0.0795,eval_evidence_logs/evidence/s4x9_leakage_attribution.json:table.RNA-Sc-100M_s17_randinit17.delta,Controlled initialization arm
+100M randinit share of trained dividend,18.3%,eval_evidence_logs/evidence/s4x9_leakage_attribution.json:table,100*0.0795/0.4344=18.3011%; displayed to one decimal
+k-mer share of 10M trained dividend,105.2%,eval_evidence_logs/evidence/s4x9_leakage_attribution.json:table,100*0.3549/0.3373=105.2179%; composition baseline exceeds trained dividend
+k-mer share of 100M trained dividend,81.7%,eval_evidence_logs/evidence/s4x9_leakage_attribution.json:table,100*0.3549/0.4344=81.6989%; computed to avoid restricting attribution to 10M
+RiNALMo-micro balanced family F1,0.2407,eval_evidence_logs/evidence/ext_full_layers.json:models.RiNALMo-micro v1(=s17).best_f1,External observational anchor only; pretraining overlap unaudited
+RiNALMo-mega balanced family F1,0.2532,eval_evidence_logs/evidence/ext_full_layers.json:models.RiNALMo-mega s17.best_f1,External observational anchor only; pretraining overlap unaudited
+RiNALMo-giga balanced family F1,0.2667,eval_evidence_logs/evidence/ext_full_layers.json:models.RiNALMo-giga s17.best_f1,External observational anchor only; pretraining overlap unaudited
+RNA-FM-96M balanced family F1,0.1335,eval_evidence_logs/evidence/ext_full_layers.json:models.RNA-FM-96M s17.best_f1,External observational anchor only; pretraining overlap unaudited

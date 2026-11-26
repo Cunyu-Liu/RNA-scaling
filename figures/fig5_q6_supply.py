@@ -114,7 +114,7 @@ for channel, values, marker in [
 ax.plot(X[-1], random["650M"], marker="s", markersize=8,
         markerfacecolor="white", markeredgecolor=COLORS["random"],
         markeredgewidth=1.8, linestyle="None")
-ax.annotate("5B midpoint;\nterminal pending", (X[-1], random["650M"]),
+ax.annotate("historical 5B midpoint;\nterminal not evaluated", (X[-1], random["650M"]),
             xytext=(-68, -35), textcoords="offset points", fontsize=7.5,
             color=COLORS["random"], arrowprops={"arrowstyle": "-", "color": COLORS["random"], "lw": 0.7})
 ax.axhline(0, color="#555555", linewidth=0.8)
@@ -236,7 +236,8 @@ ax_rns.set_axisbelow(True)
 fig.suptitle("Knowledge supply is gated by corpus composition, budget, scale, and readout channel",
              fontsize=14, fontweight="bold", color=COLORS["ink"], y=0.975)
 fig.text(0.075, 0.025,
-         "Controlled s17 contrasts. Open marker: provisional midpoint. Corpus effects are family macro-F1 differences; "
+         "Controlled s17 contrasts. Open marker: demoted historical midpoint; terminal not evaluated (Appendix A). " 
+         "Corpus effects are family macro-F1 differences; "
          "P5/RNS use their own zero-supervision units.",
          fontsize=8, color="#555555")
 

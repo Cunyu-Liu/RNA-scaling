@@ -1,0 +1,21 @@
+item,value,source,caliber_note
+initialization controls,randinit;moment-matched,project:交接文档/spec.md:36-43,Controls do not read sequence composition and cannot isolate B3
+primary classical baseline coverage,LightGBM s17 only,P0:p00_adjudication_summary.md:24-29,Not a three-seed-versus-three-seed contrast
+external-model status,observational anchors,project:交接文档/spec.md:118-124,Bidirectional unauditable corpus exposure; no controlled attribution
+rfamcap terminal structure effects,+1.77 pp at 30M;+0.14 pp at 100M,project:补证_P2_20261125/results/P2_1/p2_1_channel_specificity.csv,Terminal paired-F1 contrasts; stored +1.7681/+0.1393 pp
+external structure gap under discussion,approximately +0.10 F1,project:交接文档/spec.md:82-85,Cannot be attributed to corpus from the adjudicated rfamcap result
+rfamcap candidate checkpoints,1.8B;1.9B nt,project:补证_P2_20261125/results/P2_1/p2_1_rfamcap_structure_summary.csv,Both candidates directly evaluated; terminal contrasts use 1.9B
+historical rfamcap structure reproduction,0/23 layers at each candidate,project:补证_P2_20261125/results/P2_1/p2_1_ckpt_adjudication.json:candidates,Historical 0.5924@L20 and +0.34 pp withdrawn; source checkpoint unknown
+MARS/RNAcentral probe rows,0,P0:p04_unfinished_registry.md:3-17,No three-corpus spectrum claim
+single-training-seed scales,300M;650M,P0:p00_adjudication_summary.md:24-29; project:交接文档/spec.md:28-34,Training seed s17 only; no fabricated error bars
+multi-training-seed scales,1M;10M;30M;100M,P0:p02b_caliber_adjudication.md:17-43,Three training seeds s17/s29/s43
+10M attrition seed direction,negative in 2 of 3 paired seeds,project:交接文档/spec.md:28-34,Three-seed mean-level effect only
+10M family-F1 maximum exposure,0.5B nt,backup:eval_evidence_logs/evidence/s6_timeline.json:timeline.ckpt_nt=500038563,Single-run time-axis control
+c1Mcs exposure,2.2 epochs,project:交接文档/spec.md:55-60,Repeated-exposure control for duration account
+650M de-rRNA best layer,L27,backup:eval_evidence_logs/evidence/p1_derna_discriminator.json:650M.best.layer,Relative depth 1.00; intervention control
+650M de-rRNA F1,0.4585,backup:eval_evidence_logs/evidence/p1_derna_discriminator.json:650M.best.f1,18-class de-rRNA result
+balanced 100M LM s17,0.1696,P0:p00_adjudication_summary.md:24-29,Balanced-probe single-seed sensitivity
+balanced 100M LightGBM s17,0.1760,P0:p00_adjudication_summary.md:24-29,LM minus baseline equals -0.0064
+650M original-terminal budget effect,+1.15 pp,P0:p00_adjudication_summary.md:14-22,0.3747 minus 0.3632; single-seed E1 factorial headline
+external COV and RNS-COV status,observational or associational evidence now included,project:补证_P2_20261125/p2_adjudication_summary.md:13-20,Neither external COV nor RNS-COV supports controlled causal attribution or a strong structural proxy
+split-dependent follow-up statuses,P2.5 stopped;P2.7 stopped;P2.4 not performed;P3.1 not triggered,project:补证_P2_20261125/split_final_adjudication.md:13-20,Original split unrecoverable; reconstruction changes cluster topology and leaks old train rows; no surrogate or new-data comparability claim
