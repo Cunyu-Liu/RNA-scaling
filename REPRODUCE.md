@@ -2,15 +2,15 @@
 
 > 目的：任何人拿到 orico 备份（或 GitHub 仓库）后，能独立复现本项目**全部已得出**的训练与测评结果。
 > 权威源约定：**GitHub 仓库 = 代码权威源**；**runs/&lt;RUN_ID&gt;/manifest.json = 每个 run 的配置地面真值**（arch/seed/全部超参/val 曲线/best ckpt，本文件表格仅为索引）；**eval/*.jsonl = 测评结果地面真值**（可逐行 diff）。
+> 2026-11-26 发布盘点见 [`repo_manifest.md`](repo_manifest.md)；其中权重、数据可读性和未收口臂状态优先于本文件的历史快照。
 
 ## 0. 前置条件
 
-- **环境**：conda env `toktokenbench`（python 3.10, torch 2.6.0+cu124）。
-  规格：orico `09_env_exports/toktokenbench.yml` / `toktokenbench.pip.txt`；`conda env create -f toktokenbench.yml`。
+- **环境**：历史 conda env `toktokenbench`（python 3.10, torch 2.6.0+cu124）。旧文档引用的 orico `09_env_exports/toktokenbench.yml` / `toktokenbench.pip.txt` 不在本轮核实的备份根内，故不能把 `conda env create -f toktokenbench.yml` 当作已验证的一键命令；须先找回环境导出或按历史版本重建并记录新环境哈希。
 - **代码**：`git clone` 本仓库，checkout 到本文件所在提交（服务器 /home/cunyuliu/rna-sc，GitHub 为权威源；orico `03_RNA迁移学习_rna-sc/code_git` 为离线快照）。
-- **训练数据依赖链**（三选一）：
-  - A. 直接从 orico 恢复（md5 已核，见 `dataset_backup_audit_20261014.md`）：`release22_cluster_split.parquet`、`r22_train_rfamcap.parquet`、`r22_train_reweighted.parquet`、`rinalmo_corpus_v1.parquet` 及全部测评数据集（bpRNA_parsed / archiveii / Rfam.cm 六件套等）。
-  - B. 重建 split8080（仅训练需要，测评不需要）：07_tokenizer-benchmark `data/split.py`，`SPLIT_SEED="20260808"` 硬编码，输入 `release22_cluster_split.parquet` → 输出 `release22_split_8080.parquet`（确定性，约 40-60 min）。路径写在 `rna_sc/config.py:SPLIT_8080`，新集群需同步修改。
+- **训练数据依赖与边界**：
+  - A. 从 orico 恢复**可读子集**：`release22_cluster_split.parquet`、`r22_train_rfamcap.parquet` 及测评数据集（bpRNA_parsed / archiveii / Rfam.cm 六件套等）。2026-11-26 实测 `r22_train_reweighted.parquet`、`rinalmo_corpus_v1.parquet`、`mars_corpus.parquet` 均为 footer 不可读残片，不能再宣称可直接恢复全部训练语料；逐文件状态见 `p2/20261126/evidence/split_rebuild/source_inventory.csv`。
+  - B. **原 split8080 缺失，当前不能等价重建**：`release22_split_8080.parquet` 未备份，备份与两台远端均无精确命中。`release22_cluster_split.parquet` 只有 `cluster_id,split`，不能单独恢复 29,012,227 条序列。2026-11-26 全量重建虽完成 canonical/dedup 和 MMseqs2 聚类，但新代表 3,334,304 ≠ 旧代表 3,357,201，且出现旧 train 序列进入新 family held-out 的泄漏，故重建产物不得替代原文件。P2.5/P2.7/P2.4 按终裁不做，P3 多种子与曝光臂不触发。证据与完整边界见 `repo_manifest.md` §4–§5；不要沿用旧版“约 40–60 min 确定性重建”命令。
   - C. 语料 parquet 重建：`build_rinalmo_corpus.py` / `build_corpus_mars.py` / `build_corpus_rnacentral.py` / `s3_reweight_corpus.py`（原始公开源：Rfam release、RiNALMo recipe、MARS OMIX003037、RNAcentral FTP）。
 - **外部基线权重**：
   - RiNALMo（giga/mega/micro）+ NucleicBERT：orico `03_RNA迁移学习_rna-sc/ext_baselines/`（4.6G，已含 model.safetensors / pretrained.pt）。
@@ -30,7 +30,9 @@ python -m rna_sc.train --model <MODEL> --seed <SEED> --device <GPU_ID> \
 
 默认超参 = `rna_sc/config.py` 冻结配方：budget 2.0B nt / batch 16384 nt / context 1024 / lr 3e-4（1M-30M ×2.0）/ warmup 0.5% / MLM 15%(80/10/10) / ckpt+val 每 100M nt / val 4M nt（validation split）。**逐 run 的权威配置以 manifest.json 为准**。
 
-### 1.2 已完成 32 run 清单（orico `runs_final2_ckpt/runs/`，各含终态 ckpt + manifest.json）
+### 1.2 已完成 32 run 清单（orico `runs_final2_ckpt/runs/` 共 38 目录：32 终态 + 2 MARS 中间臂 + 4 空目录）
+
+以下 32 个终态 run 各含终态 ckpt + manifest.json；完整分组、权重位置和远端三份上传清单见 `repo_manifest.md` §3。
 
 | 轴 | run | 特殊参数 |
 |---|---|---|
@@ -45,9 +47,9 @@ python -m rna_sc.train --model <MODEL> --seed <SEED> --device <GPU_ID> \
 
 ### 1.3 未完成 6 臂（语谱实验，停机中断）
 
-- 100M/300M × marscorpus/rnacentral：已有中间 ckpt（留在旧集群 /mnt）+ manifest（delta tar `rna_sc_manifests_1014.tar.gz`）+ 停止坐标（`BACKUP_MANIFEST_20261014.md`）。恢复/重训/重建三分支见 `resume_or_restore.sh`（一条命令）。
-- 30M × 两臂：未到首个 ckpt，直接按 1.1 模板重训。
-- **这 6 臂没有已得出的测评结果，不构成复现缺口**；复现动作 = `bash resume_or_restore.sh --dry-run` 确认分支后实跑。
+- MARS 100M/300M：备份分别保留至 400,023,183 nt（4 ckpt）和 200,010,618 nt（2 ckpt），只能复测中间点，不能冒充 2B 终态。
+- MARS 30M、RNAcentral 30M/100M/300M：备份目录为空。RNAcentral 100M/300M 的旧状态快照与空目录不一致，须找回权重或重训。
+- **这 6 臂没有已完成的正式探针结果，不能登记为完成。** MARS、RiNALMo、reweighted parquet 备份残片不可读，RNAcentral 大语料缺失，因此 `resume_or_restore.sh` 只是历史恢复入口，不代表数据和权重已齐备；逐项边界见 `repo_manifest.md` §4、§6。
 
 ## 2. 测评复现（确定性推理，可精确复现论文全部表格数字）
 
@@ -66,7 +68,7 @@ python -m rna_sc.eval_matrix --device <GPU_ID> [--model <MODEL>]          # 全�
 
 1. 训练侧：`manifest.json` 的 `best_val_loss`、checkpoints val 曲线、`params` 与 arch 一致性。
 2. 测评侧：重放后 `eval/*.jsonl` 与 orico 备份 md5/逐行比对。
-3. 论文数字门：`redteam_numbers.py` / `redteam_final.py`（jsonl vs DRAFT_v1.md 全数字一致性，出报告前必跑）。
+3. 论文数字门：当前发布脚本为 `p4/20261126/assert_numbers.py`，输入与结果见同目录 `coverage_report.md`、`assertion_results.csv`。旧版 `redteam_numbers.py` / `redteam_final.py` 不在当前仓库，不再作为可执行命令宣称。
 
 ## 4. 已知偏差声明（诚实边界）
 
@@ -76,5 +78,5 @@ python -m rna_sc.eval_matrix --device <GPU_ID> [--model <MODEL>]          # 全�
 
 ## 5. 快速通道（不重训，直接复核论文数字）
 
-orico 自身即构成最小复现包：`runs_final2_ckpt`（32 终态 ckpt+manifest）+ `eval/*.jsonl` + `code_git` + `09_env_exports` + 测评数据集（`data_corpus/` 等）。
-只需：重建 conda 环境 → clone 代码（或用快照）→ 恢复测评数据集 → 跑 §2 三条 probe 命令 → 与备份 jsonl diff。**无需 split8080、无需任何语料 parquet、无需 RNA-FM（除非重放外部基线表）**。
+orico 的已有测评资产构成最小复核包：`runs_final2_ckpt`（32 终态 ckpt+manifest）+ `eval/*.jsonl` + `code_git` + 测评数据集（`data_corpus/` 等）；环境按 §0 重建，历史 `09_env_exports` 仍需另行定位。
+只需：重建 conda 环境 → clone 代码（或用快照）→ 恢复测评数据集 → 跑 §2 三条 probe 命令 → 与备份 jsonl diff。**对已有普通 probe 复核无需 split8080 或训练语料 parquet；RNA-FM 仅外部基线需要。** 需要原 `family_validation/family_test` 流的 P2.5/P2.7 不在此快速通道内，且已因原 split 缺失按终裁不做。
