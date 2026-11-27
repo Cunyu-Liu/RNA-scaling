@@ -1,0 +1,43 @@
+{
+  "tag": "650M_randinit17",
+  "layer": 15,
+  "randinit": 17,
+  "n_train_tokens": 1006208,
+  "n_eval_tokens": 164418,
+  "paired_rate_train": 0.3894,
+  "paired_rate_eval": 0.3874,
+  "positions": {
+    "resid_post": {
+      "f1": 0.5356,
+      "precision": 0.479,
+      "recall": 0.6072,
+      "acc": 0.592,
+      "epochs": 7,
+      "final_train_loss": 0.69328
+    },
+    "attn_query": {
+      "f1": 0.5749,
+      "precision": 0.4212,
+      "recall": 0.9053,
+      "acc": 0.4813,
+      "epochs": 5,
+      "final_train_loss": 0.6931
+    },
+    "attn_key": {
+      "f1": 0.5741,
+      "precision": 0.4207,
+      "recall": 0.9034,
+      "acc": 0.4808,
+      "epochs": 5,
+      "final_train_loss": 0.69312
+    },
+    "ffn_up": {
+      "f1": 0.5368,
+      "precision": 0.4668,
+      "recall": 0.6314,
+      "acc": 0.5778,
+      "epochs": 7,
+      "final_train_loss": 0.69325
+    }
+  }
+}

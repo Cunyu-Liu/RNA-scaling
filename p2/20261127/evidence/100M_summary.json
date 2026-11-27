@@ -1,0 +1,51 @@
+{
+  "tag": "100M",
+  "layer": 22,
+  "randinit": null,
+  "n_train_tokens": 1006208,
+  "n_eval_tokens": 164418,
+  "paired_rate_train": 0.3894,
+  "paired_rate_eval": 0.3874,
+  "positions": {
+    "resid_post": {
+      "f1": 0.468,
+      "precision": 0.4154,
+      "recall": 0.536,
+      "acc": 0.528,
+      "epochs": 9,
+      "final_train_loss": 0.69296
+    },
+    "attn_query": {
+      "f1": 0.453,
+      "precision": 0.4661,
+      "recall": 0.4406,
+      "acc": 0.5878,
+      "epochs": 5,
+      "final_train_loss": 0.69306
+    },
+    "attn_key": {
+      "f1": 0.495,
+      "precision": 0.4695,
+      "recall": 0.5233,
+      "acc": 0.5863,
+      "epochs": 5,
+      "final_train_loss": 0.69306
+    },
+    "ffn_up": {
+      "f1": 0.5269,
+      "precision": 0.4527,
+      "recall": 0.6302,
+      "acc": 0.5616,
+      "epochs": 5,
+      "final_train_loss": 0.69309
+    },
+    "resid_rot17": {
+      "f1": 0.4815,
+      "precision": 0.4171,
+      "recall": 0.5694,
+      "acc": 0.5249,
+      "epochs": 9,
+      "final_train_loss": 0.69298
+    }
+  }
+}

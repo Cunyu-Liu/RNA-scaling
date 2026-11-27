@@ -1,0 +1,49 @@
+{
+  "tag": "650M",
+  "depths": {
+    "rel0.3": {
+      "layer": 8,
+      "rank": 12,
+      "final_probe_auc": 0.6386,
+      "loss_base": 1.29118,
+      "loss_erasure": 1.29386,
+      "loss_random": 1.29115,
+      "delta_erasure": 0.00268,
+      "delta_random": -3e-05,
+      "extra_over_random": 0.00271
+    },
+    "rel0.5": {
+      "layer": 14,
+      "rank": 12,
+      "final_probe_auc": 0.65,
+      "loss_base": 1.29118,
+      "loss_erasure": 1.2943,
+      "loss_random": 1.29101,
+      "delta_erasure": 0.00311,
+      "delta_random": -0.00018,
+      "extra_over_random": 0.00329
+    },
+    "rel0.7": {
+      "layer": 19,
+      "rank": 12,
+      "final_probe_auc": 0.6524,
+      "loss_base": 1.29118,
+      "loss_erasure": 1.29445,
+      "loss_random": 1.29106,
+      "delta_erasure": 0.00327,
+      "delta_random": -0.00012,
+      "extra_over_random": 0.00339
+    },
+    "rel0.9": {
+      "layer": 24,
+      "rank": 12,
+      "final_probe_auc": 0.6598,
+      "loss_base": 1.29118,
+      "loss_erasure": 1.29409,
+      "loss_random": 1.29107,
+      "delta_erasure": 0.00291,
+      "delta_random": -0.00012,
+      "extra_over_random": 0.00302
+    }
+  }
+}
