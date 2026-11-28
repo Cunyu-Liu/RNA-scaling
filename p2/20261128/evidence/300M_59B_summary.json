@@ -1,0 +1,89 @@
+{
+  "tag": "300M_59B",
+  "run_dir": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/weights/RNA-Sc-300M_s17_b59",
+  "n_classes": 19,
+  "records": [
+    {
+      "data_seed": 17,
+      "probe_seed": 17,
+      "layer": 23,
+      "f1": 0.4184,
+      "acc": 0.9338,
+      "rel": 1.0
+    },
+    {
+      "data_seed": 17,
+      "probe_seed": 29,
+      "layer": 21,
+      "f1": 0.4095,
+      "acc": 0.9338,
+      "rel": 0.913
+    },
+    {
+      "data_seed": 17,
+      "probe_seed": 43,
+      "layer": 21,
+      "f1": 0.4142,
+      "acc": 0.9343,
+      "rel": 0.913
+    },
+    {
+      "data_seed": 17,
+      "probe_seed": 61,
+      "layer": 20,
+      "f1": 0.4162,
+      "acc": 0.9348,
+      "rel": 0.87
+    },
+    {
+      "data_seed": 17,
+      "probe_seed": 79,
+      "layer": 17,
+      "f1": 0.4036,
+      "acc": 0.9338,
+      "rel": 0.739
+    },
+    {
+      "data_seed": 29,
+      "probe_seed": 17,
+      "layer": 22,
+      "f1": 0.367,
+      "acc": 0.9428,
+      "rel": 0.957
+    },
+    {
+      "data_seed": 29,
+      "probe_seed": 29,
+      "layer": 22,
+      "f1": 0.3693,
+      "acc": 0.943,
+      "rel": 0.957
+    },
+    {
+      "data_seed": 29,
+      "probe_seed": 43,
+      "layer": 20,
+      "f1": 0.3721,
+      "acc": 0.943,
+      "rel": 0.87
+    },
+    {
+      "data_seed": 29,
+      "probe_seed": 61,
+      "layer": 22,
+      "f1": 0.3728,
+      "acc": 0.9428,
+      "rel": 0.957
+    },
+    {
+      "data_seed": 29,
+      "probe_seed": 79,
+      "layer": 22,
+      "f1": 0.3858,
+      "acc": 0.9438,
+      "rel": 0.957
+    }
+  ],
+  "mean_f1": 0.3929,
+  "sd_f1": 0.0215
+}

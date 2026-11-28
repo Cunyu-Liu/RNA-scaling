@@ -1,0 +1,10 @@
+{
+  "kept": 28667584,
+  "counts": {
+    "family_validation": 7502464,
+    "train": 13822258,
+    "family_test": 7072163,
+    "validation": 162814,
+    "test": 107885
+  }
+}
