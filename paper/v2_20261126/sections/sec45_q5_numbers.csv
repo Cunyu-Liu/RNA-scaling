@@ -105,3 +105,11 @@ P2.13 650M COV-CTRL multiseed SD,0.0097,补证_P2_20261125/results/P2_13/cov_mul
 P2.13 100M COV-CTRL multiseed mean,0.0210,补证_P2_20261125/results/P2_13/cov_multiseed/summary.json:models.100M.trained_mean,5 seeds mean; 0.02104
 P2.13 100M COV-CTRL multiseed SD,0.0036,补证_P2_20261125/results/P2_13/cov_multiseed/summary.json:models.100M.trained_sd,0.00363
 P2.13 randinit floor,0.00014,补证_P2_20261125/results/P2_13/cov_multiseed/summary.json:models.100M.randinit_max,max randinit COV-CTRL 0.000144; <=0.00014
+P2.14 external micro COV multiseed mean,0.1329,补证_P2_20261125/results/P2_14/ext_cov_multiseed_summary.json:models.rinalmo_micro.trained_mean,5 seeds mean; observational anchor; 5/5 positive
+P2.14 external micro COV SD,0.0250,补证_P2_20261125/results/P2_14/ext_cov_multiseed_summary.json:models.rinalmo_micro.trained_sd,sample SD; 0.025
+P2.14 external mega COV multiseed mean,0.2045,补证_P2_20261125/results/P2_14/ext_cov_multiseed_summary.json:models.rinalmo_mega.trained_mean,5 seeds mean; 5/5 positive
+P2.14 external mega COV SD,0.0145,补证_P2_20261125/results/P2_14/ext_cov_multiseed_summary.json:models.rinalmo_mega.trained_sd,0.0145
+P2.14 external giga COV multiseed mean,0.2561,补证_P2_20261125/results/P2_14/ext_cov_multiseed_summary.json:models.rinalmo_giga.trained_mean,5 seeds mean; 5/5 positive
+P2.14 external giga COV SD,0.0085,补证_P2_20261125/results/P2_14/ext_cov_multiseed_summary.json:models.rinalmo_giga.trained_sd,0.0085
+P2.14 external NB COV multiseed mean,0.0128,补证_P2_20261125/results/P2_14/ext_cov_multiseed_summary.json:models.nucleicbert.trained_mean,5 seeds mean; 5/5 positive
+P2.14 external NB COV SD,0.0018,补证_P2_20261125/results/P2_14/ext_cov_multiseed_summary.json:models.nucleicbert.trained_sd,0.0018

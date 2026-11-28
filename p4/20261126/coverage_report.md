@@ -2,17 +2,17 @@
 
 ## 输入与规则
 
-- 组装稿：`论文重写_P1_20261125/DRAFT_v2_20261125.md`（SHA256 `48a838381b98ef5e91d65edd5ab678466f432815d67ef9ca8e136a535c01e4c9`）。
-- 溯源表：`sections/*_numbers.csv` 共 585 行、14 份；空表也计入。
+- 组装稿：`论文重写_P1_20261125/DRAFT_v2_20261125.md`（SHA256 `6982e7f34b117c2dfc32edb93e3d50ce47dd21e2cd49e722bbb18752483ee69e`）。
+- 溯源表：`sections/*_numbers.csv` 共 593 行、14 份；空表也计入。
 - 权威源：只读备份 evidence/eval、项目 P0 对账表与已登记文本/代码行段。P2 汇总未被这些表直接引用时不另行推断数值。
 - 容差：按正文/登记显示精度采用半单位舍入区间（如三位小数 ±0.0005）；pp、百分数、B/M/k 单位显式换算。派生值只有在公式操作数也能落到声明 evidence 时才通过。
 - CSV 中 `missing_registration` 是正文有数字而本节溯源表未登记；`true_error` 是已登记但来源缺失、字段无法解析或值不匹配。脚本不修改论文。
 
 ## 总结
 
-- 溯源断言：**583/585 pass**，2 fail；其中 535 行使用显示舍入，39 行使用派生重算。
-- 正文数字覆盖率（出现次数）：**1584/1596 = 99.25%**。
-- 正文数字覆盖率（本节唯一字面量）：**832/842 = 98.81%**。
+- 溯源断言：**591/593 pass**，2 fail；其中 543 行使用显示舍入，39 行使用派生重算。
+- 正文数字覆盖率（出现次数）：**1603/1615 = 99.26%**。
+- 正文数字覆盖率（本节唯一字面量）：**841/851 = 98.82%**。
 - 未覆盖：10 组；真错误：2 条；黑名单违禁命中：**0**。
 - 未覆盖项分类：13 组章节编号、2 组旧稿行号定位（L598/L622）；无实验结果数值。
 - 旧值 provenance 豁免：3 处（仅记录，不当作违禁）。
@@ -23,8 +23,8 @@
 
 | ID | section | item | registered value | reason |
 |---|---|---|---|---|
-| R0346 | sec46_q6 | extended exposure | 5.9B nt | unmatched registered values: 5.9B |
-| R0457 | sec47_crosscut | S13b v1 trained family points | 30 | no resolvable source reference |
+| R0354 | sec46_q6 | extended exposure | 5.9B nt | unmatched registered values: 5.9B |
+| R0465 | sec47_crosscut | S13b v1 trained family points | 30 | no resolvable source reference |
 
 ## 未覆盖数字清单
 
