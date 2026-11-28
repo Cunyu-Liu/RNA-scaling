@@ -65,3 +65,5 @@ rfamcap 100M terminal family effect,+0.34 pp,P0:p00_adjudication_summary.md:33-3
 rfamcap appendix midpoint,0.2B nt,P0:p00_adjudication_summary.md:33-39,Trajectory only; forbidden as terminal-budget effect
 structure repeat-noise reference,approximately 1 pp,P0:p02c_structure_budget_matrix.md:1-14,Only trained-minus-randinit learning increments; not a universal threshold or budget-difference threshold
 rfamcap structure metric split,paired-F1 and true macro-F1 reported separately,project:补证_P2_20261125/results/P2_1/p2_1_report.md:6,Legacy f1 is paired-positive-class F1; f1_macro is the unweighted mean of paired and unpaired class F1
+2B terminal slope,-0.003,补证_P2_20261125/results/P2_12/convergence_evidence.json:RNA-Sc-650M_s17.terminal_slope_per100M,approx ~-0.003/100M nt; not fully plateaued
+5.9B terminal slope,-0.0005,补证_P2_20261125/results/P2_12/convergence_evidence.json:RNA-Sc-100M_s17_b59.terminal_slope_per100M,approx ~-0.0005/100M nt; near convergence; 100M_b59 -0.000472

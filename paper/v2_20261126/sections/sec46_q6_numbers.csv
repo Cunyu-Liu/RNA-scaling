@@ -71,3 +71,22 @@ nominal extended-budget logged terminal,5.8B nt,eval_evidence_logs/evidence/fact
 30M random trajectory endpoint,5B nt,eval_evidence_logs/eval/random_midpoints_results.jsonl:L3,Endpoint for 0.6136 random-split F1; midpoint rather than terminal
 30M family trajectory early checkpoint,0.8B nt,eval_evidence_logs/eval/probe_results_b59_family.jsonl:L670,Nearest early family checkpoint for 0.3409 F1
 30M family trajectory terminal checkpoint,5.8B nt,eval_evidence_logs/eval/probe_results_b59_family.jsonl:L175,Terminal checkpoint for 0.1942 F1
+P2.12 30M paired budget effect,-5.86,补证_P2_20261125/results/P2_11/budget_effect_paired_4scale.json:30M.budget_effect_pp_mean,recovered pool n=10 paired; mean -5.858 displayed -5.86; 0/10 positive
+P2.12 30M paired SD,0.91,补证_P2_20261125/results/P2_11/budget_effect_paired_4scale.json:30M.budget_effect_pp_sd,sample SD ddof=1; 0.908
+P2.12 30M paired SEM,0.287,补证_P2_20261125/results/P2_11/budget_effect_paired_4scale.json:30M.budget_effect_pp_sem,SD/sqrt(10)
+P2.12 100M paired budget effect,-1.65,补证_P2_20261125/results/P2_11/budget_effect_paired_4scale.json:100M.budget_effect_pp_mean,mean -1.648 displayed -1.65; 1/10 positive
+P2.12 100M paired SD,1.42,补证_P2_20261125/results/P2_11/budget_effect_paired_4scale.json:100M.budget_effect_pp_sd,1.421
+P2.12 100M paired SEM,0.449,补证_P2_20261125/results/P2_11/budget_effect_paired_4scale.json:100M.budget_effect_pp_sem,SD/sqrt(10)
+P2.11 300M paired budget effect,-0.74,补证_P2_20261125/results/P2_11/budget_effect_paired_4scale.json:300M.budget_effect_pp_mean,5/10 positive; uncertain; original +3.76 not reproduced
+P2.11 300M paired SD,4.38,补证_P2_20261125/results/P2_11/budget_effect_paired_4scale.json:300M.budget_effect_pp_sd,4.377
+P2.11 300M paired SEM,1.384,补证_P2_20261125/results/P2_11/budget_effect_paired_4scale.json:300M.budget_effect_pp_sem,SD/sqrt(10)
+P2.11 650M paired budget effect,+3.06,补证_P2_20261125/results/P2_11/budget_effect_paired_4scale.json:650M.budget_effect_pp_mean,mean 3.056 displayed +3.06; 9/10 positive; sign robust
+P2.11 650M paired SD,2.68,补证_P2_20261125/results/P2_11/budget_effect_paired_4scale.json:650M.budget_effect_pp_sd,2.678
+P2.11 650M paired SEM,0.847,补证_P2_20261125/results/P2_11/budget_effect_paired_4scale.json:650M.budget_effect_pp_sem,SD/sqrt(10)
+P2.12 30M F1 2B mean,0.2560,补证_P2_20261125/results/P2_11/30M_2B/summary.json:mean_f1,10 runs mean; recovered pool
+P2.12 30M F1 5.9B mean,0.1974,补证_P2_20261125/results/P2_11/30M_59B/summary.json:mean_f1,10 runs mean
+P2.12 100M F1 2B mean,0.3153,补证_P2_20261125/results/P2_11/100M_2B/summary.json:mean_f1,10 runs mean
+P2.12 100M F1 5.9B mean,0.2989,补证_P2_20261125/results/P2_11/100M_59B/summary.json:mean_f1,10 runs mean
+near-converged 650M 5.9B val loss,0.7491,补证_P2_20261125/results/P2_12/convergence_evidence.json:RNA-Sc-650M_s17_b59.final_val_loss,terminal validation loss
+near-converged 650M 5.9B terminal slope,-0.0004,补证_P2_20261125/results/P2_12/convergence_evidence.json:RNA-Sc-650M_s17_b59.terminal_slope_per100M,"per 100M nt, last-4-point linear fit; -0.000443"
+2B main terminal slope,-0.003,补证_P2_20261125/results/P2_12/convergence_evidence.json:RNA-Sc-650M_s17.terminal_slope_per100M,approx ~-0.003/100M nt; 650M 2B -0.003231

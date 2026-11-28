@@ -20,3 +20,8 @@ saturation threshold epsilon,0.03 macro-F1/decade,eval_evidence_logs/evidence/s1
 300M best-layer relative depth,0.957,eval_evidence_logs/eval/probe_results.jsonl:L1355,Single seed s17; L22/(24-1)=0.9565 rounded to three decimals
 650M best-layer relative depth,0.296,eval_evidence_logs/evidence/s1_final_verdict.json:checks.layer_migration_endpoint.650M,Single seed s17; L8/(28-1)=0.2963 rounded to three decimals
 P3.1 multi-seed supplementation,P3.1 not triggered,project:补证_P2_20261125/split_final_adjudication.md:20,Saturation observed in single-seed 300M/650M tier; three-seed 1M-100M tier supports trend; reconstructed split leaks and is incomparable
+near-converged 650M 5.9B val loss,0.7491,补证_P2_20261125/results/P2_12/convergence_evidence.json:RNA-Sc-650M_s17_b59.final_val_loss,terminal validation loss
+near-converged 650M 5.9B terminal slope,-0.0004,补证_P2_20261125/results/P2_12/convergence_evidence.json:RNA-Sc-650M_s17_b59.terminal_slope_per100M,per 100M nt
+650M 5.9B family F1,0.3747,eval_evidence_logs/evidence/factorial_verdict.json:table.650M.f1_5.9B.f1,original terminal protocol single-seed
+650M 2B family F1,0.3632,eval_evidence_logs/evidence/factorial_verdict.json:table.650M.f1_2B.f1,original terminal protocol single-seed
+650M budget effect,+1.15,eval_evidence_logs/evidence/factorial_verdict.json:table.650M.budget_delta_pp,single-seed E1; 0.3747-0.3632

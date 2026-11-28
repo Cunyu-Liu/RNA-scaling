@@ -42,3 +42,9 @@ P4 linear-map LOO mean error,0.3046,eval_evidence_logs/evidence/p4_loo_test.json
 P4 capacity-shift LOO mean error,0.7447,eval_evidence_logs/evidence/p4_loo_test.json:mean_err_2,Leave-one-out error in relative-layer units; capacity-shift form refuted
 P4 capacity-shift error 10M,1.1013,eval_evidence_logs/evidence/p4_loo_test.json:loo_shift_capacity.10M,Exceeds 1.0; descriptive LOO diagnostic
 P4 capacity-shift error 650M,1.2560,eval_evidence_logs/evidence/p4_loo_test.json:loo_shift_capacity.650M,Exceeds 1.0; descriptive LOO diagnostic
+fig3b 1M best-layer rel_mean,0.471,eval_evidence_logs/evidence/s1_final_verdict.json:five_scale_table.1M.rel_mean,3-seed mean best-layer rel_depth
+fig3b 10M best-layer rel_mean,0.141,eval_evidence_logs/evidence/s1_final_verdict.json:five_scale_table.10M.rel_mean,3-seed mean
+fig3b 30M best-layer rel_mean,0.788,eval_evidence_logs/evidence/s1_final_verdict.json:five_scale_table.30M.rel_mean,3-seed mean
+fig3b 100M best-layer rel_mean,0.864,eval_evidence_logs/evidence/s1_final_verdict.json:five_scale_table.100M.rel_mean,3-seed mean
+fig3b 300M best-layer rel_mean,0.957,eval_evidence_logs/eval/probe_results.jsonl,single-seed s17 best L22/(24-1)=0.957; computed from ledger
+fig3b 650M best-layer rel_mean,0.296,eval_evidence_logs/evidence/s1_final_verdict.json:five_scale_table.650M.rel_mean,single-seed s17

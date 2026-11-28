@@ -1,0 +1,56 @@
+{
+  "RNA-Sc-10M_s17": {
+    "final_val_loss": 0.8715865165722724,
+    "terminal_slope_per100M": -0.003747,
+    "final_nt": 1900171155,
+    "n_validations": 19
+  },
+  "RNA-Sc-30M_s17": {
+    "final_val_loss": 0.8213959498911466,
+    "terminal_slope_per100M": -0.00554,
+    "final_nt": 1900121822,
+    "n_validations": 18
+  },
+  "RNA-Sc-100M_s17": {
+    "final_val_loss": 0.79636496072636,
+    "terminal_slope_per100M": -0.003478,
+    "final_nt": 1900122218,
+    "n_validations": 19
+  },
+  "RNA-Sc-300M_s17": {
+    "final_val_loss": 0.7800505942836163,
+    "terminal_slope_per100M": -0.003136,
+    "final_nt": 1900122218,
+    "n_validations": 19
+  },
+  "RNA-Sc-650M_s17": {
+    "final_val_loss": 0.7756562890347106,
+    "terminal_slope_per100M": -0.003231,
+    "final_nt": 1900122218,
+    "n_validations": 19
+  },
+  "RNA-Sc-30M_s17_b59": {
+    "final_val_loss": 0.7927879338136268,
+    "terminal_slope_per100M": -0.000884,
+    "final_nt": 5800296014,
+    "n_validations": 58
+  },
+  "RNA-Sc-100M_s17_b59": {
+    "final_val_loss": 0.762572692537581,
+    "terminal_slope_per100M": -0.000472,
+    "final_nt": 5800296014,
+    "n_validations": 58
+  },
+  "RNA-Sc-300M_s17_b59": {
+    "final_val_loss": 0.7502781686886137,
+    "terminal_slope_per100M": -0.000472,
+    "final_nt": 5800296014,
+    "n_validations": 58
+  },
+  "RNA-Sc-650M_s17_b59": {
+    "final_val_loss": 0.7490547457577343,
+    "terminal_slope_per100M": -0.000443,
+    "final_nt": 5800296014,
+    "n_validations": 58
+  }
+}

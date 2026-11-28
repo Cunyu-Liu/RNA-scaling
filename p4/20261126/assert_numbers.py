@@ -132,27 +132,27 @@ def atoms(text: str, default_unit: str = "", skip_metric_names: bool = True) -> 
 def section_for_line(line: int) -> str:
     boundaries = [
         (5, "sec0_abstract"), (11, "sec1_intro"), (35, "sec2_related"),
-        (59, "sec3_methods"), (112, "sec41_q1"), (164, "sec42_q2"),
-        (213, "sec43_q3"), (241, "sec44_q4"), (304, "sec45_q5"),
-        (351, "sec46_q6"), (379, "sec47_crosscut"), (399, "sec5_discussion"),
-        (421, "sec6_limitations"), (10**9, "appendix_provenance"),
+        (59, "sec3_methods"), (112, "sec41_q1"), (137, "sec42_q2"),
+        (162, "sec43_q3"), (211, "sec44_q4"), (241, "sec45_q5"),
+        (308, "sec46_q6"), (370, "sec47_crosscut"), (400, "sec5_discussion"),
+        (420, "sec6_limitations"), (447, "appendix_provenance"),
     ]
     # DRAFT headings and provenance table names are not in numeric order after Q2.
-    if line >= 421:
+    if line >= 447:
         return "appendix_provenance"
-    if line >= 399:
+    if line >= 420:
         return "sec6_limitations"
-    if line >= 379:
+    if line >= 400:
         return "sec5_discussion"
-    if line >= 351:
+    if line >= 370:
         return "sec47_crosscut"
-    if line >= 304:
+    if line >= 308:
         return "sec46_q6"
     if line >= 241:
         return "sec45_q5"
-    if line >= 213:
+    if line >= 211:
         return "sec44_q4"
-    if line >= 164:
+    if line >= 162:
         return "sec43_q3"
     if line >= 137:
         return "sec42_q2"

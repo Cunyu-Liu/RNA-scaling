@@ -90,3 +90,18 @@ NucleicBERT COV minus CTRL,+0.0108,project:补证_P2_20261125/results/P2_3/p2_3_
 external randinit COV controls,approximately 0,project:补证_P2_20261125/results/P2_3/p2_3_external_cov.json:models,All corresponding randinit17 controls are near zero
 RNA-Sc-650M COV in external comparison,+0.0957,backup:eval_evidence_logs/evidence/covariation_test_650M.json:650M.cov_minus_ctrl,Controlled-family value between RiNALMo micro and mega; four-decimal display
 COV hardware tolerance,1e-4,project:补证_P2_20261125/p2_adjudication_summary.md:16,Protocol equivalence passed; residual tolerated across hardware/software without claiming a unique cause
+P2.8 650M attn_query absolute F1,0.5835,补证_P2_20261125/results/P2_8/650M_summary.json:positions.attn_query.f1,"per-token paired-position F1, converged; 650M L15"
+P2.8 650M resid_post absolute F1,0.5562,补证_P2_20261125/results/P2_8/650M_summary.json:positions.resid_post.f1,"per-token paired-position F1, converged; 650M L15; authoritative caliber"
+P2.8 650M rotation control F1,0.5478,补证_P2_20261125/results/P2_8/650M_summary.json:positions.resid_rot17.f1,"random-rotation control, does not collapse"
+P2.8 650M max net gain (resid_post),+0.021,project:补证_P2_20261125/results/P2_8/650M_summary.json:positions.resid_post.f1; project:补证_P2_20261125/results/P2_8/650M_randinit17_summary.json:positions.resid_post.f1,trained-randinit 0.5562-0.5356=0.0206 displayed +0.021
+P2.8 650M attn_query net gain,+0.009,project:补证_P2_20261125/results/P2_8/650M_summary.json:positions.attn_query.f1; project:补证_P2_20261125/results/P2_8/650M_randinit17_summary.json:positions.attn_query.f1,trained-randinit 0.5835-0.5749=0.0086 displayed +0.009
+P2.8 per-token trivial floor,0.54,补证_P2_20261125/results/P2_8/p2_8_report.md,approximate trivial floor ~0.54; limited metric discriminability
+P2.10 converged authoritative F1,0.5562,补证_P2_20261125/results/P2_10/p2_10_report.md,converged caliber authoritative; supersedes unconverged 0.5973/0.6101
+P2.9 MLM loss increase after erasure,+0.003,补证_P2_20261125/results/P2_9/p2_9_report.md,INLP erasure vs random-direction control ~0; weak E1
+P2.9 probe AUC after 12 rounds,0.64,补证_P2_20261125/results/P2_9/p2_9_report.md,erasure incomplete; pairing information distributed
+P2.9 INLP rounds,12,补证_P2_20261125/results/P2_9/p2_9_report.md,12 erasure rounds; AUC still 0.64
+P2.13 650M COV-CTRL multiseed mean,0.0937,补证_P2_20261125/results/P2_13/cov_multiseed/summary.json:models.650M.trained_mean,5 condition seeds mean; 0.09370
+P2.13 650M COV-CTRL multiseed SD,0.0097,补证_P2_20261125/results/P2_13/cov_multiseed/summary.json:models.650M.trained_sd,sample SD ddof=1; 0.00969
+P2.13 100M COV-CTRL multiseed mean,0.0210,补证_P2_20261125/results/P2_13/cov_multiseed/summary.json:models.100M.trained_mean,5 seeds mean; 0.02104
+P2.13 100M COV-CTRL multiseed SD,0.0036,补证_P2_20261125/results/P2_13/cov_multiseed/summary.json:models.100M.trained_sd,0.00363
+P2.13 randinit floor,0.00014,补证_P2_20261125/results/P2_13/cov_multiseed/summary.json:models.100M.randinit_max,max randinit COV-CTRL 0.000144; <=0.00014

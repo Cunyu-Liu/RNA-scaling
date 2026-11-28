@@ -1,0 +1,220 @@
+{
+  "seeds": [
+    17,
+    29,
+    43,
+    61,
+    79
+  ],
+  "models": {
+    "650M": {
+      "trained_mean": 0.09370188813012423,
+      "trained_sd": 0.009691399746734313,
+      "sign_positive_frac": 1.0,
+      "randinit_mean": 3.96855590933124e-05,
+      "randinit_max": 7.959883151645323e-05,
+      "per_seed_trained": {
+        "17": 0.09573159918658555,
+        "29": 0.10657768494115373,
+        "43": 0.0893512462027285,
+        "61": 0.0965224908177305,
+        "79": 0.08032641950242286
+      },
+      "anchor_seed17": 0.09572,
+      "seed17_value": 0.09573159918658555,
+      "anchor_abs_diff": 1.159918658555359e-05,
+      "anchor_pass": true
+    },
+    "100M": {
+      "trained_mean": 0.021039054760006642,
+      "trained_sd": 0.0036266201115951855,
+      "sign_positive_frac": 1.0,
+      "randinit_mean": 0.0001106315507491846,
+      "randinit_max": 0.00014390060989841321,
+      "per_seed_trained": {
+        "17": 0.020271639843210836,
+        "29": 0.02556623083396016,
+        "43": 0.01808270995426336,
+        "61": 0.02398865463854507,
+        "79": 0.017286038530053775
+      },
+      "anchor_seed17": 0.0203,
+      "seed17_value": 0.020271639843210836,
+      "anchor_abs_diff": 2.8360156789163093e-05,
+      "anchor_pass": true
+    }
+  },
+  "records": [
+    {
+      "scale": "650M",
+      "mode": "trained",
+      "seed": 17,
+      "cov_minus_ctrl": 0.09573159918658555,
+      "n": 4920
+    },
+    {
+      "scale": "650M",
+      "mode": "randinit17",
+      "seed": 17,
+      "cov_minus_ctrl": 3.9495298320927274e-05,
+      "n": 4920
+    },
+    {
+      "scale": "100M",
+      "mode": "trained",
+      "seed": 17,
+      "cov_minus_ctrl": 0.020271639843210836,
+      "n": 4920
+    },
+    {
+      "scale": "100M",
+      "mode": "randinit17",
+      "seed": 17,
+      "cov_minus_ctrl": 0.00010702633488226718,
+      "n": 4920
+    },
+    {
+      "scale": "650M",
+      "mode": "trained",
+      "seed": 29,
+      "cov_minus_ctrl": 0.10657768494115373,
+      "n": 5016
+    },
+    {
+      "scale": "650M",
+      "mode": "randinit17",
+      "seed": 29,
+      "cov_minus_ctrl": 1.6210897435007854e-05,
+      "n": 5016
+    },
+    {
+      "scale": "100M",
+      "mode": "trained",
+      "seed": 29,
+      "cov_minus_ctrl": 0.02556623083396016,
+      "n": 5016
+    },
+    {
+      "scale": "100M",
+      "mode": "randinit17",
+      "seed": 29,
+      "cov_minus_ctrl": 0.00012481041353617746,
+      "n": 5016
+    },
+    {
+      "scale": "650M",
+      "mode": "trained",
+      "seed": 43,
+      "cov_minus_ctrl": 0.0893512462027285,
+      "n": 5109
+    },
+    {
+      "scale": "650M",
+      "mode": "randinit17",
+      "seed": 43,
+      "cov_minus_ctrl": 4.478893302020834e-05,
+      "n": 5109
+    },
+    {
+      "scale": "100M",
+      "mode": "trained",
+      "seed": 43,
+      "cov_minus_ctrl": 0.01808270995426336,
+      "n": 5109
+    },
+    {
+      "scale": "100M",
+      "mode": "randinit17",
+      "seed": 43,
+      "cov_minus_ctrl": 0.00014390060989841321,
+      "n": 5109
+    },
+    {
+      "scale": "650M",
+      "mode": "trained",
+      "seed": 61,
+      "cov_minus_ctrl": 0.0965224908177305,
+      "n": 5124
+    },
+    {
+      "scale": "650M",
+      "mode": "randinit17",
+      "seed": 61,
+      "cov_minus_ctrl": 1.833383517396532e-05,
+      "n": 5124
+    },
+    {
+      "scale": "100M",
+      "mode": "trained",
+      "seed": 61,
+      "cov_minus_ctrl": 0.02398865463854507,
+      "n": 5124
+    },
+    {
+      "scale": "100M",
+      "mode": "randinit17",
+      "seed": 61,
+      "cov_minus_ctrl": 9.305174422510702e-05,
+      "n": 5124
+    },
+    {
+      "scale": "650M",
+      "mode": "trained",
+      "seed": 79,
+      "cov_minus_ctrl": 0.08032641950242286,
+      "n": 5019
+    },
+    {
+      "scale": "650M",
+      "mode": "randinit17",
+      "seed": 79,
+      "cov_minus_ctrl": 7.959883151645323e-05,
+      "n": 5019
+    },
+    {
+      "scale": "100M",
+      "mode": "trained",
+      "seed": 79,
+      "cov_minus_ctrl": 0.017286038530053775,
+      "n": 5019
+    },
+    {
+      "scale": "100M",
+      "mode": "randinit17",
+      "seed": 79,
+      "cov_minus_ctrl": 8.436865120395808e-05,
+      "n": 5019
+    }
+  ],
+  "manifest": {
+    "task": "P2.13 self-family COV multi-seed",
+    "seeds": [
+      17,
+      29,
+      43,
+      61,
+      79
+    ],
+    "created_unix": 1795859125.8181603,
+    "script_sha256": "c433c69b5c444a73e47e88875ecfae100f207db50b632e2341d9e0ca0ac9a438",
+    "bpRNA_sha256": "20d4ed56fa4f1d6e485cb48fe7b0b4d11bfe0fda2049904622dcc35874d15c51",
+    "weights": {
+      "650M": {
+        "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/weights/RNA-Sc-650M_s17",
+        "ckpt": "ckpt_nt1900122218_step202784.pt",
+        "sha256": "0631ccb128900f84eb02fb0c4396ae1de5b2330d1ea003465f4134098e63512d"
+      },
+      "100M": {
+        "path": "/teams/HoulabData_1788502323/liucunyu/rna-sc-p2/weights/RNA-Sc-100M_s17",
+        "ckpt": "ckpt_nt1900122218_step202784.pt",
+        "sha256": "7e73e31317b7a4eac601356942bff4dd885729556f5255b9c079b61749d3bb45"
+      }
+    },
+    "environment": {
+      "python": "3.10.22 | packaged by conda-forge | (main, Oct  6 2026, 23:02:24) [GCC 14.4.0]",
+      "platform": "Linux-5.15.0-161-generic-x86_64-with-glibc2.31",
+      "torch": "2.8.0+cu128",
+      "cuda": "NVIDIA GeForce RTX 5090"
+    }
+  }
+}

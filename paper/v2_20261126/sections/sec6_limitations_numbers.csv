@@ -19,3 +19,14 @@ balanced 100M LightGBM s17,0.1760,P0:p00_adjudication_summary.md:24-29,LM minus 
 650M original-terminal budget effect,+1.15 pp,P0:p00_adjudication_summary.md:14-22,0.3747 minus 0.3632; single-seed E1 factorial headline
 external COV and RNS-COV status,observational or associational evidence now included,project:补证_P2_20261125/p2_adjudication_summary.md:13-20,Neither external COV nor RNS-COV supports controlled causal attribution or a strong structural proxy
 split-dependent follow-up statuses,P2.5 stopped;P2.7 stopped;P2.4 not performed;P3.1 not triggered,project:补证_P2_20261125/split_final_adjudication.md:13-20,Original split unrecoverable; reconstruction changes cluster topology and leaks old train rows; no surrogate or new-data comparability claim
+per-token trivial floor,0.54,补证_P2_20261125/results/P2_8/p2_8_report.md,approximate; limited discriminability
+P2.9 erasure MLM increase,+0.003,补证_P2_20261125/results/P2_9/p2_9_report.md,~random-direction control
+P2.9 residual probe AUC,0.64,补证_P2_20261125/results/P2_9/p2_9_report.md,after 12 INLP rounds
+family F1 subsample SD,0.07,补证_P2_20261125/results/P2_11/p2_11_report.md,approx SD~0.07; subsample sensitive
+recovered-pool contamination offset,0.06,补证_P2_20261125/results/P2_11/p2_11_report.md,absolute F1 raised ~0.06; ~99.7% original
+2B terminal slope,-0.003,补证_P2_20261125/results/P2_12/convergence_evidence.json:RNA-Sc-650M_s17.terminal_slope_per100M,approx ~-0.003/100M nt
+5.9B terminal slope,-0.0005,补证_P2_20261125/results/P2_12/convergence_evidence.json:RNA-Sc-100M_s17_b59.terminal_slope_per100M,approx ~-0.0005/100M nt; near convergence; 100M_b59 -0.000472
+650M paired budget effect,+3.06,补证_P2_20261125/results/P2_11/budget_effect_paired_4scale.json:650M.budget_effect_pp_mean,9/10 positive
+650M paired SD,2.68,补证_P2_20261125/results/P2_11/budget_effect_paired_4scale.json:650M.budget_effect_pp_sd,2.678
+300M paired budget effect,-0.74,补证_P2_20261125/results/P2_11/budget_effect_paired_4scale.json:300M.budget_effect_pp_mean,5/10 positive; uncertain
+300M paired SD,4.38,补证_P2_20261125/results/P2_11/budget_effect_paired_4scale.json:300M.budget_effect_pp_sd,4.377
